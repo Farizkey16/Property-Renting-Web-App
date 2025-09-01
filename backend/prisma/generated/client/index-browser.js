@@ -242,10 +242,7 @@ exports.Prisma.Booking_roomsScalarFieldEnum = {
   quantity: 'quantity',
   subtotal: 'subtotal',
   created_at: 'created_at',
-  updated_at: 'updated_at',
-  check_in_date: 'check_in_date',
-  check_out_date: 'check_out_date',
-  quantity: 'quantity'
+  updated_at: 'updated_at'
 };
 
 exports.Prisma.ReviewsScalarFieldEnum = {
@@ -297,6 +294,7 @@ exports.BookingStatus = exports.$Enums.BookingStatus = {
   waiting_confirmation: 'waiting_confirmation',
   confirmed: 'confirmed',
   canceled: 'canceled',
+  canceled_by_tenant: 'canceled_by_tenant',
   expired: 'expired'
 };
 

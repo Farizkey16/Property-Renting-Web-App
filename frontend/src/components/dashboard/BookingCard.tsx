@@ -1,0 +1,117 @@
+import { Badge } from "../ui/badge"
+import { Button } from "../ui/button"
+import { Card, CardContent } from "../ui/card"
+import { Booking } from "@/types/transactions/transactions"
+import { MapPin, Calendar, Users } from "lucide-react"
+
+
+const getStatusColor = (status: string) => {
+    switch (status) {
+      case "confirmed":
+        return "bg-green-100 text-green-700 hover:bg-green-100";
+      case "pending":
+        return "bg-yellow-100 text-yellow-700 hover:bg-yellow-100";
+      case "cancelled":
+        return "bg-red-100 text-red-700 hover:bg-red-100";
+      default:
+        return "bg-gray-100 text-gray-700 hover:bg-gray-100";
+    }
+  };
+
+type BookingCardProps = {
+    booking: Booking
+}
+
+
+export const BookingCard = ({booking}: BookingCardProps) => {
+    return (
+        
+        <CardContent className="px-1 py-4">
+          <div className="space-y-4">
+            {/* Render a single booking card for the passed booking prop */}
+            <Card key={booking.id} className="border border-gray-200">
+              <CardContent className="p-4">
+                <div className="flex flex-col lg:flex-row gap-4">
+                  {/* Property Image */}
+                  <div className="w-full lg:w-32 h-20 rounded-lg overflow-hidden bg-gray-100">
+                    <img
+                      src={
+                        booking.property?.main_image ?? "/placeholder.svg"
+                      }
+                      alt={booking.property.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+
+                  {/* Booking Details */}
+                  <div className="flex-1 space-y-2">
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
+                      <div>
+                        <h3 className="font-semibold text-gray-900">
+                          {booking.property.name}
+                        </h3>
+                        <div className="flex items-center text-sm text-gray-500 mt-1">
+                          <MapPin className="w-4 h-4 mr-1" />
+                          {booking.property.city}
+                        </div>
+                      </div>
+                      <Badge className={getStatusColor(booking.status)}>
+                        {booking.status.charAt(0).toUpperCase() +
+                          booking.status.slice(1)}
+                      </Badge>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
+                      <div className="flex items-center text-gray-600">
+                        <Calendar className="w-4 h-4 mr-2" />
+                        <span>
+                          {new Date(
+                            booking.check_in_date
+                          ).toLocaleDateString()}{" "}
+                          -{" "}
+                          {new Date(
+                            booking.check_out_date
+                          ).toLocaleDateString()}
+                        </span>
+                      </div>
+                      <div className="flex items-center text-gray-600">
+                        <Users className="w-4 h-4 mr-2" />
+                        <span>
+                          {booking.booking_rooms.guests_count} guests
+                        </span>
+                      </div>
+                      <div className="flex items-center text-gray-600">
+                        <span className="font-semibold text-gray-900">
+                          {booking.amount}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col sm:flex-row gap-2 pt-2">
+                      <Button
+                        size="sm"
+                        className="bg-orange-500 hover:bg-orange-600"
+                      >
+                        View Details
+                      </Button>
+                      <Button variant="outline" size="sm">
+                        Modify Booking
+                      </Button>
+                      {booking.status === "waiting_payment" && (
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="text-red-600 hover:text-red-700 bg-transparent"
+                        >
+                          Cancel
+                        </Button>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </CardContent>
+    )
+}

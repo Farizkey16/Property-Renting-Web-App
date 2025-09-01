@@ -207,3 +207,17 @@ export const FindProofImage = async (
 
   return result;
 };
+
+export const findOrderByStatus = async (
+  order_status: string,
+  tx?: Prisma.TransactionClient
+) => {
+  const db = tx ?? prisma;
+  const orderList = await db.booking.findMany({
+    where: {
+      BookingStatus: order_status,
+    },
+  });
+
+  return orderList;
+};

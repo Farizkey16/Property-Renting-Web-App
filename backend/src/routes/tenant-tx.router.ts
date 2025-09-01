@@ -1,5 +1,7 @@
 import { Router } from "express";
 import TenantTransactions from "../controllers/transaction/tenant/tenant-tx.controller";
+import { onlyTenant } from "../middleware/by-role/tenantMiddleware";
+import { verifyToken } from "../middleware/VerifyToken";
 
 class TenantTransactionsRouter {
     private route: Router;
@@ -8,11 +10,13 @@ class TenantTransactionsRouter {
     constructor() {
         this.route = Router();
         this.tenantTrx = new TenantTransactions();
-        this.initializeRoutes();}
+        this.initializeRoutes()}
 
         private initializeRoutes() {
-            this.route.post("/accept/:id"), this.tenantTrx.acceptPayment,
-            this.route.post("/reject/:id"), this.tenantTrx.rejectPayment
+            this.route.post("/accept/:id", verifyToken, onlyTenant, this.tenantTrx.acceptPayment),
+            this.route.post("/reject/:id", verifyToken, onlyTenant, this.tenantTrx.rejectPayment),
+            this.route.patch("/cancel/:id", verifyToken, onlyTenant, this.tenantTrx.cancelPayment),
+            this.route.get("/orders", verifyToken, onlyTenant, this.tenantTrx.getOrderByStatus)
         }
 
         public getRouter(): Router{

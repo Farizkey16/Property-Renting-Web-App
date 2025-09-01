@@ -109,3 +109,133 @@ D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\prope
 Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
 
 Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. {"clientVersion":"6.13.0","name":"PrismaClientInitializationError"}
+2025-08-28 13:35:29 [ERROR]: POST /auth/register User already exist {"statusCode":400,"success":false,"message":"User already exist"}
+2025-08-28 13:38:42 [ERROR]: PATCH /auth/verify-email Invalid verification code {"statusCode":400,"success":false,"message":"Invalid verification code"}
+2025-08-28 13:38:53 [ERROR]: PATCH /auth/verify-email Invalid verification code {"statusCode":400,"success":false,"message":"Invalid verification code"}
+2025-08-28 13:40:28 [ERROR]: PATCH /auth/verify-email Invalid verification code {"statusCode":400,"success":false,"message":"Invalid verification code"}
+2025-08-28 13:45:31 [ERROR]: POST /auth/login data and hash arguments required {}
+2025-08-28 13:45:38 [ERROR]: POST /auth/login data and hash arguments required {}
+2025-08-28 13:46:54 [ERROR]: POST /auth/login data and hash arguments required {}
+2025-08-28 13:50:57 [ERROR]: POST /reservations/create Cannot read properties of undefined (reading 'role') {}
+2025-08-28 13:51:23 [ERROR]: POST /reservations/create Cannot read properties of undefined (reading 'role') {}
+2025-08-28 13:51:48 [ERROR]: POST /reservations/create Cannot read properties of undefined (reading 'role') {}
+2025-08-28 13:51:51 [ERROR]: POST /reservations/create Cannot read properties of undefined (reading 'role') {}
+2025-08-28 13:52:03 [ERROR]: POST /reservations/create Cannot read properties of undefined (reading 'role') {}
+2025-08-28 13:56:35 [ERROR]: POST /reservations/create Cannot read properties of undefined (reading 'role') {}
+2025-08-28 13:57:50 [ERROR]: POST /reservations/create Cannot read properties of undefined (reading 'role') {}
+2025-08-28 13:59:15 [ERROR]: POST /reservations/create Cannot read properties of undefined (reading 'role') {}
+2025-08-28 13:59:46 [ERROR]: POST /reservations/create Cannot read properties of undefined (reading 'role') {}
+2025-08-28 13:59:47 [ERROR]: POST /reservations/create Cannot read properties of undefined (reading 'role') {}
+2025-08-28 14:02:15 [ERROR]: POST /reservations/create Cannot read properties of undefined (reading 'role') {}
+2025-08-28 14:02:16 [ERROR]: POST /reservations/create Cannot read properties of undefined (reading 'role') {}
+2025-08-28 14:02:43 [ERROR]: POST /reservations/create Cannot read properties of undefined (reading 'role') {}
+2025-08-28 14:02:44 [ERROR]: POST /reservations/create Cannot read properties of undefined (reading 'role') {}
+2025-08-28 14:02:45 [ERROR]: POST /reservations/create Cannot read properties of undefined (reading 'role') {}
+2025-08-28 14:04:00 [ERROR]: POST /reservations/create Cannot read properties of undefined (reading 'role') {}
+2025-08-28 14:04:03 [ERROR]: POST /reservations/create Cannot read properties of undefined (reading 'role') {}
+2025-08-28 14:04:55 [ERROR]: POST /reservations/create Cannot read properties of undefined (reading 'role') {}
+2025-08-28 14:05:39 [ERROR]: POST /reservations/create Cannot read properties of undefined (reading 'role') {}
+2025-08-28 14:05:41 [ERROR]: POST /reservations/create Cannot read properties of undefined (reading 'role') {}
+2025-08-28 14:06:52 [ERROR]: POST /reservations/create 
+Invalid `tx.bookings.create()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:62:47
+
+  59 await prisma.$transaction(async (tx) => {
+  60 
+  61   // Create Booking Property
+→ 62   const newBookings = await tx.bookings.create({
+         data: {
+           status: "waiting_payment",
+           check_in_date: "2025-08-08",
+                          ~~~~~~~~~~~~
+           check_out_date: "2025-08-10",
+           total_price: 100000,
+           amount: 100000,
+           user: {
+             connect: {
+               id: "a44ff510-7a81-4376-b45b-a37b92280e43"
+             }
+           },
+           property: {
+             connect: {
+               id: "cc06ac77-9920-497e-9dff-bfc22ed661fa"
+             }
+           }
+         }
+       })
+
+Invalid value for argument `check_in_date`: premature end of input. Expected ISO-8601 DateTime. {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-08-28 14:08:50 [ERROR]: POST /reservations/create 
+Invalid `tx.booking_rooms.create()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:79:32
+
+  76 });
+  77 
+  78 // Create Booking Room
+→ 79 await tx.booking_rooms.create({
+       data: {
+         booking_id: "8eccb6d2-1daa-4d67-a021-30ca8172f875",
+         room_id: "29eb53b6-fc9b-4f7a-86b2-94df1a178917",
+         guests_count: 3,
+         price_per_night: 50000,
+         check_in_date: "2025-08-08",
+                        ~~~~~~~~~~~~
+         check_out_date: "2025-08-10",
+         quantity: 1,
+         nights: 2,
+         subtotal: 100000
+       }
+     })
+
+Invalid value for argument `check_in_date`: premature end of input. Expected ISO-8601 DateTime. {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-08-29 04:23:53 [ERROR]: GET /reservations/get Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-08-29 04:24:00 [ERROR]: GET /reservations/get Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-08-29 04:24:01 [ERROR]: GET /reservations/get Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-08-29 04:24:03 [ERROR]: GET /reservations/get Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-08-29 04:24:07 [ERROR]: GET /reservations/get Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-08-29 04:25:55 [ERROR]: GET /reservations/get Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-08-29 04:25:56 [ERROR]: GET /reservations/get Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-08-29 04:25:58 [ERROR]: GET /reservations/get Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-08-29 04:26:02 [ERROR]: GET /reservations/get Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-08-29 04:30:11 [ERROR]: GET /reservations/get Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-08-29 04:30:12 [ERROR]: GET /reservations/get Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-08-29 04:30:14 [ERROR]: GET /reservations/get Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-08-29 04:30:18 [ERROR]: GET /reservations/get Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-08-29 04:33:52 [ERROR]: GET /reservations/get Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-08-29 04:33:53 [ERROR]: GET /reservations/get Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-08-29 04:33:55 [ERROR]: GET /reservations/get Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-08-29 04:33:59 [ERROR]: GET /reservations/get Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-08-29 17:16:22 [ERROR]: GET /user/me Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-08-29 17:16:41 [ERROR]: GET /user/me Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-08-29 17:17:21 [ERROR]: GET /reservations/get Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-08-29 17:17:22 [ERROR]: GET /reservations/get Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-08-29 17:17:24 [ERROR]: GET /reservations/get Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-08-29 17:17:28 [ERROR]: GET /reservations/get Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-08-29 17:29:27 [ERROR]: GET /reservations/get Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-08-31 03:32:40 [ERROR]: GET /reservations/get Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-08-31 03:32:41 [ERROR]: GET /reservations/get Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-08-31 03:32:43 [ERROR]: GET /reservations/get Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-08-31 03:32:47 [ERROR]: GET /reservations/get Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-08-31 04:20:36 [ERROR]: GET /reservations/get Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-08-31 04:20:37 [ERROR]: GET /reservations/get Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-08-31 04:20:39 [ERROR]: GET /reservations/get Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-08-31 04:20:43 [ERROR]: GET /reservations/get Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-08-31 04:47:56 [ERROR]: GET /reservations/get Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-08-31 04:47:57 [ERROR]: GET /reservations/get Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-08-31 04:47:59 [ERROR]: GET /reservations/get Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-08-31 04:48:03 [ERROR]: GET /reservations/get Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-08-31 04:48:54 [ERROR]: GET /user/me Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-08-31 04:48:56 [ERROR]: GET /user/me Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-08-31 04:49:03 [ERROR]: GET /user/me Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-08-31 04:49:31 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-08-31 04:49:34 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-08-31 04:49:37 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-08-31 04:49:43 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-08-31 04:50:19 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-08-31 04:50:42 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-08-31 04:50:43 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-01 05:26:58 [ERROR]: GET /user/me Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-01 05:27:04 [ERROR]: GET /user/me Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-01 05:30:15 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-01 05:30:17 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-01 06:12:19 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}

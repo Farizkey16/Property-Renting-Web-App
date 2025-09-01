@@ -10,6 +10,7 @@ import TenantRouter from "./routes/tenant.router";
 import PropertyRouter from "./routes/property.router";
 import RoomRouter from "./routes/room.router";
 import TenantTxRouter from "./routes/tenant-tx.router";
+import UserTxRouter from "./routes/user-tx.router";
 
 const PORT: string | number = process.env.PORT || 4000;
 
@@ -41,6 +42,7 @@ class App {
     const propertyRouter = new PropertyRouter();
     const roomRouter = new RoomRouter();
     const tenantTxRouter = new TenantTxRouter();
+    const userTxRouter = new UserTxRouter();
     this.app.get("/", (req: Request, res: Response) => {
       res.status(200).json("<h1> Welcome to Property Renting Web App</h1>");
     });
@@ -50,6 +52,7 @@ class App {
     this.app.use("/property", propertyRouter.getRouter());
     this.app.use("/room", roomRouter.getRouter());
     this.app.use("/payment", tenantTxRouter.getRouter());
+    this.app.use("/reservations", userTxRouter.getRouter());
   }
 
   // errror handling
