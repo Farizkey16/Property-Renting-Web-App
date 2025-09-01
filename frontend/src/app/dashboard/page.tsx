@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import UserDashboard from "@/components/layouts/dashboard/user/user-dashboard";
-=======
-import UserDashboard from "@/components/layouts/dashboard/user-dashboard";
->>>>>>> main
 
 export default function Dashboard() {
   return (

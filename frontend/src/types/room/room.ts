@@ -3,11 +3,7 @@ export interface Room {
   property_id: string;
   name: string;
   description: string;
-<<<<<<< HEAD
   base_price: number;
-=======
-  base_price: string;
->>>>>>> main
   capacity: number;
   image: string;
   total_rooms: number;
@@ -28,7 +24,6 @@ export interface ApiProperty {
   property_category: string;
   rooms: Room[];
 }
-<<<<<<< HEAD
 
 export interface CreateRoomType {
   property_id: string;
@@ -40,5 +35,3 @@ export interface CreateRoomType {
   image: File[];
   weekend_peak?: { type: "percentage" | "nominal"; value: number };
 }
-=======
->>>>>>> main

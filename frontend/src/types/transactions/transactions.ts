@@ -28,7 +28,6 @@ export interface BookingsApiResponse {
   data: Booking[];
 }
 
-
 // Type Guard Booking Status
 export const VALID_BOOKING_STATUS = [
   "waiting_payment",

@@ -11,21 +11,14 @@ import {
   CardTitle,
   CardFooter,
 } from "@/components/ui/card";
-<<<<<<< HEAD
 import { useParams, useRouter, useSearchParams } from "next/navigation";
-=======
-import { useParams, useRouter } from "next/navigation";
->>>>>>> main
 import { useVerifyEmail } from "@/hooks/useAuth";
 
 export default function VerifyEmail() {
   const { email } = useParams<{ email: string }>();
   const decodedEmail = decodeURIComponent(email);
-<<<<<<< HEAD
   const searchParams = useSearchParams();
   const role = searchParams.get("role");
-=======
->>>>>>> main
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
 
   const router = useRouter();
@@ -36,19 +29,11 @@ export default function VerifyEmail() {
     e: React.ChangeEvent<HTMLInputElement>,
     index: number
   ) => {
-<<<<<<< HEAD
     const value = e.target.value.slice(-1);
-=======
-    const value = e.target.value.slice(-1); // hanya ambil 1 karakter
->>>>>>> main
     const newOtp = [...otp];
     newOtp[index] = value;
     setOtp(newOtp);
 
-<<<<<<< HEAD
-=======
-    // Auto focus ke input berikutnya
->>>>>>> main
     if (value && index < 5) {
       const nextInput = document.getElementById(`otp-${index + 1}`);
       nextInput?.focus();
@@ -65,15 +50,11 @@ export default function VerifyEmail() {
       {
         onSuccess: (data) => {
           console.log(data);
-<<<<<<< HEAD
           if (role === "tenant") {
             router.push(`/auth/tenant/${decodedEmail}`);
           } else {
             router.push("/auth/login");
           }
-=======
-          router.push("/auth/login");
->>>>>>> main
         },
         onError: (error) => {
           console.log(error);

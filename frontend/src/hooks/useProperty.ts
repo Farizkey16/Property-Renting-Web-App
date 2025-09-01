@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import {
   createPropertyServices,
   fetchAllProperties,
@@ -7,10 +6,6 @@ import {
 } from "@/services/property.services";
 import { createProperty } from "@/types/property/property";
 import { useMutation, useQuery } from "@tanstack/react-query";
-=======
-import { fetchAllProperties } from "@/services/property.services";
-import { useQuery } from "@tanstack/react-query";
->>>>>>> main
 
 export const useProperties = (category?: string) => {
   return useQuery({
@@ -20,7 +15,6 @@ export const useProperties = (category?: string) => {
     select: (data) => data.properties,
   });
 };
-<<<<<<< HEAD
 
 export const useCreateProperty = () => {
   return useMutation({
@@ -72,5 +66,3 @@ export const usePropertiesByLocation = (
     staleTime: 1000 * 60 * 5,
   });
 };
-=======
->>>>>>> main

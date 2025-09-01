@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 import { CreateRoomType } from "@/types/room/room";
-=======
->>>>>>> main
 import axios from "axios";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
@@ -11,7 +8,6 @@ export const fetchAllRooms = async () => {
   console.log(response.data);
   return response.data;
 };
-<<<<<<< HEAD
 
 export const fetchRoomsByQuery = async (
   propertyname?: string,
@@ -49,5 +45,3 @@ export const createRoom = async (room: CreateRoomType) => {
   console.log(response.data);
   return response.data;
 };
-=======
->>>>>>> main

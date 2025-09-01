@@ -140,7 +140,6 @@ exports.Prisma.Property_imagesScalarFieldEnum = {
 };
 
 exports.Prisma.RoomsScalarFieldEnum = {
-<<<<<<< HEAD
   id: 'id',
   property_id: 'property_id',
   name: 'name',
@@ -152,19 +151,6 @@ exports.Prisma.RoomsScalarFieldEnum = {
   updated_at: 'updated_at',
   deleted_at: 'deleted_at',
   total_rooms: 'total_rooms'
-=======
-  id: "id",
-  property_id: "property_id",
-  name: "name",
-  description: "description",
-  base_price: "base_price",
-  capacity: "capacity",
-  image: "image",
-  created_at: "created_at",
-  updated_at: "updated_at",
-  deleted_at: "deleted_at",
-  total_rooms: "total_rooms",
->>>>>>> main
 };
 
 exports.Prisma.Room_imagesScalarFieldEnum = {
@@ -213,7 +199,6 @@ exports.Prisma.BookingsScalarFieldEnum = {
 };
 
 exports.Prisma.Booking_roomsScalarFieldEnum = {
-<<<<<<< HEAD
   id: 'id',
   booking_id: 'booking_id',
   room_id: 'room_id',
@@ -226,23 +211,6 @@ exports.Prisma.Booking_roomsScalarFieldEnum = {
   subtotal: 'subtotal',
   created_at: 'created_at',
   updated_at: 'updated_at'
-=======
-  id: "id",
-  booking_id: "booking_id",
-  room_id: "room_id",
-  guests_count: "guests_count",
-  price_per_night: "price_per_night",
-  check_in_date: "check_in_date",
-  check_out_date: "check_out_date",
-  nights: "nights",
-  quantity: "quantity",
-  subtotal: "subtotal",
-  created_at: "created_at",
-  updated_at: "updated_at",
-  check_in_date: "check_in_date",
-  check_out_date: "check_out_date",
-  quantity: "quantity",
->>>>>>> main
 };
 
 exports.Prisma.ReviewsScalarFieldEnum = {
@@ -281,20 +249,12 @@ exports.PriceChangeType = exports.$Enums.PriceChangeType = {
 };
 
 exports.BookingStatus = exports.$Enums.BookingStatus = {
-<<<<<<< HEAD
   waiting_payment: 'waiting_payment',
   waiting_confirmation: 'waiting_confirmation',
   confirmed: 'confirmed',
   canceled: 'canceled',
   canceled_by_tenant: 'canceled_by_tenant',
   expired: 'expired'
-=======
-  waiting_payment: "waiting_payment",
-  waiting_confirmation: "waiting_confirmation",
-  confirmed: "confirmed",
-  canceled: "canceled",
-  expired: "expired",
->>>>>>> main
 };
 
 exports.PropertyCategory = exports.$Enums.PropertyCategory = {
@@ -329,23 +289,15 @@ const config = {
       fromEnvVar: null,
       value: "prisma-client-js",
     },
-<<<<<<< HEAD
     "output": {
       "value": "D:\\adi\\purwhadika\\FINPRO\\Property Renting Web App\\backend\\prisma\\generated\\client",
       "fromEnvVar": null
-=======
-    output: {
-      value:
-        "D:\\adi\\purwhadika\\FINPRO\\Property Renting Web App\\backend\\prisma\\generated\\client",
-      fromEnvVar: null,
->>>>>>> main
     },
     config: {
       engineType: "library",
     },
     binaryTargets: [
       {
-<<<<<<< HEAD
         "fromEnvVar": null,
         "value": "windows",
         "native": true
@@ -354,23 +306,11 @@ const config = {
     "previewFeatures": [],
     "sourceFilePath": "D:\\adi\\purwhadika\\FINPRO\\Property Renting Web App\\backend\\prisma\\schema.prisma",
     "isCustomOutput": true
-=======
-        fromEnvVar: null,
-        value: "windows",
-        native: true,
-      },
-    ],
-    previewFeatures: [],
-    sourceFilePath:
-      "D:\\adi\\purwhadika\\FINPRO\\Property Renting Web App\\backend\\prisma\\schema.prisma",
-    isCustomOutput: true,
->>>>>>> main
   },
   relativeEnvPaths: {
     rootEnvPath: null,
     schemaEnvPath: "../../../.env",
   },
-<<<<<<< HEAD
   "relativePath": "../..",
   "clientVersion": "6.13.0",
   "engineVersion": "361e86d0ea4987e9f53a565309b3eed797a6bcbd",
@@ -390,41 +330,6 @@ const config = {
   "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"./generated/client\"\n}\n\ndatasource db {\n  provider  = \"postgresql\"\n  url       = env(\"DATABASE_URL\")\n  directUrl = env(\"DIRECT_URL\")\n}\n\nmodel users {\n  id                    String     @id @default(uuid())\n  role                  Role\n  full_name             String     @db.VarChar(100)\n  email                 String     @unique @db.VarChar(255)\n  password_hash         String\n  profile_picture       String?    @db.VarChar(255)\n  is_verified           Boolean\n  created_at            DateTime   @default(now())\n  updated_at            DateTime   @updatedAt\n  reset_password_otp    String?    @db.VarChar(6)\n  verify_otp            String?    @db.VarChar(6)\n  verify_otp_expires_at DateTime?\n  bookings              bookings[]\n  reviews               reviews[]\n  tenants               tenants?\n}\n\nmodel tenants {\n  id           String       @id @default(uuid())\n  user_id      String       @unique\n  company_name String       @db.VarChar(100)\n  address      String\n  phone_number String       @db.VarChar(20)\n  logo         String?      @db.VarChar(255)\n  created_at   DateTime     @default(now())\n  updated_at   DateTime     @updatedAt\n  properties   properties[]\n  user         users        @relation(fields: [user_id], references: [id])\n}\n\nmodel properties {\n  id                String              @id @default(uuid())\n  tenant_id         String\n  name              String              @db.VarChar(150)\n  description       String?\n  address           String\n  city              String              @db.VarChar(100)\n  province          String              @db.VarChar(100)\n  zip_code          String              @db.VarChar(10)\n  latitude          Decimal             @db.Decimal(10, 8)\n  longitude         Decimal             @db.Decimal(11, 8)\n  main_image        String?             @db.VarChar(255)\n  created_at        DateTime            @default(now())\n  updated_at        DateTime            @updatedAt\n  deleted_at        DateTime?           @db.Timestamp(0)\n  property_category PropertyCategory\n  bookings          bookings[]\n  peak_season_rates peak_season_rates[]\n  tenant            tenants             @relation(fields: [tenant_id], references: [id])\n  property_images   property_images[]\n  reviews           reviews[]\n  rooms             rooms[]\n}\n\nmodel property_images {\n  id          String     @id @default(uuid())\n  property_id String\n  image_url   String     @db.VarChar(255)\n  created_at  DateTime   @default(now())\n  property    properties @relation(fields: [property_id], references: [id])\n}\n\nmodel rooms {\n  id                String              @id @default(uuid())\n  property_id       String\n  name              String              @db.VarChar(100)\n  description       String?\n  base_price        Decimal             @db.Decimal(12, 2)\n  capacity          Int\n  image             String?             @db.VarChar(255)\n  created_at        DateTime            @default(now())\n  updated_at        DateTime            @updatedAt\n  deleted_at        DateTime?           @db.Timestamp(0)\n  total_rooms       Int\n  booking_rooms     booking_rooms[]\n  peak_season_rates peak_season_rates[]\n  room_availability room_availability[]\n  room_images       room_images[]\n  property          properties          @relation(fields: [property_id], references: [id])\n}\n\nmodel room_images {\n  id         String   @id @default(uuid())\n  room_id    String\n  image_url  String   @db.VarChar(255)\n  created_at DateTime @default(now())\n  room       rooms    @relation(fields: [room_id], references: [id])\n}\n\nmodel room_availability {\n  id             String   @id @default(uuid())\n  room_id        String\n  date           DateTime @db.Date\n  is_available   Boolean\n  price_override Decimal? @db.Decimal(12, 2)\n  created_at     DateTime @default(now())\n  updated_at     DateTime @updatedAt\n  room           rooms    @relation(fields: [room_id], references: [id])\n\n  @@unique([room_id, date])\n}\n\nmodel peak_season_rates {\n  id                 String          @id @default(uuid())\n  property_id        String\n  room_id            String\n  start_date         DateTime        @db.Date\n  end_date           DateTime        @db.Date\n  price_change_type  PriceChangeType\n  price_change_value Decimal         @db.Decimal(12, 2)\n  created_at         DateTime        @default(now())\n  updated_at         DateTime        @updatedAt\n  property           properties      @relation(fields: [property_id], references: [id])\n  room               rooms           @relation(fields: [room_id], references: [id])\n}\n\nmodel bookings {\n  id               String          @id @default(uuid())\n  user_id          String\n  property_id      String\n  status           BookingStatus\n  check_in_date    DateTime        @db.Date\n  check_out_date   DateTime        @db.Date\n  total_price      Decimal         @db.Decimal(12, 2)\n  payment_deadline DateTime        @default(dbgenerated(\"(now() + '01:00:00'::interval)\"))\n  created_at       DateTime        @default(now())\n  updated_at       DateTime        @updatedAt\n  amount           Decimal         @db.Decimal(12, 2)\n  paid_at          DateTime?\n  proof_image      String?         @db.VarChar(255)\n  booking_rooms    booking_rooms[]\n  property         properties      @relation(fields: [property_id], references: [id])\n  user             users           @relation(fields: [user_id], references: [id])\n  reviews          reviews[]\n}\n\nmodel booking_rooms {\n  id              String   @id @default(uuid())\n  booking_id      String\n  room_id         String\n  guests_count    Int\n  price_per_night Decimal  @db.Decimal(12, 2)\n  check_in_date   DateTime @db.Date\n  check_out_date  DateTime @db.Date\n  nights          Int\n  quantity        Int\n  subtotal        Decimal  @db.Decimal(12, 2)\n  created_at      DateTime @default(now())\n  updated_at      DateTime @updatedAt\n  booking         bookings @relation(fields: [booking_id], references: [id])\n  room            rooms    @relation(fields: [room_id], references: [id])\n}\n\nmodel reviews {\n  id           String     @id @default(uuid())\n  booking_id   String\n  user_id      String\n  property_id  String\n  comment      String?\n  tenant_reply String?\n  created_at   DateTime   @default(now())\n  updated_at   DateTime   @updatedAt\n  booking      bookings   @relation(fields: [booking_id], references: [id])\n  property     properties @relation(fields: [property_id], references: [id])\n  user         users      @relation(fields: [user_id], references: [id])\n}\n\nenum Role {\n  user\n  tenant\n}\n\nenum PriceChangeType {\n  percentage\n  nominal\n}\n\nenum BookingStatus {\n  waiting_payment\n  waiting_confirmation\n  confirmed\n  canceled\n  canceled_by_tenant\n  expired\n}\n\nenum PropertyCategory {\n  apartment\n  house\n  villa\n  hotel\n  hostel\n  guesthouse\n}\n",
   "inlineSchemaHash": "376da329228a5ff783a9481b980d4b8a8aac7fa59e5842ac21af28c18835b456",
   "copyEngine": true
-=======
-  relativePath: "../..",
-  clientVersion: "6.13.0",
-  engineVersion: "361e86d0ea4987e9f53a565309b3eed797a6bcbd",
-  datasourceNames: ["db"],
-  activeProvider: "postgresql",
-  inlineDatasources: {
-    db: {
-      url: {
-        fromEnvVar: "DATABASE_URL",
-        value: null,
-      },
-    },
-  },
-  inlineSchema:
-    'generator client {\n  provider = "prisma-client-js"\n  output   = "./generated/client"\n}\n\ndatasource db {\n  provider  = "postgresql"\n  url       = env("DATABASE_URL")\n  directUrl = env("DIRECT_URL")\n}\n\nmodel users {\n  id                    String     @id @default(uuid())\n  role                  Role\n  full_name             String     @db.VarChar(100)\n  email                 String     @unique @db.VarChar(255)\n  password_hash         String\n  profile_picture       String?    @db.VarChar(255)\n  is_verified           Boolean\n  created_at            DateTime   @default(now())\n  updated_at            DateTime   @updatedAt\n  reset_password_otp    String?    @db.VarChar(6)\n  verify_otp            String?    @db.VarChar(6)\n  verify_otp_expires_at DateTime?\n  bookings              bookings[]\n  reviews               reviews[]\n  tenants               tenants[]\n}\n\nmodel tenants {\n  id           String       @id @default(uuid())\n  user_id      String       @unique\n  company_name String       @db.VarChar(100)\n  address      String\n  phone_number String       @db.VarChar(20)\n  logo         String?      @db.VarChar(255)\n  created_at   DateTime     @default(now())\n  updated_at   DateTime     @updatedAt\n  properties   properties[]\n  user         users        @relation(fields: [user_id], references: [id])\n}\n\nmodel properties {\n  id                String              @id @default(uuid())\n  tenant_id         String\n  name              String              @db.VarChar(150)\n  description       String?\n  address           String\n  city              String              @db.VarChar(100)\n  province          String              @db.VarChar(100)\n  zip_code          String              @db.VarChar(10)\n  latitude          Decimal             @db.Decimal(10, 8)\n  longitude         Decimal             @db.Decimal(11, 8)\n  main_image        String?             @db.VarChar(255)\n  created_at        DateTime            @default(now())\n  updated_at        DateTime            @updatedAt\n  deleted_at        DateTime?           @db.Timestamp(0)\n  property_category PropertyCategory\n  bookings          bookings[]\n  peak_season_rates peak_season_rates[]\n  tenant            tenants             @relation(fields: [tenant_id], references: [id])\n  property_images   property_images[]\n  reviews           reviews[]\n  rooms             rooms[]\n}\n\nmodel property_images {\n  id          String     @id @default(uuid())\n  property_id String\n  image_url   String     @db.VarChar(255)\n  created_at  DateTime   @default(now())\n  property    properties @relation(fields: [property_id], references: [id])\n}\n\nmodel rooms {\n  id                String              @id @default(uuid())\n  property_id       String\n  name              String              @db.VarChar(100)\n  description       String?\n  base_price        Decimal             @db.Decimal(12, 2)\n  capacity          Int\n  image             String?             @db.VarChar(255)\n  created_at        DateTime            @default(now())\n  updated_at        DateTime            @updatedAt\n  deleted_at        DateTime?           @db.Timestamp(0)\n  total_rooms       Int\n  booking_rooms     booking_rooms[]\n  peak_season_rates peak_season_rates[]\n  room_availability room_availability[]\n  room_images       room_images[]\n  property          properties          @relation(fields: [property_id], references: [id])\n}\n\nmodel room_images {\n  id         String   @id @default(uuid())\n  room_id    String\n  image_url  String   @db.VarChar(255)\n  created_at DateTime @default(now())\n  room       rooms    @relation(fields: [room_id], references: [id])\n}\n\nmodel room_availability {\n  id             String   @id @default(uuid())\n  room_id        String\n  date           DateTime @db.Date\n  is_available   Boolean\n  price_override Decimal? @db.Decimal(12, 2)\n  created_at     DateTime @default(now())\n  updated_at     DateTime @updatedAt\n  room           rooms    @relation(fields: [room_id], references: [id])\n\n  @@unique([room_id, date])\n}\n\nmodel peak_season_rates {\n  id                 String          @id @default(uuid())\n  property_id        String\n  room_id            String\n  start_date         DateTime        @db.Date\n  end_date           DateTime        @db.Date\n  price_change_type  PriceChangeType\n  price_change_value Decimal         @db.Decimal(12, 2)\n  created_at         DateTime        @default(now())\n  updated_at         DateTime        @updatedAt\n  property           properties      @relation(fields: [property_id], references: [id])\n  room               rooms           @relation(fields: [room_id], references: [id])\n}\n\nmodel bookings {\n  id               String          @id @default(uuid())\n  user_id          String\n  property_id      String\n  status           BookingStatus\n  check_in_date    DateTime        @db.Date\n  check_out_date   DateTime        @db.Date\n  total_price      Decimal         @db.Decimal(12, 2)\n  payment_deadline DateTime        @default(dbgenerated("(now() + \'01:00:00\'::interval)"))\n  created_at       DateTime        @default(now())\n  updated_at       DateTime        @updatedAt\n  amount           Decimal         @db.Decimal(12, 2)\n  paid_at          DateTime?\n  proof_image      String?         @db.VarChar(255)\n  booking_rooms    booking_rooms[]\n  property         properties      @relation(fields: [property_id], references: [id])\n  user             users           @relation(fields: [user_id], references: [id])\n  reviews          reviews[]\n}\n\nmodel booking_rooms {\n  id              String   @id @default(uuid())\n  booking_id      String\n  room_id         String\n  guests_count    Int\n  price_per_night Decimal  @db.Decimal(12, 2)\n  nights          Int\n  subtotal        Decimal  @db.Decimal(12, 2)\n  created_at      DateTime @default(now())\n  updated_at      DateTime @updatedAt\n  check_in_date   DateTime @db.Date\n  check_out_date  DateTime @db.Date\n  quantity        Int\n  booking         bookings @relation(fields: [booking_id], references: [id])\n  room            rooms    @relation(fields: [room_id], references: [id])\n}\n\nmodel reviews {\n  id           String     @id @default(uuid())\n  booking_id   String\n  user_id      String\n  property_id  String\n  comment      String?\n  tenant_reply String?\n  created_at   DateTime   @default(now())\n  updated_at   DateTime   @updatedAt\n  booking      bookings   @relation(fields: [booking_id], references: [id])\n  property     properties @relation(fields: [property_id], references: [id])\n  user         users      @relation(fields: [user_id], references: [id])\n}\n\nenum Role {\n  user\n  tenant\n}\n\nenum PriceChangeType {\n  percentage\n  nominal\n}\n\nenum BookingStatus {\n  waiting_payment\n  waiting_confirmation\n  confirmed\n  canceled\n  expired\n}\n\nenum PropertyCategory {\n  apartment\n  house\n  villa\n  hotel\n  hostel\n  guesthouse\n}\n',
-  inlineSchemaHash:
-    "e1a1e99faa7301d91d6df32f943f85db94e465382bb8891775adfe3968342991",
-  copyEngine: true,
-};
-
-const fs = require("fs");
-
-config.dirname = __dirname;
-if (!fs.existsSync(path.join(__dirname, "schema.prisma"))) {
-  const alternativePaths = ["prisma/generated/client", "generated/client"];
-
-  const alternativePath =
-    alternativePaths.find((altPath) => {
-      return fs.existsSync(path.join(process.cwd(), altPath, "schema.prisma"));
-    }) ?? alternativePaths[0];
-
-  config.dirname = path.join(process.cwd(), alternativePath);
-  config.isBundled = true;
->>>>>>> main
 }
 
 config.runtimeDataModel = JSON.parse(
@@ -434,7 +339,6 @@ defineDmmfProperty(exports.Prisma, config.runtimeDataModel);
 config.engineWasm = undefined;
 config.compilerWasm = undefined;
 
-<<<<<<< HEAD
 config.dirname = __dirname
 if (!fs.existsSync(path.join(__dirname, 'schema.prisma'))) {
   const alternativePaths = [
@@ -457,9 +361,6 @@ config.compilerWasm = undefined
 
 
 const { warnEnvConflicts } = require('./runtime/library.js')
-=======
-const { warnEnvConflicts } = require("./runtime/library.js");
->>>>>>> main
 
 warnEnvConflicts({
   rootEnvPath:
@@ -476,14 +377,7 @@ Object.assign(exports, Prisma);
 
 // file annotations for bundling tools to include these files
 path.join(__dirname, "query_engine-windows.dll.node");
-<<<<<<< HEAD
 path.join(process.cwd(), "prisma/generated/client/query_engine-windows.dll.node")
-=======
-path.join(
-  process.cwd(),
-  "prisma/generated/client/query_engine-windows.dll.node"
-);
->>>>>>> main
 // file annotations for bundling tools to include these files
 path.join(__dirname, "schema.prisma");
 path.join(process.cwd(), "prisma/generated/client/schema.prisma");

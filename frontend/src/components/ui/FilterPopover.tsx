@@ -121,7 +121,7 @@ export const FilterPopover = ({
                   type="search"
                   className="col-span-3"
                   value={filters.bookingId || ''}
-                  onChange={(e) => onFilterChange('bookingId', e.target.value)}
+                  ={(e) => onFilterChange('bookingId', e.target.value)}
                 />
               </div>
             </div>

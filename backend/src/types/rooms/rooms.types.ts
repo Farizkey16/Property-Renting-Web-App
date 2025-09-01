@@ -6,8 +6,5 @@ export type RoomsType = {
   capacity: number;
   image?: string;
   total_rooms: number;
-<<<<<<< HEAD
   room_images?: { image_url: string }[];
-=======
->>>>>>> main
 };

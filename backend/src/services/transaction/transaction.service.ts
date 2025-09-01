@@ -1,10 +1,6 @@
 import { Prisma } from "@prisma/client";
 import AppError from "../../errors/AppError";
-<<<<<<< HEAD
 import { findBookingRoomsByBookingId } from "../../repositories/transaction/tenant-tx.repository";
-=======
-import { findBookingRoomsByBookingId } from "../../repositories/transaction/transaction.repository";
->>>>>>> main
 import { sendEmail } from "../email.service";
 import { getEmailAndFullnameById } from "../../repositories/user/user.respository";
 import {

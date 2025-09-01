@@ -1,13 +1,5 @@
-<<<<<<< HEAD
 2025-08-26 14:12:44 [ERROR]: GET /user/me Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
 2025-08-26 14:12:49 [ERROR]: GET /property/all 
-=======
-2025-08-25 00:16:22 [ERROR]: PATCH /tenant/update Cannot read properties of undefined (reading 'role') {}
-2025-08-25 19:12:52 [ERROR]: GET /user/me Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
-2025-08-25 19:18:50 [ERROR]: POST /tenant/register Cannot read properties of undefined (reading 'role') {}
-2025-08-25 19:33:19 [ERROR]: GET /user/me Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
-2025-08-25 19:45:46 [ERROR]: GET /property/all 
->>>>>>> main
 Invalid `prisma.properties.findMany()` invocation in
 D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\property\property.repository.ts:10:28
 
@@ -17,17 +9,11 @@ D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\prope
 → 10   return prisma.properties.findMany(
 Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
 
-<<<<<<< HEAD
 Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. {"clientVersion":"6.13.0","name":"PrismaClientInitializationError"}
 2025-08-26 14:13:57 [ERROR]: GET /user/me Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
 2025-08-26 14:16:30 [ERROR]: GET /user/me Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
 2025-08-26 14:17:43 [ERROR]: GET /user/me Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
 2025-08-26 14:17:53 [ERROR]: GET /property/all 
-=======
-Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. {"code":"P1001","meta":{"modelName":"properties","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
-2025-08-25 19:49:20 [ERROR]: GET /user/me Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
-2025-08-25 19:53:19 [ERROR]: GET /property/all 
->>>>>>> main
 Invalid `prisma.properties.findMany()` invocation in
 D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\property\property.repository.ts:10:28
 
@@ -36,7 +22,6 @@ D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\prope
    9 
 → 10   return prisma.properties.findMany(
 Timed out fetching a new connection from the connection pool. More info: http://pris.ly/d/connection-pool (Current connection pool timeout: 10, connection limit: 13) {"code":"P2024","meta":{"modelName":"properties","connection_limit":13,"timeout":10},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
-<<<<<<< HEAD
 2025-08-26 14:18:47 [ERROR]: GET /user/me Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
 2025-08-26 17:29:06 [ERROR]: GET /user/me Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
 2025-08-26 17:37:16 [ERROR]: GET /user/me Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
@@ -156,51 +141,6 @@ Please make sure your database server is running at `aws-0-us-west-1.pooler.supa
 2025-08-27 20:32:37 [ERROR]: GET /property/tenant Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
 2025-08-27 20:34:32 [ERROR]: GET /property/tenant Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
 2025-08-27 20:35:06 [ERROR]: GET /property/all 
-=======
-2025-08-25 19:53:19 [ERROR]: GET /user/me 
-Invalid `prisma.users.findUnique()` invocation in
-D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\user\user.respository.ts:5:23
-
-  2 import { UpdateUser } from "../../types/user/users.types";
-  3 
-  4 export const findUserById = async (userId: string) => {
-→ 5   return prisma.users.findUnique(
-Timed out fetching a new connection from the connection pool. More info: http://pris.ly/d/connection-pool (Current connection pool timeout: 10, connection limit: 13) {"code":"P2024","meta":{"modelName":"users","connection_limit":13,"timeout":10},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
-2025-08-25 19:53:26 [ERROR]: GET /property/all 
-Invalid `prisma.properties.findMany()` invocation in
-D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\property\property.repository.ts:10:28
-
-   7 }) => {
-   8   const { property_category } = filters;
-   9 
-→ 10   return prisma.properties.findMany(
-Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
-
-Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. {"code":"P1001","meta":{"modelName":"properties","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
-2025-08-25 19:53:33 [ERROR]: GET /property/all 
-Invalid `prisma.properties.findMany()` invocation in
-D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\property\property.repository.ts:10:28
-
-   7 }) => {
-   8   const { property_category } = filters;
-   9 
-→ 10   return prisma.properties.findMany(
-Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
-
-Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. {"code":"P1001","meta":{"modelName":"properties","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
-2025-08-25 19:53:42 [ERROR]: GET /property/all 
-Invalid `prisma.properties.findMany()` invocation in
-D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\property\property.repository.ts:10:28
-
-   7 }) => {
-   8   const { property_category } = filters;
-   9 
-→ 10   return prisma.properties.findMany(
-Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
-
-Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. {"code":"P1001","meta":{"modelName":"properties","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
-2025-08-25 19:54:04 [ERROR]: GET /property/all 
->>>>>>> main
 Invalid `prisma.properties.findMany()` invocation in
 D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\property\property.repository.ts:10:28
 
@@ -211,7 +151,6 @@ D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\prope
 Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
 
 Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. {"clientVersion":"6.13.0","name":"PrismaClientInitializationError"}
-<<<<<<< HEAD
 2025-08-27 20:36:58 [ERROR]: GET /property/tenant Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
 2025-08-27 20:37:20 [ERROR]: GET /property/tenant Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
 2025-08-27 20:38:31 [ERROR]: GET /user/me Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
@@ -340,11 +279,6 @@ Raw query failed. Code: `42803`. Message: `ERROR: column "p.id" must appear in t
 Invalid `prisma.properties.findMany()` invocation in
 D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\property\property.repository.ts:10:28
 
-=======
-2025-08-25 19:54:10 [ERROR]: GET /property/all 
-Invalid `prisma.properties.findMany()` invocation in
-D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\property\property.repository.ts:10:28
-
    7 }) => {
    8   const { property_category } = filters;
    9 
@@ -352,23 +286,7 @@ D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\prope
 Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
 
 Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. {"clientVersion":"6.13.0","name":"PrismaClientInitializationError"}
-2025-08-25 19:54:17 [ERROR]: GET /property/all 
-Invalid `prisma.properties.findMany()` invocation in
-D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\property\property.repository.ts:10:28
-
->>>>>>> main
-   7 }) => {
-   8   const { property_category } = filters;
-   9 
-→ 10   return prisma.properties.findMany(
-Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
-
-Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. {"clientVersion":"6.13.0","name":"PrismaClientInitializationError"}
-<<<<<<< HEAD
 2025-08-29 17:32:18 [ERROR]: GET /property/all 
-=======
-2025-08-25 19:54:28 [ERROR]: GET /property/all 
->>>>>>> main
 Invalid `prisma.properties.findMany()` invocation in
 D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\property\property.repository.ts:10:28
 
@@ -379,7 +297,6 @@ D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\prope
 Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
 
 Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. {"clientVersion":"6.13.0","name":"PrismaClientInitializationError"}
-<<<<<<< HEAD
 2025-08-29 17:32:25 [ERROR]: GET /property/all 
 Invalid `prisma.properties.findMany()` invocation in
 D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\property\property.repository.ts:10:28
@@ -624,5 +541,3 @@ Please make sure your database server is running at `aws-0-us-west-1.pooler.supa
 2025-09-01 19:54:25 [ERROR]: GET /user/me Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
 2025-09-01 20:02:02 [ERROR]: GET /user/me Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
 2025-09-01 20:08:40 [ERROR]: GET /user/me Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
-=======
->>>>>>> main

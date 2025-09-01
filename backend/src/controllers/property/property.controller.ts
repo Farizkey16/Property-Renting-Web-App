@@ -4,19 +4,13 @@ import {
   deletePropertyServices,
   getAllPropertiesService,
   getPropertyByIdService,
-<<<<<<< HEAD
   getPropertyByLocationServices,
-=======
->>>>>>> main
   updatePropertyServices,
 } from "../../services/property/property.service";
 import { findTenantByUserId } from "../../repositories/tenant/tenant.repository";
 import AppError from "../../errors/AppError";
 import { PropertyCategory } from "../../../prisma/generated/client";
-<<<<<<< HEAD
 import { getTenantWithPropertiesByUserId } from "../../repositories/property/property.repository";
-=======
->>>>>>> main
 
 class PropertyController {
   public async getAllProperties(
@@ -60,7 +54,6 @@ class PropertyController {
     }
   }
 
-<<<<<<< HEAD
   public async getPropertiesByTenantId(
     req: Request,
     res: Response,
@@ -143,8 +136,6 @@ class PropertyController {
     }
   }
 
-=======
->>>>>>> main
   public async createProperty(
     req: Request,
     res: Response,
