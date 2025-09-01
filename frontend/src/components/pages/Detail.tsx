@@ -1,23 +1,33 @@
 "use client";
 
 import Image from "next/image";
-import {
-  Heart,
-  Star,
-  Calendar,
-  Square,
-  Tv,
-  Wind,
-  Projector,
-  Table,
-} from "lucide-react";
+import { Heart, Star, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { useRoomSearch } from "@/hooks/useRoom";
+import { formatCurrency } from "@/lib/utils";
 
 export default function PropertyDetailPage() {
   const [open, setOpen] = useState(false);
+  const params = useSearchParams();
+  const propertyname = params.get("propertyname") || undefined;
+  const roomname = params.get("roomname") || undefined;
+
+  const { data, isLoading, isError } = useRoomSearch(propertyname, roomname);
+
+  console.log(data);
+
+  if (isLoading) return <div className="p-8">Loading...</div>;
+  if (isError) return <div className="p-8">Something went wrong</div>;
+
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto p-4 lg:p-8">
@@ -28,7 +38,7 @@ export default function PropertyDetailPage() {
             <div className="grid grid-cols-4 gap-2">
               <div className="col-span-4 lg:col-span-3">
                 <Image
-                  src="https://picsum.photos/400/300"
+                  src={data?.image || "/placeholder.svg"}
                   alt="Main workspace area"
                   width={800}
                   height={500}
@@ -37,14 +47,14 @@ export default function PropertyDetailPage() {
               </div>
               <div className="col-span-4 lg:col-span-1 grid gap-2">
                 <Image
-                  src="https://picsum.photos/400/300"
+                  src={data?.room_images?.[1]?.image_url || "/placeholder.svg"}
                   alt="Bedroom area"
                   width={300}
                   height={195}
                   className="w-full h-[195px] object-cover rounded-lg"
                 />
                 <Image
-                  src="https://picsum.photos/400/300"
+                  src={data?.room_images?.[2]?.image_url || "/placeholder.svg"}
                   alt="Kitchen area"
                   width={300}
                   height={195}
@@ -58,50 +68,26 @@ export default function PropertyDetailPage() {
               <div className="flex items-start justify-between">
                 <div>
                   <h1 className="text-2xl font-semibold text-gray-900">
-                    21 Poland Street, #2
+                    {data.name || "Property Name"}
                   </h1>
                   <div className="flex items-center gap-2 mt-2">
-                    <div className="flex items-center gap-1">
-                      <Star className="w-4 h-4 fill-current text-yellow-400" />
-                      <span className="text-sm font-medium">4.6</span>
-                      <span className="text-sm text-gray-500">
-                        (241 ratings)
-                      </span>
-                    </div>
+                    <Star className="w-4 h-4 fill-current text-yellow-400" />
+                    <span className="text-sm font-medium">4.6</span>
+                    <span className="text-sm text-gray-500">(241 ratings)</span>
                   </div>
                 </div>
-                <Button variant="ghost" size="sm">
+                <Button variant="ghost" size="sm" aria-label="Add to wishlist">
                   <Heart className="w-5 h-5" />
                 </Button>
               </div>
 
-              {/* Accommodates */}
+              {/* Description */}
               <Card>
                 <CardContent className="p-6">
-                  <h3 className="text-lg font-medium mb-4">Accommodates</h3>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-600">Air tables</span>
-                      <span className="font-medium">12</span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-600">In lounge</span>
-                      <span className="font-medium">7</span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-600">
-                        Maximum total
-                      </span>
-                      <span className="font-medium">56</span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-600">Sq. ft.</span>
-                      <span className="font-medium">925</span>
-                    </div>
-                  </div>
-                  <Button variant="outline" className="w-fit mt-4">
-                    View floor plan
-                  </Button>
+                  <h3 className="text-lg font-medium mb-4">Description</h3>
+                  <p className="text-sm text-gray-700 leading-relaxed">
+                    {data.description}
+                  </p>
                 </CardContent>
               </Card>
 
@@ -126,79 +112,41 @@ export default function PropertyDetailPage() {
                 </CardContent>
               </Card>
 
-              {/* Amenities */}
               <Card>
-                <CardContent className="p-6">
-                  <h3 className="text-lg font-medium mb-4">Amenities</h3>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="flex items-center gap-3">
-                      <Wind className="w-5 h-5 text-gray-400" />
-                      <span className="text-sm">AC</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <Tv className="w-5 h-5 text-gray-400" />
-                      <span className="text-sm">Apple TV</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <div className="w-5 h-5 bg-gray-200 rounded"></div>
-                      <span className="text-sm">Skylight</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <Square className="w-5 h-5 text-gray-400" />
-                      <span className="text-sm">Whiteboards (2)</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <div className="w-5 h-5 bg-gray-200 rounded"></div>
-                      <span className="text-sm">Ensuite kitchen</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <Wind className="w-5 h-5 text-gray-400" />
-                      <span className="text-sm">Air Purification TV</span>
-                    </div>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 justify-center items-center">
+                  <div>
+                    <Image
+                      src={data.property.main_image || "/placeholder.svg"}
+                      alt={data.property.name || "Property Image"}
+                      width={600}
+                      height={400}
+                      className="w-full h-[400px] object-cover rounded-lg"
+                    />
                   </div>
-                  <Button variant="link" className="text-blue-600 p-0 mt-4">
-                    Show 8 more
-                  </Button>
-                </CardContent>
-              </Card>
-
-              {/* Additional Services */}
-              <Card>
-                <CardContent className="p-6">
-                  <h3 className="text-lg font-medium mb-4">
-                    Additional in-room services
-                  </h3>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="flex justify-between items-center">
-                      <div className="flex items-center gap-3">
-                        <Projector className="w-5 h-5 text-gray-400" />
-                        <span className="text-sm">Projector</span>
+                  <CardContent className="space-y-2">
+                    <h3 className="text-lg font-medium mb-2">
+                      Property Information
+                    </h3>
+                    <div className="text-sm text-gray-700 space-y-1">
+                      <div>
+                        <strong>Name:</strong> {data.property.name}
                       </div>
-                      <span className="text-sm font-medium">$60</span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <div className="flex items-center gap-3">
-                        <Square className="w-5 h-5 text-gray-400" />
-                        <span className="text-sm">Projection screen</span>
+                      <div>
+                        <strong>Address:</strong> {data.property.address}
                       </div>
-                      <span className="text-sm font-medium">$60</span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <div className="flex items-center gap-3">
-                        <Table className="w-5 h-5 text-gray-400" />
-                        <span className="text-sm">Multipurpose table</span>
+                      <div>
+                        <strong>City:</strong> {data.property.city}
                       </div>
-                      <span className="text-sm font-medium">$100</span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <div className="flex items-center gap-3">
-                        <div className="w-5 h-5 bg-gray-200 rounded"></div>
-                        <span className="text-sm">Pack of folding chairs</span>
+                      <div>
+                        <strong>Province:</strong> {data.property.province}
                       </div>
-                      <span className="text-sm font-medium">$50</span>
+                      <div>
+                        <strong>Property Type:</strong>{" "}
+                        {data.property.property_category}
+                      </div>
                     </div>
-                  </div>
-                </CardContent>
+                  </CardContent>
+                </div>
               </Card>
             </div>
           </div>
@@ -208,7 +156,9 @@ export default function PropertyDetailPage() {
             <div className="flex items-center justify-between">
               <div>
                 <span className="text-xs text-gray-500">From</span>
-                <div className="text-lg font-bold">$61/hr</div>
+                <div className="text-lg font-bold">
+                  {formatCurrency(data.base_price)}
+                </div>
               </div>
               <Button
                 className="bg-green-500 hover:bg-green-600 text-white"
@@ -236,10 +186,12 @@ export default function PropertyDetailPage() {
                 <div className="flex justify-between items-center">
                   <div>
                     <span className="text-sm text-gray-600">From</span>
-                    <div className="text-2xl font-bold">$61/hr</div>
+                    <div className="text-2xl font-bold">
+                      {formatCurrency(data.base_price)}
+                    </div>
                   </div>
                   <div className="text-right">
-                    <span className="text-lg font-semibold">$504/day</span>
+                    <span className="text-lg font-semibold">Peak Rate</span>
                   </div>
                 </div>
 
@@ -248,86 +200,54 @@ export default function PropertyDetailPage() {
                 </Button>
 
                 <div className="text-xs text-gray-500 text-center">
-                  You wont be charged until after your reservation begins.
+                  You won&apos;t be charged until after your reservation begins.
                   Cancellations are free up to 2 hours before.
                 </div>
 
                 <Button variant="outline" className="w-full">
                   Request free tour
                 </Button>
-
-                <div className="border-t pt-4">
-                  <div className="text-sm font-medium mb-2">
-                    Rent this space monthly
-                  </div>
-                  <div className="text-xs text-gray-500 mb-3">
-                    Access weekdays office space at a fraction of the cost of a
-                    traditional lease with.
-                  </div>
-                  <Button variant="link" className="text-blue-600 p-0 text-sm">
-                    Learn more
-                  </Button>
-                </div>
               </div>
             </DialogContent>
           </Dialog>
 
-          {/* Right Column - Booking */}
+          {/* Desktop Booking Column */}
           <div className="hidden lg:block lg:col-span-1">
             <div className="sticky top-4">
               <Card>
                 <CardContent className="p-6 space-y-4">
-                  {/* Booking Header */}
-                  <div className="flex items-center justify-between">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="flex items-center gap-2">
-                      <Calendar className="w-4 h-4" />
-                      Choose a date and time
-                    </Button>
-                  </div>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="flex items-center gap-2">
+                    <Calendar className="w-4 h-4" />
+                    Choose a date and time
+                  </Button>
 
-                  {/* Pricing */}
                   <div className="flex justify-between items-center">
                     <div>
                       <span className="text-sm text-gray-600">From</span>
-                      <div className="text-2xl font-bold">$61/hr</div>
+                      <div className="text-2xl font-bold">
+                        {formatCurrency(data.base_price)}
+                      </div>
                     </div>
                     <div className="text-right">
-                      <span className="text-lg font-semibold">$504/day</span>
+                      <span className="text-lg font-semibold">Peak Rate</span>
                     </div>
                   </div>
 
-                  {/* Reserve Button */}
                   <Button className="w-full bg-green-500 hover:bg-green-600 text-white">
                     Reserve now
                   </Button>
 
                   <div className="text-xs text-gray-500 text-center">
-                    You wont be charged until after your reservation begins.
-                    Cancellations are free up to 2 hours before.
+                    You won&apos;t be charged until after your reservation
+                    begins. Cancellations are free up to 2 hours before.
                   </div>
 
                   <Button variant="outline" className="w-full">
                     Request free tour
                   </Button>
-
-                  {/* Monthly Rental */}
-                  <div className="border-t pt-4">
-                    <div className="text-sm font-medium mb-2">
-                      Rent this space monthly
-                    </div>
-                    <div className="text-xs text-gray-500 mb-3">
-                      Access weekdays office space at a fraction of the cost of
-                      a traditional lease with.
-                    </div>
-                    <Button
-                      variant="link"
-                      className="text-blue-600 p-0 text-sm">
-                      Learn more
-                    </Button>
-                  </div>
                 </CardContent>
               </Card>
             </div>

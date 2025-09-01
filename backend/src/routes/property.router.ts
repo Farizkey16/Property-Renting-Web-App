@@ -24,6 +24,12 @@ class PropertyRouter {
     );
     this.route.get("/all", this.propertyController.getAllProperties);
     this.route.get("/get/:id", this.propertyController.getPropertyById);
+    this.route.get("/nearby", this.propertyController.getPropertyByLocation);
+    this.route.get(
+      "/tenant",
+      verifyToken,
+      this.propertyController.getPropertiesByTenantId
+    );
     this.route.patch("/update/:id", this.propertyController.updateProperty);
     this.route.delete("/delete/:id", this.propertyController.deleteProperty);
   }

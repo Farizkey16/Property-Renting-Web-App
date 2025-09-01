@@ -19,8 +19,13 @@ export const verifyToken = (
       throw new AppError("TOKEN_KEY is not set", 500);
     }
 
-    const token =
-      req.headers.authorization?.split(" ")[1] || req.cookies?.token;
+    const authHeader = req.headers.authorization;
+    const cookieToken = req.cookies?.token;
+
+    console.log("Authorization Header:", authHeader);
+    console.log("Cookie Token:", cookieToken);
+
+    const token = authHeader?.split(" ")[1] || cookieToken;
     if (!token) {
       throw new AppError("Token not found", 401);
     }
@@ -30,6 +35,7 @@ export const verifyToken = (
 
     next();
   } catch (error) {
+    console.error("VerifyToken Error:", error);
     if (error instanceof TokenExpiredError) {
       next(new AppError("Token expired", 401));
     } else if (error instanceof JsonWebTokenError) {

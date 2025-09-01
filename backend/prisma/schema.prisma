@@ -24,7 +24,7 @@ model users {
   verify_otp_expires_at DateTime?
   bookings              bookings[]
   reviews               reviews[]
-  tenants               tenants[]
+  tenants               tenants?
 }
 
 model tenants {

@@ -4,11 +4,13 @@ import {
   deletePropertyServices,
   getAllPropertiesService,
   getPropertyByIdService,
+  getPropertyByLocationServices,
   updatePropertyServices,
 } from "../../services/property/property.service";
 import { findTenantByUserId } from "../../repositories/tenant/tenant.repository";
 import AppError from "../../errors/AppError";
 import { PropertyCategory } from "../../../prisma/generated/client";
+import { getTenantWithPropertiesByUserId } from "../../repositories/property/property.repository";
 
 class PropertyController {
   public async getAllProperties(
@@ -47,6 +49,88 @@ class PropertyController {
       res
         .status(200)
         .send({ message: "Property found", success: true, property });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  public async getPropertiesByTenantId(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
+    try {
+      const decrypt = res.locals.decrypt;
+      if (!decrypt || !decrypt.userId) {
+        throw new AppError("Unauthorized access", 401);
+      }
+
+      const tenantWithProperties = await getTenantWithPropertiesByUserId(
+        decrypt.userId
+      );
+
+      if (!tenantWithProperties) {
+        throw new AppError("Tenant not found", 404);
+      }
+
+      res.status(200).json({
+        success: true,
+        message: "Properties found",
+        tenant: {
+          id: tenantWithProperties.id,
+          logo: tenantWithProperties.logo,
+          company_name: tenantWithProperties.company_name,
+        },
+        properties: tenantWithProperties.properties,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  public async getPropertyByLocation(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
+    try {
+      const {
+        latitude,
+        longitude,
+        radius,
+        checkIn,
+        checkOut,
+        category,
+        minPrice,
+        maxPrice,
+      } = req.query;
+
+      if (!latitude || !longitude || !radius) {
+        throw new AppError("latitude, longitude, and radius are required", 400);
+      }
+
+      const rad = radius ? Number(radius) : 5;
+      const lat = Number(latitude);
+      const lng = Number(longitude);
+
+      const properties = await getPropertyByLocationServices(
+        lat,
+        lng,
+        rad,
+        checkIn as string,
+        checkOut as string,
+        category as PropertyCategory,
+        minPrice ? Number(minPrice) : undefined,
+        maxPrice ? Number(maxPrice) : undefined
+      );
+
+      res.status(200).send({
+        message: "Properties found",
+        success: true,
+        radius: rad,
+        user_location: { latitude: lat, longitude: lng },
+        properties,
+      });
     } catch (error) {
       next(error);
     }

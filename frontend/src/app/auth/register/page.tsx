@@ -41,7 +41,7 @@ export default function RegisterPage() {
     register(form, {
       onSuccess: (data) => {
         console.log(data);
-        router.push(`/auth/verify-email/${form.email}`);
+        router.push(`/auth/verify-email/${form.email}?role=${form.role}`);
       },
       onError: (error) => {
         console.log(error);

@@ -2,9 +2,10 @@ import { NextFunction, Request, Response } from "express";
 import {
   createRoomService,
   deleteRoomByIdService,
-  getRoomByIdService,
+  getRoomByPropertyAndNameService,
   getRoomsService,
 } from "../../services/rooms/rooms.services";
+import AppError from "../../errors/AppError";
 
 class RoomsController {
   public async getRoomsController(
@@ -20,13 +21,21 @@ class RoomsController {
     }
   }
 
-  public async getRoomByIdController(
+  public async getRoomByPropertyAndName(
     req: Request,
     res: Response,
     next: NextFunction
   ): Promise<void> {
     try {
-      const response = await getRoomByIdService(req.params.id);
+      const { propertyname, roomname } = req.query;
+      if (!propertyname || !roomname) {
+        throw new AppError("propertyname and roomname are required", 404);
+      }
+      const response = await getRoomByPropertyAndNameService(
+        propertyname as string,
+        roomname as string
+      );
+
       res.status(200).send({ message: "Room found", success: true, response });
     } catch (error) {
       next(error);
@@ -39,12 +48,17 @@ class RoomsController {
     next: NextFunction
   ): Promise<void> {
     try {
-      const { property_id } = req.params;
+      const weekend_peak = req.body.weekend_peak
+        ? {
+            type: req.body.weekend_peak.type as "percentage" | "nominal",
+            value: Number(req.body.weekend_peak.value),
+          }
+        : undefined;
 
       const response = await createRoomService(
         req.body,
-        property_id,
-        req.file as Express.Multer.File
+        req.files as Express.Multer.File[],
+        weekend_peak
       );
       res
         .status(200)

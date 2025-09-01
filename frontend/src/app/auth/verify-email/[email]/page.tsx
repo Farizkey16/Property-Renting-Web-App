@@ -11,12 +11,14 @@ import {
   CardTitle,
   CardFooter,
 } from "@/components/ui/card";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useVerifyEmail } from "@/hooks/useAuth";
 
 export default function VerifyEmail() {
   const { email } = useParams<{ email: string }>();
   const decodedEmail = decodeURIComponent(email);
+  const searchParams = useSearchParams();
+  const role = searchParams.get("role");
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
 
   const router = useRouter();
@@ -27,12 +29,11 @@ export default function VerifyEmail() {
     e: React.ChangeEvent<HTMLInputElement>,
     index: number
   ) => {
-    const value = e.target.value.slice(-1); // hanya ambil 1 karakter
+    const value = e.target.value.slice(-1);
     const newOtp = [...otp];
     newOtp[index] = value;
     setOtp(newOtp);
 
-    // Auto focus ke input berikutnya
     if (value && index < 5) {
       const nextInput = document.getElementById(`otp-${index + 1}`);
       nextInput?.focus();
@@ -49,7 +50,11 @@ export default function VerifyEmail() {
       {
         onSuccess: (data) => {
           console.log(data);
-          router.push("/auth/login");
+          if (role === "tenant") {
+            router.push(`/auth/tenant/${decodedEmail}`);
+          } else {
+            router.push("/auth/login");
+          }
         },
         onError: (error) => {
           console.log(error);

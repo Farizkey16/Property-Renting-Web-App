@@ -1,4 +1,4 @@
-import UserDashboard from "@/components/layouts/dashboard/user-dashboard";
+import UserDashboard from "@/components/layouts/dashboard/user/user-dashboard";
 
 export default function Dashboard() {
   return (
