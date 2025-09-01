@@ -3,13 +3,20 @@ import { prisma } from "../../../config/prisma";
 import AppError from "../../../errors/AppError";
 import {
   findBookingRoomsByBookingId,
+<<<<<<< HEAD
   findOrderByStatus,
+=======
+>>>>>>> main
   FindProofImage,
   OverlappingBooking,
   UpdateBookings,
   UpdateRoomAvailability,
   ValidateBooking,
+<<<<<<< HEAD
 } from "../../../repositories/transaction/tenant-tx.repository";
+=======
+} from "../../../repositories/transaction/transaction.repository";
+>>>>>>> main
 import { getEmailAndFullnameById } from "../../../repositories/user/user.respository";
 import {
   availableRooms,
@@ -25,21 +32,44 @@ class TenantTransactions {
     next: NextFunction
   ) => {
     try {
+<<<<<<< HEAD
       const role = res.locals.decrypt.role;
       // Validate Transaction ID
 
       const transactionId = req.params?.id;
+=======
+      // Validate Role
+      const decrypt = res.locals.decrypt;
+
+      if (!decrypt || decrypt.role !== "tenant") {
+        throw new AppError("Unauthorized access", 401);
+      }
+
+      // Validate Transaction ID
+
+      const transactionId = req.params.id;
+>>>>>>> main
 
       if (!transactionId) {
         throw new AppError("Invalid transaction ID", 400);
       }
 
       // Batch Query Accept Transaction
+<<<<<<< HEAD
       const bookingProcess = await prisma.$transaction(async (tx) => {
         // Validate Property --> repository selects property key
         await ValidateBooking(transactionId, role.userId, tx);
 
         // Update booking and Return UserID
+=======
+
+      const bookingProcess = await prisma.$transaction(async (tx) => {
+        // Validate Property --> repository selects property key
+        await ValidateBooking(transactionId, decrypt.userId, tx);
+
+        // Update booking and Return UserID
+
+>>>>>>> main
         const userID = await UpdateBookings(transactionId, "confirmed", tx);
 
         // Validate user
@@ -53,6 +83,10 @@ class TenantTransactions {
         const overlappingBooking = await OverlappingBooking(transactionId, tx);
 
         // Calculating room availability based on dates and room
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
         const availability = availableRooms(findRooms, overlappingBooking, tx);
 
         return {
@@ -87,7 +121,16 @@ class TenantTransactions {
     next: NextFunction
   ) => {
     try {
+<<<<<<< HEAD
       const role = res.locals.decrypt.role;
+=======
+      // Validate Role
+      const decrypt = res.locals.decrypt;
+
+      if (!decrypt || decrypt.role !== "tenant") {
+        throw new AppError("Unauthorized access", 401);
+      }
+>>>>>>> main
 
       // Validate Transaction ID
 
@@ -99,7 +142,11 @@ class TenantTransactions {
 
       const rejectProcess = await prisma.$transaction(async (tx) => {
         // Validate Property --> repository selects property key
+<<<<<<< HEAD
         await ValidateBooking(transactionId, role.userId, tx);
+=======
+        await ValidateBooking(transactionId, decrypt.userId, tx);
+>>>>>>> main
 
         // Update booking and Return UserID
 
@@ -141,6 +188,16 @@ class TenantTransactions {
     next: NextFunction
   ) => {
     try {
+<<<<<<< HEAD
+=======
+      // Validate Role
+      const decrypt = res.locals.decrypt;
+
+      if (!decrypt || decrypt.role !== "tenant") {
+        throw new AppError("Unauthorized access", 401);
+      }
+
+>>>>>>> main
       // Validate Transaction
 
       const transactionId = req.params.id;
@@ -150,7 +207,11 @@ class TenantTransactions {
       }
 
       // Find Payment Proof
+<<<<<<< HEAD
       await FindProofImage(transactionId);
+=======
+      await FindProofImage(transactionId)
+>>>>>>> main
 
       // Update Status to Canceled
       const cancelledBooking = await UpdateBookings(transactionId, "canceled");
@@ -158,6 +219,7 @@ class TenantTransactions {
       // Send Response
       res.json({
         message: "Payment canceled by Tenant, booking updated",
+<<<<<<< HEAD
         data: cancelledBooking,
       });
     } catch (error) {
@@ -193,6 +255,12 @@ class TenantTransactions {
       });
     } catch (error) {
       next(error);
+=======
+        data: cancelledBooking
+      });
+    } catch (error) {
+        next(error)
+>>>>>>> main
     }
   };
 }

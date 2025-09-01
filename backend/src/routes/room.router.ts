@@ -15,10 +15,17 @@ class RoomRouter {
 
   private initializeRoutes() {
     this.route.get("/all", this.roomRouter.getRoomsController);
+<<<<<<< HEAD
     this.route.get("/search", this.roomRouter.getRoomByPropertyAndName);
     this.route.post(
       "/create",
       uploaderMemory().array("images", 5),
+=======
+    this.route.get("/get/:id", this.roomRouter.getRoomByIdController);
+    this.route.post(
+      "/create/:property_id",
+      uploaderMemory().single("image"),
+>>>>>>> main
       this.roomRouter.createRoomController
     );
     this.route.patch("/update/:id", this.roomRouter.updateRoom);

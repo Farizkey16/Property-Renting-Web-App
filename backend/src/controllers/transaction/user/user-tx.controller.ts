@@ -1,11 +1,19 @@
 import { Request, Response, NextFunction } from "express";
 import { prisma } from "../../../config/prisma";
+<<<<<<< HEAD
 import { DateTime } from "luxon";
 import AppError from "../../../errors/AppError";
 import { getUserById } from "../../../services/user/user.service";
 import { UpdateRoomAvailability } from "../../../repositories/transaction/tenant-tx.repository";
 import { Prisma } from "../../../../prisma/generated/client";
 import { BookingStatus } from "../../../../prisma/generated/client";
+=======
+import { handleUpload } from "../../../config/cloudinary";
+import { DateTime } from "luxon"
+import AppError from "../../../errors/AppError";
+import { getUserById } from "../../../services/user/user.service";
+import { UpdateRoomAvailability } from "../../../repositories/transaction/transaction.repository";
+>>>>>>> main
 
 class UserTransactions {
   public reservation = async (
@@ -14,6 +22,7 @@ class UserTransactions {
     next: NextFunction
   ) => {
     try {
+<<<<<<< HEAD
       const role = res.locals.decrypt;
 
       const userId = role.userId;
@@ -22,6 +31,22 @@ class UserTransactions {
 
       if (!user) {
         throw new AppError("User not found", 404);
+=======
+      // Validate role
+      const decrypt = res.locals.decrypt
+
+      if (!decrypt || !decrypt.userId) {
+        throw new AppError("Unauthorized access", 401)
+      }
+
+      const userId = decrypt.userId
+      console.log("userId from token:", userId)
+
+      const user = await getUserById(userId)
+
+      if (!user) {
+        throw new AppError("User not found", 404)
+>>>>>>> main
       }
 
       // Validating fields
@@ -35,11 +60,19 @@ class UserTransactions {
         total_price,
         price_per_night,
         subtotal,
+<<<<<<< HEAD
         quantity,
       } = req.body;
 
       if (!property_id || !check_in_date || !check_out_date) {
         throw new AppError("Please enter the required fields", 400);
+=======
+        quantity
+      } = req.body;
+
+      if (!property_id || !check_in_date || !check_out_date) {
+        throw new AppError("Please enter the required fields", 400)
+>>>>>>> main
       }
 
       // Checking Room Availability
@@ -55,7 +88,11 @@ class UserTransactions {
       });
 
       if (conflict_dates.length > 0) {
+<<<<<<< HEAD
         throw new AppError("Room is not available", 409);
+=======
+        throw new AppError("Room is not available", 409)
+>>>>>>> main
       }
 
       await prisma.$transaction(async (tx) => {
@@ -83,8 +120,13 @@ class UserTransactions {
             room_id: room_id,
             guests_count: guests_count,
             price_per_night: price_per_night,
+<<<<<<< HEAD
             check_in_date: new Date(check_in_date),
             check_out_date: new Date(check_out_date),
+=======
+            check_in_date: check_in_date,
+            check_out_date: check_out_date,
+>>>>>>> main
             quantity: quantity,
             nights: nights,
             subtotal: subtotal,
@@ -116,7 +158,10 @@ class UserTransactions {
         message: "Booking successfully created.",
       });
     } catch (error) {
+<<<<<<< HEAD
       console.log(error);
+=======
+>>>>>>> main
       next(error);
     }
   };
@@ -127,6 +172,7 @@ class UserTransactions {
     next: NextFunction
   ) => {
     try {
+<<<<<<< HEAD
       const { status, check_in_date, check_out_date, sort } = req.query;
       const { bookingId } = req.params
       const userId = res.locals.decrypt.userId;
@@ -140,6 +186,21 @@ class UserTransactions {
       // Status Filter
       if (status && typeof status === "string") {
         whereClause.status = status as BookingStatus;
+=======
+      // Validate Role
+      const decrypt = res.locals.decrypt
+
+      if (!decrypt || !decrypt.userId) {
+        throw new AppError("Unauthorized access", 401)
+      }
+
+      const userId = decrypt.userId
+      console.log("userId from token:", userId)
+      const user = await getUserById(userId)
+
+      if (!user) {
+        throw new AppError("User not found", 404);
+>>>>>>> main
       }
 
       // Date Filter
@@ -183,20 +244,14 @@ class UserTransactions {
               subtotal: true,
             },
           },
+<<<<<<< HEAD
           property: {
-            select: {
-              name: true,
-              main_image: true,
-              city: true
-            }
-          },
-          status: true
-
+=======
         },
       });
 
       if (!bookings || bookings.length === 0) {
-        throw new AppError("No reservations found", 404);
+        throw new AppError("No reservations found", 404)
       }
 
       res.status(200).json({
@@ -209,6 +264,132 @@ class UserTransactions {
     }
   };
 
+  public getReservationsByDate = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const { check_in_date, check_out_date } = req.body;
+
+      // Validate Role
+      const decrypt = res.locals.decrypt
+
+      if (!decrypt || !decrypt.userId) {
+        throw new AppError("Unauthorized access", 401)
+      }
+
+      const userId = decrypt.userId;
+      console.log("userId from token:", userId)
+      const user = await getUserById(userId)
+
+      if (!user) {
+        throw new AppError("User not found", 404);
+      }
+
+      const bookings = await prisma.bookings.findMany({
+        where: {
+          user_id: user.id,
+          check_in_date: { gte: new Date(check_in_date) },
+          check_out_date: { lte: new Date(check_out_date) },
+        },
+        select: {
+          id: true,
+          check_in_date: true,
+          check_out_date: true,
+          booking_rooms: {
+>>>>>>> main
+            select: {
+              name: true,
+              main_image: true,
+              city: true
+            }
+          },
+          status: true
+
+        },
+      });
+
+      if (!bookings || bookings.length === 0) {
+<<<<<<< HEAD
+        throw new AppError("No reservations found", 404);
+=======
+        throw new AppError("No reservations found", 404)
+>>>>>>> main
+      }
+
+      res.status(200).json({
+        success: true,
+        message: "Reservations successfully fetched.",
+        data: bookings,
+      });
+    } catch (err) {
+      next(err);
+    }
+  };
+
+<<<<<<< HEAD
+=======
+  public getReservationsByOrderNo = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const { booking_id } = req.params;
+
+      // Validate Role
+      const decrypt = res.locals.decrypt
+
+      if (!decrypt || !decrypt.userId) {
+        throw new AppError("Unauthorized access", 401)
+      }
+
+      const userId = decrypt.userId
+      console.log("userId from token:", userId)
+
+      const user = await getUserById(userId)
+
+      if (!user) {
+        throw new AppError("User not found", 404)
+      }
+
+      const bookings = await prisma.bookings.findMany({
+        where: {
+          user_id: user.id,
+          id: booking_id,
+        },
+        select: {
+          id: true,
+          check_in_date: true,
+          check_out_date: true,
+          booking_rooms: {
+            select: {
+              id: true,
+              room_id: true,
+              guests_count: true,
+              nights: true,
+              price_per_night: true,
+              subtotal: true,
+            },
+          },
+        },
+      });
+
+      if (!bookings || bookings.length === 0) {
+        throw new AppError("No reservations found", 404)
+      }
+
+      res.status(200).json({
+        success: true,
+        message: "Reservations successfully fetched.",
+        data: bookings,
+      });
+    } catch (err) {
+      next(err);
+    }
+  };
+>>>>>>> main
 
   public getReservationsHistory = async (
     req: Request,
@@ -217,6 +398,7 @@ class UserTransactions {
   ) => {
     try {
       // Validate Role
+<<<<<<< HEAD
       const decrypt = res.locals.decrypt;
 
       if (!decrypt || !decrypt.userId) {
@@ -226,6 +408,17 @@ class UserTransactions {
       const userId = decrypt.userId;
       console.log("userId from token:", userId);
       const user = await getUserById(userId);
+=======
+      const decrypt = res.locals.decrypt
+
+      if (!decrypt || !decrypt.userId) {
+        throw new AppError("Unauthorized access", 401)
+      }
+
+      const userId = decrypt.userId
+      console.log("userId from token:", userId)
+      const user = await getUserById(userId)
+>>>>>>> main
 
       if (!user) {
         throw new AppError("User not found", 404);
@@ -259,7 +452,11 @@ class UserTransactions {
       });
 
       if (!bookings || bookings.length === 0) {
+<<<<<<< HEAD
         throw new AppError("No reservations found", 404);
+=======
+        throw new AppError("No reservations found", 404)
+>>>>>>> main
       }
 
       res.status(200).json({
@@ -272,6 +469,73 @@ class UserTransactions {
     }
   };
 
+<<<<<<< HEAD
+=======
+  public getReservationsByStatus = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      // Validate Role
+       const decrypt = res.locals.decrypt
+
+      if (!decrypt || !decrypt.userId) {
+        throw new AppError("Unauthorized access", 401)
+      }
+
+      const userId = decrypt.userId;
+      console.log("userId from token:", userId)
+      const user = await getUserById(userId)
+
+      if (!user) {
+        throw new AppError("User not found", 404);
+      }
+
+      const bookings = await prisma.bookings.findMany({
+        where: {
+          user_id: user.id,
+          check_out_date: {
+            lt: new Date(),
+          },
+          status: {
+            in: ["confirmed", "canceled"]
+          }
+        },
+        select: {
+          id: true,
+          check_in_date: true,
+          check_out_date: true,
+          booking_rooms: {
+            select: {
+              id: true,
+              room_id: true,
+              guests_count: true,
+              nights: true,
+              price_per_night: true,
+              subtotal: true,
+            },
+          },
+        },
+        orderBy: {
+            check_out_date: "desc"
+        }
+      });
+
+      if (!bookings || bookings.length === 0) {
+        throw new AppError("No reservations found", 404)
+      }
+
+      res.status(200).json({
+        success: true,
+        message: "Reservations successfully fetched.",
+        data: bookings,
+      });
+    } catch (err) {
+      next(err);
+    }
+  };
+>>>>>>> main
 
   public paymentProofUpload = async (
     req: Request,
@@ -280,6 +544,7 @@ class UserTransactions {
   ) => {
     try {
       // Validate Role
+<<<<<<< HEAD
       const decrypt = res.locals.decrypt;
 
       if (!decrypt || !decrypt.userId) {
@@ -293,11 +558,30 @@ class UserTransactions {
 
       if (!user) {
         throw new AppError("User not found", 404);
+=======
+      const decrypt = res.locals.decrypt
+
+      if (!decrypt || !decrypt.userId) {
+        throw new AppError("Unauthorized access", 401)
+      }
+
+      const userId = decrypt.userId
+      console.log("userId from token:", userId)
+
+      const user = await getUserById(userId)
+
+      if (!user) {
+        throw new AppError("User not found", 404)
+>>>>>>> main
       }
 
       // Upload
       if (!req.file) {
+<<<<<<< HEAD
         throw new AppError("No file uploaded.", 400);
+=======
+        throw new AppError("No file uploaded.", 400)
+>>>>>>> main
       }
       // const b64 = Buffer.from(req.file.buffer).toString("base64");
       // let dataURI = "data:" + req.file.mimetype + ";base64," + b64; // Must be converted to base64 data URI since Cloudinary cannot handle raw Node.js buffer
@@ -326,4 +610,9 @@ class UserTransactions {
   };
 }
 
+<<<<<<< HEAD
 export default UserTransactions;
+=======
+
+export default UserTransactions
+>>>>>>> main

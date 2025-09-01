@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import dayjs from "dayjs";
 import { prisma } from "../../config/prisma";
 import { RoomsType } from "../../types/rooms/rooms.types";
@@ -77,6 +78,13 @@ export const getRoomAvailabilityWithPriceRepository = async (
   });
 
   return availabilityWithPrice;
+=======
+import { prisma } from "../../config/prisma";
+import { RoomsType } from "../../types/rooms/rooms.types";
+
+export const createRoomRepository = async (data: RoomsType) => {
+  return await prisma.rooms.create({ data });
+>>>>>>> main
 };
 
 export const findRoomRepository = async (property_id: string) => {
@@ -96,6 +104,7 @@ export const findAllRoomsRepository = async () => {
   });
 };
 
+<<<<<<< HEAD
 export const getRoomByPropertyAndNameRepository = async (
   propertyname: string,
   roomname: string
@@ -130,6 +139,8 @@ export const getRoomByPropertyAndNameRepository = async (
   });
 };
 
+=======
+>>>>>>> main
 export const findRoomByIdRepository = async (id: string) => {
   return await prisma.rooms.findUnique({
     where: { id },

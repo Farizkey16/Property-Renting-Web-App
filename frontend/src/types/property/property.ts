@@ -7,6 +7,7 @@ export enum PropertyCategory {
   guesthouse = "guesthouse",
 }
 
+<<<<<<< HEAD
 export interface createProperty {
   name: string;
   description: string;
@@ -73,4 +74,21 @@ export interface PropertyResponse {
   message: string;
   tenant: Tenant;
   properties: Property[];
+=======
+export interface Property {
+  id: number;
+  title: string;
+  location: string;
+  image: string;
+  rating: number;
+  beds: number;
+  baths: number;
+  guests: number;
+  price: string;
+  period: string;
+  originalPrice?: string;
+  badge?: string;
+  badgeColor?: string;
+  category?: PropertyCategory;
+>>>>>>> main
 }

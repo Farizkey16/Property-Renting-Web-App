@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 import { createProperty, PropertyResponse } from "@/types/property/property";
+=======
+>>>>>>> main
 import axios from "axios";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
@@ -10,6 +13,7 @@ export const fetchAllProperties = async (params?: {
   console.log(response.data);
   return response.data;
 };
+<<<<<<< HEAD
 
 export const createPropertyServices = async (tenant: createProperty) => {
   const formData = new FormData();
@@ -72,3 +76,5 @@ export const fetchPropertyByLocation = async (
   console.log(response.data);
   return response.data;
 };
+=======
+>>>>>>> main

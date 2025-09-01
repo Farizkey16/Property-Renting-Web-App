@@ -770,6 +770,7 @@ D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\prope
 Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
 
 Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. {"clientVersion":"6.13.0","name":"PrismaClientInitializationError"}
+<<<<<<< HEAD
 2025-08-25 23:30:25 [ERROR]: GET /property/all 
 Invalid `prisma.properties.findMany()` invocation in
 D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\property\property.repository.ts:10:28
@@ -1412,3 +1413,5 @@ Please make sure your database server is running at `aws-0-us-west-1.pooler.supa
 2025-09-01 19:54:25 [ERROR]: GET /user/me Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
 2025-09-01 20:02:02 [ERROR]: GET /user/me Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
 2025-09-01 20:08:40 [ERROR]: GET /user/me Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
+=======
+>>>>>>> main
