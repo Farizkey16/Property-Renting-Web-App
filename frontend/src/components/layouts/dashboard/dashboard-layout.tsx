@@ -14,6 +14,7 @@ import {
   User,
   BarChart3,
   Store,
+  Grid3X3,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useFetchMe } from "@/hooks/useUser";
@@ -32,8 +33,8 @@ const sidebarTenant = [
 
 const sidebarUser = [
   { icon: LayoutDashboard, label: "Profile", link: "/dashboard" },
-  { icon: Building, label: "History Trips", link: "/dashboard/trips" },
-  { icon: DollarSign, label: "Payment", link: "/dashboard/payment" },
+  { icon: Building, label: "Past Bookings", link: "/dashboard/history" },
+  { icon: Grid3X3, label: "Bookings", link: "/dashboard/bookings" },
   { icon: Bell, label: "Notifications", link: "/dashboard/notifications" },
 ];
 

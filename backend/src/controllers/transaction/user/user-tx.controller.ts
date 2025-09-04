@@ -6,6 +6,7 @@ import { getUserById } from "../../../services/user/user.service";
 import { UpdateRoomAvailability } from "../../../repositories/transaction/tenant-tx.repository";
 import { Prisma } from "../../../../prisma/generated/client";
 import { BookingStatus } from "../../../../prisma/generated/client";
+import { isValidBookingStatus } from "../../../types/transaction/transactions.types";
 
 class UserTransactions {
   public reservation = async (
@@ -105,9 +106,7 @@ class UserTransactions {
           },
         });
 
-        // 1 Hour Timer
-        const bookingDate = newBookings.created_at;
-        const expired = DateTime.fromJSDate(bookingDate).plus({ hours: 1 });
+       
       });
 
       // Send Response
@@ -127,30 +126,45 @@ class UserTransactions {
     next: NextFunction
   ) => {
     try {
-      const { status, check_in_date, check_out_date, sort } = req.query;
-      const { bookingId } = req.params
+      const {
+        status,
+        check_in_date: startDate,
+        check_out_date: endDate,
+        sort,
+      } = req.query;
+      const { bookingId } = req.params;
       const userId = res.locals.decrypt.userId;
       console.log("userId from token:", userId);
 
       // Default Filter
-      const whereClause: Prisma.bookingsWhereInput = {
+      const whereClause: any = {
         user_id: userId,
       };
 
       // Status Filter
-      if (status && typeof status === "string") {
-        whereClause.status = status as BookingStatus;
+      if (status) {
+        // if (Array.isArray(statusList)) {
+        //   statusList = status as string[];
+        // } else if (typeof status === "string") {
+        //   statusList = status.split(",");
+        // }
+
+        const statusList = [].concat(status as any);
+        const validStatus = statusList.filter((s) => isValidBookingStatus(s));
+        if (validStatus.length > 0) {
+          whereClause.status = { in: validStatus };
+        }
       }
 
       // Date Filter
       if (
-        check_in_date &&
-        typeof check_in_date === "string" &&
-        check_out_date &&
-        typeof check_out_date === "string"
+        startDate &&
+        typeof startDate === "string" &&
+        endDate &&
+        typeof endDate === "string"
       ) {
-        const start = new Date(check_in_date);
-        const end = new Date(check_out_date);
+        const start = new Date(startDate);
+        const end = new Date(endDate);
 
         // Check Date Validity
         if (!isNaN(start.getTime()) && !isNaN(end.getTime())) {
@@ -159,15 +173,15 @@ class UserTransactions {
         }
       }
 
-        // Booking ID Filter
-        if (bookingId && typeof bookingId === "string") {
-          whereClause.id = bookingId;
-        }
+      // Booking ID Filter
+      if (bookingId && typeof bookingId === "string") {
+        whereClause.id = bookingId;
+      }
 
       const bookings = await prisma.bookings.findMany({
         where: whereClause,
         orderBy: {
-          created_at: sort === 'asc' ? 'asc' : 'desc'
+          created_at: sort === "asc" ? "asc" : "desc",
         },
         select: {
           id: true,
@@ -187,17 +201,16 @@ class UserTransactions {
             select: {
               name: true,
               main_image: true,
-              city: true
-            }
+              city: true,
+            },
           },
-          status: true
-
+          status: true,
         },
       });
 
-      if (!bookings || bookings.length === 0) {
-        throw new AppError("No reservations found", 404);
-      }
+      // if (!bookings || bookings.length === 0) {
+      //   throw new AppError("No reservations found", 404);
+      // } --> this should be deleted so empty array would be returned despite no booking.
 
       res.status(200).json({
         success: true,
@@ -208,7 +221,6 @@ class UserTransactions {
       next(err);
     }
   };
-
 
   public getReservationsHistory = async (
     req: Request,
@@ -271,7 +283,6 @@ class UserTransactions {
       next(err);
     }
   };
-
 
   public paymentProofUpload = async (
     req: Request,

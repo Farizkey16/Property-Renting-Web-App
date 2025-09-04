@@ -98,7 +98,8 @@ export const scheduleReminder = async (bookingId: string) => {
   reminderDate.setDate(reminderDate.getDate() - 1);
   reminderDate.setHours(9, 0, 0, 0);
 
-  await scheduler.send(
+  const boss = await scheduler();
+  await boss.send(
     "send-booking-reminder",
     {
       bookingId: bookingId,

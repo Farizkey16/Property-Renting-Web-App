@@ -1,5 +1,6 @@
 import express, { Application, Response, Request, NextFunction } from "express";
 import cors from "cors";
+import qs from 'qs'
 import dotenv from "dotenv";
 dotenv.config();
 import AuthRouter from "./routes/auth.router";
@@ -10,6 +11,10 @@ import TenantRouter from "./routes/tenant.router";
 import PropertyRouter from "./routes/property.router";
 import RoomRouter from "./routes/room.router";
 import TenantTxRouter from "./routes/tenant-tx.router";
+import UserTxRouter from "./routes/user-tx.router";
+import { startAllWorkersAndSchedules } from "./services/scheduler.service";
+import PricingQuoteController from "./controllers/pricing/pricing.controller";
+import PricingRouter from "./routes/pricing.router";
 
 const PORT: string | number = process.env.PORT || 4000;
 
@@ -32,6 +37,9 @@ class App {
         credentials: true,
       })
     );
+    this.app.set('query parser', (str: string) => {
+      return qs.parse(str, {arrayLimit: 20})
+    })
   }
 
   private route(): void {
@@ -41,6 +49,8 @@ class App {
     const propertyRouter = new PropertyRouter();
     const roomRouter = new RoomRouter();
     const tenantTxRouter = new TenantTxRouter();
+    const userTxRouter = new UserTxRouter();
+    const pricingRouter = new PricingRouter
     this.app.get("/", (req: Request, res: Response) => {
       res.status(200).json("<h1> Welcome to Property Renting Web App</h1>");
     });
@@ -50,23 +60,28 @@ class App {
     this.app.use("/property", propertyRouter.getRouter());
     this.app.use("/room", roomRouter.getRouter());
     this.app.use("/payment", tenantTxRouter.getRouter());
+    this.app.use("/reservations", userTxRouter.getRouter());
+    this.app.use("/pricing", pricingRouter.getRouter())
   }
 
   // errror handling
   private errorHandler(): void {
     this.app.use(
       (error: any, req: Request, res: Response, next: NextFunction) => {
+        const statusCode = error.statusCode || 500
+        const message = error.message || "An unexpected internal server error occurred."
         logger.error(
-          `${req.method} ${req.path} ${error.message} ${JSON.stringify(error)}`
+          `${req.method} ${req.path} | STATUS: ${error.message} | MESSAGE: ${JSON.stringify(error)}`
         );
-        res.status(error.rc || 500).send(error);
+        res.status(statusCode).json({message: message, statusCode: statusCode});
       }
     );
   }
 
   public start(): void {
     this.app.listen(PORT, () => {
-      console.log(`API RUNNING AT: http://localhost:${PORT}`);
+      console.log(`API RUNNING AT: http://localhost:${PORT}`)
+      startAllWorkersAndSchedules();
     });
   }
 }

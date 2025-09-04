@@ -47,6 +47,14 @@ export const fetchPropertyByTenant = async (): Promise<PropertyResponse> => {
   return response.data;
 };
 
+export const fetchPropertyById = async (propertyId: string | undefined) => {
+  const response = await axios.get(`${BASE_URL}/property/get/${propertyId}`, {
+    withCredentials: true
+  });
+  console.log(response.data);
+  return response.data.property;
+}
+
 // property.services.ts
 export const fetchPropertyByLocation = async (
   latitude: number,

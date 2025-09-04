@@ -541,6 +541,1564 @@ Please make sure your database server is running at `aws-0-us-west-1.pooler.supa
 2025-09-01 19:54:25 [ERROR]: GET /user/me Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
 2025-09-01 20:02:02 [ERROR]: GET /user/me Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
 2025-09-01 20:08:40 [ERROR]: GET /user/me Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-02 12:30:03 [ERROR]: GET /reservations/get Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-02 16:55:52 [ERROR]: GET /reservations/get 
+Invalid `prisma.bookings.findMany()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:167:46
+
+  164     whereClause.id = bookingId;
+  165   }
+  166 
+→ 167 const bookings = await prisma.bookings.findMany({
+        where: {
+          user_id: "a44ff510-7a81-4376-b45b-a37b92280e43",
+          status: "confirmed,canceled,canceled_by_tenant,expired"
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        },
+        orderBy: {
+          created_at: "desc"
+        },
+        select: {
+          id: true,
+          check_in_date: true,
+          check_out_date: true,
+          booking_rooms: {
+            select: {
+              id: true,
+              room_id: true,
+              guests_count: true,
+              nights: true,
+              price_per_night: true,
+              subtotal: true
+            }
+          },
+          property: {
+            select: {
+              name: true,
+              main_image: true,
+              city: true
+            }
+          },
+          status: true
+        }
+      })
+
+Invalid value for argument `status`. Expected BookingStatus. {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-02 16:57:02 [ERROR]: GET /reservations/get 
+Invalid `prisma.bookings.findMany()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:167:46
+
+  164     whereClause.id = bookingId;
+  165   }
+  166 
+→ 167 const bookings = await prisma.bookings.findMany({
+        where: {
+          user_id: "a44ff510-7a81-4376-b45b-a37b92280e43",
+          status: "confirmed,canceled,canceled_by_tenant,expired"
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        },
+        orderBy: {
+          created_at: "desc"
+        },
+        select: {
+          id: true,
+          check_in_date: true,
+          check_out_date: true,
+          booking_rooms: {
+            select: {
+              id: true,
+              room_id: true,
+              guests_count: true,
+              nights: true,
+              price_per_night: true,
+              subtotal: true
+            }
+          },
+          property: {
+            select: {
+              name: true,
+              main_image: true,
+              city: true
+            }
+          },
+          status: true
+        }
+      })
+
+Invalid value for argument `status`. Expected BookingStatus. {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-02 16:57:09 [ERROR]: GET /reservations/get 
+Invalid `prisma.bookings.findMany()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:167:46
+
+  164     whereClause.id = bookingId;
+  165   }
+  166 
+→ 167 const bookings = await prisma.bookings.findMany({
+        where: {
+          user_id: "a44ff510-7a81-4376-b45b-a37b92280e43",
+          status: "confirmed,canceled,canceled_by_tenant,expired"
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        },
+        orderBy: {
+          created_at: "desc"
+        },
+        select: {
+          id: true,
+          check_in_date: true,
+          check_out_date: true,
+          booking_rooms: {
+            select: {
+              id: true,
+              room_id: true,
+              guests_count: true,
+              nights: true,
+              price_per_night: true,
+              subtotal: true
+            }
+          },
+          property: {
+            select: {
+              name: true,
+              main_image: true,
+              city: true
+            }
+          },
+          status: true
+        }
+      })
+
+Invalid value for argument `status`. Expected BookingStatus. {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-02 16:57:10 [ERROR]: GET /reservations/get 
+Invalid `prisma.bookings.findMany()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:167:46
+
+  164     whereClause.id = bookingId;
+  165   }
+  166 
+→ 167 const bookings = await prisma.bookings.findMany({
+        where: {
+          user_id: "a44ff510-7a81-4376-b45b-a37b92280e43",
+          status: "confirmed,canceled,canceled_by_tenant,expired"
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        },
+        orderBy: {
+          created_at: "desc"
+        },
+        select: {
+          id: true,
+          check_in_date: true,
+          check_out_date: true,
+          booking_rooms: {
+            select: {
+              id: true,
+              room_id: true,
+              guests_count: true,
+              nights: true,
+              price_per_night: true,
+              subtotal: true
+            }
+          },
+          property: {
+            select: {
+              name: true,
+              main_image: true,
+              city: true
+            }
+          },
+          status: true
+        }
+      })
+
+Invalid value for argument `status`. Expected BookingStatus. {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-02 16:57:12 [ERROR]: GET /reservations/get 
+Invalid `prisma.bookings.findMany()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:167:46
+
+  164     whereClause.id = bookingId;
+  165   }
+  166 
+→ 167 const bookings = await prisma.bookings.findMany({
+        where: {
+          user_id: "a44ff510-7a81-4376-b45b-a37b92280e43",
+          status: "confirmed,canceled,canceled_by_tenant,expired"
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        },
+        orderBy: {
+          created_at: "desc"
+        },
+        select: {
+          id: true,
+          check_in_date: true,
+          check_out_date: true,
+          booking_rooms: {
+            select: {
+              id: true,
+              room_id: true,
+              guests_count: true,
+              nights: true,
+              price_per_night: true,
+              subtotal: true
+            }
+          },
+          property: {
+            select: {
+              name: true,
+              main_image: true,
+              city: true
+            }
+          },
+          status: true
+        }
+      })
+
+Invalid value for argument `status`. Expected BookingStatus. {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-02 16:57:16 [ERROR]: GET /reservations/get 
+Invalid `prisma.bookings.findMany()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:167:46
+
+  164     whereClause.id = bookingId;
+  165   }
+  166 
+→ 167 const bookings = await prisma.bookings.findMany({
+        where: {
+          user_id: "a44ff510-7a81-4376-b45b-a37b92280e43",
+          status: "confirmed,canceled,canceled_by_tenant,expired"
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        },
+        orderBy: {
+          created_at: "desc"
+        },
+        select: {
+          id: true,
+          check_in_date: true,
+          check_out_date: true,
+          booking_rooms: {
+            select: {
+              id: true,
+              room_id: true,
+              guests_count: true,
+              nights: true,
+              price_per_night: true,
+              subtotal: true
+            }
+          },
+          property: {
+            select: {
+              name: true,
+              main_image: true,
+              city: true
+            }
+          },
+          status: true
+        }
+      })
+
+Invalid value for argument `status`. Expected BookingStatus. {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-02 16:57:36 [ERROR]: GET /reservations/get 
+Invalid `prisma.bookings.findMany()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:167:46
+
+  164     whereClause.id = bookingId;
+  165   }
+  166 
+→ 167 const bookings = await prisma.bookings.findMany({
+        where: {
+          user_id: "a44ff510-7a81-4376-b45b-a37b92280e43",
+          status: "confirmed,canceled,canceled_by_tenant,expired"
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        },
+        orderBy: {
+          created_at: "desc"
+        },
+        select: {
+          id: true,
+          check_in_date: true,
+          check_out_date: true,
+          booking_rooms: {
+            select: {
+              id: true,
+              room_id: true,
+              guests_count: true,
+              nights: true,
+              price_per_night: true,
+              subtotal: true
+            }
+          },
+          property: {
+            select: {
+              name: true,
+              main_image: true,
+              city: true
+            }
+          },
+          status: true
+        }
+      })
+
+Invalid value for argument `status`. Expected BookingStatus. {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-02 16:57:37 [ERROR]: GET /reservations/get 
+Invalid `prisma.bookings.findMany()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:167:46
+
+  164     whereClause.id = bookingId;
+  165   }
+  166 
+→ 167 const bookings = await prisma.bookings.findMany({
+        where: {
+          user_id: "a44ff510-7a81-4376-b45b-a37b92280e43",
+          status: "confirmed,canceled,canceled_by_tenant,expired"
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        },
+        orderBy: {
+          created_at: "desc"
+        },
+        select: {
+          id: true,
+          check_in_date: true,
+          check_out_date: true,
+          booking_rooms: {
+            select: {
+              id: true,
+              room_id: true,
+              guests_count: true,
+              nights: true,
+              price_per_night: true,
+              subtotal: true
+            }
+          },
+          property: {
+            select: {
+              name: true,
+              main_image: true,
+              city: true
+            }
+          },
+          status: true
+        }
+      })
+
+Invalid value for argument `status`. Expected BookingStatus. {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-02 16:57:39 [ERROR]: GET /reservations/get 
+Invalid `prisma.bookings.findMany()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:167:46
+
+  164     whereClause.id = bookingId;
+  165   }
+  166 
+→ 167 const bookings = await prisma.bookings.findMany({
+        where: {
+          user_id: "a44ff510-7a81-4376-b45b-a37b92280e43",
+          status: "confirmed,canceled,canceled_by_tenant,expired"
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        },
+        orderBy: {
+          created_at: "desc"
+        },
+        select: {
+          id: true,
+          check_in_date: true,
+          check_out_date: true,
+          booking_rooms: {
+            select: {
+              id: true,
+              room_id: true,
+              guests_count: true,
+              nights: true,
+              price_per_night: true,
+              subtotal: true
+            }
+          },
+          property: {
+            select: {
+              name: true,
+              main_image: true,
+              city: true
+            }
+          },
+          status: true
+        }
+      })
+
+Invalid value for argument `status`. Expected BookingStatus. {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-02 16:57:43 [ERROR]: GET /reservations/get 
+Invalid `prisma.bookings.findMany()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:167:46
+
+  164     whereClause.id = bookingId;
+  165   }
+  166 
+→ 167 const bookings = await prisma.bookings.findMany({
+        where: {
+          user_id: "a44ff510-7a81-4376-b45b-a37b92280e43",
+          status: "confirmed,canceled,canceled_by_tenant,expired"
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        },
+        orderBy: {
+          created_at: "desc"
+        },
+        select: {
+          id: true,
+          check_in_date: true,
+          check_out_date: true,
+          booking_rooms: {
+            select: {
+              id: true,
+              room_id: true,
+              guests_count: true,
+              nights: true,
+              price_per_night: true,
+              subtotal: true
+            }
+          },
+          property: {
+            select: {
+              name: true,
+              main_image: true,
+              city: true
+            }
+          },
+          status: true
+        }
+      })
+
+Invalid value for argument `status`. Expected BookingStatus. {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-02 17:00:02 [ERROR]: GET /reservations/get 
+Invalid `prisma.bookings.findMany()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:167:46
+
+  164     whereClause.id = bookingId;
+  165   }
+  166 
+→ 167 const bookings = await prisma.bookings.findMany({
+        where: {
+          user_id: "a44ff510-7a81-4376-b45b-a37b92280e43",
+          status: "confirmed,canceled,canceled_by_tenant,expired"
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        },
+        orderBy: {
+          created_at: "desc"
+        },
+        select: {
+          id: true,
+          check_in_date: true,
+          check_out_date: true,
+          booking_rooms: {
+            select: {
+              id: true,
+              room_id: true,
+              guests_count: true,
+              nights: true,
+              price_per_night: true,
+              subtotal: true
+            }
+          },
+          property: {
+            select: {
+              name: true,
+              main_image: true,
+              city: true
+            }
+          },
+          status: true
+        }
+      })
+
+Invalid value for argument `status`. Expected BookingStatus. {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-02 17:00:03 [ERROR]: GET /reservations/get 
+Invalid `prisma.bookings.findMany()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:167:46
+
+  164     whereClause.id = bookingId;
+  165   }
+  166 
+→ 167 const bookings = await prisma.bookings.findMany({
+        where: {
+          user_id: "a44ff510-7a81-4376-b45b-a37b92280e43",
+          status: "confirmed,canceled,canceled_by_tenant,expired"
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        },
+        orderBy: {
+          created_at: "desc"
+        },
+        select: {
+          id: true,
+          check_in_date: true,
+          check_out_date: true,
+          booking_rooms: {
+            select: {
+              id: true,
+              room_id: true,
+              guests_count: true,
+              nights: true,
+              price_per_night: true,
+              subtotal: true
+            }
+          },
+          property: {
+            select: {
+              name: true,
+              main_image: true,
+              city: true
+            }
+          },
+          status: true
+        }
+      })
+
+Invalid value for argument `status`. Expected BookingStatus. {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-02 17:00:05 [ERROR]: GET /reservations/get 
+Invalid `prisma.bookings.findMany()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:167:46
+
+  164     whereClause.id = bookingId;
+  165   }
+  166 
+→ 167 const bookings = await prisma.bookings.findMany({
+        where: {
+          user_id: "a44ff510-7a81-4376-b45b-a37b92280e43",
+          status: "confirmed,canceled,canceled_by_tenant,expired"
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        },
+        orderBy: {
+          created_at: "desc"
+        },
+        select: {
+          id: true,
+          check_in_date: true,
+          check_out_date: true,
+          booking_rooms: {
+            select: {
+              id: true,
+              room_id: true,
+              guests_count: true,
+              nights: true,
+              price_per_night: true,
+              subtotal: true
+            }
+          },
+          property: {
+            select: {
+              name: true,
+              main_image: true,
+              city: true
+            }
+          },
+          status: true
+        }
+      })
+
+Invalid value for argument `status`. Expected BookingStatus. {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-02 17:00:09 [ERROR]: GET /reservations/get 
+Invalid `prisma.bookings.findMany()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:167:46
+
+  164     whereClause.id = bookingId;
+  165   }
+  166 
+→ 167 const bookings = await prisma.bookings.findMany({
+        where: {
+          user_id: "a44ff510-7a81-4376-b45b-a37b92280e43",
+          status: "confirmed,canceled,canceled_by_tenant,expired"
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        },
+        orderBy: {
+          created_at: "desc"
+        },
+        select: {
+          id: true,
+          check_in_date: true,
+          check_out_date: true,
+          booking_rooms: {
+            select: {
+              id: true,
+              room_id: true,
+              guests_count: true,
+              nights: true,
+              price_per_night: true,
+              subtotal: true
+            }
+          },
+          property: {
+            select: {
+              name: true,
+              main_image: true,
+              city: true
+            }
+          },
+          status: true
+        }
+      })
+
+Invalid value for argument `status`. Expected BookingStatus. {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-02 17:00:37 [ERROR]: GET /reservations/get 
+Invalid `prisma.bookings.findMany()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:167:46
+
+  164     whereClause.id = bookingId;
+  165   }
+  166 
+→ 167 const bookings = await prisma.bookings.findMany({
+        where: {
+          user_id: "a44ff510-7a81-4376-b45b-a37b92280e43",
+          status: "confirmed,canceled,canceled_by_tenant,expired"
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        },
+        orderBy: {
+          created_at: "desc"
+        },
+        select: {
+          id: true,
+          check_in_date: true,
+          check_out_date: true,
+          booking_rooms: {
+            select: {
+              id: true,
+              room_id: true,
+              guests_count: true,
+              nights: true,
+              price_per_night: true,
+              subtotal: true
+            }
+          },
+          property: {
+            select: {
+              name: true,
+              main_image: true,
+              city: true
+            }
+          },
+          status: true
+        }
+      })
+
+Invalid value for argument `status`. Expected BookingStatus. {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-02 17:00:38 [ERROR]: GET /reservations/get 
+Invalid `prisma.bookings.findMany()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:167:46
+
+  164     whereClause.id = bookingId;
+  165   }
+  166 
+→ 167 const bookings = await prisma.bookings.findMany({
+        where: {
+          user_id: "a44ff510-7a81-4376-b45b-a37b92280e43",
+          status: "confirmed,canceled,canceled_by_tenant,expired"
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        },
+        orderBy: {
+          created_at: "desc"
+        },
+        select: {
+          id: true,
+          check_in_date: true,
+          check_out_date: true,
+          booking_rooms: {
+            select: {
+              id: true,
+              room_id: true,
+              guests_count: true,
+              nights: true,
+              price_per_night: true,
+              subtotal: true
+            }
+          },
+          property: {
+            select: {
+              name: true,
+              main_image: true,
+              city: true
+            }
+          },
+          status: true
+        }
+      })
+
+Invalid value for argument `status`. Expected BookingStatus. {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-02 17:01:07 [ERROR]: GET /reservations/get 
+Invalid `prisma.bookings.findMany()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:167:46
+
+  164     whereClause.id = bookingId;
+  165   }
+  166 
+→ 167 const bookings = await prisma.bookings.findMany({
+        where: {
+          user_id: "a44ff510-7a81-4376-b45b-a37b92280e43",
+          status: "confirmed,canceled,canceled_by_tenant,expired"
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        },
+        orderBy: {
+          created_at: "desc"
+        },
+        select: {
+          id: true,
+          check_in_date: true,
+          check_out_date: true,
+          booking_rooms: {
+            select: {
+              id: true,
+              room_id: true,
+              guests_count: true,
+              nights: true,
+              price_per_night: true,
+              subtotal: true
+            }
+          },
+          property: {
+            select: {
+              name: true,
+              main_image: true,
+              city: true
+            }
+          },
+          status: true
+        }
+      })
+
+Invalid value for argument `status`. Expected BookingStatus. {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-02 17:01:08 [ERROR]: GET /reservations/get 
+Invalid `prisma.bookings.findMany()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:167:46
+
+  164     whereClause.id = bookingId;
+  165   }
+  166 
+→ 167 const bookings = await prisma.bookings.findMany({
+        where: {
+          user_id: "a44ff510-7a81-4376-b45b-a37b92280e43",
+          status: "confirmed,canceled,canceled_by_tenant,expired"
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        },
+        orderBy: {
+          created_at: "desc"
+        },
+        select: {
+          id: true,
+          check_in_date: true,
+          check_out_date: true,
+          booking_rooms: {
+            select: {
+              id: true,
+              room_id: true,
+              guests_count: true,
+              nights: true,
+              price_per_night: true,
+              subtotal: true
+            }
+          },
+          property: {
+            select: {
+              name: true,
+              main_image: true,
+              city: true
+            }
+          },
+          status: true
+        }
+      })
+
+Invalid value for argument `status`. Expected BookingStatus. {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-02 17:01:10 [ERROR]: GET /reservations/get 
+Invalid `prisma.bookings.findMany()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:167:46
+
+  164     whereClause.id = bookingId;
+  165   }
+  166 
+→ 167 const bookings = await prisma.bookings.findMany({
+        where: {
+          user_id: "a44ff510-7a81-4376-b45b-a37b92280e43",
+          status: "confirmed,canceled,canceled_by_tenant,expired"
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        },
+        orderBy: {
+          created_at: "desc"
+        },
+        select: {
+          id: true,
+          check_in_date: true,
+          check_out_date: true,
+          booking_rooms: {
+            select: {
+              id: true,
+              room_id: true,
+              guests_count: true,
+              nights: true,
+              price_per_night: true,
+              subtotal: true
+            }
+          },
+          property: {
+            select: {
+              name: true,
+              main_image: true,
+              city: true
+            }
+          },
+          status: true
+        }
+      })
+
+Invalid value for argument `status`. Expected BookingStatus. {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-02 17:01:14 [ERROR]: GET /reservations/get 
+Invalid `prisma.bookings.findMany()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:167:46
+
+  164     whereClause.id = bookingId;
+  165   }
+  166 
+→ 167 const bookings = await prisma.bookings.findMany({
+        where: {
+          user_id: "a44ff510-7a81-4376-b45b-a37b92280e43",
+          status: "confirmed,canceled,canceled_by_tenant,expired"
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        },
+        orderBy: {
+          created_at: "desc"
+        },
+        select: {
+          id: true,
+          check_in_date: true,
+          check_out_date: true,
+          booking_rooms: {
+            select: {
+              id: true,
+              room_id: true,
+              guests_count: true,
+              nights: true,
+              price_per_night: true,
+              subtotal: true
+            }
+          },
+          property: {
+            select: {
+              name: true,
+              main_image: true,
+              city: true
+            }
+          },
+          status: true
+        }
+      })
+
+Invalid value for argument `status`. Expected BookingStatus. {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-02 17:01:30 [ERROR]: GET /reservations/get 
+Invalid `prisma.bookings.findMany()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:167:46
+
+  164     whereClause.id = bookingId;
+  165   }
+  166 
+→ 167 const bookings = await prisma.bookings.findMany({
+        where: {
+          user_id: "a44ff510-7a81-4376-b45b-a37b92280e43",
+          status: "confirmed,canceled,canceled_by_tenant,expired"
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        },
+        orderBy: {
+          created_at: "desc"
+        },
+        select: {
+          id: true,
+          check_in_date: true,
+          check_out_date: true,
+          booking_rooms: {
+            select: {
+              id: true,
+              room_id: true,
+              guests_count: true,
+              nights: true,
+              price_per_night: true,
+              subtotal: true
+            }
+          },
+          property: {
+            select: {
+              name: true,
+              main_image: true,
+              city: true
+            }
+          },
+          status: true
+        }
+      })
+
+Invalid value for argument `status`. Expected BookingStatus. {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-02 17:01:31 [ERROR]: GET /reservations/get 
+Invalid `prisma.bookings.findMany()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:167:46
+
+  164     whereClause.id = bookingId;
+  165   }
+  166 
+→ 167 const bookings = await prisma.bookings.findMany({
+        where: {
+          user_id: "a44ff510-7a81-4376-b45b-a37b92280e43",
+          status: "confirmed,canceled,canceled_by_tenant,expired"
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        },
+        orderBy: {
+          created_at: "desc"
+        },
+        select: {
+          id: true,
+          check_in_date: true,
+          check_out_date: true,
+          booking_rooms: {
+            select: {
+              id: true,
+              room_id: true,
+              guests_count: true,
+              nights: true,
+              price_per_night: true,
+              subtotal: true
+            }
+          },
+          property: {
+            select: {
+              name: true,
+              main_image: true,
+              city: true
+            }
+          },
+          status: true
+        }
+      })
+
+Invalid value for argument `status`. Expected BookingStatus. {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-02 17:01:35 [ERROR]: GET /reservations/get 
+Invalid `prisma.bookings.findMany()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:167:46
+
+  164     whereClause.id = bookingId;
+  165   }
+  166 
+→ 167 const bookings = await prisma.bookings.findMany({
+        where: {
+          user_id: "a44ff510-7a81-4376-b45b-a37b92280e43",
+          status: "confirmed,canceled,canceled_by_tenant,expired"
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        },
+        orderBy: {
+          created_at: "desc"
+        },
+        select: {
+          id: true,
+          check_in_date: true,
+          check_out_date: true,
+          booking_rooms: {
+            select: {
+              id: true,
+              room_id: true,
+              guests_count: true,
+              nights: true,
+              price_per_night: true,
+              subtotal: true
+            }
+          },
+          property: {
+            select: {
+              name: true,
+              main_image: true,
+              city: true
+            }
+          },
+          status: true
+        }
+      })
+
+Invalid value for argument `status`. Expected BookingStatus. {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-02 17:01:36 [ERROR]: GET /reservations/get 
+Invalid `prisma.bookings.findMany()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:167:46
+
+  164     whereClause.id = bookingId;
+  165   }
+  166 
+→ 167 const bookings = await prisma.bookings.findMany({
+        where: {
+          user_id: "a44ff510-7a81-4376-b45b-a37b92280e43",
+          status: "confirmed,canceled,canceled_by_tenant,expired"
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        },
+        orderBy: {
+          created_at: "desc"
+        },
+        select: {
+          id: true,
+          check_in_date: true,
+          check_out_date: true,
+          booking_rooms: {
+            select: {
+              id: true,
+              room_id: true,
+              guests_count: true,
+              nights: true,
+              price_per_night: true,
+              subtotal: true
+            }
+          },
+          property: {
+            select: {
+              name: true,
+              main_image: true,
+              city: true
+            }
+          },
+          status: true
+        }
+      })
+
+Invalid value for argument `status`. Expected BookingStatus. {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-02 17:01:38 [ERROR]: GET /reservations/get 
+Invalid `prisma.bookings.findMany()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:167:46
+
+  164     whereClause.id = bookingId;
+  165   }
+  166 
+→ 167 const bookings = await prisma.bookings.findMany({
+        where: {
+          user_id: "a44ff510-7a81-4376-b45b-a37b92280e43",
+          status: "confirmed,canceled,canceled_by_tenant,expired"
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        },
+        orderBy: {
+          created_at: "desc"
+        },
+        select: {
+          id: true,
+          check_in_date: true,
+          check_out_date: true,
+          booking_rooms: {
+            select: {
+              id: true,
+              room_id: true,
+              guests_count: true,
+              nights: true,
+              price_per_night: true,
+              subtotal: true
+            }
+          },
+          property: {
+            select: {
+              name: true,
+              main_image: true,
+              city: true
+            }
+          },
+          status: true
+        }
+      })
+
+Invalid value for argument `status`. Expected BookingStatus. {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-02 17:01:42 [ERROR]: GET /reservations/get 
+Invalid `prisma.bookings.findMany()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:167:46
+
+  164     whereClause.id = bookingId;
+  165   }
+  166 
+→ 167 const bookings = await prisma.bookings.findMany({
+        where: {
+          user_id: "a44ff510-7a81-4376-b45b-a37b92280e43",
+          status: "confirmed,canceled,canceled_by_tenant,expired"
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        },
+        orderBy: {
+          created_at: "desc"
+        },
+        select: {
+          id: true,
+          check_in_date: true,
+          check_out_date: true,
+          booking_rooms: {
+            select: {
+              id: true,
+              room_id: true,
+              guests_count: true,
+              nights: true,
+              price_per_night: true,
+              subtotal: true
+            }
+          },
+          property: {
+            select: {
+              name: true,
+              main_image: true,
+              city: true
+            }
+          },
+          status: true
+        }
+      })
+
+Invalid value for argument `status`. Expected BookingStatus. {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-02 17:02:03 [ERROR]: GET /reservations/get 
+Invalid `prisma.bookings.findMany()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:167:46
+
+  164     whereClause.id = bookingId;
+  165   }
+  166 
+→ 167 const bookings = await prisma.bookings.findMany({
+        where: {
+          user_id: "a44ff510-7a81-4376-b45b-a37b92280e43",
+          status: "confirmed,canceled,canceled_by_tenant,expired"
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        },
+        orderBy: {
+          created_at: "desc"
+        },
+        select: {
+          id: true,
+          check_in_date: true,
+          check_out_date: true,
+          booking_rooms: {
+            select: {
+              id: true,
+              room_id: true,
+              guests_count: true,
+              nights: true,
+              price_per_night: true,
+              subtotal: true
+            }
+          },
+          property: {
+            select: {
+              name: true,
+              main_image: true,
+              city: true
+            }
+          },
+          status: true
+        }
+      })
+
+Invalid value for argument `status`. Expected BookingStatus. {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-02 17:02:04 [ERROR]: GET /reservations/get 
+Invalid `prisma.bookings.findMany()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:167:46
+
+  164     whereClause.id = bookingId;
+  165   }
+  166 
+→ 167 const bookings = await prisma.bookings.findMany({
+        where: {
+          user_id: "a44ff510-7a81-4376-b45b-a37b92280e43",
+          status: "confirmed,canceled,canceled_by_tenant,expired"
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        },
+        orderBy: {
+          created_at: "desc"
+        },
+        select: {
+          id: true,
+          check_in_date: true,
+          check_out_date: true,
+          booking_rooms: {
+            select: {
+              id: true,
+              room_id: true,
+              guests_count: true,
+              nights: true,
+              price_per_night: true,
+              subtotal: true
+            }
+          },
+          property: {
+            select: {
+              name: true,
+              main_image: true,
+              city: true
+            }
+          },
+          status: true
+        }
+      })
+
+Invalid value for argument `status`. Expected BookingStatus. {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-02 17:02:06 [ERROR]: GET /reservations/get 
+Invalid `prisma.bookings.findMany()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:167:46
+
+  164     whereClause.id = bookingId;
+  165   }
+  166 
+→ 167 const bookings = await prisma.bookings.findMany({
+        where: {
+          user_id: "a44ff510-7a81-4376-b45b-a37b92280e43",
+          status: "confirmed,canceled,canceled_by_tenant,expired"
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        },
+        orderBy: {
+          created_at: "desc"
+        },
+        select: {
+          id: true,
+          check_in_date: true,
+          check_out_date: true,
+          booking_rooms: {
+            select: {
+              id: true,
+              room_id: true,
+              guests_count: true,
+              nights: true,
+              price_per_night: true,
+              subtotal: true
+            }
+          },
+          property: {
+            select: {
+              name: true,
+              main_image: true,
+              city: true
+            }
+          },
+          status: true
+        }
+      })
+
+Invalid value for argument `status`. Expected BookingStatus. {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-02 17:02:10 [ERROR]: GET /reservations/get 
+Invalid `prisma.bookings.findMany()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:167:46
+
+  164     whereClause.id = bookingId;
+  165   }
+  166 
+→ 167 const bookings = await prisma.bookings.findMany({
+        where: {
+          user_id: "a44ff510-7a81-4376-b45b-a37b92280e43",
+          status: "confirmed,canceled,canceled_by_tenant,expired"
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        },
+        orderBy: {
+          created_at: "desc"
+        },
+        select: {
+          id: true,
+          check_in_date: true,
+          check_out_date: true,
+          booking_rooms: {
+            select: {
+              id: true,
+              room_id: true,
+              guests_count: true,
+              nights: true,
+              price_per_night: true,
+              subtotal: true
+            }
+          },
+          property: {
+            select: {
+              name: true,
+              main_image: true,
+              city: true
+            }
+          },
+          status: true
+        }
+      })
+
+Invalid value for argument `status`. Expected BookingStatus. {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-02 17:02:26 [ERROR]: GET /reservations/get 
+Invalid `prisma.bookings.findMany()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:167:46
+
+  164     whereClause.id = bookingId;
+  165   }
+  166 
+→ 167 const bookings = await prisma.bookings.findMany({
+        where: {
+          user_id: "a44ff510-7a81-4376-b45b-a37b92280e43",
+          status: "confirmed,canceled,canceled_by_tenant,expired"
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        },
+        orderBy: {
+          created_at: "desc"
+        },
+        select: {
+          id: true,
+          check_in_date: true,
+          check_out_date: true,
+          booking_rooms: {
+            select: {
+              id: true,
+              room_id: true,
+              guests_count: true,
+              nights: true,
+              price_per_night: true,
+              subtotal: true
+            }
+          },
+          property: {
+            select: {
+              name: true,
+              main_image: true,
+              city: true
+            }
+          },
+          status: true
+        }
+      })
+
+Invalid value for argument `status`. Expected BookingStatus. {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-02 17:19:29 [ERROR]: GET /reservations/get statusList.filter is not a function {}
+2025-09-02 17:19:30 [ERROR]: GET /reservations/get statusList.filter is not a function {}
+2025-09-02 17:19:32 [ERROR]: GET /reservations/get statusList.filter is not a function {}
+2025-09-02 17:19:36 [ERROR]: GET /reservations/get statusList.filter is not a function {}
+2025-09-02 17:20:05 [ERROR]: GET /reservations/get statusList.filter is not a function {}
+2025-09-02 17:20:06 [ERROR]: GET /reservations/get statusList.filter is not a function {}
+2025-09-02 17:20:08 [ERROR]: GET /reservations/get statusList.filter is not a function {}
+2025-09-02 17:20:12 [ERROR]: GET /reservations/get statusList.filter is not a function {}
+2025-09-02 17:21:31 [ERROR]: GET /reservations/get statusList.filter is not a function {}
+2025-09-02 17:21:32 [ERROR]: GET /reservations/get statusList.filter is not a function {}
+2025-09-02 17:21:34 [ERROR]: GET /reservations/get statusList.filter is not a function {}
+2025-09-02 17:21:38 [ERROR]: GET /reservations/get statusList.filter is not a function {}
+2025-09-02 17:22:11 [ERROR]: GET /reservations/get statusList.filter is not a function {}
+2025-09-02 17:22:11 [ERROR]: GET /reservations/get statusList.filter is not a function {}
+2025-09-02 17:22:12 [ERROR]: GET /reservations/get statusList.filter is not a function {}
+2025-09-02 17:22:14 [ERROR]: GET /reservations/get statusList.filter is not a function {}
+2025-09-02 17:22:19 [ERROR]: GET /reservations/get statusList.filter is not a function {}
+2025-09-02 17:22:20 [ERROR]: GET /reservations/get statusList.filter is not a function {}
+2025-09-02 17:22:22 [ERROR]: GET /reservations/get statusList.filter is not a function {}
+2025-09-02 17:22:26 [ERROR]: GET /reservations/get statusList.filter is not a function {}
+2025-09-02 17:23:56 [ERROR]: GET /reservations/get statusList.filter is not a function {}
+2025-09-02 17:24:13 [ERROR]: GET /reservations/get statusList.filter is not a function {}
+2025-09-02 17:24:14 [ERROR]: GET /reservations/get statusList.filter is not a function {}
+2025-09-02 17:24:18 [ERROR]: GET /reservations/get statusList.filter is not a function {}
+2025-09-02 17:24:19 [ERROR]: GET /reservations/get statusList.filter is not a function {}
+2025-09-02 17:24:21 [ERROR]: GET /reservations/get statusList.filter is not a function {}
+2025-09-02 17:24:25 [ERROR]: GET /reservations/get statusList.filter is not a function {}
+2025-09-02 17:26:08 [ERROR]: GET /reservations/get statusList.filter is not a function {}
+2025-09-02 17:26:08 [ERROR]: GET /reservations/get statusList.filter is not a function {}
+2025-09-02 17:26:09 [ERROR]: GET /reservations/get statusList.filter is not a function {}
+2025-09-02 17:26:11 [ERROR]: GET /reservations/get statusList.filter is not a function {}
+2025-09-02 17:26:15 [ERROR]: GET /reservations/get statusList.filter is not a function {}
+2025-09-02 17:32:15 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-02 17:32:19 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-02 17:32:21 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-02 17:32:24 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-02 17:32:30 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-02 18:02:56 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-02 20:00:53 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-02 20:04:57 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-02 20:04:59 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-02 20:05:03 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-02 20:05:08 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-02 20:15:50 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-02 20:15:53 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-02 20:15:56 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-02 20:16:02 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-02 20:16:53 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-02 20:16:56 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-02 20:16:59 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-02 20:17:04 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 03:45:38 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:00:39 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:00:42 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:00:45 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:00:50 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:04:31 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:04:39 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:04:45 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:04:47 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:04:50 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:04:55 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:07:35 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:07:37 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:07:40 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:07:45 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:08:06 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:08:08 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:08:12 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:08:17 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:08:23 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:09:41 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:10:19 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:11:08 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:11:11 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:11:15 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:11:20 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:13:08 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:13:10 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:13:14 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:13:20 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:14:44 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:14:46 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:14:49 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:14:58 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:18:26 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:18:30 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:18:32 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:18:35 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:18:40 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:19:17 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:19:19 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:19:22 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:19:27 [ERROR]: GET /reservations/get No reservations found {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:22:15 [ERROR]: GET /reservations/get | STATUS: No reservations found | MESSAGE: {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:22:17 [ERROR]: GET /reservations/get | STATUS: No reservations found | MESSAGE: {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:22:20 [ERROR]: GET /reservations/get | STATUS: No reservations found | MESSAGE: {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:22:25 [ERROR]: GET /reservations/get | STATUS: No reservations found | MESSAGE: {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:23:14 [ERROR]: GET /reservations/get | STATUS: No reservations found | MESSAGE: {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:23:16 [ERROR]: GET /reservations/get | STATUS: No reservations found | MESSAGE: {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:25:10 [ERROR]: GET /reservations/get | STATUS: No reservations found | MESSAGE: {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:25:13 [ERROR]: GET /reservations/get | STATUS: No reservations found | MESSAGE: {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:25:16 [ERROR]: GET /reservations/get | STATUS: No reservations found | MESSAGE: {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 04:25:22 [ERROR]: GET /reservations/get | STATUS: No reservations found | MESSAGE: {"statusCode":404,"success":false,"message":"No reservations found"}
+2025-09-03 15:53:49 [ERROR]: GET /reservations/get | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-03 15:53:51 [ERROR]: GET /reservations/get | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-03 15:53:55 [ERROR]: GET /reservations/get | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-03 15:53:57 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-03 15:54:04 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-04 12:59:48 [ERROR]: GET /property/get/undefined | STATUS: Property not found | MESSAGE: {"statusCode":404,"success":false,"message":"Property not found"}
+2025-09-04 12:59:50 [ERROR]: GET /property/get/undefined | STATUS: Property not found | MESSAGE: {"statusCode":404,"success":false,"message":"Property not found"}
+2025-09-04 12:59:53 [ERROR]: GET /property/get/undefined | STATUS: Property not found | MESSAGE: {"statusCode":404,"success":false,"message":"Property not found"}
+2025-09-04 12:59:58 [ERROR]: GET /property/get/undefined | STATUS: Property not found | MESSAGE: {"statusCode":404,"success":false,"message":"Property not found"}
+2025-09-04 20:07:07 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-04 20:20:57 [ERROR]: GET /property/get/6599c906-5f13-4a30-a913-a161fc196530 | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/repositories/property/property.repository.ts:63:28
+
+  60 };
+  61 
+  62 export const findPropertyByIdRepository = async (id: string) => {
+→ 63   return prisma.properties.findUnique(
+The table `public.properties` does not exist in the current database. | MESSAGE: {"code":"P2021","meta":{"modelName":"properties","table":"public.properties"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-04 20:20:57 [ERROR]: GET /pricing/quote | STATUS: 
+Invalid `prisma.rooms.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/pricing/pricing.controller.ts:19:39
+
+  16   checkOut: string;
+  17 };
+  18 
+→ 19 const room = await prisma.rooms.findUnique(
+The table `public.rooms` does not exist in the current database. | MESSAGE: {"code":"P2021","meta":{"modelName":"rooms","table":"public.rooms"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-04 20:20:59 [ERROR]: GET /property/get/6599c906-5f13-4a30-a913-a161fc196530 | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/repositories/property/property.repository.ts:63:28
+
+  60 };
+  61 
+  62 export const findPropertyByIdRepository = async (id: string) => {
+→ 63   return prisma.properties.findUnique(
+The table `public.properties` does not exist in the current database. | MESSAGE: {"code":"P2021","meta":{"modelName":"properties","table":"public.properties"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-04 20:21:00 [ERROR]: GET /pricing/quote | STATUS: 
+Invalid `prisma.rooms.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/pricing/pricing.controller.ts:19:39
+
+  16   checkOut: string;
+  17 };
+  18 
+→ 19 const room = await prisma.rooms.findUnique(
+The table `public.rooms` does not exist in the current database. | MESSAGE: {"code":"P2021","meta":{"modelName":"rooms","table":"public.rooms"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-04 20:21:03 [ERROR]: GET /property/get/6599c906-5f13-4a30-a913-a161fc196530 | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/repositories/property/property.repository.ts:63:28
+
+  60 };
+  61 
+  62 export const findPropertyByIdRepository = async (id: string) => {
+→ 63   return prisma.properties.findUnique(
+The table `public.properties` does not exist in the current database. | MESSAGE: {"code":"P2021","meta":{"modelName":"properties","table":"public.properties"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-04 20:21:03 [ERROR]: GET /pricing/quote | STATUS: 
+Invalid `prisma.rooms.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/pricing/pricing.controller.ts:19:39
+
+  16   checkOut: string;
+  17 };
+  18 
+→ 19 const room = await prisma.rooms.findUnique(
+The table `public.rooms` does not exist in the current database. | MESSAGE: {"code":"P2021","meta":{"modelName":"rooms","table":"public.rooms"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-04 20:21:08 [ERROR]: GET /property/get/6599c906-5f13-4a30-a913-a161fc196530 | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/repositories/property/property.repository.ts:63:28
+
+  60 };
+  61 
+  62 export const findPropertyByIdRepository = async (id: string) => {
+→ 63   return prisma.properties.findUnique(
+The table `public.properties` does not exist in the current database. | MESSAGE: {"code":"P2021","meta":{"modelName":"properties","table":"public.properties"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-04 20:21:08 [ERROR]: GET /pricing/quote | STATUS: 
+Invalid `prisma.rooms.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/pricing/pricing.controller.ts:19:39
+
+  16   checkOut: string;
+  17 };
+  18 
+→ 19 const room = await prisma.rooms.findUnique(
+The table `public.rooms` does not exist in the current database. | MESSAGE: {"code":"P2021","meta":{"modelName":"rooms","table":"public.rooms"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-04 20:21:45 [ERROR]: GET /user/me | STATUS: 
+Invalid `prisma.users.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/repositories/user/user.respository.ts:7:23
+
+  4 import AppError from "../../errors/AppError";
+  5 
+  6 export const findUserById = async (userId: string) => {
+→ 7   return prisma.users.findUnique(
+The table `public.users` does not exist in the current database. | MESSAGE: {"code":"P2021","meta":{"modelName":"users","table":"public.users"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-04 20:21:45 [ERROR]: GET /room/search | STATUS: 
+Invalid `prisma.rooms.findMany()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/repositories/rooms/rooms.repository.ts:103:29
+
+  100   propertyname: string,
+  101   roomname: string
+  102 ) => {
+→ 103   return await prisma.rooms.findMany(
+The table `public.rooms` does not exist in the current database. | MESSAGE: {"code":"P2021","meta":{"modelName":"rooms","table":"public.rooms"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-04 20:21:47 [ERROR]: GET /room/search | STATUS: 
+Invalid `prisma.rooms.findMany()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/repositories/rooms/rooms.repository.ts:103:29
+
+  100   propertyname: string,
+  101   roomname: string
+  102 ) => {
+→ 103   return await prisma.rooms.findMany(
+The table `public.rooms` does not exist in the current database. | MESSAGE: {"code":"P2021","meta":{"modelName":"rooms","table":"public.rooms"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-04 20:21:48 [ERROR]: GET /user/me | STATUS: 
+Invalid `prisma.users.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/repositories/user/user.respository.ts:7:23
+
+  4 import AppError from "../../errors/AppError";
+  5 
+  6 export const findUserById = async (userId: string) => {
+→ 7   return prisma.users.findUnique(
+The table `public.users` does not exist in the current database. | MESSAGE: {"code":"P2021","meta":{"modelName":"users","table":"public.users"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-04 20:22:05 [ERROR]: GET /user/me | STATUS: 
+Invalid `prisma.users.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/repositories/user/user.respository.ts:7:23
+
+  4 import AppError from "../../errors/AppError";
+  5 
+  6 export const findUserById = async (userId: string) => {
+→ 7   return prisma.users.findUnique(
+The table `public.users` does not exist in the current database. | MESSAGE: {"code":"P2021","meta":{"modelName":"users","table":"public.users"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-04 20:22:05 [ERROR]: GET /property/all | STATUS: 
+Invalid `prisma.properties.findMany()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/repositories/property/property.repository.ts:10:28
+
+   7 }) => {
+   8   const { property_category } = filters;
+   9 
+→ 10   return prisma.properties.findMany(
+The table `public.properties` does not exist in the current database. | MESSAGE: {"code":"P2021","meta":{"modelName":"properties","table":"public.properties"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-04 20:22:07 [ERROR]: GET /property/all | STATUS: 
+Invalid `prisma.properties.findMany()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/repositories/property/property.repository.ts:10:28
+
+   7 }) => {
+   8   const { property_category } = filters;
+   9 
+→ 10   return prisma.properties.findMany(
+The table `public.properties` does not exist in the current database. | MESSAGE: {"code":"P2021","meta":{"modelName":"properties","table":"public.properties"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-04 20:27:18 [ERROR]: GET /property/get/6599c906-5f13-4a30-a913-a161fc196530 | STATUS: Property not found | MESSAGE: {"statusCode":404,"success":false,"message":"Property not found"}
+2025-09-04 20:27:18 [ERROR]: GET /pricing/quote | STATUS: Room not found | MESSAGE: {"statusCode":404,"success":false,"message":"Room not found"}
+2025-09-04 20:27:40 [ERROR]: GET /property/get/6599c906-5f13-4a30-a913-a161fc196530 | STATUS: Property not found | MESSAGE: {"statusCode":404,"success":false,"message":"Property not found"}
+2025-09-04 20:27:40 [ERROR]: GET /pricing/quote | STATUS: Room not found | MESSAGE: {"statusCode":404,"success":false,"message":"Room not found"}
+2025-09-04 20:27:43 [ERROR]: GET /pricing/quote | STATUS: Room not found | MESSAGE: {"statusCode":404,"success":false,"message":"Room not found"}
+2025-09-04 20:27:43 [ERROR]: GET /property/get/6599c906-5f13-4a30-a913-a161fc196530 | STATUS: Property not found | MESSAGE: {"statusCode":404,"success":false,"message":"Property not found"}
 2025-09-01 22:04:53 [ERROR]: GET /user/me Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
 2025-09-01 22:06:54 [ERROR]: GET /user/me Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
 2025-09-01 22:17:37 [ERROR]: GET /user/me Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}

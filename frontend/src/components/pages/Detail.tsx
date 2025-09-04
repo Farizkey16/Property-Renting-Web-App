@@ -14,19 +14,51 @@ import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useRoomSearch } from "@/hooks/useRoom";
 import { formatCurrency } from "@/lib/utils";
+import { DatePickerWithRange } from "../ui/DatePickerPopover";
+import { DateRange } from "react-day-picker";
+import { format } from "date-fns";
+import { useRouter } from "next/navigation";
 
 export default function PropertyDetailPage() {
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const params = useSearchParams();
   const propertyname = params.get("propertyname") || undefined;
   const roomname = params.get("roomname") || undefined;
+  const [dateRange, setDateRange] = useState<DateRange | undefined>(() => {
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    return {
+      from: today,
+      to: tomorrow,
+    };
+  });
 
   const { data, isLoading, isError } = useRoomSearch(propertyname, roomname);
+
+  const propertyId = data?.property?.id 
+  const roomId = data?.id
 
   console.log(data);
 
   if (isLoading) return <div className="p-8">Loading...</div>;
   if (isError) return <div className="p-8">Something went wrong</div>;
+
+  const handleReserveNow = () => {
+    if (!dateRange?.from || !dateRange?.to) {
+      alert("Please select a date range.");
+      return;
+    }
+
+    const checkIn = format(dateRange.from, "yyyy-MM-dd");
+    const checkOut = format(dateRange.to, "yyyy-MM-dd");
+
+    router.push(
+      `/dashboard/booking-detail?propertyId=${propertyId}&roomId=${roomId}&checkIn=${checkIn}&checkOut=${checkOut}`
+    );
+    console.log("Reserving dates:", { checkIn, checkOut });
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -162,7 +194,8 @@ export default function PropertyDetailPage() {
               </div>
               <Button
                 className="bg-green-500 hover:bg-green-600 text-white"
-                onClick={() => setOpen(true)}>
+                onClick={() => setOpen(true)}
+              >
                 Reserve now
               </Button>
             </div>
@@ -175,13 +208,14 @@ export default function PropertyDetailPage() {
                 <DialogTitle>Book this space</DialogTitle>
               </DialogHeader>
               <div className="space-y-4">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="flex items-center gap-2">
                   <Calendar className="w-4 h-4" />
                   Choose a date and time
-                </Button>
+                  <DatePickerWithRange
+                    date={dateRange}
+                    onDateChange={setDateRange}
+                    className="mt-4"
+                  />
+                
 
                 <div className="flex justify-between items-center">
                   <div>
@@ -195,7 +229,7 @@ export default function PropertyDetailPage() {
                   </div>
                 </div>
 
-                <Button className="w-full bg-green-500 hover:bg-green-600 text-white">
+                <Button onClick={handleReserveNow} className="w-full bg-green-500 hover:bg-green-600 text-white">
                   Reserve now
                 </Button>
 
@@ -215,14 +249,14 @@ export default function PropertyDetailPage() {
           <div className="hidden lg:block lg:col-span-1">
             <div className="sticky top-4">
               <Card>
-                <CardContent className="p-6 space-y-4">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="flex items-center gap-2">
-                    <Calendar className="w-4 h-4" />
+                <CardContent className="p-6 space-y-4">              
                     Choose a date and time
-                  </Button>
+                    <DatePickerWithRange
+                    date={dateRange}
+                    onDateChange={setDateRange}
+                    className="mt-4"
+                  />
+                  
 
                   <div className="flex justify-between items-center">
                     <div>
@@ -236,7 +270,7 @@ export default function PropertyDetailPage() {
                     </div>
                   </div>
 
-                  <Button className="w-full bg-green-500 hover:bg-green-600 text-white">
+                  <Button onClick={handleReserveNow} className="w-full bg-green-500 hover:bg-green-600 text-white">
                     Reserve now
                   </Button>
 

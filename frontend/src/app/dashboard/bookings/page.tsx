@@ -30,13 +30,13 @@ const BookingsPage = () => {
     return {
       status: status,
       sort: sort,
-      start: searchParams.get("start") ?? undefined,
-      end: searchParams.get("end") ?? undefined,
+      startDate: searchParams.get("start") ?? undefined,
+      endDate: searchParams.get("end") ?? undefined,
       bookingId: searchParams.get("id") ?? undefined,
     };
   }, [searchParams]);
 
-  const { data: bookings, isLoading, isError, error } = useBookings(filters);
+  const { data: bookings, isLoading, isError } = useBookings(filters);
 
   type FilterKeys = keyof FetchBookingsParams;
 

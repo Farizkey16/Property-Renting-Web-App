@@ -20,6 +20,8 @@ import {
 // Import the types and constants
 import { FetchBookingsParams } from '@/services/transactions.services';
 import { VALID_BOOKING_STATUS, BookingStatus } from '@/types/transactions/transactions';
+import { useState } from 'react';
+
 
 // Define the component's props
 type FilterPopoverProps = {
@@ -33,6 +35,7 @@ export const FilterPopover = ({
   onFilterChange,
   onClearFilters,
 }: FilterPopoverProps) => {
+
   return (
     <Popover.Root>
       <Popover.Trigger asChild>
@@ -105,23 +108,8 @@ export const FilterPopover = ({
                   id="start-date"
                   type="date"
                   className="col-span-3"
-                  value={filters.start || ''}
-                  onChange={(e) => onFilterChange('start', e.target.value)}
-                />
-              </div>
-
-              {/* --- Booking ID Filter --- */}
-
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="start-date" className="text-right">
-                  Booking ID
-                </Label>
-                <Input
-                  id="booking-id"
-                  type="search"
-                  className="col-span-3"
-                  value={filters.bookingId || ''}
-                  ={(e) => onFilterChange('bookingId', e.target.value)}
+                  value={filters.startDate || ''}
+                  onChange={(e) => onFilterChange('startDate', e.target.value)}
                 />
               </div>
             </div>

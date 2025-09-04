@@ -1,21 +1,21 @@
 import { Job } from "pg-boss";
-import { prisma } from "./config/prisma";
-import { scheduler } from "./services/scheduler.service";
-import { sendReminder } from "./services/email.service";
-import { BOOKING_CONFIRMATION_TEMPLATE_SINGLE, BOOKING_REMINDER_TEMPLATE, BOOKING_CONFIRMATION_TEMPLATE_MULTIPLE, BOOKING_REMINDER_TEMPLATE_MULTIPLE } from "./utils/emailTemplates";
-import { BookingTemplateData } from "./types/transaction/transactions.types";
+import { prisma } from "../../config/prisma";
+import { scheduler } from "../scheduler.service";
+import { sendReminder } from "../email.service";
+import { BOOKING_CONFIRMATION_TEMPLATE_SINGLE, BOOKING_REMINDER_TEMPLATE, BOOKING_CONFIRMATION_TEMPLATE_MULTIPLE, BOOKING_REMINDER_TEMPLATE_MULTIPLE } from "../../utils/emailTemplates";
+import { BookingTemplateData } from "../../types/transaction/transactions.types";
+import { getBoss } from "../scheduler.service";
 
 interface ReminderJobType {
   bookingId: string;
+  
 }
 
-async function startWorker() {
-  await scheduler.start();
+const BOOKING_REMINDER = "send-booking-reminder";
 
-  console.log("Worker started. Listening for 'send-booking-reminder' jobs...");
+export const bookingReminderHandler = async (job: Job<ReminderJobType>[]) => {
 
-  const handler = async (job: Job<ReminderJobType>[]) => {
-    for (const jb of job) {
+  for (const jb of job) {
       const { bookingId } = jb.data;
 
       try {
@@ -106,9 +106,18 @@ async function startWorker() {
         throw error;
       }
     }
-  };
 
-  await scheduler.work<ReminderJobType>("send-booking-reminder", handler);
 }
 
-startWorker();
+// async function startWorker() {
+//   const boss = await getBoss();
+
+//   console.log("Worker started. Listening for 'send-booking-reminder' jobs...");
+
+//   await boss.work<ReminderJobType>(BOOKING_REMINDER, {batchSize: 10}, bookingReminderHandler);
+// }
+
+// startWorker().catch((error) => {
+//   console.error("Worker failed to start:", error);
+//   process.exit(1)
+// });

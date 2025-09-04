@@ -30,17 +30,31 @@ export interface BookingsApiResponse {
 
 // Type Guard Booking Status
 export const VALID_BOOKING_STATUS = [
-  "waiting_payment",
-  "confirmed",
-  "canceled",
-  "canceled_by_tenant",
-  "expired",
+    "waiting_payment",
+    "confirmed",
+    "canceled",
+    "canceled_by_tenant",
+    "expired",
+] as const;
+
+export const VALID_BOOKING_HISTORY_STATUS = [
+    "confirmed",
+    "canceled",
+    "canceled_by_tenant",
+    "expired",
 ] as const;
 
 export type BookingStatus = typeof VALID_BOOKING_STATUS[number];
 
+export type BookingHistoryStatus = Exclude<BookingStatus, "waiting_payment">
+
+
 export function isValidBookingStatus(status: any): status is BookingStatus {
     return VALID_BOOKING_STATUS.includes(status)
+}
+
+export function isValidBookingHistoryStatus(status: any): status is BookingHistoryStatus {
+    return status !== "waiting_payment" && VALID_BOOKING_HISTORY_STATUS.includes(status)
 }
 
 // Type Guard Sort
