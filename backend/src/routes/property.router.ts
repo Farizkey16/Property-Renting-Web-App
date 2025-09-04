@@ -30,7 +30,13 @@ class PropertyRouter {
       verifyToken,
       this.propertyController.getPropertiesByTenantId
     );
-    this.route.patch("/update/:id", this.propertyController.updateProperty);
+    this.route.patch(
+      "/update/:id",
+      verifyToken,
+      onlyTenant,
+      uploaderMemory().single("main_image"),
+      this.propertyController.updateProperty
+    );
     this.route.delete("/delete/:id", this.propertyController.deleteProperty);
   }
 

@@ -20,6 +20,19 @@ export interface createProperty {
   property_category: PropertyCategory;
 }
 
+export interface updateProperty {
+  name?: string;
+  description?: string;
+  address?: string;
+  city?: string;
+  province?: string;
+  zip_code?: string;
+  latitude?: string;
+  longitude?: string;
+  main_image?: File | null;
+  property_category: PropertyCategory;
+}
+
 export interface RoomImage {
   id: string;
   room_id: string;
@@ -32,7 +45,7 @@ export interface Room {
   property_id: string;
   name: string;
   description: string;
-  base_price: string;
+  base_price: number;
   capacity: number;
   image: string;
   created_at: string;
@@ -52,8 +65,8 @@ export interface Property {
   city: string;
   province: string;
   zip_code: string;
-  latitude: string;
-  longitude: string;
+  latitude: number;
+  longitude: number;
   main_image: string;
   created_at: string;
   updated_at: string;

@@ -8,26 +8,10 @@ import { Label } from "@/components/ui/label";
 import { CheckCircle } from "lucide-react";
 import Image from "next/image";
 import React, { useState, useEffect, useRef } from "react";
-import { useFetchMe } from "@/hooks/useUser";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { User } from "@/types/auth/auth";
-
-// === API update user ===
-async function updateUser(data: Partial<User>) {
-  const res = await fetch("http://localhost:4000/user/update", {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    credentials: "include",
-    body: JSON.stringify(data),
-  });
-
-  if (!res.ok) throw new Error("Failed to update user");
-  return res.json();
-}
+import { useFetchMe, useUpdateProfile } from "@/hooks/useUser";
 
 const UserDashboard = () => {
   const { data: user, isLoading } = useFetchMe();
-  const queryClient = useQueryClient();
 
   // local state form
   const [fullName, setFullName] = useState("");
@@ -36,6 +20,7 @@ const UserDashboard = () => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
+  // isi data awal kalau ada user
   useEffect(() => {
     if (user) {
       setFullName(user.full_name || "");
@@ -44,32 +29,15 @@ const UserDashboard = () => {
     }
   }, [user]);
 
-  const mutation = useMutation({
-    mutationFn: updateUser,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["me"] });
-    },
-  });
+  const { mutate, isPending } = useUpdateProfile();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // siapkan payload
-    const payload: Partial<User> = {
+    mutate({
       full_name: fullName,
-      email,
-    };
-
-    // kalau ada file, biasanya harus diupload via FormData
-    // di sini masih dummy, jadi hanya preview
-    if (selectedFile) {
-      // contoh: bisa append ke FormData dan kirim ke backend
-      // const formData = new FormData();
-      // formData.append("profile_picture", selectedFile);
-      // fetch("http://localhost:4000/user/upload", { method: "POST", body: formData });
-    }
-
-    mutation.mutate(payload);
+      profile_picture: selectedFile ?? undefined,
+    });
   };
 
   const handleButtonClick = () => {
@@ -149,7 +117,7 @@ const UserDashboard = () => {
                   id="email"
                   type="email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  disabled
                   className="pr-20"
                 />
                 {user.is_verified && (
@@ -168,7 +136,7 @@ const UserDashboard = () => {
               <Label htmlFor="role" className="text-sm font-medium mb-2 block">
                 Role
               </Label>
-              <h1>{user.role}</h1>
+              <Badge className="uppercase">{user.role}</Badge>
             </div>
 
             <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 pt-4 lg:pt-6">
@@ -186,9 +154,9 @@ const UserDashboard = () => {
               </Button>
               <Button
                 type="submit"
-                disabled={mutation.isPending}
+                disabled={isPending}
                 className="flex-1 bg-orange-500 hover:bg-orange-600 order-1 sm:order-2">
-                {mutation.isPending ? "Saving..." : "Save Changes"}
+                {isPending ? "Saving..." : "Save Changes"}
               </Button>
             </div>
           </form>

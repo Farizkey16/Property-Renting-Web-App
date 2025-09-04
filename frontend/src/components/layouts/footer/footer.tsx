@@ -8,9 +8,9 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* About */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">StayEase</h3>
+            <h3 className="text-lg font-semibold mb-4">homz</h3>
             <p className="text-gray-400 text-sm">
-              StayEase is your trusted platform for booking villas, apartments,
+              homz is your trusted platform for booking villas, apartments,
               homestays, and hotels. Find the perfect accommodation for your
               next trip quickly and easily.
             </p>

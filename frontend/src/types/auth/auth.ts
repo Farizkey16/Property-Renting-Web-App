@@ -17,7 +17,7 @@ export interface User {
   full_name: string;
   is_verified: boolean;
   profile_picture: string | null;
-  tenants?: Tenant[];
+  tenants?: Tenant;
 }
 
 export interface AuthResponse {

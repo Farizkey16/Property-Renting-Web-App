@@ -159,18 +159,16 @@ model booking_rooms {
   subtotal        Decimal  @db.Decimal(12, 2)
   created_at      DateTime @default(now())
   updated_at      DateTime @updatedAt
-  check_in_date   DateTime @db.Date
-  check_out_date  DateTime @db.Date
-  quantity        Int
   booking         bookings @relation(fields: [booking_id], references: [id])
   room            rooms    @relation(fields: [room_id], references: [id])
 }
 
 model reviews {
   id           String     @id @default(uuid())
-  booking_id   String
+  booking_id   String     @unique
   user_id      String
   property_id  String
+  rating       Int
   comment      String?
   tenant_reply String?
   created_at   DateTime   @default(now())

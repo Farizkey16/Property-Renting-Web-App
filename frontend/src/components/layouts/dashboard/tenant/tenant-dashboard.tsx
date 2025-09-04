@@ -5,26 +5,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useFetchMe } from "@/hooks/useUser";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useUpdateTenant } from "@/hooks/useTenant"; // import hook baru
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 
-async function updateTenant(data: FormData) {
-  const res = await fetch("http://localhost:4000/tenant/update", {
-    method: "PUT",
-    credentials: "include",
-    body: data, // kirim FormData
-  });
-
-  if (!res.ok) throw new Error("Failed to update tenant");
-  return res.json();
-}
-
 const TenantDashboard = () => {
   const { data: user, isLoading } = useFetchMe();
-  const queryClient = useQueryClient();
-
-  const tenant = user?.tenants?.[0];
+  const tenant = user?.tenants;
 
   const [companyName, setCompanyName] = useState("");
   const [address, setAddress] = useState("");
@@ -32,40 +19,34 @@ const TenantDashboard = () => {
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string>("");
 
+  const mutation = useUpdateTenant();
+
   useEffect(() => {
     if (tenant) {
       setCompanyName(tenant.company_name || "");
       setAddress(tenant.address || "");
       setPhoneNumber(tenant.phone_number || "");
-      setPreview(tenant.logo || ""); // tampilkan logo lama
+      setPreview(tenant.logo || "");
     }
   }, [tenant]);
-
-  const mutation = useMutation({
-    mutationFn: updateTenant,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["me"] });
-    },
-  });
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       setLogoFile(file);
-      setPreview(URL.createObjectURL(file)); // buat preview lokal
+      setPreview(URL.createObjectURL(file));
     }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const formData = new FormData();
-    formData.append("company_name", companyName);
-    formData.append("address", address);
-    formData.append("phone_number", phoneNumber);
-    if (logoFile) formData.append("logo", logoFile);
-
-    mutation.mutate(formData);
+    mutation.mutate({
+      company_name: companyName,
+      address,
+      phone_number: phoneNumber,
+      logo: logoFile || undefined,
+    });
   };
 
   if (isLoading) return <p className="p-4">Loading...</p>;

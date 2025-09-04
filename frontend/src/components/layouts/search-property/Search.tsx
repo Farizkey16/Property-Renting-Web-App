@@ -19,6 +19,8 @@ import { formatCurrency } from "@/lib/utils";
 import { PropertyCard } from "../property/property-card";
 import { ApiProperty } from "@/types/room/room";
 import Link from "next/link";
+import MapLoading from "@/components/fragment/loading-error/MapLoading";
+import FileNotFoundPages from "@/components/fragment/loading-error/FileNotFound";
 
 export interface Room {
   id: string;
@@ -86,7 +88,7 @@ export default function PropertyDiscovery({
   }, [tempRadius]);
 
   useEffect(() => {
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams();
 
     params.set("lat", latitude.toString());
     params.set("lng", longitude.toString());
@@ -99,10 +101,7 @@ export default function PropertyDiscovery({
     if (queryCheckOut) params.set("checkOut", queryCheckOut);
     if (queryCategory) params.set("category", queryCategory);
 
-    const newSearch = `?${params.toString()}`;
-    if (newSearch !== window.location.search) {
-      router.push(`/property${newSearch}`);
-    }
+    router.replace(`/property?${params.toString()}`);
   }, [
     latitude,
     longitude,
@@ -112,7 +111,6 @@ export default function PropertyDiscovery({
     queryCheckOut,
     queryCategory,
     router,
-    searchParams,
   ]);
 
   // Fetch data property
@@ -160,8 +158,14 @@ export default function PropertyDiscovery({
     </div>
   );
 
-  if (isLoading) return <p>Loading...</p>;
-  if (isError) return <p>Failed to load data</p>;
+  if (isLoading) return <MapLoading />;
+  if (isError) return <FileNotFoundPages />;
+
+  const noOrInvalidProperties =
+    !data?.properties ||
+    data.properties.length === 0 ||
+    priceRange[0] >= priceRange[1] ||
+    radius[0] <= 0;
 
   return (
     <div className="flex h-auto bg-gray-50">
@@ -185,7 +189,8 @@ export default function PropertyDiscovery({
               </Dialog>
 
               {/* Grid property */}
-              {data && data.properties && data.properties.length > 0 ? (
+
+              {!noOrInvalidProperties ? (
                 data.properties.flatMap((property: ApiProperty) =>
                   property.rooms?.map((room) => (
                     <Link
@@ -197,6 +202,9 @@ export default function PropertyDiscovery({
                           roomname: room.name,
                           checkIn: queryCheckIn,
                           checkOut: queryCheckOut,
+                          category: queryCategory,
+                          minPrice: queryMinPrice,
+                          maxPrice: queryMaxPrice,
                         },
                       }}
                       className="block">
@@ -205,7 +213,16 @@ export default function PropertyDiscovery({
                   ))
                 )
               ) : (
-                <p>No properties found</p>
+                <div className="flex flex-col items-center justify-center py-16 text-center text-gray-600">
+                  <p className="text-lg font-semibold mb-2">
+                    No properties found
+                  </p>
+                  <p className="text-sm">
+                    Try increasing the{" "}
+                    <span className="font-medium">radius</span> or adjusting the{" "}
+                    <span className="font-medium">price range</span>.
+                  </p>
+                </div>
               )}
             </div>
           )}

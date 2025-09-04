@@ -20,3 +20,26 @@ export const registerTenant = async (tenant: TenantTypes) => {
   console.log(response.data);
   return response.data;
 };
+
+export const updateTenant = async (
+  company_name: string,
+  address: string,
+  phone_number: string,
+  logo: File
+) => {
+  const formData = new FormData();
+  formData.append("company_name", company_name);
+  formData.append("address", address);
+  formData.append("phone_number", phone_number);
+  formData.append("logo", logo);
+
+  const response = await axios.patch(`${BASE_URL}/tenant/update`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+    withCredentials: true,
+  });
+
+  console.log(response.data);
+  return response.data;
+};

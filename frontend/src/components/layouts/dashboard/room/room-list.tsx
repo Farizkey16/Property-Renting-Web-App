@@ -1,20 +1,21 @@
 "use client";
 
-import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal } from "lucide-react";
+import { Pencil, Trash2 } from "lucide-react";
+import { formatCurrency, formatDate } from "@/lib/utils";
+import Link from "next/link";
 
 interface RoomListProps {
   rooms: Array<{
     id: string;
     name: string;
-    base_price: string;
+    base_price: number;
     capacity: number;
     image?: string;
     status?: string;
-    propertyName?: string;
+    created_at?: string;
     room_images?: { image_url: string }[];
   }>;
 }
@@ -27,8 +28,8 @@ const statusColors: Record<string, string> = {
 
 export function RoomList({ rooms }: RoomListProps) {
   return (
-    <Card>
-      <CardContent>
+    <div>
+      <div>
         <div className="overflow-x-auto rounded-lg border ">
           <table className="w-full text-sm">
             <thead className="bg-muted/50">
@@ -39,9 +40,7 @@ export function RoomList({ rooms }: RoomListProps) {
                 <th className="text-left py-3 px-3 font-medium text-muted-foreground">
                   Room
                 </th>
-                <th className="text-left py-3 px-3 font-medium text-muted-foreground">
-                  Property
-                </th>
+
                 <th className="text-left py-3 px-3 font-medium text-muted-foreground">
                   Price
                 </th>
@@ -51,7 +50,13 @@ export function RoomList({ rooms }: RoomListProps) {
                 <th className="text-left py-3 px-3 font-medium text-muted-foreground">
                   Status
                 </th>
+                <th className="text-left py-3 px-3 font-medium text-muted-foreground">
+                  Created At
+                </th>
                 <th />
+                <th className="text-left py-3 px-3 font-medium text-muted-foreground ">
+                  Actions
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -74,9 +79,8 @@ export function RoomList({ rooms }: RoomListProps) {
                       <span className="font-medium">{room.name}</span>
                     </div>
                   </td>
-                  <td className="py-3 px-3">{room.propertyName || "-"}</td>
                   <td className="py-3 px-3 text-muted-foreground">
-                    Rp {Number(room.base_price).toLocaleString("id-ID")}
+                    {formatCurrency(room.base_price)}
                   </td>
                   <td className="py-3 px-3">{room.capacity}</td>
                   <td className="py-3 px-3">
@@ -90,9 +94,17 @@ export function RoomList({ rooms }: RoomListProps) {
                       {room.status || "Available"}
                     </Badge>
                   </td>
-                  <td className="py-3 px-3 text-right">
-                    <Button variant="ghost" size="icon">
-                      <MoreHorizontal className="w-4 h-4" />
+                  <td className="py-3 px-3">
+                    {formatDate(room.created_at ?? "")}
+                  </td>
+                  <td className="flex justify-evenly items-center py-3 px-3  ">
+                    <Link href={`/dashboard/property/room/edit/${room.id}`}>
+                      <Button variant="ghost" size="icon">
+                        <Pencil className="w-4 h-4" />
+                      </Button>
+                    </Link>
+                    <Button variant="destructive" size="icon">
+                      <Trash2 className="w-4 h-4" />
                     </Button>
                   </td>
                 </tr>
@@ -100,7 +112,7 @@ export function RoomList({ rooms }: RoomListProps) {
             </tbody>
           </table>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }

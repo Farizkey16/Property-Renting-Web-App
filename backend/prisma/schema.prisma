@@ -165,9 +165,10 @@ model booking_rooms {
 
 model reviews {
   id           String     @id @default(uuid())
-  booking_id   String
+  booking_id   String     @unique
   user_id      String
   property_id  String
+  rating       Int
   comment      String?
   tenant_reply String?
   created_at   DateTime   @default(now())

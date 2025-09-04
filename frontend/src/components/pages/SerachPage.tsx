@@ -1,17 +1,28 @@
 "use client";
-import React, { useState } from "react";
 import { PropertyTypeNav } from "../layouts/property/property-type-nav";
 import PropertyDiscovery from "../layouts/search-property/Search";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const SerachPage = () => {
-  const [category, setCategory] = useState("");
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  const categories = searchParams.get("category") || "";
   return (
     <div className="min-h-auto bg-gray-50">
       <PropertyTypeNav
-        onSelectCategory={setCategory}
-        activeCategory={category}
+        activeCategory={categories}
+        onSelectCategory={(value) => {
+          const params = new URLSearchParams(searchParams.toString());
+          if (value) {
+            params.set("category", value);
+          } else {
+            params.delete("category");
+          }
+          router.push(`?${params.toString()}`);
+        }}
       />
-      <PropertyDiscovery category={category} />
+      <PropertyDiscovery category={categories} />
     </div>
   );
 };

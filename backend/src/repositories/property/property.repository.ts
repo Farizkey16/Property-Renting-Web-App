@@ -1,17 +1,32 @@
 import { PropertyCategory } from "../../../prisma/generated/client";
 import { prisma } from "../../config/prisma";
-import { PropertyTypes } from "../../types/property/property.types";
+import AppError from "../../errors/AppError";
+import {
+  PropertyTypes,
+  UpdatePropertyInput,
+} from "../../types/property/property.types";
 
 export const getAllPropertiesRepository = async (filters: {
   property_category?: string;
+  min_price?: number;
+  max_price?: number;
 }) => {
-  const { property_category } = filters;
+  const { property_category, min_price, max_price } = filters;
 
   return prisma.properties.findMany({
     where: {
       property_category: property_category
         ? (property_category as PropertyCategory)
         : undefined,
+      rooms: {
+        some: {
+          base_price: {
+            gte: min_price || undefined,
+            lte: max_price || undefined,
+          },
+        },
+      },
+      deleted_at: null,
     },
     orderBy: { created_at: "desc" },
     include: {
@@ -22,7 +37,7 @@ export const getAllPropertiesRepository = async (filters: {
 
 export const getPropertyByIdRepository = async (propertyId: string) => {
   return prisma.properties.findUnique({
-    where: { id: propertyId },
+    where: { id: propertyId, deleted_at: null },
     include: {
       property_images: true,
       reviews: true,
@@ -61,7 +76,7 @@ export const getTenantWithPropertiesByUserId = async (userId: string) => {
 
 export const findPropertyByIdRepository = async (id: string) => {
   return prisma.properties.findUnique({
-    where: { id },
+    where: { id, deleted_at: null },
   });
 };
 
@@ -146,4 +161,45 @@ export const findNearbyPropertiesRepository = async (
     ${category ? `AND p.property_category = '${category}'` : ""}
     ORDER BY distance ASC;
   `);
+};
+
+export const updatePropertyRepository = async (data: UpdatePropertyInput) => {
+  const { propertyId, tenant_id, ...updateData } = data;
+  const result = await prisma.properties.updateMany({
+    where: {
+      id: propertyId,
+      tenant_id: tenant_id,
+      deleted_at: null,
+    },
+    data: updateData,
+  });
+  if (result.count === 0) {
+    throw new AppError("Property not found or not owned by tenant", 404);
+  }
+  const updatedProperty = await prisma.properties.findUnique({
+    where: { id: propertyId },
+  });
+  return updatedProperty;
+};
+
+export const softDeletePropertyRepository = async (
+  propertyId: string,
+  tenant_id: string
+) => {
+  const result = await prisma.properties.updateMany({
+    where: {
+      id: propertyId,
+      tenant_id: tenant_id,
+      deleted_at: null,
+    },
+    data: {
+      deleted_at: new Date(),
+    },
+  });
+
+  if (result.count === 0) {
+    throw new AppError("Property not found or already deleted", 404);
+  }
+
+  return true;
 };

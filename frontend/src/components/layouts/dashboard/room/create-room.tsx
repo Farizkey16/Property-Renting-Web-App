@@ -28,7 +28,6 @@ const CreateRoom = () => {
   const [previews, setPreviews] = useState<string[]>([]);
   const createRoom = useCreateRoom();
 
-  // Cleanup previews to avoid memory leaks
   useEffect(() => {
     return () => {
       previews.forEach(URL.revokeObjectURL);

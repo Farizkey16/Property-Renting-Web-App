@@ -242,10 +242,7 @@ exports.Prisma.Booking_roomsScalarFieldEnum = {
   quantity: 'quantity',
   subtotal: 'subtotal',
   created_at: 'created_at',
-  updated_at: 'updated_at',
-  check_in_date: 'check_in_date',
-  check_out_date: 'check_out_date',
-  quantity: 'quantity'
+  updated_at: 'updated_at'
 };
 
 exports.Prisma.ReviewsScalarFieldEnum = {
@@ -253,6 +250,7 @@ exports.Prisma.ReviewsScalarFieldEnum = {
   booking_id: 'booking_id',
   user_id: 'user_id',
   property_id: 'property_id',
+  rating: 'rating',
   comment: 'comment',
   tenant_reply: 'tenant_reply',
   created_at: 'created_at',

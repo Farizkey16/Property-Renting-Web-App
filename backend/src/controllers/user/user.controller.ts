@@ -127,14 +127,6 @@ class UserController {
       next(error);
     }
   }
-
-  public async changeEmail(
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<void> {
-    // code
-  }
 }
 
 export default UserController;

@@ -17,6 +17,24 @@ export const createUser = async (data: CreateUser) => {
   });
 };
 
+export const createUserByGoogle = async (data: {
+  full_name: string;
+  email: string;
+  profile_picture?: string;
+  role?: "tenant" | "user";
+}) => {
+  return prisma.users.create({
+    data: {
+      full_name: data.full_name,
+      email: data.email,
+      profile_picture: data.profile_picture,
+      is_verified: true,
+      role: data.role || "user",
+      password_hash: "",
+    },
+  });
+};
+
 export const createNewOtp = async (data: CreateNewOtp) => {
   return prisma.users.update({
     where: { email: data.email },

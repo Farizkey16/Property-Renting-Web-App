@@ -14,8 +14,7 @@ import {
 } from "@/components/ui/card";
 import { useRouter } from "next/navigation";
 import { useLoginUser } from "@/hooks/useAuth";
-import { FcGoogle } from "react-icons/fc";
-import { FaFacebook, FaGithub } from "react-icons/fa";
+import LoginGoogle from "@/components/fragment/button-action/LoginGoogle";
 
 export default function LoginPage() {
   const [form, setForm] = useState({
@@ -109,24 +108,7 @@ export default function LoginPage() {
               <div className="flex-1 h-px bg-gray-300"></div>
             </div>
 
-            {/* Social buttons */}
-            <div className="flex flex-col gap-2">
-              <Button
-                variant="outline"
-                className="flex items-center gap-2 w-full">
-                <FcGoogle className="text-red-500" /> Continue with Google
-              </Button>
-              <Button
-                variant="outline"
-                className="flex items-center gap-2 w-full">
-                <FaGithub /> Continue with GitHub
-              </Button>
-              <Button
-                variant="outline"
-                className="flex items-center gap-2 w-full">
-                <FaFacebook className="text-blue-600" /> Continue with Facebook
-              </Button>
-            </div>
+            <LoginGoogle />
           </CardContent>
 
           <CardFooter className="text-center text-sm text-gray-600">

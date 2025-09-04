@@ -171,6 +171,7 @@ CREATE TABLE "public"."reviews" (
     "booking_id" TEXT NOT NULL,
     "user_id" TEXT NOT NULL,
     "property_id" TEXT NOT NULL,
+    "rating" INTEGER NOT NULL,
     "comment" TEXT,
     "tenant_reply" TEXT,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -187,6 +188,9 @@ CREATE UNIQUE INDEX "tenants_user_id_key" ON "public"."tenants"("user_id");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "room_availability_room_id_date_key" ON "public"."room_availability"("room_id", "date");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "reviews_booking_id_key" ON "public"."reviews"("booking_id");
 
 -- AddForeignKey
 ALTER TABLE "public"."tenants" ADD CONSTRAINT "tenants_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

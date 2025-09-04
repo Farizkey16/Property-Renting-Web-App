@@ -37,7 +37,7 @@ export function Header() {
           <div className="w-8 h-8 bg-black rounded flex items-center justify-center">
             <span className="text-white text-sm font-bold">h</span>
           </div>
-          <span className="text-xl font-semibold">hide</span>
+          <span className="text-xl font-semibold">homz</span>
         </Link>
 
         {/* Center - Search Bar (hidden on mobile) */}
@@ -90,7 +90,7 @@ export function Header() {
             </DropdownMenu>
           ) : (
             <Link href="/auth/login">
-              <Button className="bg-blue-500 hover:bg-blue-600 text-white">
+              <Button className="bg-blue-500 hover:bg-blue-600 text-white rounded-3xl cursor-pointer">
                 Login
               </Button>
             </Link>
@@ -162,7 +162,7 @@ export function Header() {
                   </>
                 ) : (
                   <Link href="/auth/login">
-                    <Button className="bg-blue-500 hover:bg-blue-600 text-white w-full">
+                    <Button className="bg-blue-500 hover:bg-blue-600 text-white w-full ">
                       Login
                     </Button>
                   </Link>

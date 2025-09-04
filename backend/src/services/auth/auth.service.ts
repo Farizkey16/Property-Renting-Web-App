@@ -5,6 +5,7 @@ import AppError from "../../errors/AppError";
 import {
   createNewOtp,
   createUser,
+  createUserByGoogle,
   findUserByEmail,
   updateStatusEmail,
 } from "../../repositories/auth/auth.repository";
@@ -13,6 +14,8 @@ import { generatedOtp } from "../../utils/generateOtp";
 import { hashPassword } from "../../utils/hash";
 import { generateTokenAndSetCookie } from "../../utils/jwt";
 import { Response } from "express";
+import { oauth2Client } from "../../utils/google";
+import { google } from "googleapis";
 
 export const registerService = async (data: any) => {
   const { full_name, email, password_hash, role } = data;
@@ -53,6 +56,35 @@ export const registerService = async (data: any) => {
 
   const { password_hash: _, ...userWithoutPassword } = newUser;
   return userWithoutPassword;
+};
+
+export const handleGoogleCallback = async (code: string, res: Response) => {
+  const { tokens } = await oauth2Client.getToken(code);
+  oauth2Client.setCredentials(tokens);
+
+  const oauth2 = google.oauth2("v2");
+  const { data } = await oauth2.userinfo.get({ auth: oauth2Client });
+
+  if (!data.email || !data.name) {
+    throw new AppError("Failed to fetch Google profile", 400);
+  }
+
+  let user = await findUserByEmail(data.email);
+  if (!user) {
+    user = await createUserByGoogle({
+      email: data.email,
+      full_name: data.name,
+      profile_picture: data.picture || undefined,
+      role: "user",
+    });
+  }
+
+  const token = generateTokenAndSetCookie(res, {
+    id: user.id,
+    role: user.role,
+  });
+
+  return { user, token };
 };
 
 export const loginService = async (data: any, res: Response) => {
