@@ -9,6 +9,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export const fetchAllProperties = async (params?: {
   property_category?: string;
+  name?: string;
 }) => {
   const response = await axios.get(`${BASE_URL}/property/all`, { params });
   console.log(response.data);
@@ -49,11 +50,11 @@ export const fetchPropertyByTenant = async (): Promise<PropertyResponse> => {
 
 export const fetchPropertyById = async (propertyId: string | undefined) => {
   const response = await axios.get(`${BASE_URL}/property/get/${propertyId}`, {
-    withCredentials: true
+    withCredentials: true,
   });
   console.log(response.data);
   return response.data.property;
-}
+};
 
 // property.services.ts
 export const fetchPropertyByLocation = async (
@@ -85,7 +86,7 @@ export const fetchPropertyByLocation = async (
   return response.data;
 };
 
-export const getPropertyById = async (id: string | undefined) => {
+export const getPropertyById = async (id: string) => {
   const response = await axios.get<{ property: createProperty }>(
     `${BASE_URL}/property/get/${id}`
   );

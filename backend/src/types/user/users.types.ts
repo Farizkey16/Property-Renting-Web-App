@@ -24,6 +24,15 @@ export type CreateNewOtp = {
   reset_password_otp?: string | null;
 };
 
+export type newOtpChangeEmailTypes = {
+  id: string;
+  email: string;
+  verify_otp?: string | null;
+  verify_otp_expires_at?: Date | null;
+  reset_password_otp?: string | null;
+  is_verified: boolean;
+};
+
 export type VerifyEmail = {
   email: string;
   is_verified: boolean;

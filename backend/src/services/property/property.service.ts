@@ -14,10 +14,12 @@ import { PropertyTypes } from "../../types/property/property.types";
 
 export const getAllPropertiesService = async (filter: {
   property_category?: string;
-  min_price?: number;
-  max_price?: number;
+  name?: string;
 }) => {
-  const response = await getAllPropertiesRepository(filter);
+  const response = await getAllPropertiesRepository({
+    property_category: filter.property_category,
+    name: filter.name,
+  });
   return response;
 };
 

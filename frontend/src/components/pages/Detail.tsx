@@ -14,11 +14,7 @@ import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useRoomSearch } from "@/hooks/useRoom";
 import { formatCurrency } from "@/lib/utils";
-import { DatePickerWithRange } from "../ui/DatePickerPopover";
-import { DateRange } from "react-day-picker";
-import { format } from "date-fns";
-import { useRouter } from "next/navigation";
-import { GuestPicker } from "../ui/GuestPicker";
+import { PropertyDetailSkeleton } from "../fragment/loading-error/PropertyDetailSkeleton";
 
 export default function PropertyDetailPage() {
   const router = useRouter();
@@ -26,8 +22,8 @@ export default function PropertyDetailPage() {
   const [guests, setGuests] = useState({
     adults: 1,
     children: 0,
-    rooms: 1
-  })
+    rooms: 1,
+  });
   const params = useSearchParams();
   const propertyname = params.get("propertyname") || undefined;
   const roomname = params.get("roomname") || undefined;
@@ -43,16 +39,16 @@ export default function PropertyDetailPage() {
 
   const { data, isLoading, isError } = useRoomSearch(propertyname, roomname);
 
-  const propertyId = data?.property?.id 
-  const roomId = data?.id
-  const adults = guests.adults
-  const children = guests.children
-  const totalGuests = (adults + children).toString()
-  const rooms = guests.rooms.toString()
+  const propertyId = data?.property?.id;
+  const roomId = data?.id;
+  const adults = guests.adults;
+  const children = guests.children;
+  const totalGuests = (adults + children).toString();
+  const rooms = guests.rooms.toString();
 
   console.log(data);
 
-  if (isLoading) return <div className="p-8">Loading...</div>;
+  if (isLoading) return <PropertyDetailSkeleton />;
   if (isError) return <div className="p-8">Something went wrong</div>;
 
   const handleReserveNow = () => {
@@ -204,8 +200,7 @@ export default function PropertyDetailPage() {
               </div>
               <Button
                 className="bg-green-500 hover:bg-green-600 text-white"
-                onClick={() => setOpen(true)}
-              >
+                onClick={() => setOpen(true)}>
                 Reserve now
               </Button>
             </div>
@@ -218,15 +213,13 @@ export default function PropertyDetailPage() {
                 <DialogTitle>Book this space</DialogTitle>
               </DialogHeader>
               <div className="space-y-4">
-                  <Calendar className="w-4 h-4" />
-                  Choose a date and time
-                  <DatePickerWithRange
-                    date={dateRange}
-                    onDateChange={setDateRange}
-                    className="mt-4"
-                  />
-                
-
+                <Calendar className="w-4 h-4" />
+                Choose a date and time
+                <DatePickerWithRange
+                  date={dateRange}
+                  onDateChange={setDateRange}
+                  className="mt-4"
+                />
                 <div className="flex justify-between items-center">
                   <div>
                     <span className="text-sm text-gray-600">From</span>
@@ -238,16 +231,15 @@ export default function PropertyDetailPage() {
                     <span className="text-lg font-semibold">Peak Rate</span>
                   </div>
                 </div>
-
-                <Button onClick={handleReserveNow} className="w-full bg-green-500 hover:bg-green-600 text-white">
+                <Button
+                  onClick={handleReserveNow}
+                  className="w-full bg-green-500 hover:bg-green-600 text-white">
                   Reserve now
                 </Button>
-
                 <div className="text-xs text-gray-500 text-center">
                   You won&apos;t be charged until after your reservation begins.
                   Cancellations are free up to 2 hours before.
                 </div>
-
                 <Button variant="outline" className="w-full">
                   Request free tour
                 </Button>
@@ -259,16 +251,14 @@ export default function PropertyDetailPage() {
           <div className="hidden lg:block lg:col-span-1">
             <div className="sticky top-4">
               <Card>
-                <CardContent className="p-6 space-y-4">              
-                    Choose a date and time
-                    <DatePickerWithRange
+                <CardContent className="p-6 space-y-4">
+                  Choose a date and time
+                  <DatePickerWithRange
                     date={dateRange}
                     onDateChange={setDateRange}
                     className="mt-4"
                   />
-                  <GuestPicker value={guests} onChange={setGuests}/>
-                  
-
+                  <GuestPicker value={guests} onChange={setGuests} />
                   <div className="flex justify-between items-center">
                     <div>
                       <span className="text-sm text-gray-600">From</span>
@@ -280,16 +270,15 @@ export default function PropertyDetailPage() {
                       <span className="text-lg font-semibold">Peak Rate</span>
                     </div>
                   </div>
-
-                  <Button onClick={handleReserveNow} className="w-full bg-green-500 hover:bg-green-600 text-white">
+                  <Button
+                    onClick={handleReserveNow}
+                    className="w-full bg-green-500 hover:bg-green-600 text-white">
                     Reserve now
                   </Button>
-
                   <div className="text-xs text-gray-500 text-center">
                     You won&apos;t be charged until after your reservation
                     begins. Cancellations are free up to 2 hours before.
                   </div>
-
                   <Button variant="outline" className="w-full">
                     Request free tour
                   </Button>

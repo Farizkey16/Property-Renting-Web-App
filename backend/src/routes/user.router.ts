@@ -31,6 +31,11 @@ class UserRouter {
       uploaderMemory().single("profile_picture"),
       this.userController.updateProfile
     );
+    this.route.patch(
+      "/change-email-otp",
+      verifyToken,
+      this.userController.newOtpChangeEmail
+    );
   }
 
   public getRouter(): Router {

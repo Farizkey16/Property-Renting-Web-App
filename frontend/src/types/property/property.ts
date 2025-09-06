@@ -39,6 +39,19 @@ export interface updateProperty {
   property_category: PropertyCategory;
 }
 
+export interface updateProperty {
+  name?: string;
+  description?: string;
+  address?: string;
+  city?: string;
+  province?: string;
+  zip_code?: string;
+  latitude?: string;
+  longitude?: string;
+  main_image?: File | null;
+  property_category: PropertyCategory;
+}
+
 export interface RoomImage {
   id: string;
   room_id: string;
@@ -92,4 +105,9 @@ export interface PropertyResponse {
   message: string;
   tenant: Tenant;
   properties: Property[];
+}
+
+export interface PropertyFilters {
+  property_category?: string;
+  name?: string;
 }

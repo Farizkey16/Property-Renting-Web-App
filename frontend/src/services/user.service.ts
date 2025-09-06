@@ -59,3 +59,19 @@ export const resetPassword = async (
 
   return response.data;
 };
+
+export const changeEmailOtp = async (email: string) => {
+  const response = await axios.patch(
+    `${BASE_URL}/user/change-email-otp`,
+    { email },
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    }
+  );
+
+  console.log(response.data);
+  return response.data;
+};

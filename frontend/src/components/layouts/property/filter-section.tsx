@@ -1,29 +1,40 @@
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
 
-const filterOptions = [
-  { label: "All", active: true },
-  { label: "Price: Low to High", active: false },
-  { label: "Price: High to Low", active: false },
-  { label: "Top Rating", active: false },
-];
+interface PropertySearchProps {
+  onFilterChange?: (filters: { name?: string }) => void;
+}
 
-export function FilterSection() {
+export function FilterSection({ onFilterChange }: PropertySearchProps) {
+  const [name, setName] = useState("");
+
+  const handleSearchClick = () => {
+    onFilterChange?.({ name });
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSearchClick();
+    }
+  };
+
   return (
-    <div className="space-y-4 mb-6">
-      {/* Mobile Filter Options - Horizontal Scroll */}
-      <div className="flex items-center gap-2 overflow-x-auto md:overflow-x-visible scrollbar-hide pb-2 md:pb-0 w-full max-w-full">
-        {filterOptions.map((option, index) => (
-          <Button
-            key={index}
-            variant={option.active ? "default" : "ghost"}
-            size="sm"
-            className={`${
-              option.active ? "bg-black text-white" : "text-gray-600"
-            } whitespace-nowrap flex-shrink-0`}>
-            {option.label}
-          </Button>
-        ))}
-      </div>
+    <div className="flex items-center gap-2 mb-6">
+      <input
+        type="text"
+        placeholder="Find a property..."
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        onKeyDown={handleKeyDown}
+        className="border rounded-2xl bg-white p-2 text-sm flex-grow shadow-sm"
+      />
+      <Button
+        variant="default"
+        size="sm"
+        onClick={handleSearchClick}
+        className="bg-blue-600 text-white rounded-2xl">
+        Search
+      </Button>
     </div>
   );
 }

@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import AppError from "../../errors/AppError";
 import {
   getUserById,
+  newOtpChangeEmailServices,
   otpPasswordServices,
   resetPasswordUser,
   updateProfileServices,
@@ -126,6 +127,41 @@ class UserController {
     } catch (error) {
       next(error);
     }
+  }
+
+  public async newOtpChangeEmail(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
+    try {
+      const decrypt = res.locals.decrypt;
+      if (!decrypt || !decrypt.userId) {
+        throw new AppError("Unauthorized access", 401);
+      }
+      const userId = decrypt.userId;
+      await newOtpChangeEmailServices(req.body, userId);
+      res.send({ message: "OTP sent to your email", success: true });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  public async changeEmail(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
+    try {
+      const decrypt = res.locals.decrypt;
+      if (!decrypt || !decrypt.userId) {
+        throw new AppError("Unauthorized access", 401);
+      }
+      const userId = decrypt.userId;
+      const exitingUser = await getUserById(userId);
+
+      const { newEmail } = req.body;
+    } catch (error) {}
   }
 }
 

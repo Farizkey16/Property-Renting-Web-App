@@ -46,56 +46,59 @@ export function Header() {
         </div>
 
         {/* Right - Desktop Actions */}
-        <div className="hidden lg:flex items-center space-x-4 flex-shrink-0">
-          <Button variant="ghost" size="icon">
-            <Bell className="w-4 h-4" />
-          </Button>
-
-          {isLoading ? (
-            <span className="text-sm text-gray-500">Loading...</span>
-          ) : isLoggedIn ? (
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  className="flex items-center space-x-2 px-2 hover:bg-transparent">
-                  <Avatar className="w-8 h-8">
-                    {user?.profile_picture ? (
-                      <AvatarImage src={user.profile_picture} />
-                    ) : (
-                      <AvatarFallback>
-                        {user?.full_name?.charAt(0).toUpperCase() || "U"}
-                      </AvatarFallback>
-                    )}
-                  </Avatar>
-                  <span className="text-sm font-medium">{user?.full_name}</span>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-48">
-                <DropdownMenuLabel className="font-normal">
-                  <div className="flex flex-col space-y-1">
-                    <p className="text-sm font-medium leading-none">
-                      {user?.full_name}
-                    </p>
-                    <p className="text-xs leading-none text-muted-foreground">
-                      {user?.email}
-                    </p>
-                  </div>
-                </DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => router.push("/dashboard")}>
-                  Dashboard
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          ) : (
-            <Link href="/auth/login">
-              <Button className="bg-blue-500 hover:bg-blue-600 text-white rounded-3xl cursor-pointer">
-                Login
+        {isLoading ? (
+          <span className="text-sm text-gray-500">Loading...</span>
+        ) : isLoggedIn ? (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="ghost"
+                className="flex items-center space-x-2 px-2 hover:bg-transparent">
+                <Avatar className="w-8 h-8">
+                  {user?.profile_picture ? (
+                    <AvatarImage src={user.profile_picture} />
+                  ) : (
+                    <AvatarFallback>
+                      {user?.full_name?.charAt(0).toUpperCase() || "U"}
+                    </AvatarFallback>
+                  )}
+                </Avatar>
+                <span className="text-sm font-medium">{user?.full_name}</span>
               </Button>
-            </Link>
-          )}
-        </div>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-48">
+              <DropdownMenuLabel className="font-normal">
+                <div className="flex flex-col space-y-1">
+                  <p className="text-sm font-medium leading-none">
+                    {user?.full_name}
+                  </p>
+                  <p className="text-xs leading-none text-muted-foreground">
+                    {user?.email}
+                  </p>
+                </div>
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              {user?.is_verified ? (
+                <DropdownMenuItem onClick={() => router.push("/dashboard")}>
+                  My Profile
+                </DropdownMenuItem>
+              ) : (
+                <DropdownMenuItem
+                  onClick={() =>
+                    router.push(`/auth/verify-email/${user?.email}`)
+                  }>
+                  Verify Email
+                </DropdownMenuItem>
+              )}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        ) : (
+          <Link href="/auth/login">
+            <Button className="bg-blue-500 hover:bg-blue-600 text-white rounded-3xl cursor-pointer hidden lg:block">
+              Login
+            </Button>
+          </Link>
+        )}
 
         {/* Mobile Actions */}
         <div className="flex lg:hidden items-center space-x-2">

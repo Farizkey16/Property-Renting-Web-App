@@ -18,7 +18,7 @@ class PropertyController {
     res: Response,
     next: NextFunction
   ): Promise<void> {
-    const { property_category, minPrice, maxPrice } = req.query;
+    const { property_category, name } = req.query;
     try {
       if (
         property_category &&
@@ -30,8 +30,7 @@ class PropertyController {
       }
       const properties = await getAllPropertiesService({
         property_category: property_category as PropertyCategory,
-        min_price: Number(minPrice),
-        max_price: Number(maxPrice),
+        name: name as string,
       });
       res
         .status(200)

@@ -6,7 +6,6 @@ import {
   createNewOtp,
   createUser,
   createUserByGoogle,
-  findTenantById,
   findUserByEmail,
   updateStatusEmail,
 } from "../../repositories/auth/auth.repository";

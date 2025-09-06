@@ -13,7 +13,7 @@ import { PropertyCategory } from "@/types/property/property";
 import { useRouter, useSearchParams } from "next/navigation";
 
 interface PropertyTypeNavProps {
-  onSelectCategory?: (value: string) => void; // optional, biar tetap fleksibel
+  onSelectCategory?: (value: string) => void;
   activeCategory: string;
 }
 

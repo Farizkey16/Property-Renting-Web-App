@@ -1,4 +1,5 @@
 import {
+  changeEmailOtp,
   fetchMe,
   newOtp,
   resetPassword,
@@ -51,6 +52,14 @@ export function useResetPassword() {
       otp: string;
     }) => {
       return await resetPassword(oldPassword, newPassword, otp);
+    },
+  });
+}
+
+export function useChangeEmailOtp() {
+  return useMutation({
+    mutationFn: async (email: string) => {
+      return await changeEmailOtp(email);
     },
   });
 }

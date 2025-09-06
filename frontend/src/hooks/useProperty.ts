@@ -7,14 +7,17 @@ import {
   getPropertyById,
   updatePropertyService,
 } from "@/services/property.services";
-import { createProperty, updateProperty } from "@/types/property/property";
+import {
+  createProperty,
+  PropertyFilters,
+  updateProperty,
+} from "@/types/property/property";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-export const useProperties = (category?: string) => {
+export const useProperties = (filters: PropertyFilters = {}) => {
   return useQuery({
-    queryKey: ["properties", category],
-    queryFn: () =>
-      fetchAllProperties(category ? { property_category: category } : {}),
+    queryKey: ["properties", filters],
+    queryFn: () => fetchAllProperties(filters),
     select: (data) => data.properties,
   });
 };
@@ -70,7 +73,7 @@ export const usePropertiesByLocation = (
   });
 };
 
-export const usePropertyById = (id: string | undefined) => {
+export const usePropertyById = (id: string) => {
   return useQuery({
     queryKey: ["property", id],
     queryFn: () => getPropertyById(id),

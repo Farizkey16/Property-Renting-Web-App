@@ -5,28 +5,20 @@ import {
   PropertyTypes,
   UpdatePropertyInput,
 } from "../../types/property/property.types";
+import { parsePropertyCategory } from "../../utils/propertyCategory";
 
 export const getAllPropertiesRepository = async (filters: {
   property_category?: string;
-  min_price?: number;
-  max_price?: number;
+  name?: string;
 }) => {
-  const { property_category, min_price, max_price } = filters;
+  const { property_category, name } = filters;
 
   return prisma.properties.findMany({
     where: {
       property_category: property_category
         ? (property_category as PropertyCategory)
         : undefined,
-      rooms: {
-        some: {
-          base_price: {
-            gte: min_price || undefined,
-            lte: max_price || undefined,
-          },
-        },
-      },
-      deleted_at: null,
+      name: name ? { contains: name, mode: "insensitive" } : undefined,
     },
     orderBy: { created_at: "desc" },
     include: {
@@ -38,21 +30,19 @@ export const getAllPropertiesRepository = async (filters: {
 export const getPropertyByIdRepository = async (propertyId: string) => {
   return prisma.properties.findUnique({
     where: { id: propertyId, deleted_at: null },
-    select: {
-      name: true,
-      description: true,
+    include: {
       property_images: true,
-      main_image:true,
+      main_image: true,
       reviews: true,
       rooms: {
         select: {
           id: true,
           name: true,
           room_images: true,
-          room_availability: true
-        }
-      }
-    }
+          room_availability: true,
+        },
+      },
+    },
   });
 };
 

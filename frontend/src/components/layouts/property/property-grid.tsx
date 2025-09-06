@@ -6,13 +6,14 @@ import { ApiProperty } from "@/types/room/room";
 import Link from "next/link";
 import FileNotFoundPages from "@/components/fragment/loading-error/FileNotFound";
 import { PropertyCardSkeleton } from "@/components/fragment/loading-error/PropertyCardSkeleton";
+import { PropertyFilters } from "@/types/property/property";
 
 interface PropertyGridProps {
-  category: string;
+  filters?: PropertyFilters;
 }
 
-export function PropertyGrid({ category }: PropertyGridProps) {
-  const { data, isLoading, error } = useProperties(category);
+export function PropertyGrid({ filters = {} }: PropertyGridProps) {
+  const { data, isLoading, error } = useProperties(filters);
 
   if (isLoading) {
     return (

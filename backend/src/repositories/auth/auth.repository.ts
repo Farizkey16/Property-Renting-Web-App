@@ -2,6 +2,7 @@ import { prisma } from "../../config/prisma";
 import {
   CreateNewOtp,
   CreateUser,
+  newOtpChangeEmailTypes,
   VerifyEmail,
 } from "../../types/user/users.types";
 
@@ -38,6 +39,15 @@ export const createUserByGoogle = async (data: {
 export const createNewOtp = async (data: CreateNewOtp) => {
   return prisma.users.update({
     where: { email: data.email },
+    data,
+  });
+};
+
+export const newOtpChangeEmailRepository = async (
+  data: newOtpChangeEmailTypes
+) => {
+  return prisma.users.update({
+    where: { id: data.id },
     data,
   });
 };
