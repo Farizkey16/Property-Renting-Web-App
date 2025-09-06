@@ -1,8 +1,11 @@
 import { Prisma } from "@prisma/client";
 import AppError from "../../errors/AppError";
-import { findBookingRoomsByBookingId } from "../../repositories/transaction/tenant-tx.repository";
+import { findBookingRoomsByBookingId, updateProofImageRepository } from "../../repositories/transaction/tenant-tx.repository";
 import { sendEmail } from "../email.service";
-import { getEmailAndFullnameById } from "../../repositories/user/user.respository";
+import {
+  findUserById,
+  getEmailAndFullnameById,
+} from "../../repositories/user/user.respository";
 import {
   BOOKING_CONFIRMATION_TEMPLATE_SINGLE,
   BOOKING_CONFIRMATION_TEMPLATE_MULTIPLE,
@@ -16,6 +19,9 @@ import {
   BookingTemplateData,
   BookingRoomCompleteType,
 } from "../../types/transaction/transactions.types";
+import { NextFunction } from "express";
+import { handleUpload } from "../../config/cloudinary";
+import { checkBookingAndUserId } from "../../repositories/transaction/user-tx.repository";
 
 type BookingRoomType = Awaited<
   ReturnType<typeof findBookingRoomsByBookingId>
@@ -146,3 +152,25 @@ export const sendRejectionNotification = async (
     BOOKING_REJECTION_TEMPLATE_SINGLE(templateData)
   );
 };
+
+export const proofUploadService = async (
+  userId: string,
+  bookingId: string,
+  file?: Express.Multer.File
+) => {
+  const existingUserBooking = await checkBookingAndUserId(bookingId, userId);
+  if (!existingUserBooking) {
+    throw new AppError("User tied with certain booking ID is not found.", 404);
+  }
+
+  let uploadProof = null;
+  if (file) {
+    uploadProof = await handleUpload(file)
+  }
+
+  const final_img = await updateProofImageRepository(bookingId, {proof_image: uploadProof?.secure_url, status: "waiting_confirmation"})
+
+  return final_img
+};
+
+

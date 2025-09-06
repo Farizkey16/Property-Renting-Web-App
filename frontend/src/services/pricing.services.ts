@@ -3,9 +3,9 @@ import axios from "axios";
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export interface FetchPriceParams {
-  roomId?: string;
-  checkIn?: string;
-  checkOut?: string;
+  roomId: string;
+  checkIn: string;
+  checkOut: string;
 }
 
 export const fetchPriceQuote = async (params: FetchPriceParams) => {

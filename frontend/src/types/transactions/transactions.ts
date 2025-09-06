@@ -11,7 +11,9 @@ export interface Booking {
   check_in_date: string;
   check_out_date: string;
   proof_image: string;
+  payment_deadline: string;
   amount: number;
+  total_price: number;
   property: {
     main_image: string;
     name: string;
@@ -19,7 +21,38 @@ export interface Booking {
   };
   booking_rooms: {
     guests_count: number;
-  };
+    price_per_night: number;
+  }[];
+}
+// export interface Booking {
+//   id: string;
+//   userId: string;
+//   propertyId: string;
+//   status:
+//     | "waiting_payment"
+//     | "confirmed"
+//     | "canceled"
+//     | "canceled_by_tenant"
+//     | "expired";
+//   checkInDate: string;
+//   checkOutDate: string;
+//   proofImage: string;
+//   paymentDeadline: string;
+//   amount: number;
+//   property: {
+//     mainImage: string;
+//     name: string;
+//     city: string;
+//   };
+//   bookingRooms: {
+//     guestsCount: number;
+//   }[];
+// }
+
+export interface BookingApiResponse {
+  message: string;
+  success: boolean;
+  data: Booking;
 }
 
 export interface BookingsApiResponse {
@@ -30,41 +63,42 @@ export interface BookingsApiResponse {
 
 // Type Guard Booking Status
 export const VALID_BOOKING_STATUS = [
-    "waiting_payment",
-    "confirmed",
-    "canceled",
-    "canceled_by_tenant",
-    "expired",
+  "waiting_payment",
+  "confirmed",
+  "canceled",
+  "canceled_by_tenant",
+  "expired",
 ] as const;
 
 export const VALID_BOOKING_HISTORY_STATUS = [
-    "confirmed",
-    "canceled",
-    "canceled_by_tenant",
-    "expired",
+  "confirmed",
+  "canceled",
+  "canceled_by_tenant",
+  "expired",
 ] as const;
 
-export type BookingStatus = typeof VALID_BOOKING_STATUS[number];
+export type BookingStatus = (typeof VALID_BOOKING_STATUS)[number];
 
-export type BookingHistoryStatus = Exclude<BookingStatus, "waiting_payment">
-
+export type BookingHistoryStatus = Exclude<BookingStatus, "waiting_payment">;
 
 export function isValidBookingStatus(status: any): status is BookingStatus {
-    return VALID_BOOKING_STATUS.includes(status)
+  return VALID_BOOKING_STATUS.includes(status);
 }
 
-export function isValidBookingHistoryStatus(status: any): status is BookingHistoryStatus {
-    return status !== "waiting_payment" && VALID_BOOKING_HISTORY_STATUS.includes(status)
+export function isValidBookingHistoryStatus(
+  status: any
+): status is BookingHistoryStatus {
+  return (
+    status !== "waiting_payment" &&
+    VALID_BOOKING_HISTORY_STATUS.includes(status)
+  );
 }
 
 // Type Guard Sort
-export const VALID_SORT = [
-    "asc",
-    "desc"
-] as const
+export const VALID_SORT = ["asc", "desc"] as const;
 
-export type SortStatus = typeof VALID_SORT[number]
+export type SortStatus = (typeof VALID_SORT)[number];
 
 export function isValidSort(sort: any): sort is SortStatus {
-    return VALID_SORT.includes(sort)
+  return VALID_SORT.includes(sort);
 }

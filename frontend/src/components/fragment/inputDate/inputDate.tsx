@@ -10,8 +10,9 @@ import {
 import { Button } from "@/components/ui/button";
 import { DateRange } from "react-day-picker";
 import { format } from "date-fns";
-import { CalendarIcon, LucideMapPin, Search } from "lucide-react";
+import { CalendarIcon, LucideMapPin, Search, Users } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { GuestPicker } from "@/components/ui/GuestPicker";
 
 interface MapboxFeature {
   id: string;
@@ -24,6 +25,11 @@ interface MapboxFeature {
 
 export default function InputDate() {
   const [date, setDate] = React.useState<DateRange | undefined>();
+  const [guests, setGuests] = React.useState({
+    adults: 1,
+    children: 0,
+    rooms: 1
+  })
   const [location, setLocation] = React.useState("");
   const [coords, setCoords] = React.useState<{
     lat: number;
@@ -76,6 +82,8 @@ export default function InputDate() {
   };
 
   const handleSearch = () => {
+
+    console.log("EXECUTION: handleSearch is running. The 'guests' state it sees is:", guests);
     if (!coords || !date?.from) {
       alert("Pilih lokasi dan tanggal terlebih dahulu!");
       return;
@@ -88,6 +96,9 @@ export default function InputDate() {
       checkOut: format(date.to ?? date.from, "yyyy-MM-dd"),
       minPrice: "100000",
       maxPrice: "5000000",
+      adults: guests.adults.toString(),
+      children: guests.children.toString(),
+      rooms: guests.rooms.toString()
     });
     router.push(`/property?${params.toString()}`);
   };
@@ -109,7 +120,8 @@ export default function InputDate() {
           <ul className="absolute top-full left-0 right-0 bg-white border rounded-lg mt-1 max-h-60 overflow-auto shadow-md z-50">
             <li
               className="px-4 py-2 cursor-pointer hover:bg-gray-100 font-medium text-blue-600"
-              onClick={handleSelectNearby}>
+              onClick={handleSelectNearby}
+            >
               <LucideMapPin className="w-4 h-4 inline mr-1" />
               Find nearby
             </li>
@@ -117,7 +129,8 @@ export default function InputDate() {
               <li
                 key={place.id}
                 className="px-4 py-2 cursor-pointer hover:bg-gray-100"
-                onClick={() => handleSelectSuggestion(place)}>
+                onClick={() => handleSelectSuggestion(place)}
+              >
                 {place.place_name}
               </li>
             ))}
@@ -161,11 +174,17 @@ export default function InputDate() {
         </Popover>
       </div>
 
+      {/* Guests Picker */}
+      <div className="flex flex-1 flex-col lg:flex-row items-stretch lg:items-center lg:border-l lg:border-gray-200">
+        <GuestPicker value={guests} onChange={setGuests}/>
+      </div>
+
       {/* Search Button */}
       <div className="flex justify-end lg:flex-none  items-center roundered-r-4xl">
         <Button
           className="rounded-full w-full h-full lg:w-auto"
-          onClick={handleSearch}>
+          onClick={handleSearch}
+        >
           <Search className="w-4 h-4 mr-2" />
           Search
         </Button>

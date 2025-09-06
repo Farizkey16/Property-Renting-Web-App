@@ -1,8 +1,14 @@
 import { Prisma } from "@prisma/client";
+import { Prisma as PrismaNew } from "../../../prisma/generated/client";
 import { prisma } from "../../config/prisma";
 import AppError from "../../errors/AppError";
 import { BookingStatus } from "../../../prisma/generated/client";
-import { BookingRoomCompleteType } from "../../types/transaction/transactions.types";
+import {
+  BookingRoomCompleteType,
+  BookingsWhereInput,
+  isValidSort,
+  ProofImage,
+} from "../../types/transaction/transactions.types";
 
 export const ValidateBooking = async (
   booking_id: string,
@@ -208,16 +214,60 @@ export const FindProofImage = async (
   return result;
 };
 
-export const findOrderByStatus = async (
-  order_status: string,
+export const getOrderRepository = async (
+  whereClause: BookingsWhereInput,
+  sort: string | undefined,
   tx?: Prisma.TransactionClient
 ) => {
   const db = tx ?? prisma;
   const orderList = await db.booking.findMany({
-    where: {
-      BookingStatus: order_status,
+    where: whereClause,
+    orderBy: {
+      createdAt: isValidSort(sort) && sort === "asc" ? "asc" : "desc",
     },
   });
 
   return orderList;
 };
+
+export const findBookingByIdRepository = async (
+  bookingId: string,
+  identity: { userId: string; tenantId?: string; role: string },
+  tx?: Prisma.TransactionClient
+) => {
+  const db = tx ?? prisma;
+  const where: PrismaNew.bookingsWhereInput = {
+    id: bookingId,
+  };
+
+  if (identity.role === "tenant" && identity.tenantId) {
+    where.property = { tenant_id: identity.tenantId };
+  } else {
+    where.user_id = identity.userId;
+  }
+
+  return prisma.bookings.findFirst({
+    where,
+    select: {
+        id: true,
+        status: true,
+        check_in_date: true,
+        check_out_date: true,
+        total_price: true,    
+        payment_deadline: true,
+        property: { select: { name: true, city: true } },
+        booking_rooms: { include: { room: { select: { name: true } } } },
+        user: { select: { full_name: true } }
+    }
+});
+};
+
+export const updateProofImageRepository = async (bookingId: string, data: ProofImage, tx?: Prisma.TransactionClient) => {
+  const db = tx ?? prisma;
+  await db.bookings.update({
+    where: {
+      id: bookingId,
+      status: "waiting_payment"
+    }, data
+  })
+}

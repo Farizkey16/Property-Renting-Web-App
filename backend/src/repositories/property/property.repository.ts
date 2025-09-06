@@ -38,16 +38,21 @@ export const getAllPropertiesRepository = async (filters: {
 export const getPropertyByIdRepository = async (propertyId: string) => {
   return prisma.properties.findUnique({
     where: { id: propertyId, deleted_at: null },
-    include: {
+    select: {
+      name: true,
+      description: true,
       property_images: true,
+      main_image:true,
       reviews: true,
       rooms: {
-        include: {
+        select: {
+          id: true,
+          name: true,
           room_images: true,
-          room_availability: true,
-        },
-      },
-    },
+          room_availability: true
+        }
+      }
+    }
   });
 };
 

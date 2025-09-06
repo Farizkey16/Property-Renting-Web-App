@@ -85,7 +85,7 @@ export const fetchPropertyByLocation = async (
   return response.data;
 };
 
-export const getPropertyById = async (id: string) => {
+export const getPropertyById = async (id: string | undefined) => {
   const response = await axios.get<{ property: createProperty }>(
     `${BASE_URL}/property/get/${id}`
   );

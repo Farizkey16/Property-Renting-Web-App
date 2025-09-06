@@ -16,7 +16,8 @@ class TenantTransactionsRouter {
             this.route.post("/accept/:id", verifyToken, onlyTenant, this.tenantTrx.acceptPayment),
             this.route.post("/reject/:id", verifyToken, onlyTenant, this.tenantTrx.rejectPayment),
             this.route.patch("/cancel/:id", verifyToken, onlyTenant, this.tenantTrx.cancelPayment),
-            this.route.get("/orders", verifyToken, onlyTenant, this.tenantTrx.getOrderByStatus)
+            this.route.get("/orders", verifyToken, onlyTenant, this.tenantTrx.getReservation)
+            this.route.get("/orders/:id", verifyToken, onlyTenant, this.tenantTrx.getReservationById)
         }
 
         public getRouter(): Router{

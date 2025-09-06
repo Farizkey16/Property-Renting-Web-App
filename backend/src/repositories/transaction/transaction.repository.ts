@@ -28,27 +28,26 @@ export const ValidateBooking = async (
 };
 
 export const UpdateBookings = async (
-  transaction_id: string,
+  booking_id: string,
   status: BookingStatus,
   tx?: Prisma.TransactionClient
 ) => {
-  const updateBooking = await tx.bookings.update({
+
+  const db = tx ?? prisma
+  const updateBooking = await db.bookings.update({
     where: {
-      id: transaction_id,
+      id: booking_id,
     },
     data: {
       status: status,
-    },
-    select: {
-      user_id: true,
-    },
+    }
   });
 
   if (!updateBooking) {
     throw new AppError("Booking cannot be updated", 400);
   }
 
-  return updateBooking.user_id;
+  return updateBooking
 };
 
 export const findBookingRoomsByBookingId = async (
@@ -193,17 +192,7 @@ export const FindProofImage = async (
   });
 
   if (!result) {
-    throw new AppError("The booking does not exist.", 404);
-  } else {
-    if (result.proof_image) {
-      console.log("Proof image exists:", result.proof_image);
-    } else {
-      console.log(
-        "Booking exists, but a proof image has not been uploaded yet. Cancellation cannot be processed."
-      );
-      return;
-    }
-  }
-
+    throw new AppError("This booking does not exist.", 404);
+  } 
   return result;
 };

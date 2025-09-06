@@ -1,8 +1,10 @@
+import { useParams } from "next/navigation"
 import { Badge } from "../ui/badge"
 import { Button } from "../ui/button"
 import { Card, CardContent } from "../ui/card"
 import { Booking } from "@/types/transactions/transactions"
 import { MapPin, Calendar, Users } from "lucide-react"
+import { useCancelBooking } from "@/hooks/useBookings"
 
 
 const getStatusColor = (status: string) => {
@@ -24,6 +26,14 @@ type BookingCardProps = {
 
 
 export const BookingCard = ({booking}: BookingCardProps) => {
+  const cancelBookingMutation = useCancelBooking()
+
+  const handleCancel = (bookingId: string) => {
+  if(window.confirm("Are you sure you want to cancel this booking?")) {
+    cancelBookingMutation.mutate(bookingId)
+  }
+}
+
     return (
         
         <CardContent className="px-1 py-4">
@@ -77,7 +87,7 @@ export const BookingCard = ({booking}: BookingCardProps) => {
                       <div className="flex items-center text-gray-600">
                         <Users className="w-4 h-4 mr-2" />
                         <span>
-                          {booking.booking_rooms.guests_count} guests
+                           guests
                         </span>
                       </div>
                       <div className="flex items-center text-gray-600">
@@ -102,6 +112,8 @@ export const BookingCard = ({booking}: BookingCardProps) => {
                           variant="outline"
                           size="sm"
                           className="text-red-600 hover:text-red-700 bg-transparent"
+                          disabled={cancelBookingMutation.isPending}
+                          onClick={() => handleCancel(booking.id)}
                         >
                           Cancel
                         </Button>

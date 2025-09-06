@@ -7,6 +7,7 @@ type JwtPayload = {
   role: string;
   iat: number;
   exp: number;
+  tenantId?: string
 };
 
 export const verifyToken = (

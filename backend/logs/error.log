@@ -2174,3 +2174,704 @@ Please make sure your database server is running at `aws-0-us-west-1.pooler.supa
 2025-09-04 18:16:54 [ERROR]: POST /user/otp-password Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
 2025-09-04 18:20:36 [ERROR]: PATCH /user/reset-password Cannot destructure property 'oldPassword' of 'req.body' as it is undefined. {}
 2025-09-04 18:23:49 [ERROR]: PATCH /user/reset-password Invalid password {"statusCode":401,"success":false,"message":"Invalid password"}
+2025-09-04 20:42:23 [ERROR]: POST /auth/login | STATUS: User not found | MESSAGE: {"statusCode":400,"success":false,"message":"User not found"}
+2025-09-04 20:52:08 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-04 20:52:34 [ERROR]: POST /auth/register | STATUS: User already exist | MESSAGE: {"statusCode":400,"success":false,"message":"User already exist"}
+2025-09-04 20:54:19 [ERROR]: POST /tenant/register | STATUS: Invalid cloud_name dfhadzmjvf | MESSAGE: {"message":"Invalid cloud_name dfhadzmjvf","name":"Error","http_code":401}
+2025-09-04 20:54:34 [ERROR]: POST /tenant/register | STATUS: Invalid cloud_name dfhadzmjvf | MESSAGE: {"message":"Invalid cloud_name dfhadzmjvf","name":"Error","http_code":401}
+2025-09-04 20:54:56 [ERROR]: POST /tenant/register | STATUS: Invalid cloud_name dfhadzmjvf | MESSAGE: {"message":"Invalid cloud_name dfhadzmjvf","name":"Error","http_code":401}
+2025-09-04 20:55:22 [ERROR]: POST /tenant/register | STATUS: Invalid cloud_name dfhadzmjvf | MESSAGE: {"message":"Invalid cloud_name dfhadzmjvf","name":"Error","http_code":401}
+2025-09-04 20:56:55 [ERROR]: POST /tenant/register | STATUS: Invalid cloud_name dfhadzmjvf | MESSAGE: {"message":"Invalid cloud_name dfhadzmjvf","name":"Error","http_code":401}
+2025-09-04 20:57:47 [ERROR]: POST /tenant/register | STATUS: Invalid cloud_name dfhadzmjvf | MESSAGE: {"message":"Invalid cloud_name dfhadzmjvf","name":"Error","http_code":401}
+2025-09-04 20:59:58 [ERROR]: POST /tenant/register | STATUS: Only image files are allowed (jpeg, jpg, png, gif) | MESSAGE: {"name":"EXTENSION_VALIDATION","storageErrors":[]}
+2025-09-04 20:59:59 [ERROR]: POST /tenant/register | STATUS: Only image files are allowed (jpeg, jpg, png, gif) | MESSAGE: {"name":"EXTENSION_VALIDATION","storageErrors":[]}
+2025-09-04 21:00:21 [ERROR]: POST /tenant/register | STATUS: Invalid cloud_name dfhadzmjvf | MESSAGE: {"message":"Invalid cloud_name dfhadzmjvf","name":"Error","http_code":401}
+2025-09-04 21:01:39 [ERROR]: POST /tenant/register | STATUS: Invalid cloud_name dfhadzmjvf | MESSAGE: {"message":"Invalid cloud_name dfhadzmjvf","name":"Error","http_code":401}
+2025-09-04 21:10:01 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-04 21:29:14 [ERROR]: GET /property/get/30b7c57f-fe6f-4c5c-9936-94c689517762 | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/repositories/property/property.repository.ts:39:28
+
+  36 };
+  37 
+  38 export const getPropertyByIdRepository = async (propertyId: string) => {
+→ 39   return prisma.properties.findUnique({
+         where: {
+           id: "30b7c57f-fe6f-4c5c-9936-94c689517762",
+           deleted_at: null
+         },
+         include: {
+           property_images: true,
+           reviews: true,
+           rooms: {
+             select: {
+             ~~~~~~
+               name: true
+             },
+             include: {
+             ~~~~~~~
+               room_images: true,
+               room_availability: true
+             }
+           }
+         }
+       })
+
+Please either use `include` or `select`, but not both at the same time. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-04 21:32:43 [ERROR]: GET /property/get/30b7c57f-fe6f-4c5c-9936-94c689517762 | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/repositories/property/property.repository.ts:39:28
+
+  36 };
+  37 
+  38 export const getPropertyByIdRepository = async (propertyId: string) => {
+→ 39   return prisma.properties.findUnique({
+         where: {
+           id: "30b7c57f-fe6f-4c5c-9936-94c689517762",
+           deleted_at: null
+         },
+         include: {
+           property_images: true,
+           reviews: true,
+           rooms: {
+             select: {
+             ~~~~~~
+               name: true
+             },
+             include: {
+             ~~~~~~~
+               room_images: true,
+               room_availability: true
+             }
+           }
+         }
+       })
+
+Please either use `include` or `select`, but not both at the same time. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-04 21:33:38 [ERROR]: GET /property/get/30b7c57f-fe6f-4c5c-9936-94c689517762 | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/repositories/property/property.repository.ts:39:28
+
+  36 };
+  37 
+  38 export const getPropertyByIdRepository = async (propertyId: string) => {
+→ 39   return prisma.properties.findUnique({
+         where: {
+           id: "30b7c57f-fe6f-4c5c-9936-94c689517762",
+           deleted_at: null
+         },
+         include: {
+           property_images: true,
+           reviews: true,
+           rooms: {
+             select: {
+             ~~~~~~
+               name: true
+             },
+             include: {
+             ~~~~~~~
+               room_images: true,
+               room_availability: true
+             }
+           }
+         }
+       })
+
+Please either use `include` or `select`, but not both at the same time. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-04 21:33:43 [ERROR]: GET /property/get/30b7c57f-fe6f-4c5c-9936-94c689517762 | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/repositories/property/property.repository.ts:39:28
+
+  36 };
+  37 
+  38 export const getPropertyByIdRepository = async (propertyId: string) => {
+→ 39   return prisma.properties.findUnique({
+         where: {
+           id: "30b7c57f-fe6f-4c5c-9936-94c689517762",
+           deleted_at: null
+         },
+         include: {
+           property_images: true,
+           reviews: true,
+           rooms: {
+             select: {
+             ~~~~~~
+               name: true
+             },
+             include: {
+             ~~~~~~~
+               room_images: true,
+               room_availability: true
+             }
+           }
+         }
+       })
+
+Please either use `include` or `select`, but not both at the same time. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-04 21:34:00 [ERROR]: GET /property/get/30b7c57f-fe6f-4c5c-9936-94c689517762 | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/repositories/property/property.repository.ts:39:28
+
+  36 };
+  37 
+  38 export const getPropertyByIdRepository = async (propertyId: string) => {
+→ 39   return prisma.properties.findUnique({
+         where: {
+           id: "30b7c57f-fe6f-4c5c-9936-94c689517762",
+           deleted_at: null
+         },
+         include: {
+           property_images: true,
+           reviews: true,
+           rooms: {
+             select: {
+             ~~~~~~
+               name: true
+             },
+             include: {
+             ~~~~~~~
+               room_images: true,
+               room_availability: true
+             }
+           }
+         }
+       })
+
+Please either use `include` or `select`, but not both at the same time. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-04 21:34:46 [ERROR]: GET /property/get/30b7c57f-fe6f-4c5c-9936-94c689517762 | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/repositories/property/property.repository.ts:39:28
+
+  36 };
+  37 
+  38 export const getPropertyByIdRepository = async (propertyId: string) => {
+→ 39   return prisma.properties.findUnique({
+         where: {
+           id: "30b7c57f-fe6f-4c5c-9936-94c689517762",
+           deleted_at: null
+         },
+         include: {
+           property_images: true,
+           reviews: true,
+           rooms: {
+             select: {
+             ~~~~~~
+               name: true
+             },
+             include: {
+             ~~~~~~~
+               room_images: true,
+               room_availability: true
+             }
+           }
+         }
+       })
+
+Please either use `include` or `select`, but not both at the same time. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-04 21:54:11 [ERROR]: GET /property/get/6599c906-5f13-4a30-a913-a161fc196530 | STATUS: Property not found | MESSAGE: {"statusCode":404,"success":false,"message":"Property not found"}
+2025-09-04 21:54:11 [ERROR]: GET /pricing/quote | STATUS: Room not found | MESSAGE: {"statusCode":404,"success":false,"message":"Room not found"}
+2025-09-04 21:54:23 [ERROR]: GET /pricing/quote | STATUS: Room not found | MESSAGE: {"statusCode":404,"success":false,"message":"Room not found"}
+2025-09-04 21:54:23 [ERROR]: GET /property/get/6599c906-5f13-4a30-a913-a161fc196530 | STATUS: Property not found | MESSAGE: {"statusCode":404,"success":false,"message":"Property not found"}
+2025-09-04 21:54:25 [ERROR]: GET /pricing/quote | STATUS: Room not found | MESSAGE: {"statusCode":404,"success":false,"message":"Room not found"}
+2025-09-04 21:54:25 [ERROR]: GET /property/get/6599c906-5f13-4a30-a913-a161fc196530 | STATUS: Property not found | MESSAGE: {"statusCode":404,"success":false,"message":"Property not found"}
+2025-09-04 21:58:57 [ERROR]: GET /pricing/quote | STATUS: Room not found | MESSAGE: {"statusCode":404,"success":false,"message":"Room not found"}
+2025-09-04 21:58:57 [ERROR]: GET /property/get/6599c906-5f13-4a30-a913-a161fc196530 | STATUS: Property not found | MESSAGE: {"statusCode":404,"success":false,"message":"Property not found"}
+2025-09-04 22:13:09 [ERROR]: GET /pricing/quote | STATUS: Room not found | MESSAGE: {"statusCode":404,"success":false,"message":"Room not found"}
+2025-09-04 22:13:09 [ERROR]: GET /property/get/6599c906-5f13-4a30-a913-a161fc196530 | STATUS: Property not found | MESSAGE: {"statusCode":404,"success":false,"message":"Property not found"}
+2025-09-04 22:13:24 [ERROR]: GET /property/get/6599c906-5f13-4a30-a913-a161fc196530 | STATUS: Property not found | MESSAGE: {"statusCode":404,"success":false,"message":"Property not found"}
+2025-09-04 22:13:24 [ERROR]: GET /pricing/quote | STATUS: Room not found | MESSAGE: {"statusCode":404,"success":false,"message":"Room not found"}
+2025-09-04 22:13:27 [ERROR]: GET /pricing/quote | STATUS: Room not found | MESSAGE: {"statusCode":404,"success":false,"message":"Room not found"}
+2025-09-04 22:13:27 [ERROR]: GET /property/get/6599c906-5f13-4a30-a913-a161fc196530 | STATUS: Property not found | MESSAGE: {"statusCode":404,"success":false,"message":"Property not found"}
+2025-09-05 10:28:56 [ERROR]: GET /pricing/quote | STATUS: Room not found | MESSAGE: {"statusCode":404,"success":false,"message":"Room not found"}
+2025-09-05 10:28:56 [ERROR]: GET /property/get/6599c906-5f13-4a30-a913-a161fc196530 | STATUS: Property not found | MESSAGE: {"statusCode":404,"success":false,"message":"Property not found"}
+2025-09-05 13:31:07 [ERROR]: GET /property/get/30b7c57f-fe6f-4c5c-9936-94c689517762 | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/repositories/property/property.repository.ts:83:28
+
+  80 };
+  81 
+  82 export const findPropertyByIdRepository = async (id: string) => {
+→ 83   return prisma.properties.findUnique(
+Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"code":"P1001","meta":{"modelName":"properties","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-05 13:31:07 [ERROR]: GET /pricing/quote | STATUS: 
+Invalid `prisma.rooms.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/pricing/pricing.controller.ts:19:39
+
+  16   checkOut: string;
+  17 };
+  18 
+→ 19 const room = await prisma.rooms.findUnique(
+Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"code":"P1001","meta":{"modelName":"rooms","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-05 13:54:53 [ERROR]: POST /reservations/create | STATUS: Please enter the required fields | MESSAGE: {"statusCode":400,"success":false,"message":"Please enter the required fields"}
+2025-09-05 13:56:09 [ERROR]: POST /reservations/create | STATUS: Please enter the required fields | MESSAGE: {"statusCode":400,"success":false,"message":"Please enter the required fields"}
+2025-09-05 13:56:33 [ERROR]: POST /reservations/create | STATUS: Please enter the required fields | MESSAGE: {"statusCode":400,"success":false,"message":"Please enter the required fields"}
+2025-09-05 15:49:07 [ERROR]: POST /reservations/create | STATUS: 
+Invalid `tx.bookings.create()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:64:47
+
+  61 
+  62 await prisma.$transaction(async (tx) => {
+  63   // Create Booking Property
+→ 64   const newBookings = await tx.bookings.create({
+         data: {
+           status: "waiting_payment",
+           check_in_date: new Date("2025-09-05T00:00:00.000Z"),
+           check_out_date: new Date("2025-09-06T00:00:00.000Z"),
+           amount: undefined,
+           user: {
+             connect: {
+               id: "c54675ef-4f94-4ccd-99c9-14225ae8fb6e"
+             }
+           },
+           property: {
+             connect: {
+               id: "30b7c57f-fe6f-4c5c-9936-94c689517762"
+             }
+           },
+       +   total_price: Decimal
+         }
+       })
+
+Argument `total_price` is missing. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-05 15:51:48 [ERROR]: POST /reservations/create | STATUS: 
+Invalid `tx.booking_rooms.create()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:81:32
+
+  78 });
+  79 
+  80 // Create Booking Room
+→ 81 await tx.booking_rooms.create({
+       data: {
+         booking_id: "55e05c76-9ac7-4382-b558-9d5220fe7b90",
+         room_id: "48a4a9f1-efef-4a81-a280-0bd138034e5f",
+         guests_count: 3,
+         check_in_date: new Date("2025-09-05T00:00:00.000Z"),
+         check_out_date: new Date("2025-09-06T00:00:00.000Z"),
+         quantity: undefined,
+         nights: 1,
+         subtotal: 350000,
+     +   price_per_night: Decimal
+       }
+     })
+
+Argument `price_per_night` is missing. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-05 15:54:33 [ERROR]: POST /reservations/create | STATUS: 
+Invalid `tx.booking_rooms.create()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:80:32
+
+  77 });
+  78 
+  79 // Create Booking Room
+→ 80 await tx.booking_rooms.create({
+       data: {
+         booking_id: "a5978ddc-5c02-49f7-bb51-20e1eb02a215",
+         room_id: "48a4a9f1-efef-4a81-a280-0bd138034e5f",
+         guests_count: 3,
+         price_per_night: 350000,
+         check_in_date: new Date("2025-09-05T00:00:00.000Z"),
+         check_out_date: new Date("2025-09-06T00:00:00.000Z"),
+         nights: 1,
+         subtotal: 350000,
+     +   quantity: Int
+       }
+     })
+
+Argument `quantity` is missing. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-05 15:55:33 [ERROR]: POST /reservations/create | STATUS: 
+Invalid `tx.booking_rooms.create()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:80:32
+
+  77 });
+  78 
+  79 // Create Booking Room
+→ 80 await tx.booking_rooms.create({
+       data: {
+         booking_id: "51a96e5f-f4cb-4798-90a2-6dec8b3895ae",
+         room_id: "48a4a9f1-efef-4a81-a280-0bd138034e5f",
+         guests_count: 3,
+         price_per_night: 350000,
+         check_in_date: new Date("2025-09-05T00:00:00.000Z"),
+         check_out_date: new Date("2025-09-06T00:00:00.000Z"),
+         quantity: NaN,
+         nights: 1,
+         subtotal: 350000,
+     +   booking: {
+     +     create: bookingsCreateWithoutBooking_roomsInput | bookingsUncheckedCreateWithoutBooking_roomsInput,
+     +     connectOrCreate: bookingsCreateOrConnectWithoutBooking_roomsInput,
+     +     connect: bookingsWhereUniqueInput
+     +   }
+       }
+     })
+
+Argument `booking` is missing. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-05 15:57:21 [ERROR]: POST /reservations/create | STATUS: 
+Invalid `tx.booking_rooms.create()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:80:32
+
+  77 });
+  78 
+  79 // Create Booking Room
+→ 80 await tx.booking_rooms.create({
+       data: {
+         booking_id: "49a028e1-4c0f-4e7f-b4e1-062bc4464e06",
+         room_id: "48a4a9f1-efef-4a81-a280-0bd138034e5f",
+         guests_count: 3,
+         price_per_night: 350000,
+         check_in_date: new Date("2025-09-05T00:00:00.000Z"),
+         check_out_date: new Date("2025-09-06T00:00:00.000Z"),
+         quantity: NaN,
+         nights: 1,
+         subtotal: 350000,
+     +   booking: {
+     +     create: bookingsCreateWithoutBooking_roomsInput | bookingsUncheckedCreateWithoutBooking_roomsInput,
+     +     connectOrCreate: bookingsCreateOrConnectWithoutBooking_roomsInput,
+     +     connect: bookingsWhereUniqueInput
+     +   }
+       }
+     })
+
+Argument `booking` is missing. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-05 15:57:25 [ERROR]: POST /reservations/create | STATUS: 
+Invalid `tx.booking_rooms.create()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:80:32
+
+  77 });
+  78 
+  79 // Create Booking Room
+→ 80 await tx.booking_rooms.create({
+       data: {
+         booking_id: "83c4e7e9-daad-44a2-9d31-080d431dc367",
+         room_id: "48a4a9f1-efef-4a81-a280-0bd138034e5f",
+         guests_count: 3,
+         price_per_night: 350000,
+         check_in_date: new Date("2025-09-05T00:00:00.000Z"),
+         check_out_date: new Date("2025-09-06T00:00:00.000Z"),
+         quantity: NaN,
+         nights: 1,
+         subtotal: 350000,
+     +   booking: {
+     +     create: bookingsCreateWithoutBooking_roomsInput | bookingsUncheckedCreateWithoutBooking_roomsInput,
+     +     connectOrCreate: bookingsCreateOrConnectWithoutBooking_roomsInput,
+     +     connect: bookingsWhereUniqueInput
+     +   }
+       }
+     })
+
+Argument `booking` is missing. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-05 16:02:50 [ERROR]: POST /reservations/create | STATUS: 
+Invalid `tx.booking_rooms.create()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:80:32
+
+  77 });
+  78 
+  79 // Create Booking Room
+→ 80 await tx.booking_rooms.create({
+       data: {
+         booking_id: "7eee35e5-b69b-4a6c-b7c2-02c05e69370e",
+         room_id: "48a4a9f1-efef-4a81-a280-0bd138034e5f",
+         guests_count: 3,
+         price_per_night: 350000,
+         check_in_date: new Date("2025-09-05T00:00:00.000Z"),
+         check_out_date: new Date("2025-09-06T00:00:00.000Z"),
+         quantity: NaN,
+         nights: 1,
+         subtotal: 350000,
+     +   booking: {
+     +     create: bookingsCreateWithoutBooking_roomsInput | bookingsUncheckedCreateWithoutBooking_roomsInput,
+     +     connectOrCreate: bookingsCreateOrConnectWithoutBooking_roomsInput,
+     +     connect: bookingsWhereUniqueInput
+     +   }
+       }
+     })
+
+Argument `booking` is missing. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-05 16:06:05 [ERROR]: POST /reservations/create | STATUS: 
+Invalid `tx.booking_rooms.create()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:80:32
+
+  77 });
+  78 
+  79 // Create Booking Room
+→ 80 await tx.booking_rooms.create({
+       data: {
+         booking_id: "9f040743-8ed3-4d59-bee0-d6f8054d1cf1",
+         room_id: "48a4a9f1-efef-4a81-a280-0bd138034e5f",
+         guests_count: 3,
+         price_per_night: 350000,
+         check_in_date: new Date("2025-09-05T00:00:00.000Z"),
+         check_out_date: new Date("2025-09-06T00:00:00.000Z"),
+         quantity: NaN,
+         nights: 1,
+         subtotal: 350000,
+     +   booking: {
+     +     create: bookingsCreateWithoutBooking_roomsInput | bookingsUncheckedCreateWithoutBooking_roomsInput,
+     +     connectOrCreate: bookingsCreateOrConnectWithoutBooking_roomsInput,
+     +     connect: bookingsWhereUniqueInput
+     +   }
+       }
+     })
+
+Argument `booking` is missing. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-05 16:07:28 [ERROR]: POST /reservations/create | STATUS: Room is not available | MESSAGE: {"statusCode":409,"success":false,"message":"Room is not available"}
+2025-09-05 16:10:49 [ERROR]: POST /reservations/create | STATUS: 
+Invalid `tx.booking_rooms.create()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:80:32
+
+  77 });
+  78 
+  79 // Create Booking Room
+→ 80 await tx.booking_rooms.create(
+Transaction API error: Transaction not found. Transaction ID is invalid, refers to an old closed transaction Prisma doesn't have information about anymore, or was obtained before disconnecting. | MESSAGE: {"code":"P2028","meta":{"modelName":"booking_rooms","error":"Transaction not found. Transaction ID is invalid, refers to an old closed transaction Prisma doesn't have information about anymore, or was obtained before disconnecting."},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-05 16:15:47 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-05 16:25:25 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 16:25:26 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 16:25:28 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 16:25:32 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 16:27:39 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 16:27:40 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 16:29:48 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 16:33:26 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 16:39:10 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 17:26:24 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 17:26:25 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 17:26:27 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 17:26:31 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 17:30:00 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 17:30:02 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 17:30:04 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 17:30:11 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 17:30:12 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 17:30:14 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 17:30:18 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 17:54:33 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 17:54:34 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 17:54:36 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 17:54:38 [ERROR]: POST /auth/logout | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-05 17:54:40 [ERROR]: GET /payment/orders | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-05 17:54:45 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-05 18:02:47 [ERROR]: POST /reservations/create | STATUS: Room is not available | MESSAGE: {"statusCode":409,"success":false,"message":"Room is not available"}
+2025-09-05 18:03:44 [ERROR]: POST /reservations/create | STATUS: Room is not available | MESSAGE: {"statusCode":409,"success":false,"message":"Room is not available"}
+2025-09-05 18:04:30 [ERROR]: POST /reservations/create | STATUS: checkInDate.toISOString is not a function | MESSAGE: {}
+2025-09-05 18:17:00 [ERROR]: POST /reservations/create | STATUS: checkInDate.toISOString is not a function | MESSAGE: {}
+2025-09-05 19:20:12 [ERROR]: POST /reservations/create | STATUS: 
+Invalid `tx.bookings.create()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:66:47
+
+  63 
+  64 const createBooking: Booking = await prisma.$transaction(async (tx) => {
+  65   // Create Booking Property
+→ 66   const newBookings = await tx.bookings.create({
+         data: {
+           status: "waiting_payment",
+           check_in_date: new Date("2025-09-20T00:00:00.000Z"),
+           check_out_date: new Date("2025-09-21T00:00:00.000Z"),
+           amount: undefined,
+           user: {
+             connect: {
+               id: "c54675ef-4f94-4ccd-99c9-14225ae8fb6e"
+             }
+           },
+           property: {
+             connect: {
+               id: "30b7c57f-fe6f-4c5c-9936-94c689517762"
+             }
+           },
+           booking_rooms: {
+             create: {
+               room_id: "48a4a9f1-efef-4a81-a280-0bd138034e5f",
+               guests_count: 1,
+               price_per_night: undefined,
+               check_in_date: new Date("2025-09-20T00:00:00.000Z"),
+               check_out_date: new Date("2025-09-21T00:00:00.000Z"),
+               quantity: 0,
+               nights: undefined,
+               subtotal: undefined
+             }
+           },
+       +   total_price: Decimal
+         }
+       })
+
+Argument `total_price` is missing. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-05 19:20:50 [ERROR]: POST /reservations/create | STATUS: Cannot access 'createBooking' before initialization | MESSAGE: {}
+2025-09-05 19:24:41 [ERROR]: POST /reservations/create | STATUS: Transaction API error: Transaction not found. Transaction ID is invalid, refers to an old closed transaction Prisma doesn't have information about anymore, or was obtained before disconnecting. | MESSAGE: {"code":"P2028","meta":{"error":"Transaction not found. Transaction ID is invalid, refers to an old closed transaction Prisma doesn't have information about anymore, or was obtained before disconnecting."},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-05 19:25:52 [ERROR]: POST /reservations/create | STATUS: Room is not available | MESSAGE: {"statusCode":409,"success":false,"message":"Room is not available"}
+2025-09-05 20:46:54 [ERROR]: GET /payment/orders/0a2a86a8-b429-44b7-837e-e84463d6d818 | STATUS: Unauthorized access, only tenant can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only tenant can access this route"}
+2025-09-05 20:46:55 [ERROR]: GET /payment/orders/0a2a86a8-b429-44b7-837e-e84463d6d818 | STATUS: Unauthorized access, only tenant can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only tenant can access this route"}
+2025-09-05 20:46:57 [ERROR]: GET /payment/orders/0a2a86a8-b429-44b7-837e-e84463d6d818 | STATUS: Unauthorized access, only tenant can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only tenant can access this route"}
+2025-09-05 20:47:01 [ERROR]: GET /payment/orders/0a2a86a8-b429-44b7-837e-e84463d6d818 | STATUS: Unauthorized access, only tenant can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only tenant can access this route"}
+2025-09-05 20:49:50 [ERROR]: GET /payment/orders/0a2a86a8-b429-44b7-837e-e84463d6d818 | STATUS: Unauthorized access, only tenant can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only tenant can access this route"}
+2025-09-05 20:49:51 [ERROR]: GET /payment/orders/0a2a86a8-b429-44b7-837e-e84463d6d818 | STATUS: Unauthorized access, only tenant can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only tenant can access this route"}
+2025-09-05 20:49:53 [ERROR]: GET /payment/orders/0a2a86a8-b429-44b7-837e-e84463d6d818 | STATUS: Unauthorized access, only tenant can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only tenant can access this route"}
+2025-09-05 20:49:57 [ERROR]: GET /payment/orders/0a2a86a8-b429-44b7-837e-e84463d6d818 | STATUS: Unauthorized access, only tenant can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only tenant can access this route"}
+2025-09-05 20:50:04 [ERROR]: GET /payment/orders/0a2a86a8-b429-44b7-837e-e84463d6d818 | STATUS: Unauthorized access, only tenant can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only tenant can access this route"}
+2025-09-05 20:50:05 [ERROR]: GET /payment/orders/0a2a86a8-b429-44b7-837e-e84463d6d818 | STATUS: Unauthorized access, only tenant can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only tenant can access this route"}
+2025-09-05 20:50:07 [ERROR]: GET /payment/orders/0a2a86a8-b429-44b7-837e-e84463d6d818 | STATUS: Unauthorized access, only tenant can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only tenant can access this route"}
+2025-09-05 20:50:11 [ERROR]: GET /payment/orders/0a2a86a8-b429-44b7-837e-e84463d6d818 | STATUS: Unauthorized access, only tenant can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only tenant can access this route"}
+2025-09-05 20:51:37 [ERROR]: GET /payment/orders/0a2a86a8-b429-44b7-837e-e84463d6d818 | STATUS: Unauthorized access, only tenant can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only tenant can access this route"}
+2025-09-05 20:51:38 [ERROR]: GET /payment/orders/0a2a86a8-b429-44b7-837e-e84463d6d818 | STATUS: Unauthorized access, only tenant can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only tenant can access this route"}
+2025-09-05 20:51:40 [ERROR]: GET /payment/orders/0a2a86a8-b429-44b7-837e-e84463d6d818 | STATUS: Unauthorized access, only tenant can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only tenant can access this route"}
+2025-09-05 20:52:38 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-05 20:52:49 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-05 20:55:01 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 20:55:02 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 20:55:04 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 20:55:08 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 21:12:26 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 21:12:27 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 21:12:48 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 21:12:50 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 21:12:54 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 21:12:58 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 21:12:58 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 21:12:59 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 21:13:01 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 21:13:05 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 21:13:37 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 21:13:37 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 21:13:38 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 21:13:40 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 21:13:44 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 21:15:05 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 21:15:06 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 21:15:08 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 21:15:12 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 21:15:13 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 21:15:13 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 21:15:14 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 21:15:16 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 21:15:20 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 21:15:34 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 21:15:34 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 21:15:35 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 21:15:35 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 21:15:36 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 21:15:37 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 21:15:38 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 21:15:40 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 21:15:44 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 21:16:12 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 21:16:12 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 21:16:13 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 21:16:15 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 21:16:19 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 21:20:53 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 21:20:54 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 21:20:55 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 21:20:57 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 21:20:58 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 21:21:00 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 21:21:04 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 21:21:59 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 21:22:03 [ERROR]: GET /payment/orders/get | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
+2025-09-05 21:22:07 [ERROR]: GET /payment/orders/get | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
+2025-09-05 21:22:09 [ERROR]: GET /payment/orders/get | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
+2025-09-05 21:22:13 [ERROR]: GET /payment/orders/get | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
+2025-09-05 21:22:18 [ERROR]: GET /payment/orders/get | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
+2025-09-05 21:23:05 [ERROR]: GET /payment/orders/get | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
+2025-09-05 21:23:10 [ERROR]: GET /payment/orders/get | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
+2025-09-05 21:24:50 [ERROR]: GET /payment/orders/get | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
+2025-09-05 21:24:52 [ERROR]: GET /payment/orders/get | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
+2025-09-05 21:24:54 [ERROR]: GET /payment/orders/get | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
+2025-09-05 21:24:57 [ERROR]: GET /payment/orders/get | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
+2025-09-05 21:25:04 [ERROR]: GET /payment/orders/get | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
+2025-09-05 21:25:35 [ERROR]: GET /payment/orders/get | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
+2025-09-05 21:25:41 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 21:25:42 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 21:25:44 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 21:25:48 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 21:25:50 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 21:25:59 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 21:26:00 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 21:26:02 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 21:27:11 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 21:27:13 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 21:27:17 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 21:27:29 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 21:27:30 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 21:30:03 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 21:30:04 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 21:30:10 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 21:30:11 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 21:30:13 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 21:30:15 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 21:30:19 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 21:30:27 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 21:37:31 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 21:37:34 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 21:37:35 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 21:37:38 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 21:37:39 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 21:37:40 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 21:37:42 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 21:37:46 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 21:53:28 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 21:53:29 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 21:53:31 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 21:53:35 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 21:53:37 [ERROR]: GET /reservations/get | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-05 21:53:40 [ERROR]: POST /auth/logout | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-05 21:53:41 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-05 21:53:42 [ERROR]: GET /payment/orders | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-05 22:02:52 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-05 22:03:25 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 22:03:26 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 22:03:28 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 22:03:32 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 22:04:07 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 22:04:13 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 22:04:14 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 22:04:16 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 22:04:20 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 22:37:38 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 22:37:39 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 22:37:41 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 22:37:45 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-05 22:37:48 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-06 00:58:39 [ERROR]: POST /reservations/create | STATUS: Transaction API error: Transaction not found. Transaction ID is invalid, refers to an old closed transaction Prisma doesn't have information about anymore, or was obtained before disconnecting. | MESSAGE: {"code":"P2028","meta":{"error":"Transaction not found. Transaction ID is invalid, refers to an old closed transaction Prisma doesn't have information about anymore, or was obtained before disconnecting."},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-06 00:59:07 [ERROR]: POST /reservations/create | STATUS: 
+Invalid `tx.room_availability.upsert()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:106:34
+
+  103 
+  104 await Promise.all(
+  105   datesToUpdate.map((date) =>
+→ 106     tx.room_availability.upsert(
+Transaction API error: Transaction already closed: A query cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 5258 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction. | MESSAGE: {"code":"P2028","meta":{"modelName":"room_availability","error":"Transaction already closed: A query cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 5258 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction."},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-06 01:00:15 [ERROR]: POST /reservations/create | STATUS: 
+Invalid `tx.room_availability.upsert()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:106:34
+
+  103 
+  104 await Promise.all(
+  105   datesToUpdate.map((date) =>
+→ 106     tx.room_availability.upsert(
+Transaction API error: Transaction not found. Transaction ID is invalid, refers to an old closed transaction Prisma doesn't have information about anymore, or was obtained before disconnecting. | MESSAGE: {"code":"P2028","meta":{"modelName":"room_availability","error":"Transaction not found. Transaction ID is invalid, refers to an old closed transaction Prisma doesn't have information about anymore, or was obtained before disconnecting."},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-06 01:08:33 [ERROR]: PATCH /reservations/cancel/cfb9e985-6b74-482f-ae3b-352b9d8634e2 | STATUS: Cannot read properties of undefined (reading 'findUnique') | MESSAGE: {}
+2025-09-06 01:09:54 [ERROR]: PATCH /reservations/cancel/c8e672de-8f47-4d6a-81f2-b4b97ab369b5 | STATUS: Cannot read properties of undefined (reading 'findUnique') | MESSAGE: {}
+2025-09-06 01:12:52 [ERROR]: PATCH /reservations/cancel/cfb9e985-6b74-482f-ae3b-352b9d8634e2 | STATUS: Cannot read properties of undefined (reading 'findUnique') | MESSAGE: {}
+2025-09-06 01:13:59 [ERROR]: PATCH /reservations/cancel/cfb9e985-6b74-482f-ae3b-352b9d8634e2 | STATUS: Cannot read properties of undefined (reading 'findUnique') | MESSAGE: {}
+2025-09-06 01:23:36 [ERROR]: PATCH /reservations/cancel/cfb9e985-6b74-482f-ae3b-352b9d8634e2 | STATUS: Cannot read properties of undefined (reading 'findUnique') | MESSAGE: {}
+2025-09-06 01:31:48 [ERROR]: PATCH /reservations/cancel/cfb9e985-6b74-482f-ae3b-352b9d8634e2 | STATUS: Cannot read properties of undefined (reading 'findUnique') | MESSAGE: {}
+2025-09-06 01:48:31 [ERROR]: GET /reservations/get | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-06 02:28:33 [ERROR]: GET /payment/orders/159da1f4-ada0-4b3a-bed4-a436db80bc5f | STATUS: Unauthorized access, only tenant can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only tenant can access this route"}
+2025-09-06 02:28:34 [ERROR]: GET /payment/orders/159da1f4-ada0-4b3a-bed4-a436db80bc5f | STATUS: Unauthorized access, only tenant can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only tenant can access this route"}
+2025-09-06 02:28:36 [ERROR]: GET /payment/orders/159da1f4-ada0-4b3a-bed4-a436db80bc5f | STATUS: Unauthorized access, only tenant can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only tenant can access this route"}
+2025-09-06 02:28:40 [ERROR]: GET /payment/orders/159da1f4-ada0-4b3a-bed4-a436db80bc5f | STATUS: Unauthorized access, only tenant can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only tenant can access this route"}
+2025-09-06 23:37:57 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-06 23:39:49 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-06 23:39:50 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-06 23:39:52 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-06 23:39:56 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-06 23:42:30 [ERROR]: GET /payment/orders | STATUS: Cannot read properties of undefined (reading 'findMany') | MESSAGE: {}
+2025-09-06 23:42:31 [ERROR]: GET /payment/orders | STATUS: Cannot read properties of undefined (reading 'findMany') | MESSAGE: {}
+2025-09-06 23:42:33 [ERROR]: GET /payment/orders | STATUS: Cannot read properties of undefined (reading 'findMany') | MESSAGE: {}
+2025-09-06 23:42:38 [ERROR]: GET /payment/orders | STATUS: Cannot read properties of undefined (reading 'findMany') | MESSAGE: {}
+2025-09-06 23:42:39 [ERROR]: GET /payment/orders | STATUS: Cannot read properties of undefined (reading 'findMany') | MESSAGE: {}
+2025-09-06 23:42:41 [ERROR]: GET /payment/orders | STATUS: Cannot read properties of undefined (reading 'findMany') | MESSAGE: {}
+2025-09-06 23:42:45 [ERROR]: GET /payment/orders | STATUS: Cannot read properties of undefined (reading 'findMany') | MESSAGE: {}
+2025-09-06 23:47:46 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}

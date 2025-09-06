@@ -2,9 +2,10 @@ import { Request, Response, NextFunction } from "express";
 import { prisma } from "../../../config/prisma";
 import AppError from "../../../errors/AppError";
 import {
+  findBookingByIdRepository,
   findBookingRoomsByBookingId,
-  findOrderByStatus,
   FindProofImage,
+  getOrderRepository,
   OverlappingBooking,
   UpdateBookings,
   UpdateRoomAvailability,
@@ -17,6 +18,8 @@ import {
   sendRejectionNotification,
   sendUserBookingConfirmation,
 } from "../../../services/transaction/transaction.service";
+import { Prisma } from "../../../../prisma/generated/client";
+import { isValidBookingStatus } from "../../../types/transaction/transactions.types";
 
 class TenantTransactions {
   public acceptPayment = async (
@@ -141,7 +144,6 @@ class TenantTransactions {
     next: NextFunction
   ) => {
     try {
-      // Validate Transaction
 
       const transactionId = req.params.id;
 
@@ -153,7 +155,7 @@ class TenantTransactions {
       await FindProofImage(transactionId);
 
       // Update Status to Canceled
-      const cancelledBooking = await UpdateBookings(transactionId, "canceled");
+      const cancelledBooking = await UpdateBookings(transactionId, "canceled_by_tenant");
 
       // Send Response
       res.json({
@@ -165,31 +167,90 @@ class TenantTransactions {
     }
   };
 
-  public getOrderByStatus = async (
+  public getReservation = async (
     req: Request,
     res: Response,
     next: NextFunction
   ) => {
     try {
       // Fetch Orders Based on Booking Status
-      const { BookingStatus } = req.query;
+      const { status, sort, end, start, bookingId } = req.query;
 
-      if (!BookingStatus || typeof BookingStatus !== "string") {
+      if (!status || typeof status !== "string") {
         throw new AppError("Booking status query parameter is required.", 400);
       }
 
-      const orderByStatus = await findOrderByStatus(BookingStatus);
+      const tenant = res.locals.decrypt;
 
-      if (!orderByStatus || orderByStatus.length === 0) {
+      const whereClause: Prisma.bookingsWhereInput = {};
+
+      // if (tenant.role === "tenant") {
+      //   // if (!tenant.id) {
+      //   //   throw new AppError(
+      //   //     "Tenant ID not found in token for tenant user.",
+      //   //     403
+      //   //   );
+      //   // }
+      //   whereClause.property = {
+      //     tenant_id: tenant.id,
+      //   };
+      // } else {
+      //   whereClause.user_id = tenant.user_id;
+      // }
+
+      if (status && typeof status === "string") {
+        const validStatuses = status
+          .split(",")
+          .filter((s) => isValidBookingStatus(s));
+        if (validStatuses.length > 0) {
+          whereClause.status = { in: validStatuses };
+        }
+      }
+
+      if (end && typeof end === "string") {
+        whereClause.check_out_date = { lte: new Date(end) };
+      }
+
+      const orderFetch = await getOrderRepository(
+        whereClause,
+        sort as string | undefined
+      );
+
+      if (!orderFetch || orderFetch.length === 0) {
         res.json({
           message: "No orders found.",
           data: [],
         });
+        return;
       }
 
       res.json({
-        message: "Order(s) by booking status successfully retrieved.",
-        data: orderByStatus,
+        message: "Order(s) successfully retrieved.",
+        data: orderFetch,
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public getReservationById = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const { bookingId } = req.params;
+      const user = res.locals.decrypt;
+
+      const booking = await findBookingByIdRepository(bookingId, user);
+
+      if (!booking) {
+        throw new AppError("Booking not found.", 404);
+      }
+
+      res.status(200).json({
+        message: "Booking retrieved successfully",
+        data: booking,
       });
     } catch (error) {
       next(error);

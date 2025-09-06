@@ -32,13 +32,6 @@ export const usePropertyByTenant = () => {
   });
 };
 
-export const usePropertyById = (propertyId: string | undefined) => {
-  return useQuery({
-    queryKey: ["property-by-id", propertyId],
-    queryFn: () => fetchPropertyById(propertyId)
-  })
-}
-
 export const usePropertiesByLocation = (
   lat: number,
   lng: number,
@@ -77,7 +70,7 @@ export const usePropertiesByLocation = (
   });
 };
 
-export const usePropertyById = (id: string) => {
+export const usePropertyById = (id: string | undefined) => {
   return useQuery({
     queryKey: ["property", id],
     queryFn: () => getPropertyById(id),

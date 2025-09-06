@@ -1,38 +1,62 @@
 import axios from "axios";
 import {
   Booking,
+  BookingApiResponse,
   BookingsApiResponse,
   BookingStatus,
 } from "@/types/transactions/transactions";
-import qs from "qs"
+import qs from "qs";
 
 export interface FetchBookingsParams {
-  status?: BookingStatus
+  status?: BookingStatus;
   sort?: "asc" | "desc";
   startDate?: string;
   endDate?: string;
   bookingId?: string;
 }
 
-export type FlexibleBookingParams = Omit<FetchBookingsParams, 'status'> & {
-  status?: readonly string[]| string | string[]
-}
+export type FlexibleBookingParams = Omit<FetchBookingsParams, "status"> & {
+  status?: readonly string[] | string | string[];
+};
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
-export const fetchBookings = async <T extends FlexibleBookingParams> (
-  query?: T
+export interface CreateBookingPayload {
+  propertyId: string;
+  roomId: string;
+  checkInDate: string;
+  checkOutDate: string;
+  guests: number;
+  fullName: string;
+  email: string;
+  quantity: number;
+}
+
+export const createBooking = async (bookingData: CreateBookingPayload) => {
+  const response = await axios.post(
+    `${BASE_URL}/reservations/create`,
+    bookingData,
+    {
+      withCredentials: true,
+    }
+  );
+
+  return response.data;
+};
+
+export const fetchBookings = async <T extends FlexibleBookingParams>(
+  query: T
 ): Promise<Booking[]> => {
   try {
     const endpoint = `${BASE_URL}/reservations/get`;
     const response = await axios.get<BookingsApiResponse>(endpoint, {
-      params: query,
+      params: { ...query },
       withCredentials: true,
       paramsSerializer: {
         serialize: (params) => {
-          return qs.stringify(params, {arrayFormat: "repeat"})
-        }
-      }
+          return qs.stringify(params, { arrayFormat: "repeat" });
+        },
+      },
     });
     console.log(response.data.data);
     return response.data.data;
@@ -40,4 +64,69 @@ export const fetchBookings = async <T extends FlexibleBookingParams> (
     console.error("Failed to fetch bookings:", error);
     throw new Error("Could not retrieve bookings.");
   }
+};
+
+export const fetchTenantBookingById = async (bookingId: string) => {
+  try {
+    // The endpoint matches a standard REST pattern for getting a single resource
+    const response = await axios.get<BookingApiResponse>(
+      `${BASE_URL}/payment/orders/${bookingId}`,
+      {
+        withCredentials: true,
+      }
+    );
+    // Assuming your controller nests the result in a 'data' property
+    return response.data.data;
+  } catch (error) {
+    console.error(`Failed to fetch booking with ID ${bookingId}:`, error);
+    throw new Error("Could not retrieve booking details.");
+  }
+};
+
+export const fetchUserBookingById = async (bookingId: string) => {
+  if (!bookingId) {
+    throw new Error("Booking ID is required.");
+  }
+
+  try {
+    const endpoint = `${BASE_URL}/reservations/${bookingId}`;
+    const response = await axios.get<BookingApiResponse>(endpoint, {
+      params: { bookingId: bookingId },
+      withCredentials: true,
+    });
+
+    return response.data.data;
+  } catch (error) {
+    console.error(`Failed to fetch booking with ID:`, error);
+    throw new Error("Could not retrieve booking details.");
+  }
+};
+
+export const fetchUserBookings = async (filters: FetchBookingsParams) => {
+  const endpoint = `${BASE_URL}/reservations/get`; // New, specific endpoint
+  const response = await axios.get(endpoint, {
+    params: filters,
+    withCredentials: true,
+  });
+  return response.data.data;
+};
+
+export const fetchTenantBookings = async (filters: FetchBookingsParams) => {
+  const endpoint = `${BASE_URL}/payment/orders`;
+  const response = await axios.get(endpoint, {
+    params: filters,
+    withCredentials: true,
+  });
+  return response.data.data;
+};
+
+export const cancelBookingById = async (id: string) => {
+  const response = await axios.patch(
+    `${BASE_URL}/reservations/cancel/${id}`,
+    {},
+    {
+      withCredentials: true,
+    }
+  );
+  return response.data;
 };

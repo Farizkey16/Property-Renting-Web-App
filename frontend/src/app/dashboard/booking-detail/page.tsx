@@ -15,12 +15,18 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@radix-ui/react-select";
 import { Users, Bed, Wifi, Coffee, Shield, Clock, X } from "lucide-react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { usePropertyById } from "@/hooks/useProperty";
 import { format, parseISO } from "date-fns";
-import { useBookings } from "@/hooks/useBookings";
+import { ToastContainer, toast } from "react-toastify";
+
 import { usePriceQuote } from "@/hooks/usePriceQuote";
 import { formatCurrency } from "@/lib/utils";
+import { useMutation } from "@tanstack/react-query";
+import {
+  createBooking,
+  CreateBookingPayload,
+} from "@/services/transactions.services";
 
 export default function BookingDetailsForm() {
   const [formData, setFormData] = useState({
@@ -38,28 +44,54 @@ export default function BookingDetailsForm() {
       others: false,
     },
   });
+  const router = useRouter();
+
+  const createBookingMutation = useMutation({
+    mutationFn: createBooking,
+
+    onSuccess: (data) => {
+      const bookingId = data.data.id
+    
+      console.log("Booking created successfully!", data);
+      console.log("ID is:", bookingId)
+      
+      router.push(`/dashboard/payment-page/${bookingId}`);
+      toast.success("Your booking has been made! Please proceed to payment.");
+
+      
+    },
+
+    onError: (error) => {
+      console.error("Failed to create booking:", error);
+      toast.error(error.message);
+    },
+  });
 
   // Fetch Booking Details
-  const searchParams = useSearchParams()
+  const searchParams = useSearchParams();
 
-  const startDateString = searchParams.get("checkIn")
-  const endDateString = searchParams.get("checkOut") 
-  const property_id = searchParams.get("propertyId") ?? undefined
-  const room_id = searchParams.get("roomId")
+  const startDateString = searchParams.get("checkIn");
+  const endDateString = searchParams.get("checkOut");
+  const property_id = searchParams.get("propertyId") ?? undefined;
+  const room_id = searchParams.get("roomId");
+  const guests = searchParams.get("guests");
+  const rooms = searchParams.get("rooms")
 
   // Parse for Display
-  const startDate = startDateString ? parseISO(startDateString) : new Date()
-  const endDate = endDateString ? parseISO(endDateString) : new Date()
-  const startDateDisplay = format(startDate, 'eee, d MMM yyyy')
-  const endDateDisplay = format(endDate, 'eee, d MMM yyyy')
+  const startDate = startDateString ? parseISO(startDateString) : new Date();
+  const endDate = endDateString ? parseISO(endDateString) : new Date();
+  const startDateDisplay = format(startDate, "eee, d MMM yyyy");
+  const endDateDisplay = format(endDate, "eee, d MMM yyyy");
 
+  const { data: property, isLoading: isLoadingProperty } =
+    usePropertyById(property_id);
+  const { data: priceDetails, isLoading: isLoadingPrice } = usePriceQuote(
+    room_id!,
+    startDateString!,
+    endDateString!
+  );
 
-  
-
-  const {data: property, isLoading: isLoadingProperty} = usePropertyById(property_id)
-  const {data: priceDetails, isLoading: isLoadingPrice} = usePriceQuote(room_id!, startDateString!, endDateString!)
-
-  
+  const selectedRoom = property?.rooms?.find((r) => r.id === room_id);
 
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -73,7 +105,42 @@ export default function BookingDetailsForm() {
   };
 
   const handleContinue = () => {
-    console.log("Booking form submitted:", formData);
+    const checkInDate = searchParams.get("checkIn");
+    const checkOutDate = searchParams.get("checkOut");
+    const propertyId = searchParams.get("propertyId") ?? undefined;
+    const roomId = searchParams.get("roomId");
+    const guests = searchParams.get("guests");
+    const quantity = searchParams.get("rooms")
+
+    console.log('quantity is:', quantity)
+
+
+    if (!propertyId || !roomId || !checkInDate || !checkOutDate || !guests || !quantity) {
+      alert(
+        "Error: Booking information is incomplete in the URL. Cannot proceed."
+      );
+      return;
+    }
+
+    const finalBookingPayload = {
+      propertyId: propertyId,
+      roomId: roomId,
+      checkInDate: checkInDate,
+      checkOutDate: checkOutDate,
+      guests: Number(guests),
+      quantity: Number(quantity),
+
+      ...formData,
+
+      totalPrice: priceDetails?.totalPrice,
+      nights: priceDetails?.nights,
+      subtotal: priceDetails?.subtotal,
+      taxesAndFees: priceDetails?.taxesAndFees,
+    };
+
+    console.log("Booking form submitted:", finalBookingPayload);
+
+    createBookingMutation.mutate(finalBookingPayload);
   };
 
   return (
@@ -178,7 +245,6 @@ export default function BookingDetailsForm() {
                     </p>
                   </div>
                 </div>
-
               </CardContent>
             </Card>
 
@@ -348,20 +414,14 @@ export default function BookingDetailsForm() {
             <Card className="overflow-hidden">
               <div className="relative">
                 <img
-                  src="/luxury-hotel-room.png"
-                  alt="Village Hotel Bugis"
+                  src={property?.main_image}
+                  alt={property?.name}
                   className="w-full h-48 object-cover"
                 />
-                <div className="absolute top-2 right-2 bg-blue-600 text-white px-2 py-1 rounded text-xs font-medium">
-                  <Clock className="w-3 h-3 inline mr-1" />
-                  Don't miss out! Only 1 room(s) left for the lowest price.
-                </div>
               </div>
               <CardContent className="p-4">
                 <div className="flex items-center gap-2 mb-2">
-                  <h3 className="font-semibold text-lg">
-                   {property?.name}
-                  </h3>
+                  <h3 className="font-semibold text-lg">{property?.name}</h3>
                   <div className="flex text-yellow-400">{"★".repeat(4)}</div>
                 </div>
                 <div className="flex items-center text-sm text-gray-600 mb-2">
@@ -388,14 +448,14 @@ export default function BookingDetailsForm() {
                   </div>
                 </div>
                 <div className="text-sm">
-                  <p className="text-gray-600">1 night</p>
+                  <p className="text-gray-600">{`${priceDetails?.nights} night(s)`}</p>
                 </div>
 
                 <Separator />
 
                 <div>
                   <h4 className="font-semibold mb-2">
-                    (1x) Double Or Twin Superior Room
+                    (1x) {selectedRoom?.name}
                   </h4>
                   <p className="text-red-600 text-sm font-medium mb-3">
                     1 room(s) left!
@@ -404,11 +464,7 @@ export default function BookingDetailsForm() {
                   <div className="space-y-2 text-sm text-gray-600">
                     <div className="flex items-center gap-2">
                       <Users className="w-4 h-4" />
-                      <span>1 Guest</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Bed className="w-4 h-4" />
-                      <span>1 SUPERIOR ROOM</span>
+                      <span>{`${guests} guest(s)`} </span>
                     </div>
                     <div className="flex items-center gap-2">
                       <Coffee className="w-4 h-4" />
@@ -428,14 +484,16 @@ export default function BookingDetailsForm() {
                     <span className="font-semibold">Total Room Price</span>
                     <div className="text-right">
                       <p className="text-gray-500 line-through text-sm">
-                        Rp 3.156.521
+                        {formatCurrency(priceDetails?.subtotal)}
                       </p>
                       <p className="text-red-600 font-bold text-lg">
-                        Rp 2.367.391
+                        {formatCurrency(priceDetails?.subtotal)}
                       </p>
                     </div>
                   </div>
-                  <p className="text-sm text-gray-600">1 room(s), 1 night(s)</p>
+                  <p className="text-sm text-gray-600">
+                    {`${rooms}`} room(s), {`${priceDetails?.nights} night(s)`}
+                  </p>
                 </div>
               </CardContent>
             </Card>

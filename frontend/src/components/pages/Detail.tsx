@@ -18,10 +18,16 @@ import { DatePickerWithRange } from "../ui/DatePickerPopover";
 import { DateRange } from "react-day-picker";
 import { format } from "date-fns";
 import { useRouter } from "next/navigation";
+import { GuestPicker } from "../ui/GuestPicker";
 
 export default function PropertyDetailPage() {
   const router = useRouter();
   const [open, setOpen] = useState(false);
+  const [guests, setGuests] = useState({
+    adults: 1,
+    children: 0,
+    rooms: 1
+  })
   const params = useSearchParams();
   const propertyname = params.get("propertyname") || undefined;
   const roomname = params.get("roomname") || undefined;
@@ -39,6 +45,10 @@ export default function PropertyDetailPage() {
 
   const propertyId = data?.property?.id 
   const roomId = data?.id
+  const adults = guests.adults
+  const children = guests.children
+  const totalGuests = (adults + children).toString()
+  const rooms = guests.rooms.toString()
 
   console.log(data);
 
@@ -55,7 +65,7 @@ export default function PropertyDetailPage() {
     const checkOut = format(dateRange.to, "yyyy-MM-dd");
 
     router.push(
-      `/dashboard/booking-detail?propertyId=${propertyId}&roomId=${roomId}&checkIn=${checkIn}&checkOut=${checkOut}`
+      `/dashboard/booking-detail?propertyId=${propertyId}&roomId=${roomId}&checkIn=${checkIn}&checkOut=${checkOut}&guests=${totalGuests}&rooms=${rooms}`
     );
     console.log("Reserving dates:", { checkIn, checkOut });
   };
@@ -256,6 +266,7 @@ export default function PropertyDetailPage() {
                     onDateChange={setDateRange}
                     className="mt-4"
                   />
+                  <GuestPicker value={guests} onChange={setGuests}/>
                   
 
                   <div className="flex justify-between items-center">
