@@ -32,7 +32,6 @@ export const getPropertyByIdRepository = async (propertyId: string) => {
     where: { id: propertyId, deleted_at: null },
     include: {
       property_images: true,
-      main_image: true,
       reviews: true,
       rooms: {
         select: {
@@ -85,13 +84,42 @@ export const findNearbyPropertiesRepository = async (
   lat: number,
   lng: number,
   radius: number,
-  checkIn?: string,
-  checkOut?: string,
+  checkIn: string,
+  checkOut: string,
   category?: string,
   minPrice?: number,
-  maxPrice?: number
+  maxPrice?: number,
+  guests?: number,
+  rooms?: number
 ) => {
-  return await prisma.$queryRawUnsafe<any[]>(`
+  const query = `
+    WITH dates AS (
+      SELECT generate_series($1::date, $2::date - interval '1 day', interval '1 day') AS date
+    ),
+    available_rooms AS (
+      SELECT 
+        r.id,
+        r.property_id,
+        r.name,
+        r.description,
+        r.base_price,
+        r.capacity,
+        r.image,
+        r.total_rooms,
+        COUNT(ra.date) FILTER (WHERE ra.is_available = true) AS available_days,
+        COUNT(d.date) AS total_days
+      FROM rooms r
+      CROSS JOIN dates d
+      LEFT JOIN room_availability ra 
+        ON ra.room_id = r.id AND ra.date = d.date
+      WHERE
+        (${minPrice ? `r.base_price >= ${minPrice}` : "TRUE"})
+        AND (${maxPrice ? `r.base_price <= ${maxPrice}` : "TRUE"})
+        AND (${guests ? `r.capacity >= ${guests}` : "TRUE"})
+        AND (${rooms ? `r.total_rooms >= ${rooms}` : "TRUE"})
+      GROUP BY r.id
+      HAVING COUNT(ra.date) FILTER (WHERE ra.is_available = true) = COUNT(d.date)
+    )
     SELECT 
       p.id,
       p.name,
@@ -105,57 +133,51 @@ export const findNearbyPropertiesRepository = async (
       p.main_image,
       p.property_category,
       (6371 * acos(
-        cos(radians(${lat})) *
+        cos(radians($3)) *
         cos(radians(p.latitude::double precision)) *
-        cos(radians(p.longitude::double precision) - radians(${lng})) +
-        sin(radians(${lat})) *
+        cos(radians(p.longitude::double precision) - radians($4)) +
+        sin(radians($3)) *
         sin(radians(p.latitude::double precision))
       )) AS distance,
       COALESCE(
         json_agg(
           json_build_object(
-            'id', r.id,
-            'name', r.name,
-            'description', r.description,
-            'base_price', r.base_price,
-            'capacity', r.capacity,
-            'image', r.image,
-            'total_rooms', r.total_rooms
+            'id', ar.id,
+            'name', ar.name,
+            'description', ar.description,
+            'base_price', ar.base_price,
+            'capacity', ar.capacity,
+            'image', ar.image,
+            'total_rooms', ar.total_rooms
           )
-        ) FILTER (
-          WHERE r.id IS NOT NULL
-          ${
-            checkIn && checkOut
-              ? `AND NOT EXISTS (
-                  SELECT 1
-                  FROM room_availability ra
-                  WHERE ra.room_id = r.id
-                  AND ra.date BETWEEN '${checkIn}'::date AND '${checkOut}'::date
-                  AND ra.is_available = false
-                )`
-              : ""
-          }
-          ${minPrice ? `AND r.base_price >= ${minPrice}` : ""}
-          ${maxPrice ? `AND r.base_price <= ${maxPrice}` : ""}
-        ),
+        ) FILTER (WHERE ar.id IS NOT NULL),
         '[]'
       ) AS rooms
     FROM properties p
-    LEFT JOIN rooms r ON r.property_id = p.id
+    LEFT JOIN available_rooms ar ON ar.property_id = p.id
+    ${category ? `WHERE p.property_category = '${category}'` : ""}
     GROUP BY 
       p.id, p.name, p.description, p.address, p.city, 
       p.province, p.zip_code, p.latitude, p.longitude, 
       p.main_image, p.property_category
     HAVING (6371 * acos(
-      cos(radians(${lat})) *
+      cos(radians($3)) *
       cos(radians(p.latitude::double precision)) *
-      cos(radians(p.longitude::double precision) - radians(${lng})) +
-      sin(radians(${lat})) *
+      cos(radians(p.longitude::double precision) - radians($4)) +
+      sin(radians($3)) *
       sin(radians(p.latitude::double precision))
-    )) <= ${radius}
-    ${category ? `AND p.property_category = '${category}'` : ""}
+    )) <= $5
     ORDER BY distance ASC;
-  `);
+  `;
+
+  return await prisma.$queryRawUnsafe<any[]>(
+    query,
+    checkIn,
+    checkOut,
+    lat,
+    lng,
+    radius
+  );
 };
 
 export const updatePropertyRepository = async (data: UpdatePropertyInput) => {

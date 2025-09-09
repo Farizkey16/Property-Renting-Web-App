@@ -61,7 +61,7 @@ export function Footer() {
               </li>
               <li className="flex items-center">
                 <Mail className="h-4 w-4 mr-2" />
-                support@stayease.com
+                support@homz.com
               </li>
             </ul>
           </div>
@@ -69,7 +69,7 @@ export function Footer() {
 
         {/* Footer Bottom */}
         <div className="mt-10 pt-6 border-t border-gray-800 text-center text-sm text-gray-500">
-          © {new Date().getFullYear()} StayEase. All rights reserved.
+          © {new Date().getFullYear()} homz. All rights reserved.
         </div>
       </div>
     </footer>

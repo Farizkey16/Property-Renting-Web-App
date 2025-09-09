@@ -1,72 +1,5 @@
-2025-09-06 19:32:14 [ERROR]: GET /user/me Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
-2025-09-06 19:38:14 [ERROR]: GET /user/me Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
-2025-09-06 19:38:21 [ERROR]: GET /user/me Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
-2025-09-06 19:48:28 [ERROR]: GET /user/me Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
-2025-09-06 19:48:34 [ERROR]: GET /user/me Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
-2025-09-06 19:49:41 [ERROR]: GET /user/me Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
-2025-09-06 19:50:59 [ERROR]: GET /user/me Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
-2025-09-06 20:00:18 [ERROR]: GET /user/me Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
-2025-09-06 20:02:20 [ERROR]: GET /user/me Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
-2025-09-06 20:04:52 [ERROR]: GET /user/me Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
-2025-09-06 20:10:54 [ERROR]: GET /property/all 
-Invalid `prisma.properties.findMany()` invocation in
-D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\property\property.repository.ts:16:28
-
-  13 }) => {
-  14   const { property_category, name } = filters;
-  15 
-→ 16   return prisma.properties.findMany(
-Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
-
-Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. {"code":"P1001","meta":{"modelName":"properties","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
-2025-09-06 20:11:00 [ERROR]: GET /property/all 
-Invalid `prisma.properties.findMany()` invocation in
-D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\property\property.repository.ts:16:28
-
-  13 }) => {
-  14   const { property_category, name } = filters;
-  15 
-→ 16   return prisma.properties.findMany(
-Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
-
-Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. {"code":"P1001","meta":{"modelName":"properties","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
-2025-09-06 20:11:20 [ERROR]: GET /user/me Unauthorized {"statusCode":401,"success":false,"message":"Unauthorized"}
-2025-09-06 20:11:25 [ERROR]: GET /property/all 
-Invalid `prisma.properties.findMany()` invocation in
-D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\property\property.repository.ts:16:28
-
-  13 }) => {
-  14   const { property_category, name } = filters;
-  15 
-→ 16   return prisma.properties.findMany(
-Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
-
-Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. {"code":"P1001","meta":{"modelName":"properties","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
-2025-09-06 20:11:31 [ERROR]: GET /property/all 
-Invalid `prisma.properties.findMany()` invocation in
-D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\property\property.repository.ts:16:28
-
-  13 }) => {
-  14   const { property_category, name } = filters;
-  15 
-→ 16   return prisma.properties.findMany(
-Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
-
-Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. {"code":"P1001","meta":{"modelName":"properties","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
-2025-09-06 20:11:38 [ERROR]: GET /property/all 
-Invalid `prisma.properties.findMany()` invocation in
-D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\property\property.repository.ts:16:28
-
-  13 }) => {
-  14   const { property_category, name } = filters;
-  15 
-→ 16   return prisma.properties.findMany(
-Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
-
-Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. {"code":"P1001","meta":{"modelName":"properties","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
-2025-09-06 20:17:47 [ERROR]: POST /auth/login Invalid password {"statusCode":401,"success":false,"message":"Invalid password"}
-2025-09-06 21:36:16 [ERROR]: PATCH /user/change-email-otp Cannot destructure property 'email' of 'data' as it is undefined. {}
-2025-09-06 21:41:19 [ERROR]: PATCH /user/change-email-otp 
+2025-09-07 16:57:02 [ERROR]: GET /property/nearby | STATUS: checkIn and checkOut are required | MESSAGE: {"statusCode":400,"success":false,"message":"checkIn and checkOut are required"}
+2025-09-07 17:13:01 [ERROR]: GET /user/me | STATUS: 
 Invalid `prisma.users.findUnique()` invocation in
 D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\user\user.respository.ts:7:23
 
@@ -76,15 +9,105 @@ D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\user\
 → 7   return prisma.users.findUnique(
 Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
 
-Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. {"code":"P1001","meta":{"modelName":"users","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
-2025-09-06 21:47:33 [ERROR]: GET /property/all 
-Invalid `prisma.properties.findMany()` invocation in
-D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\property\property.repository.ts:16:28
+Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"code":"P1001","meta":{"modelName":"users","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-07 21:37:20 [ERROR]: GET /room/search | STATUS: 
+Invalid `prisma.rooms.findMany()` invocation in
+D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\rooms\rooms.repository.ts:165:29
 
-  13 }) => {
-  14   const { property_category, name } = filters;
-  15 
-→ 16   return prisma.properties.findMany(
+  162   checkIn?: string,
+  163   checkOut?: string
+  164 ) => {
+→ 165   return await prisma.rooms.findMany(
 Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
 
-Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. {"code":"P1001","meta":{"modelName":"properties","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"clientVersion":"6.13.0","name":"PrismaClientInitializationError"}
+2025-09-07 22:09:32 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-07 22:14:59 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-07 22:16:18 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-07 22:16:22 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-07 22:39:13 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-07 22:44:35 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-07 22:53:20 [ERROR]: POST /auth/register | STATUS: User already exist | MESSAGE: {"statusCode":400,"success":false,"message":"User already exist"}
+2025-09-07 22:54:14 [ERROR]: POST /auth/register | STATUS: User already exist | MESSAGE: {"statusCode":400,"success":false,"message":"User already exist"}
+2025-09-08 19:49:32 [ERROR]: GET /room/search | STATUS: 
+Invalid `prisma.rooms.findMany()` invocation in
+D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\rooms\rooms.repository.ts:172:29
+
+  169   checkIn?: string,
+  170   checkOut?: string
+  171 ) => {
+→ 172   return await prisma.rooms.findMany(
+Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"code":"P1001","meta":{"modelName":"rooms","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-08 19:49:38 [ERROR]: GET /room/search | STATUS: 
+Invalid `prisma.rooms.findMany()` invocation in
+D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\rooms\rooms.repository.ts:172:29
+
+  169   checkIn?: string,
+  170   checkOut?: string
+  171 ) => {
+→ 172   return await prisma.rooms.findMany(
+Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"code":"P1001","meta":{"modelName":"rooms","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-08 21:43:24 [ERROR]: GET /room/search | STATUS: 
+Invalid `prisma.rooms.findMany()` invocation in
+D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\rooms\rooms.repository.ts:173:29
+
+  170   checkIn?: string,
+  171   checkOut?: string
+  172 ) => {
+→ 173   return await prisma.rooms.findMany(
+Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"code":"P1001","meta":{"modelName":"rooms","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-08 21:43:30 [ERROR]: GET /room/search | STATUS: 
+Invalid `prisma.rooms.findMany()` invocation in
+D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\rooms\rooms.repository.ts:173:29
+
+  170   checkIn?: string,
+  171   checkOut?: string
+  172 ) => {
+→ 173   return await prisma.rooms.findMany(
+Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"code":"P1001","meta":{"modelName":"rooms","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-09 17:53:02 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-09 17:58:49 [ERROR]: POST /auth/login | STATUS: User not found | MESSAGE: {"statusCode":400,"success":false,"message":"User not found"}
+2025-09-09 18:00:01 [ERROR]: POST /auth/login | STATUS: Invalid password | MESSAGE: {"statusCode":401,"success":false,"message":"Invalid password"}
+2025-09-09 18:00:09 [ERROR]: POST /auth/login | STATUS: Invalid password | MESSAGE: {"statusCode":401,"success":false,"message":"Invalid password"}
+2025-09-09 18:00:23 [ERROR]: POST /auth/login | STATUS: Invalid password | MESSAGE: {"statusCode":401,"success":false,"message":"Invalid password"}
+2025-09-09 18:18:37 [ERROR]: GET /user/me | STATUS: 
+Invalid `prisma.users.findUnique()` invocation in
+D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\user\user.respository.ts:7:23
+
+  4 import AppError from "../../errors/AppError";
+  5 
+  6 export const findUserById = async (userId: string) => {
+→ 7   return prisma.users.findUnique(
+Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"code":"P1001","meta":{"modelName":"users","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-09 18:38:25 [ERROR]: GET /room/search | STATUS: 
+Invalid `prisma.rooms.findMany()` invocation in
+D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\rooms\rooms.repository.ts:173:29
+
+  170   checkIn?: string,
+  171   checkOut?: string
+  172 ) => {
+→ 173   return await prisma.rooms.findMany(
+Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"code":"P1001","meta":{"modelName":"rooms","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-09 19:01:52 [ERROR]: GET /room/search | STATUS: 
+Invalid `prisma.rooms.findMany()` invocation in
+D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\rooms\rooms.repository.ts:169:29
+
+  166   checkIn?: string,
+  167   checkOut?: string
+  168 ) => {
+→ 169   return await prisma.rooms.findMany(
+Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"clientVersion":"6.13.0","name":"PrismaClientInitializationError"}

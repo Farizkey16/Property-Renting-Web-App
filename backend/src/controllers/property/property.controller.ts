@@ -101,6 +101,8 @@ class PropertyController {
         radius,
         checkIn,
         checkOut,
+        guests,
+        rooms,
         category,
         minPrice,
         maxPrice,
@@ -110,7 +112,11 @@ class PropertyController {
         throw new AppError("latitude, longitude, and radius are required", 400);
       }
 
-      const rad = radius ? Number(radius) : 5;
+      if (!checkIn || !checkOut) {
+        throw new AppError("checkIn and checkOut are required", 400);
+      }
+
+      const rad = Number(radius) || 5;
       const lat = Number(latitude);
       const lng = Number(longitude);
 
@@ -122,7 +128,9 @@ class PropertyController {
         checkOut as string,
         category as PropertyCategory,
         minPrice ? Number(minPrice) : undefined,
-        maxPrice ? Number(maxPrice) : undefined
+        maxPrice ? Number(maxPrice) : undefined,
+        guests ? Number(guests) : undefined,
+        rooms ? Number(rooms) : undefined
       );
 
       res.status(200).send({
@@ -130,6 +138,15 @@ class PropertyController {
         success: true,
         radius: rad,
         user_location: { latitude: lat, longitude: lng },
+        filters: {
+          checkIn,
+          checkOut,
+          guests: guests ? Number(guests) : undefined,
+          rooms: rooms ? Number(rooms) : undefined,
+          category,
+          minPrice: minPrice ? Number(minPrice) : undefined,
+          maxPrice: maxPrice ? Number(maxPrice) : undefined,
+        },
         properties,
       });
     } catch (error) {

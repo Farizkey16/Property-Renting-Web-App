@@ -8,28 +8,27 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
-import { DateRange } from "react-day-picker";
-import { format } from "date-fns";
-import { CalendarIcon, LucideMapPin, Search, Users } from "lucide-react";
+import { CalendarIcon, LucideMapPin, Search } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { GuestPicker } from "@/components/ui/GuestPicker";
+import { format } from "date-fns";
 
 interface MapboxFeature {
   id: string;
-  type: string;
   place_name: string;
-  text: string;
-  center: [number, number]; // [lng, lat]
-  context?: Array<{ id: string; text: string }>;
+  center: [number, number];
 }
 
 export default function InputDate() {
-  const [date, setDate] = React.useState<DateRange | undefined>();
+  const [checkIn, setCheckIn] = React.useState<Date | undefined>();
+  const [checkOut, setCheckOut] = React.useState<Date | undefined>();
+  const [openCheckIn, setOpenCheckIn] = React.useState(false);
+  const [openCheckOut, setOpenCheckOut] = React.useState(false);
+
   const [guests, setGuests] = React.useState({
-    adults: 1,
-    children: 0,
-    rooms: 1
-  })
+    guests: 1,
+    rooms: 1,
+  });
   const [location, setLocation] = React.useState("");
   const [coords, setCoords] = React.useState<{
     lat: number;
@@ -37,25 +36,38 @@ export default function InputDate() {
   } | null>(null);
   const [suggestions, setSuggestions] = React.useState<MapboxFeature[]>([]);
   const [showSuggestions, setShowSuggestions] = React.useState(false);
+  const [geoLoading, setGeoLoading] = React.useState(false);
 
   const router = useRouter();
 
+  // Handle guests change
+  const handleGuestsChange = (newGuests: typeof guests) => {
+    setGuests({
+      guests: Math.min(newGuests.guests, 4),
+      rooms: Math.max(newGuests.rooms, 1),
+    });
+  };
+
+  // Handle location input
   const handleInputChange = async (value: string) => {
     setLocation(value);
-    if (!value) {
+    if (!value) return setSuggestions([]);
+
+    try {
+      const token = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
+      const res = await fetch(
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(
+          value
+        )}.json?access_token=${token}&autocomplete=true&types=place&country=id`
+      );
+      if (!res.ok) throw new Error("Mapbox fetch failed");
+      const data: { features: MapboxFeature[] } = await res.json();
+      setSuggestions(data.features);
+      setShowSuggestions(true);
+    } catch (err) {
+      console.error(err);
       setSuggestions([]);
-      return;
     }
-    const token = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
-    const res = await fetch(
-      `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(
-        value
-      )}.json?access_token=${token}&autocomplete=true&types=place&country=id`
-    );
-    if (!res.ok) return;
-    const data: { features: MapboxFeature[] } = await res.json();
-    setSuggestions(data.features);
-    setShowSuggestions(true);
   };
 
   const handleSelectSuggestion = (place: MapboxFeature) => {
@@ -71,37 +83,47 @@ export default function InputDate() {
     setSuggestions([]);
     setShowSuggestions(false);
 
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (pos) => {
-          setCoords({ lat: pos.coords.latitude, lng: pos.coords.longitude });
-        },
-        () => alert("Gagal mendapatkan lokasi.")
-      );
-    }
-  };
-
-  const handleSearch = () => {
-
-    console.log("EXECUTION: handleSearch is running. The 'guests' state it sees is:", guests);
-    if (!coords || !date?.from) {
-      alert("Pilih lokasi dan tanggal terlebih dahulu!");
+    if (!navigator.geolocation) {
+      alert("Browser tidak mendukung geolocation.");
       return;
     }
+
+    setGeoLoading(true);
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        setCoords({ lat: pos.coords.latitude, lng: pos.coords.longitude });
+        setGeoLoading(false);
+      },
+      (err) => {
+        alert("Gagal mendapatkan lokasi.");
+        console.error(err);
+        setGeoLoading(false);
+      }
+    );
+  };
+
+  // Handle search button
+  const handleSearch = () => {
+    if (!coords) return alert("Pilih lokasi terlebih dahulu!");
+    if (!checkIn) return alert("Pilih tanggal check-in!");
+    if (!checkOut) return alert("Pilih tanggal check-out!");
+
     const params = new URLSearchParams({
-      lat: coords.lat.toString(),
-      lng: coords.lng.toString(),
+      latitude: coords.lat.toString(),
+      longitude: coords.lng.toString(),
       radius: "5",
-      checkIn: format(date.from, "yyyy-MM-dd"),
-      checkOut: format(date.to ?? date.from, "yyyy-MM-dd"),
+      checkIn: format(checkIn, "yyyy-MM-dd"),
+      checkOut: format(checkOut, "yyyy-MM-dd"),
       minPrice: "100000",
       maxPrice: "5000000",
-      adults: guests.adults.toString(),
-      children: guests.children.toString(),
-      rooms: guests.rooms.toString()
+      guests: guests.guests.toString(),
+      rooms: guests.rooms.toString(),
     });
+
     router.push(`/property?${params.toString()}`);
   };
+
+  const canSearch = !!coords && !!checkIn && !!checkOut && !geoLoading;
 
   return (
     <div className="w-full flex flex-col lg:flex-row items-stretch border rounded-4xl bg-white p-4 lg:p-0 gap-2 lg:gap-0 shadow-sm">
@@ -114,23 +136,20 @@ export default function InputDate() {
           placeholder="Where are you going?"
           className="w-full px-2 py-2 lg:py-3 focus:outline-none text-gray-600 placeholder-gray-400"
           onFocus={() => setShowSuggestions(true)}
-          onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
         />
         {showSuggestions && (
           <ul className="absolute top-full left-0 right-0 bg-white border rounded-lg mt-1 max-h-60 overflow-auto shadow-md z-50">
             <li
-              className="px-4 py-2 cursor-pointer hover:bg-gray-100 font-medium text-blue-600"
-              onClick={handleSelectNearby}
-            >
-              <LucideMapPin className="w-4 h-4 inline mr-1" />
+              className="px-4 py-2 cursor-pointer hover:bg-gray-100 font-medium text-blue-600 flex items-center"
+              onMouseDown={handleSelectNearby}>
+              <LucideMapPin className="w-4 h-4 mr-1" />
               Find nearby
             </li>
             {suggestions.map((place) => (
               <li
                 key={place.id}
                 className="px-4 py-2 cursor-pointer hover:bg-gray-100"
-                onClick={() => handleSelectSuggestion(place)}
-              >
+                onMouseDown={() => handleSelectSuggestion(place)}>
                 {place.place_name}
               </li>
             ))}
@@ -138,53 +157,70 @@ export default function InputDate() {
         )}
       </div>
 
-      {/* Date pickers */}
-      <div className="flex flex-1 flex-col lg:flex-row items-stretch lg:items-center lg:border-l lg:border-gray-200">
-        <Popover>
-          <PopoverTrigger asChild>
-            <button className="flex-1 flex items-center px-4 py-2 text-left hover:bg-gray-50">
-              <CalendarIcon className="w-4 h-4 text-gray-400 mr-2" />
-              <span className="text-sm text-gray-600">
-                {date?.from ? format(date.from, "LLL dd") : "Check in"}
-              </span>
-            </button>
-          </PopoverTrigger>
-          <PopoverContent className="p-0" align="start">
-            <Calendar
-              mode="range"
-              selected={date}
-              onSelect={setDate}
-              disabled={{ before: new Date() }}
-            />
-          </PopoverContent>
-        </Popover>
+      {/* Check-in */}
+      <Popover open={openCheckIn} onOpenChange={setOpenCheckIn}>
+        <PopoverTrigger asChild>
+          <button
+            type="button"
+            className="flex-1 flex items-center px-4 py-2 text-left hover:bg-gray-50"
+            onClick={() => setOpenCheckIn(!openCheckIn)}>
+            <CalendarIcon className="w-4 h-4 text-gray-400 mr-2" />
+            <span className="text-sm text-gray-600">
+              {checkIn ? format(checkIn, "LLL dd") : "Check in"}
+            </span>
+          </button>
+        </PopoverTrigger>
+        <PopoverContent className="p-0">
+          <Calendar
+            mode="single"
+            selected={checkIn}
+            onSelect={(date) => {
+              setCheckIn(date);
+              setOpenCheckIn(false); // Tutup popover check-in
+              setOpenCheckOut(true); // Langsung buka popover check-out
+            }}
+            disabled={{ before: new Date() }}
+          />
+        </PopoverContent>
+      </Popover>
 
-        <Popover>
-          <PopoverTrigger asChild>
-            <button className="flex-1 flex items-center px-4 py-2 text-left hover:bg-gray-50">
-              <CalendarIcon className="w-4 h-4 text-gray-400 mr-2" />
-              <span className="text-sm text-gray-600">
-                {date?.to ? format(date.to, "LLL dd") : "Check out"}
-              </span>
-            </button>
-          </PopoverTrigger>
-          <PopoverContent className="p-0" align="start">
-            <Calendar mode="range" selected={date} onSelect={setDate} />
-          </PopoverContent>
-        </Popover>
-      </div>
+      {/* Check-out */}
+      <Popover open={openCheckOut} onOpenChange={setOpenCheckOut}>
+        <PopoverTrigger asChild>
+          <button
+            type="button"
+            className="flex-1 flex items-center px-4 py-2 text-left hover:bg-gray-50"
+            onClick={() => setOpenCheckOut(!openCheckOut)}>
+            <CalendarIcon className="w-4 h-4 text-gray-400 mr-2" />
+            <span className="text-sm text-gray-600">
+              {checkOut ? format(checkOut, "LLL dd") : "Check out"}
+            </span>
+          </button>
+        </PopoverTrigger>
+        <PopoverContent className="p-0">
+          <Calendar
+            mode="single"
+            selected={checkOut}
+            onSelect={(date) => {
+              setCheckOut(date);
+              setOpenCheckOut(false); // Tutup setelah pilih
+            }}
+            disabled={{ before: checkIn ?? new Date() }}
+          />
+        </PopoverContent>
+      </Popover>
 
       {/* Guests Picker */}
       <div className="flex flex-1 flex-col lg:flex-row items-stretch lg:items-center lg:border-l lg:border-gray-200">
-        <GuestPicker value={guests} onChange={setGuests}/>
+        <GuestPicker value={guests} onChange={handleGuestsChange} />
       </div>
 
       {/* Search Button */}
-      <div className="flex justify-end lg:flex-none  items-center roundered-r-4xl">
+      <div className="flex justify-end lg:flex-none items-center rounded-r-4xl">
         <Button
           className="rounded-full w-full h-full lg:w-auto"
           onClick={handleSearch}
-        >
+          disabled={!canSearch}>
           <Search className="w-4 h-4 mr-2" />
           Search
         </Button>

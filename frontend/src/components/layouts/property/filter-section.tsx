@@ -26,7 +26,7 @@ export function FilterSection({ onFilterChange }: PropertySearchProps) {
         value={name}
         onChange={(e) => setName(e.target.value)}
         onKeyDown={handleKeyDown}
-        className="border rounded-2xl bg-white p-2 text-sm flex-grow shadow-sm"
+        className="border rounded-3xl bg-white p-2 lg:p-3  text-sm flex-grow shadow-sm"
       />
       <Button
         variant="default"

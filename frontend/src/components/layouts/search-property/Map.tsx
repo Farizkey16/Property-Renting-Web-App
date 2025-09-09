@@ -6,8 +6,8 @@ import React, { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { usePropertiesByLocation } from "@/hooks/useProperty";
 import { FaHome } from "react-icons/fa";
+import Image from "next/image";
 
-// Definisikan type Property sesuai response API
 type Property = {
   id: string;
   name: string;
@@ -15,6 +15,7 @@ type Property = {
   latitude: string;
   longitude: string;
   distance: number;
+  image?: string; // tambahkan field image
 };
 
 const MapPages = ({
@@ -112,28 +113,38 @@ const MapPages = ({
             {properties.map((p) => (
               <Marker
                 key={p.id}
-                latitude={parseFloat(p.latitude)}
-                longitude={parseFloat(p.longitude)}
+                latitude={Number(p.latitude)}
+                longitude={Number(p.longitude)}
                 anchor="bottom"
                 onClick={() => setSelectedProperty(p)}>
-                <FaHome className="w-7 h-7 text-blue-600 bg-white rounded-full p-1 shadow-md hover:scale-110 transition-transform cursor-pointer" />
+                <div className="w-8 h-8">
+                  <FaHome className="w-full h-full text-blue-600 bg-white rounded-full p-1 shadow-md hover:scale-110 transition-transform cursor-pointer" />
+                </div>
               </Marker>
             ))}
 
+            {/* Popup property */}
             {selectedProperty && (
               <Popup
-                latitude={parseFloat(selectedProperty.latitude)}
-                longitude={parseFloat(selectedProperty.longitude)}
+                latitude={Number(selectedProperty.latitude)}
+                longitude={Number(selectedProperty.longitude)}
                 anchor="top"
                 closeOnClick={false}
                 onClose={() => setSelectedProperty(null)}
-                className="z-50">
-                <div className="text-sm space-y-1">
+                className="z-50 max-w-xs">
+                <div className="text-sm space-y-2">
                   <h4 className="font-semibold">{selectedProperty.name}</h4>
                   <p className="text-gray-600">{selectedProperty.address}</p>
                   <p className="text-xs text-gray-500">
                     {selectedProperty.distance.toFixed(2)} km away
                   </p>
+                  {selectedProperty.image && (
+                    <Image
+                      src={selectedProperty.image}
+                      alt={selectedProperty.name}
+                      className="w-full h-24 object-cover rounded-md"
+                    />
+                  )}
                 </div>
               </Popup>
             )}

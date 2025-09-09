@@ -88,8 +88,13 @@ export const getPropertyByLocationServices = async (
   checkOut?: string,
   category?: PropertyCategory,
   minPrice?: number,
-  maxPrice?: number
+  maxPrice?: number,
+  guests?: number,
+  rooms?: number
 ) => {
+  if (!checkIn || !checkOut) {
+    throw new Error("checkIn dan checkOut wajib diisi");
+  }
   return await findNearbyPropertiesRepository(
     lat,
     lng,
@@ -98,7 +103,9 @@ export const getPropertyByLocationServices = async (
     checkOut,
     category,
     minPrice,
-    maxPrice
+    maxPrice,
+    guests,
+    rooms
   );
 };
 

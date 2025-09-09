@@ -1,7 +1,10 @@
-import dayjs from "dayjs";
 import { prisma } from "../../config/prisma";
 import { RoomsType } from "../../types/rooms/rooms.types";
 import { Decimal } from "@prisma/client/runtime/library";
+import dayjs from "../../utils/dayjs";
+import { Prisma } from "../../../prisma/generated/client";
+
+const LOCAL_TZ = "Asia/Jakarta";
 
 export const createRoomRepository = async (data: RoomsType) => {
   return await prisma.rooms.create({
@@ -22,7 +25,7 @@ export const createRoomRepository = async (data: RoomsType) => {
 };
 
 export const createRoomAvailability = async (room_id: string, months = 6) => {
-  const today = dayjs();
+  let today = dayjs().tz(LOCAL_TZ).startOf("day");
   const endDate = today.add(months, "month");
   const availabilityData = [];
 
@@ -42,7 +45,7 @@ export const createRoomAvailability = async (room_id: string, months = 6) => {
   });
 };
 
-export const getRoomAvailabilityWithPriceRepository = async (
+export const getRoomDefaultAvailabilityWithPriceRepository = async (
   room_id: string,
   weekend_peak?: { type: "percentage" | "nominal"; value: number }
 ) => {
@@ -56,7 +59,7 @@ export const getRoomAvailabilityWithPriceRepository = async (
   const base_price = new Decimal(room.base_price);
 
   const availabilityWithPrice = room.room_availability.map((item) => {
-    const day = dayjs(item.date).day(); // 0 = Sunday, 6 = Saturday
+    const day = dayjs(item.date).tz(LOCAL_TZ).day();
     let price = base_price;
 
     if (day === 0 || day === 6) {
@@ -65,18 +68,79 @@ export const getRoomAvailabilityWithPriceRepository = async (
           weekend_peak.type === "percentage"
             ? base_price.plus(base_price.mul(weekend_peak.value).div(100))
             : base_price.plus(new Decimal(weekend_peak.value));
-      } else {
-        price = base_price.mul(1.1); // default +10% weekend
       }
     }
 
     return {
       ...item,
-      price: price.toNumber(), // ubah Decimal ke number supaya bisa dikirim ke frontend
+      price: price.toNumber(),
     };
   });
 
   return availabilityWithPrice;
+};
+
+export const getRoomAvailabilityWithPriceRepository = async (
+  room_id: string,
+  checkIn: string,
+  checkOut: string,
+  weekend_peak?: { type: "percentage" | "nominal"; value: number }
+) => {
+  const startDate = dayjs(checkIn).tz(LOCAL_TZ).startOf("day").toDate();
+  const endDate = dayjs(checkOut).tz(LOCAL_TZ).startOf("day").toDate();
+
+  const room = await prisma.rooms.findUnique({
+    where: { id: room_id },
+    include: { peak_season_rates: true },
+  });
+
+  if (!room) return [];
+
+  const availabilities = await prisma.room_availability.findMany({
+    where: {
+      room_id,
+      date: { gte: startDate, lt: endDate },
+    },
+    orderBy: { date: "asc" },
+  });
+
+  const base_price = new Decimal(room.base_price);
+  let total = new Decimal(0);
+
+  const availabilityWithPrice = availabilities.map((item) => {
+    const day = dayjs(item.date).tz(LOCAL_TZ).day();
+    let price = base_price;
+
+    const peak = room.peak_season_rates.find(
+      (rate) =>
+        dayjs(item.date).tz(LOCAL_TZ).isSameOrAfter(rate.start_date, "day") &&
+        dayjs(item.date).tz(LOCAL_TZ).isSameOrBefore(rate.end_date, "day")
+    );
+
+    if (peak) {
+      price =
+        peak.price_change_type === "percentage"
+          ? base_price.plus(base_price.mul(peak.price_change_value).div(100))
+          : base_price.plus(new Decimal(peak.price_change_value));
+    } else if ((day === 0 || day === 6) && weekend_peak) {
+      price =
+        weekend_peak.type === "percentage"
+          ? base_price.plus(base_price.mul(weekend_peak.value).div(100))
+          : base_price.plus(new Decimal(weekend_peak.value));
+    }
+
+    total = total.plus(price);
+
+    return {
+      ...item,
+      price: price.toNumber(),
+    };
+  });
+
+  return {
+    dates: availabilityWithPrice,
+    total: total.toNumber(),
+  };
 };
 
 export const findRoomRepository = async (property_id: string) => {
@@ -98,7 +162,9 @@ export const findAllRoomsRepository = async () => {
 
 export const getRoomByPropertyAndNameRepository = async (
   propertyname: string,
-  roomname: string
+  roomname: string,
+  checkIn?: string,
+  checkOut?: string
 ) => {
   return await prisma.rooms.findMany({
     where: {
@@ -121,11 +187,46 @@ export const getRoomByPropertyAndNameRepository = async (
               },
             }
           : {},
+        checkIn && checkOut
+          ? {
+              room_availability: {
+                some: {
+                  date: {
+                    gte: new Date(checkIn),
+                    lt: new Date(checkOut),
+                  },
+                  is_available: true,
+                },
+              },
+            }
+          : {},
       ],
     },
     include: {
       property: true,
       room_images: true,
+      room_availability:
+        checkIn && checkOut
+          ? {
+              where: {
+                date: {
+                  gte: new Date(checkIn),
+                  lt: new Date(checkOut),
+                },
+                is_available: true,
+              },
+              orderBy: { date: "asc" },
+            }
+          : false,
+      peak_season_rates:
+        checkIn && checkOut
+          ? {
+              where: {
+                start_date: { lte: new Date(checkOut) },
+                end_date: { gte: new Date(checkIn) },
+              },
+            }
+          : true,
     },
   });
 };
@@ -139,5 +240,50 @@ export const findRoomByIdRepository = async (id: string) => {
 export const deleteRoomByIdRepository = async (id: string) => {
   return await prisma.rooms.delete({
     where: { id },
+  });
+};
+
+export const updateRoomByIdRepository = async (
+  id: string,
+  data: Partial<RoomsType>
+) => {
+  const updateData: Prisma.roomsUpdateInput = {
+    ...(data.property_id && {
+      property: {
+        connect: { id: data.property_id },
+      },
+    }),
+    name: data.name,
+    description: data.description,
+    base_price: data.base_price,
+    capacity: data.capacity,
+    total_rooms: data.total_rooms,
+    image: data.image,
+    ...(data.room_images && {
+      room_images: {
+        deleteMany: {},
+        create: data.room_images.map((img) => ({ image_url: img.image_url })),
+      },
+    }),
+  };
+
+  return await prisma.rooms.update({
+    where: { id },
+    data: updateData,
+  });
+};
+
+export const getRoomByIdRepository = async (id: string) => {
+  return await prisma.rooms.findUnique({
+    where: { id },
+    select: {
+      name: true,
+      description: true,
+      capacity: true,
+      image: true,
+      total_rooms: true,
+      room_images: true,
+      base_price: true,
+    },
   });
 };

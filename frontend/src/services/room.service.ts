@@ -11,14 +11,23 @@ export const fetchAllRooms = async () => {
 
 export const fetchRoomsByQuery = async (
   propertyname?: string,
-  roomname?: string
+  roomname?: string,
+  checkIn?: string,
+  checkOut?: string
 ) => {
   const response = await axios.get(`${BASE_URL}/room/search`, {
     params: {
       propertyname,
       roomname,
+      checkIn,
+      checkOut,
     },
   });
+  if (!response.data.response || response.data.response.length === 0) {
+    return null;
+  }
+
+  console.log(response.data.response[0]);
   return response.data.response[0];
 };
 
@@ -42,6 +51,24 @@ export const createRoom = async (room: CreateRoomType) => {
     },
   });
 
+  console.log(response.data);
+  return response.data;
+};
+
+export const deleteRoom = async (id: string) => {
+  const response = await axios.delete(`${BASE_URL}/room/delete/${id}`);
+  console.log(response.data);
+  return response.data;
+};
+
+export const fetchRoomById = async (id: string) => {
+  const response = await axios.get(`${BASE_URL}/room/get/${id}`);
+  console.log(response.data);
+  return response.data;
+};
+
+export const editRoom = async (id: string, room: CreateRoomType) => {
+  const response = await axios.patch(`${BASE_URL}/room/edit/${id}`, room);
   console.log(response.data);
   return response.data;
 };

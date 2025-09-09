@@ -56,7 +56,6 @@ export const fetchPropertyById = async (propertyId: string | undefined) => {
   return response.data.property;
 };
 
-// property.services.ts
 export const fetchPropertyByLocation = async (
   latitude: number,
   longitude: number,
@@ -65,7 +64,9 @@ export const fetchPropertyByLocation = async (
   checkOut?: string,
   category?: string,
   minPrice?: number,
-  maxPrice?: number
+  maxPrice?: number,
+  guests?: number,
+  rooms?: number
 ) => {
   const params = new URLSearchParams({
     latitude: latitude.toString(),
@@ -73,16 +74,18 @@ export const fetchPropertyByLocation = async (
     radius: radius.toString(),
   });
 
-  if (checkIn) params.append("checkIn", checkIn);
-  if (checkOut) params.append("checkOut", checkOut);
+  if (checkIn != null && checkIn !== "") params.append("checkIn", checkIn);
+  if (checkOut != null && checkOut !== "") params.append("checkOut", checkOut);
   if (category) params.append("category", category);
   if (minPrice !== undefined) params.append("minPrice", minPrice.toString());
   if (maxPrice !== undefined) params.append("maxPrice", maxPrice.toString());
+  if (guests !== undefined) params.append("guests", guests.toString());
+  if (rooms !== undefined) params.append("rooms", rooms.toString());
 
   const response = await axios.get(
     `${BASE_URL}/property/nearby?${params.toString()}`
   );
-  console.log(response.data);
+
   return response.data;
 };
 
