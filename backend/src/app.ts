@@ -15,6 +15,7 @@ import UserTxRouter from "./routes/user-tx.router";
 import { startAllWorkersAndSchedules } from "./services/scheduler.service";
 import PricingQuoteController from "./controllers/pricing/pricing.controller";
 import PricingRouter from "./routes/pricing.router";
+import ReviewRouter from "./routes/review.router";
 
 const PORT: string | number = process.env.PORT || 4000;
 
@@ -51,6 +52,7 @@ class App {
     const tenantTxRouter = new TenantTxRouter();
     const userTxRouter = new UserTxRouter();
     const pricingRouter = new PricingRouter
+    const reviewRouter = new ReviewRouter
     this.app.get("/", (req: Request, res: Response) => {
       res.status(200).json("<h1> Welcome to Property Renting Web App</h1>");
     });
@@ -62,9 +64,10 @@ class App {
     this.app.use("/payment", tenantTxRouter.getRouter());
     this.app.use("/reservations", userTxRouter.getRouter());
     this.app.use("/pricing", pricingRouter.getRouter())
+    this.app.use("/reviews", reviewRouter.getRouter())
   }
 
-  // errror handling
+  // error handling
   private errorHandler(): void {
     this.app.use(
       (error: any, req: Request, res: Response, next: NextFunction) => {

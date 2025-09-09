@@ -10,17 +10,40 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useRoomSearch } from "@/hooks/useRoom";
 import { formatCurrency } from "@/lib/utils";
 import { PropertyDetailSkeleton } from "../fragment/loading-error/PropertyDetailSkeleton";
 import { DateRange } from "react-day-picker";
+import { format } from "date-fns";
+import { DatePickerWithRange } from "../ui/DatePickerPopover";
+import { GuestPicker } from "../ui/GuestPicker";
+import { ReviewList } from "../reviews/reviews-card";
+
+interface Review {
+  id: string
+  userName: string
+  userAvatar: string
+  yearsOnPlatform: number
+  rating: number
+  date: string
+  content: string
+  isExpanded?: boolean
+}
+
+interface ReviewsCardProps {
+  reviews: Review[]
+  reviewsPerPage?: number
+}
+
 import { DatePickerWithRange } from "../ui/DatePickerPopover";
 import { GuestPicker } from "../ui/GuestPicker";
 import { addDays, format, startOfDay } from "date-fns";
 
 export default function PropertyDetailPage() {
+
   const router = useRouter();
   const params = useSearchParams();
 
@@ -207,6 +230,11 @@ export default function PropertyDetailPage() {
                     </div>
                   </div>
                 </CardContent>
+              </Card>
+              
+              <Card className="px-4 py-6">
+                <h3 className="text-lg font-medium ">Reviews & Ratings</h3>
+                <ReviewList propertyId={propertyId}/>
               </Card>
 
               <Card>

@@ -1,5 +1,6 @@
 import { Prisma } from "../../../prisma/generated/client";
 import { BookingStatus as PrismaBookingStatus} from "../../../prisma/generated/client";
+import { findBookingByIdRepository } from "../../repositories/transaction/tenant-tx.repository";
 
 export type BookingsWhereInput = Prisma.bookingsWhereInput;
 
@@ -23,8 +24,8 @@ export interface Overlapping {
 
 export type FormattedRoom = {
   name: string;
-  check_in_date: string[];
-  check_out_date: string[];
+  check_in_date: string;
+  check_out_date: string;
   guests_count: number;
   quantity: number;
   subtotal: number;
@@ -97,3 +98,7 @@ export type SortStatus = (typeof VALID_SORT)[number];
 export function isValidSort(sort: any): sort is SortStatus {
   return VALID_SORT.includes(sort);
 }
+
+type BookingPayload = Prisma.PromiseReturnType<typeof findBookingByIdRepository>;
+
+export type BookingWithDetails = NonNullable<BookingPayload>

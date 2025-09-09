@@ -1,5 +1,6 @@
 "use client";
 
+import { LeaveReviewForm } from "@/components/dashboard/leave-review";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -13,6 +14,7 @@ import {
   VALID_BOOKING_HISTORY_STATUS,
 } from "@/types/transactions/transactions";
 import { dataTagErrorSymbol } from "@tanstack/react-query";
+import { access } from "fs";
 
 import {
   Search,
@@ -26,58 +28,6 @@ import {
 import { useSearchParams } from "next/navigation";
 import { useMemo } from "react";
 
-// Mock trip history data
-// const tripHistory = [
-//   {
-//     id: "TR001",
-//     property: "Seaside Resort & Spa",
-//     location: "Santorini, Greece",
-//     checkIn: "2024-07-10",
-//     checkOut: "2024-07-17",
-//     guests: 2,
-//     status: "completed",
-//     amount: "$2,450",
-//     rating: 5,
-//     image: "/santorini-resort.png",
-//   },
-//   {
-//     id: "TR002",
-//     property: "Mountain Cabin Retreat",
-//     location: "Aspen, Colorado",
-//     checkIn: "2024-05-20",
-//     checkOut: "2024-05-25",
-//     guests: 4,
-//     status: "completed",
-//     amount: "$1,680",
-//     rating: 4,
-//     image: "/mountain-cabin-aspen.png",
-//   },
-//   {
-//     id: "TR003",
-//     property: "City Center Loft",
-//     location: "Paris, France",
-//     checkIn: "2024-03-15",
-//     checkOut: "2024-03-22",
-//     guests: 3,
-//     status: "completed",
-//     amount: "$1,890",
-//     rating: 5,
-//     image: "/paris-loft-apartment.png",
-//   },
-//   {
-//     id: "TR004",
-//     property: "Desert Oasis Villa",
-//     location: "Dubai, UAE",
-//     checkIn: "2024-01-08",
-//     checkOut: "2024-01-15",
-//     guests: 6,
-//     status: "cancelled",
-//     amount: "$3,200",
-//     rating: null,
-//     image: "/dubai-villa-desert.png",
-//   },
-// ]
-
 const HistoryTripsPage = () => {
   const searchParams = useSearchParams();
 
@@ -90,23 +40,6 @@ const HistoryTripsPage = () => {
       default:
         return "bg-gray-100 text-gray-700 hover:bg-gray-100";
     }
-  };
-
-  const renderStars = (rating: number | null) => {
-    if (!rating) return null;
-    return (
-      <div className="flex items-center gap-1">
-        {[...Array(5)].map((_, i) => (
-          <Star
-            key={i}
-            className={`w-4 h-4 ${
-              i < rating ? "fill-yellow-400 text-yellow-400" : "text-gray-300"
-            }`}
-          />
-        ))}
-        <span className="text-sm text-gray-600 ml-1">({rating}/5)</span>
-      </div>
-    );
   };
 
   /**
@@ -203,7 +136,7 @@ const HistoryTripsPage = () => {
                         </div>
                         <div className="flex items-center text-gray-600">
                           <Users className="w-4 h-4 mr-2" />
-                          <span>{trip.booking_rooms.guests_count} guests</span>
+                          <span>{trip.booking_rooms.reduce((acc, br) => acc + br.guests_count, 0)} guests</span>
                         </div>
                         <div className="flex items-center text-gray-600">
                           <span className="font-semibold text-gray-900">
@@ -224,14 +157,14 @@ const HistoryTripsPage = () => {
                         >
                           View Details
                         </Button>
-                        {trip.status === "confirmed" && (
+                        {trip.status === "confirmed" && (new Date(trip.check_out_date) < new Date()) && (
                           <>
-                            <Button variant="outline" size="sm">
-                              Download Receipt
-                            </Button>
                             <Button variant="outline" size="sm">
                               Book Again
                             </Button>
+                            
+                              <LeaveReviewForm bookingId={trip.id}/> 
+                            
                             {/* {!trip.rating && (
                               <Button variant="outline" size="sm">
                                 Leave Review

@@ -56,11 +56,11 @@ const BookingsPage = () => {
     const search = current.toString();
     const query = search ? `?${search}` : "";
 
-    router.push(`/dashboard/bookings-tenant${query}`);
+    router.push(`/dashboard/bookings${query}`);
   };
 
   const clearFilters = () => {
-    router.push(`/dashboard/bookings-tenant`);
+    router.push(`/dashboard/bookings`);
   };
 
   return (

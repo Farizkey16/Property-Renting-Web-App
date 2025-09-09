@@ -221,6 +221,11 @@ class UserTransactions {
             },
           },
           status: true,
+          _count: {
+            select: {
+              reviews: true,
+            },
+          },
         },
       });
 

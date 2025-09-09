@@ -77,6 +77,10 @@ export default function BookingDetailsForm() {
   const guests = searchParams.get("guests");
   const rooms = searchParams.get("rooms")
 
+  if (!startDateString || !endDateString || !property_id || !room_id || !guests || !rooms) {
+    throw new Error("Query does not exist.")
+  }
+
   // Parse for Display
   const startDate = startDateString ? parseISO(startDateString) : new Date();
   const endDate = endDateString ? parseISO(endDateString) : new Date();
@@ -85,6 +89,8 @@ export default function BookingDetailsForm() {
 
   const { data: property, isLoading: isLoadingProperty } =
     usePropertyById(property_id);
+
+
   const { data: priceDetails, isLoading: isLoadingPrice } = usePriceQuote(
     room_id!,
     startDateString!,
@@ -497,42 +503,6 @@ export default function BookingDetailsForm() {
                 </div>
               </CardContent>
             </Card>
-
-            {/* Policies */}
-            {/* <Card className="py-6">
-              <CardHeader>
-                <CardTitle className="text-sm font-semibold flex items-center gap-2">
-                  <Shield className="w-4 h-4" />
-                  Cancellation and Reschedule Policy
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="p-4 pt-0 space-y-3 text-sm">
-                <div className="flex items-start gap-2">
-                  <X className="w-4 h-4 text-gray-500 mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">
-                    This reservation is non-refundable.
-                  </span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <X className="w-4 h-4 text-gray-500 mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700">Non-reschedulable</span>
-                </div>
-
-                <Separator />
-
-                <div>
-                  <h5 className="font-medium mb-2">Accommodation Policy</h5>
-                </div>
-
-                <div>
-                  <h5 className="font-medium mb-2">Facility</h5>
-                  <p className="text-gray-600">
-                    Outdoor Timber Deck closed temporarily from 21-7-2025 to
-                    15-9-2025.
-                  </p>
-                </div>
-              </CardContent>
-            </Card> */}
           </div>
         </div>
       </div>

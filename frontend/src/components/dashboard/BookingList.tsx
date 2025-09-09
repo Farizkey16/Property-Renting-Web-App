@@ -1,6 +1,6 @@
 import { Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { BookingCard } from "./BookingCard";
+import { BookingCard, BookingCardProps } from "./BookingCard";
 import { Booking } from "@/types/transactions/transactions";
 
 const BookingCardSkeleton = () => (
@@ -11,12 +11,14 @@ type BookingListProps = {
   bookings?: Booking[];
   isLoading: boolean;
   isError: boolean;
+  role?: 'tenant' | 'user'
 };
 
 export const BookingList = ({
   bookings,
   isLoading,
   isError,
+  role
 }: BookingListProps) => {
   if (isLoading) {
     return (
@@ -58,7 +60,7 @@ export const BookingList = ({
   return (
     <div className="grid gap-4">
       {bookings.map((booking) => (
-        <BookingCard key={booking.id} booking={booking} />
+        <BookingCard key={booking.id} booking={booking} role={role!}/>
       ))}
     </div>
   );

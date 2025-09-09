@@ -2315,6 +2315,318 @@ D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\prope
 Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
 
 Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. {"code":"P1001","meta":{"modelName":"properties","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-07 01:30:08 [ERROR]: POST /reservations/create | STATUS: Room is not available | MESSAGE: {"statusCode":409,"success":false,"message":"Room is not available"}
+2025-09-07 01:31:31 [ERROR]: PATCH /reservations/proof/b3cd6476-1b92-4cbc-8729-194c31562556 | STATUS: Unexpected field | MESSAGE: {"name":"MulterError","message":"Unexpected field","code":"LIMIT_UNEXPECTED_FILE","field":"proofImage","storageErrors":[]}
+2025-09-07 01:31:48 [ERROR]: PATCH /reservations/proof/b3cd6476-1b92-4cbc-8729-194c31562556 | STATUS: Unexpected field | MESSAGE: {"name":"MulterError","message":"Unexpected field","code":"LIMIT_UNEXPECTED_FILE","field":"proofImage","storageErrors":[]}
+2025-09-07 01:38:42 [ERROR]: PATCH /reservations/proof/dd731114-b990-4f0f-92f8-b5c4852b9f53 | STATUS: Unexpected field | MESSAGE: {"name":"MulterError","message":"Unexpected field","code":"LIMIT_UNEXPECTED_FILE","field":"proofImage","storageErrors":[]}
+2025-09-07 01:46:43 [ERROR]: PATCH /reservations/proof/dd731114-b990-4f0f-92f8-b5c4852b9f53 | STATUS: Unexpected field | MESSAGE: {"name":"MulterError","message":"Unexpected field","code":"LIMIT_UNEXPECTED_FILE","field":"proofImage","storageErrors":[]}
+2025-09-07 01:47:44 [ERROR]: PATCH /reservations/proof/dd731114-b990-4f0f-92f8-b5c4852b9f53 | STATUS: Unexpected field | MESSAGE: {"name":"MulterError","message":"Unexpected field","code":"LIMIT_UNEXPECTED_FILE","field":"proofImage","storageErrors":[]}
+2025-09-07 01:51:42 [ERROR]: GET /reservations/dd731114-b990-4f0f-92f8-b5c4852b9f53 | STATUS: 
+Invalid `prisma.bookings.findFirst()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/repositories/transaction/tenant-tx.repository.ts:249:26
+
+  246   where.user_id = identity.userId;
+  247 }
+  248 
+→ 249 return prisma.bookings.findFirst(
+Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"code":"P1001","meta":{"modelName":"bookings","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-07 01:54:29 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-07 01:57:51 [ERROR]: GET /payment/orders | STATUS: Cannot read properties of undefined (reading 'findMany') | MESSAGE: {}
+2025-09-07 01:57:52 [ERROR]: GET /payment/orders | STATUS: Cannot read properties of undefined (reading 'findMany') | MESSAGE: {}
+2025-09-07 01:57:54 [ERROR]: GET /payment/orders | STATUS: Cannot read properties of undefined (reading 'findMany') | MESSAGE: {}
+2025-09-07 01:57:58 [ERROR]: GET /payment/orders | STATUS: Cannot read properties of undefined (reading 'findMany') | MESSAGE: {}
+2025-09-07 02:25:36 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-07 02:58:11 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
+2025-09-07 02:58:13 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
+2025-09-07 02:58:17 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
+2025-09-07 02:58:22 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
+2025-09-07 02:58:38 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
+2025-09-07 02:58:50 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
+2025-09-07 02:59:44 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
+2025-09-07 03:00:13 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
+2025-09-07 03:00:17 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
+2025-09-07 03:00:20 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
+2025-09-07 03:00:23 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
+2025-09-07 03:00:28 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
+2025-09-07 03:02:51 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
+2025-09-07 03:02:53 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
+2025-09-07 03:02:56 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
+2025-09-07 03:03:01 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
+2025-09-07 03:03:23 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
+2025-09-07 03:03:25 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
+2025-09-07 03:03:28 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
+2025-09-07 03:03:35 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
+2025-09-07 03:03:43 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
+2025-09-07 03:03:57 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
+2025-09-07 03:03:59 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
+2025-09-07 03:04:02 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
+2025-09-07 03:04:08 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
+2025-09-07 03:10:29 [ERROR]: GET /payment/orders/tenant | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-07 03:10:30 [ERROR]: GET /payment/orders/tenant | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-07 03:10:32 [ERROR]: GET /payment/orders/tenant | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-07 03:10:36 [ERROR]: GET /payment/orders/tenant | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-07 03:10:40 [ERROR]: GET /payment/orders/tenant | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-07 03:12:34 [ERROR]: GET /payment/orders/tenant | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-07 03:12:42 [ERROR]: GET /payment/orders/tenant | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-07 03:12:43 [ERROR]: GET /payment/orders/tenant | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-07 03:12:45 [ERROR]: GET /payment/orders/tenant | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-07 03:12:49 [ERROR]: GET /payment/orders/tenant | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-07 03:13:28 [ERROR]: GET /payment/orders/tenant | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-07 03:13:29 [ERROR]: GET /payment/orders/tenant | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-07 03:13:31 [ERROR]: GET /payment/orders/tenant | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-07 03:13:35 [ERROR]: GET /payment/orders/tenant | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-07 03:14:51 [ERROR]: GET /payment/orders/tenant | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-07 03:14:52 [ERROR]: GET /payment/orders/tenant | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-07 03:14:54 [ERROR]: GET /payment/orders/tenant | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-07 03:14:58 [ERROR]: GET /payment/orders/tenant | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-07 03:15:38 [ERROR]: GET /payment/orders/tenant | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-07 03:15:39 [ERROR]: GET /payment/orders/tenant | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-07 03:15:41 [ERROR]: GET /payment/orders/tenant | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-07 03:15:45 [ERROR]: GET /payment/orders/tenant | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
+2025-09-07 03:16:19 [ERROR]: GET /payment/orders/tenant | STATUS: Cannot read properties of undefined (reading 'findMany') | MESSAGE: {}
+2025-09-07 03:16:20 [ERROR]: GET /payment/orders/tenant | STATUS: Cannot read properties of undefined (reading 'findMany') | MESSAGE: {}
+2025-09-07 03:16:22 [ERROR]: GET /payment/orders/tenant | STATUS: Cannot read properties of undefined (reading 'findMany') | MESSAGE: {}
+2025-09-07 03:16:26 [ERROR]: GET /payment/orders/tenant | STATUS: Cannot read properties of undefined (reading 'findMany') | MESSAGE: {}
+2025-09-07 03:17:26 [ERROR]: GET /payment/orders/tenant | STATUS: Cannot read properties of undefined (reading 'findMany') | MESSAGE: {}
+2025-09-07 03:17:31 [ERROR]: GET /payment/orders/tenant | STATUS: Cannot read properties of undefined (reading 'findMany') | MESSAGE: {}
+2025-09-07 03:17:32 [ERROR]: GET /payment/orders/tenant | STATUS: Cannot read properties of undefined (reading 'findMany') | MESSAGE: {}
+2025-09-07 03:17:34 [ERROR]: GET /payment/orders/tenant | STATUS: Cannot read properties of undefined (reading 'findMany') | MESSAGE: {}
+2025-09-07 03:17:39 [ERROR]: GET /payment/orders/tenant | STATUS: Cannot read properties of undefined (reading 'findMany') | MESSAGE: {}
+2025-09-07 03:24:17 [ERROR]: GET /payment/orders/tenant | STATUS: Cannot read properties of undefined (reading 'findMany') | MESSAGE: {}
+2025-09-07 03:24:20 [ERROR]: GET /payment/orders/tenant | STATUS: Cannot read properties of undefined (reading 'findMany') | MESSAGE: {}
+2025-09-07 03:24:24 [ERROR]: GET /payment/orders/tenant | STATUS: Cannot read properties of undefined (reading 'findMany') | MESSAGE: {}
+2025-09-07 03:24:29 [ERROR]: GET /payment/orders/tenant | STATUS: Cannot read properties of undefined (reading 'findMany') | MESSAGE: {}
+2025-09-07 03:25:25 [ERROR]: GET /payment/orders/tenant | STATUS: 
+Invalid `db.bookings.findMany()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/repositories/transaction/tenant-tx.repository.ts:223:39
+
+  220   tx?: Prisma.TransactionClient
+  221 ) => {
+  222   const db = tx ?? prisma;
+→ 223   const orderList = await db.bookings.findMany({
+          where: {
+            property: {
+              tenant_id: "44773eca-8e8c-4696-a2c4-b2cf7d792612"
+            },
+            status: {
+              in: [
+                "waiting_payment"
+              ]
+            }
+          },
+          orderBy: {
+            createdAt: "asc",
+            ~~~~~~~~~
+        ?   id?: SortOrder,
+        ?   user_id?: SortOrder,
+        ?   property_id?: SortOrder,
+        ?   status?: SortOrder,
+        ?   check_in_date?: SortOrder,
+        ?   check_out_date?: SortOrder,
+        ?   total_price?: SortOrder,
+        ?   payment_deadline?: SortOrder,
+        ?   created_at?: SortOrder,
+        ?   updated_at?: SortOrder,
+        ?   amount?: SortOrder,
+        ?   paid_at?: SortOrder | SortOrderInput,
+        ?   proof_image?: SortOrder | SortOrderInput,
+        ?   booking_rooms?: booking_roomsOrderByRelationAggregateInput,
+        ?   property?: propertiesOrderByWithRelationInput,
+        ?   user?: usersOrderByWithRelationInput,
+        ?   reviews?: reviewsOrderByRelationAggregateInput
+          }
+        })
+
+Unknown argument `createdAt`. Did you mean `created_at`? Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-07 03:25:27 [ERROR]: GET /payment/orders/tenant | STATUS: 
+Invalid `db.bookings.findMany()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/repositories/transaction/tenant-tx.repository.ts:223:39
+
+  220   tx?: Prisma.TransactionClient
+  221 ) => {
+  222   const db = tx ?? prisma;
+→ 223   const orderList = await db.bookings.findMany({
+          where: {
+            property: {
+              tenant_id: "44773eca-8e8c-4696-a2c4-b2cf7d792612"
+            },
+            status: {
+              in: [
+                "waiting_payment"
+              ]
+            }
+          },
+          orderBy: {
+            createdAt: "asc",
+            ~~~~~~~~~
+        ?   id?: SortOrder,
+        ?   user_id?: SortOrder,
+        ?   property_id?: SortOrder,
+        ?   status?: SortOrder,
+        ?   check_in_date?: SortOrder,
+        ?   check_out_date?: SortOrder,
+        ?   total_price?: SortOrder,
+        ?   payment_deadline?: SortOrder,
+        ?   created_at?: SortOrder,
+        ?   updated_at?: SortOrder,
+        ?   amount?: SortOrder,
+        ?   paid_at?: SortOrder | SortOrderInput,
+        ?   proof_image?: SortOrder | SortOrderInput,
+        ?   booking_rooms?: booking_roomsOrderByRelationAggregateInput,
+        ?   property?: propertiesOrderByWithRelationInput,
+        ?   user?: usersOrderByWithRelationInput,
+        ?   reviews?: reviewsOrderByRelationAggregateInput
+          }
+        })
+
+Unknown argument `createdAt`. Did you mean `created_at`? Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-07 03:25:31 [ERROR]: GET /payment/orders/tenant | STATUS: 
+Invalid `db.bookings.findMany()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/repositories/transaction/tenant-tx.repository.ts:223:39
+
+  220   tx?: Prisma.TransactionClient
+  221 ) => {
+  222   const db = tx ?? prisma;
+→ 223   const orderList = await db.bookings.findMany({
+          where: {
+            property: {
+              tenant_id: "44773eca-8e8c-4696-a2c4-b2cf7d792612"
+            },
+            status: {
+              in: [
+                "waiting_payment"
+              ]
+            }
+          },
+          orderBy: {
+            createdAt: "asc",
+            ~~~~~~~~~
+        ?   id?: SortOrder,
+        ?   user_id?: SortOrder,
+        ?   property_id?: SortOrder,
+        ?   status?: SortOrder,
+        ?   check_in_date?: SortOrder,
+        ?   check_out_date?: SortOrder,
+        ?   total_price?: SortOrder,
+        ?   payment_deadline?: SortOrder,
+        ?   created_at?: SortOrder,
+        ?   updated_at?: SortOrder,
+        ?   amount?: SortOrder,
+        ?   paid_at?: SortOrder | SortOrderInput,
+        ?   proof_image?: SortOrder | SortOrderInput,
+        ?   booking_rooms?: booking_roomsOrderByRelationAggregateInput,
+        ?   property?: propertiesOrderByWithRelationInput,
+        ?   user?: usersOrderByWithRelationInput,
+        ?   reviews?: reviewsOrderByRelationAggregateInput
+          }
+        })
+
+Unknown argument `createdAt`. Did you mean `created_at`? Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-07 03:25:36 [ERROR]: GET /payment/orders/tenant | STATUS: 
+Invalid `db.bookings.findMany()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/repositories/transaction/tenant-tx.repository.ts:223:39
+
+  220   tx?: Prisma.TransactionClient
+  221 ) => {
+  222   const db = tx ?? prisma;
+→ 223   const orderList = await db.bookings.findMany({
+          where: {
+            property: {
+              tenant_id: "44773eca-8e8c-4696-a2c4-b2cf7d792612"
+            },
+            status: {
+              in: [
+                "waiting_payment"
+              ]
+            }
+          },
+          orderBy: {
+            createdAt: "asc",
+            ~~~~~~~~~
+        ?   id?: SortOrder,
+        ?   user_id?: SortOrder,
+        ?   property_id?: SortOrder,
+        ?   status?: SortOrder,
+        ?   check_in_date?: SortOrder,
+        ?   check_out_date?: SortOrder,
+        ?   total_price?: SortOrder,
+        ?   payment_deadline?: SortOrder,
+        ?   created_at?: SortOrder,
+        ?   updated_at?: SortOrder,
+        ?   amount?: SortOrder,
+        ?   paid_at?: SortOrder | SortOrderInput,
+        ?   proof_image?: SortOrder | SortOrderInput,
+        ?   booking_rooms?: booking_roomsOrderByRelationAggregateInput,
+        ?   property?: propertiesOrderByWithRelationInput,
+        ?   user?: usersOrderByWithRelationInput,
+        ?   reviews?: reviewsOrderByRelationAggregateInput
+          }
+        })
+
+Unknown argument `createdAt`. Did you mean `created_at`? Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-07 03:43:59 [ERROR]: PATCH /reservations/cancel/dd731114-b990-4f0f-92f8-b5c4852b9f53 | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
+2025-09-07 04:05:09 [ERROR]: PATCH /payment/cancel/dd731114-b990-4f0f-92f8-b5c4852b9f53 | STATUS: Cannot read properties of undefined (reading 'bookings') | MESSAGE: {}
+2025-09-07 04:06:50 [ERROR]: PATCH /payment/cancel/dd731114-b990-4f0f-92f8-b5c4852b9f53 | STATUS: Cannot read properties of undefined (reading 'bookings') | MESSAGE: {}
+2025-09-07 04:08:08 [ERROR]: PATCH /payment/cancel/dd731114-b990-4f0f-92f8-b5c4852b9f53 | STATUS: The booking does not exist. | MESSAGE: {"statusCode":404,"success":false,"message":"The booking does not exist."}
+2025-09-07 04:11:20 [ERROR]: PATCH /payment/cancel/dd731114-b990-4f0f-92f8-b5c4852b9f53 | STATUS: Cannot read properties of undefined (reading 'bookings') | MESSAGE: {}
+2025-09-07 04:11:33 [ERROR]: PATCH /payment/cancel/dd731114-b990-4f0f-92f8-b5c4852b9f53 | STATUS: Cannot read properties of undefined (reading 'bookings') | MESSAGE: {}
+2025-09-07 04:12:20 [ERROR]: PATCH /payment/cancel/b3cd6476-1b92-4cbc-8729-194c31562556 | STATUS: Cannot read properties of undefined (reading 'bookings') | MESSAGE: {}
+2025-09-07 04:12:41 [ERROR]: PATCH /payment/cancel/dd731114-b990-4f0f-92f8-b5c4852b9f53 | STATUS: Cannot read properties of undefined (reading 'bookings') | MESSAGE: {}
+2025-09-07 04:13:54 [ERROR]: PATCH /payment/cancel/dd731114-b990-4f0f-92f8-b5c4852b9f53 | STATUS: Cannot read properties of undefined (reading 'bookings') | MESSAGE: {}
+2025-09-07 04:42:00 [ERROR]: PATCH /payment/accept/c8e672de-8f47-4d6a-81f2-b4b97ab369b5 | STATUS: 
+Invalid `prisma.users.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/repositories/user/user.respository.ts:43:35
+
+  40   });
+  41 };
+  42 export const getEmailAndFullnameById = async (userId: string) => {
+→ 43   const user = await prisma.users.findUnique({
+         where: {
+           id: {
+             user_id: "c54675ef-4f94-4ccd-99c9-14225ae8fb6e"
+           }
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+         },
+         select: {
+           email: true,
+           full_name: true
+         }
+       })
+
+Argument `id`: Invalid value provided. Expected String, provided Object. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-07 04:44:48 [ERROR]: PATCH /payment/accept/c8e672de-8f47-4d6a-81f2-b4b97ab369b5 | STATUS: 
+Invalid `prisma.users.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/repositories/user/user.respository.ts:43:35
+
+  40   });
+  41 };
+  42 export const getEmailAndFullnameById = async (userId: string) => {
+→ 43   const user = await prisma.users.findUnique({
+         where: {
+           id: {
+             user_id: "c54675ef-4f94-4ccd-99c9-14225ae8fb6e"
+           }
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+         },
+         select: {
+           email: true,
+           full_name: true
+         }
+       })
+
+Argument `id`: Invalid value provided. Expected String, provided Object. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-07 04:47:29 [ERROR]: PATCH /payment/accept/c8e672de-8f47-4d6a-81f2-b4b97ab369b5 | STATUS: Invalid time value | MESSAGE: {}
+2025-09-07 04:48:08 [ERROR]: PATCH /payment/accept/c8e672de-8f47-4d6a-81f2-b4b97ab369b5 | STATUS: Invalid time value | MESSAGE: {}
+2025-09-07 05:47:26 [ERROR]: PATCH /payment/accept/d34b1bfc-ef2b-4bd7-9488-fcfb77d92d9b | STATUS: Booking not found, not awaiting confirmation, or you are not authorized. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found, not awaiting confirmation, or you are not authorized."}
+2025-09-07 05:47:47 [ERROR]: PATCH /payment/accept/d34b1bfc-ef2b-4bd7-9488-fcfb77d92d9b | STATUS: Booking not found, not awaiting confirmation, or you are not authorized. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found, not awaiting confirmation, or you are not authorized."}
+2025-09-07 05:48:02 [ERROR]: PATCH /payment/accept/d34b1bfc-ef2b-4bd7-9488-fcfb77d92d9b | STATUS: Booking not found, not awaiting confirmation, or you are not authorized. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found, not awaiting confirmation, or you are not authorized."}
+2025-09-07 05:50:07 [ERROR]: PATCH /payment/accept/d34b1bfc-ef2b-4bd7-9488-fcfb77d92d9b | STATUS: Invalid time value | MESSAGE: {}
+2025-09-08 00:28:30 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-08 01:10:47 [ERROR]: POST /reservations/c8e672de-8f47-4d6a-81f2-b4b97ab369b5/reviews | STATUS: Review already submitted. | MESSAGE: {"statusCode":409,"success":false,"message":"Review already submitted."}
+2025-09-08 03:56:07 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-08 03:56:15 [ERROR]: POST /auth/login | STATUS: Invalid password | MESSAGE: {"statusCode":401,"success":false,"message":"Invalid password"}
 2025-09-07 12:03:56 [ERROR]: GET /property/nearby | STATUS: 
 Invalid `prisma.$queryRawUnsafe()` invocation:
 

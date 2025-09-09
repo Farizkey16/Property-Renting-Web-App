@@ -3,14 +3,17 @@ import PropertyController from "../controllers/property/property.controller";
 import { verifyToken } from "../middleware/VerifyToken";
 import { onlyTenant } from "../middleware/by-role/tenantMiddleware";
 import { uploaderMemory } from "../middleware/uploader";
+import BookingReviews from "../controllers/reviews/review.controller";
 
 class PropertyRouter {
   private route: Router;
   private propertyController: PropertyController;
+  private reviewController: BookingReviews;
 
   constructor() {
     this.route = Router();
     this.propertyController = new PropertyController();
+    this.reviewController = new BookingReviews;
     this.initializeRoutes();
   }
 
@@ -23,6 +26,7 @@ class PropertyRouter {
       this.propertyController.createProperty
     );
     this.route.get("/all", this.propertyController.getAllProperties);
+    this.route.get("/:propertyId/reviews", this.reviewController.getReviews)
     this.route.get("/get/:id", this.propertyController.getPropertyById);
     this.route.get("/nearby", this.propertyController.getPropertyByLocation);
     this.route.get(

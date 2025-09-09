@@ -3,14 +3,17 @@ import TenantController from "../controllers/tenant/tenant.controller";
 import { onlyTenant } from "../middleware/by-role/tenantMiddleware";
 import { verifyToken } from "../middleware/VerifyToken";
 import { uploaderMemory } from "../middleware/uploader";
+import SalesReport from "../controllers/tenant-report/tenant-report.controller";
 
 class TenantRouter {
   private route: Router;
   private tenantController: TenantController;
+  private salesReport: SalesReport;
 
   constructor() {
     this.route = Router();
     this.tenantController = new TenantController();
+    this.salesReport = new SalesReport();
     this.initializeRoutes();
   }
 
@@ -25,6 +28,11 @@ class TenantRouter {
       verifyToken,
       uploaderMemory().single("logo"),
       this.tenantController.updateTenant
+    );
+    this.route.get(
+      "/sales-report",
+      verifyToken,
+      this.salesReport.getSalesReport
     );
   }
   public getRouter(): Router {

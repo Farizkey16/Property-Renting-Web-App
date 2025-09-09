@@ -1,7 +1,7 @@
 "use client";
 
 import { Card, CardContent, CardHeader} from "@/components/ui/card";
-import { useBookings } from "@/hooks/useBookings";
+import { useBookings, useTenantBookings, useUserBookings } from "@/hooks/useBookings";
 import { useMemo } from "react";
 import { useFetchMe } from "@/hooks/useUser";
 import type { FetchBookingsParams } from "@/services/transactions.services";
@@ -40,7 +40,10 @@ const BookingsPage = () => {
     };
   }, [searchParams]);
 
-  const { data: bookings, isLoading, isError } = useBookings(filters);
+  const userQuery = useUserBookings(filters, { enabled: role === 'user'});
+  const tenantQuery = useTenantBookings(filters, { enabled: role === 'tenant'})
+
+  const {data: bookings, isLoading, isError} = role === 'tenant' ? tenantQuery : userQuery
 
   type FilterKeys = keyof FetchBookingsParams;
 
@@ -79,6 +82,7 @@ const BookingsPage = () => {
             bookings={bookings}
             isLoading={isLoading}
             isError={isError}
+            role={role}
           />
         </CardContent>
       </Card>

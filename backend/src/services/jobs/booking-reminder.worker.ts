@@ -68,8 +68,8 @@ export const bookingReminderHandler = async (job: Job<ReminderJobType>[]) => {
             propertyName: booking.property.name,
             rooms: booking.booking_rooms.map(room => ({
                 name: room.room.name,
-                check_in_date: [room.check_in_date.toISOString().split("T")[0]],
-                check_out_date: [room.check_out_date.toISOString().split("T")[0]],
+                check_in_date: room.check_in_date.toISOString().split("T")[0],
+                check_out_date: room.check_out_date.toISOString().split("T")[0],
                 guests_count: room.guests_count,
                 quantity: room.quantity,
                 subtotal: typeof room.subtotal === "number" ? room.subtotal : Number(room.subtotal),

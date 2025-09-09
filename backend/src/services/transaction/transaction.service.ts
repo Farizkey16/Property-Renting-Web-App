@@ -18,6 +18,7 @@ import {
   FormattedRoom,
   BookingTemplateData,
   BookingRoomCompleteType,
+  BookingWithDetails,
 } from "../../types/transaction/transactions.types";
 import { NextFunction } from "express";
 import { handleUpload } from "../../config/cloudinary";
@@ -51,31 +52,32 @@ export const availableRooms = (
 };
 
 export const sendUserBookingConfirmation = async (
-  bookingId: string,
-  userId: string,
-  bookingRooms: BookingRoomType[]
+  booking: BookingWithDetails
 ) => {
-  const bookingRoomsFromDb = await findBookingRoomsByBookingId(bookingId);
-  const user = await getEmailAndFullnameById(userId);
-  const propertyName = bookingRoomsFromDb[0].room.property.name;
+  
+  const user = booking.user
+  const propertyName = booking.property.name
+
+  if (!user || !propertyName || booking.booking_rooms.length === 0) {
+      throw new AppError("Cannot send confirmation: booking data is incomplete.", 500);
+  }
 
   const formattedRooms: FormattedRoom[] = (
-    bookingRoomsFromDb as BookingRoomCompleteType[]
-  ).map((dbRoom) => {
+    booking.booking_rooms.map((dbRoom) => {
     return {
       name: dbRoom.room.name,
       room_id: dbRoom.room_id,
-      check_in_date: dbRoom.check_in_date.toISOString().split("T"),
-      check_out_date: dbRoom.check_out_date.toISOString().split("T"),
+      check_in_date: dbRoom.check_in_date.toISOString().split("T")[0],
+      check_out_date: dbRoom.check_out_date.toISOString().split("T")[0],
       guests_count: dbRoom.guests_count,
       quantity: dbRoom.quantity,
-      subtotal: dbRoom.subtotal,
+      subtotal: Number(dbRoom.subtotal),
     };
-  });
+  }));
 
   const templateData: BookingTemplateData = {
-    guestName: user.fullname,
-    booking_id: bookingId,
+    guestName: user.full_name,
+    booking_id: booking.id,
     propertyName: propertyName,
     rooms: formattedRooms,
   };
@@ -83,7 +85,7 @@ export const sendUserBookingConfirmation = async (
   await sendEmail(
     user.email,
     "Your Booking Details",
-    bookingRooms.length > 1
+    formattedRooms.length > 1
       ? BOOKING_CONFIRMATION_TEMPLATE_MULTIPLE(templateData)
       : BOOKING_CONFIRMATION_TEMPLATE_SINGLE(templateData)
   );
@@ -131,8 +133,8 @@ export const sendRejectionNotification = async (
     return {
       name: dbRoom.room.name,
       room_id: dbRoom.room_id,
-      check_in_date: dbRoom.check_in_date.toISOString().split("T"),
-      check_out_date: dbRoom.check_out_date.toISOString().split("T"),
+      check_in_date: dbRoom.check_in_date.toISOString().split("T")[0],
+      check_out_date: dbRoom.check_out_date.toISOString().split("T")[0],
       guests_count: dbRoom.guests_count,
       quantity: dbRoom.quantity,
       subtotal: dbRoom.subtotal,

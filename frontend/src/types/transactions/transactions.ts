@@ -7,6 +7,7 @@ export interface Booking {
     | "confirmed"
     | "canceled"
     | "canceled_by_tenant"
+    | "waiting_confirmation"
     | "expired";
   check_in_date: string;
   check_out_date: string;

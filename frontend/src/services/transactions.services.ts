@@ -103,7 +103,7 @@ export const fetchUserBookingById = async (bookingId: string) => {
 };
 
 export const fetchUserBookings = async (filters: FetchBookingsParams) => {
-  const endpoint = `${BASE_URL}/reservations/get`; // New, specific endpoint
+  const endpoint = `${BASE_URL}/reservations/get`;
   const response = await axios.get(endpoint, {
     params: filters,
     withCredentials: true,
@@ -112,7 +112,7 @@ export const fetchUserBookings = async (filters: FetchBookingsParams) => {
 };
 
 export const fetchTenantBookings = async (filters: FetchBookingsParams) => {
-  const endpoint = `${BASE_URL}/payment/orders`;
+  const endpoint = `${BASE_URL}/payment/orders/tenant`;
   const response = await axios.get(endpoint, {
     params: filters,
     withCredentials: true,
@@ -120,7 +120,7 @@ export const fetchTenantBookings = async (filters: FetchBookingsParams) => {
   return response.data.data;
 };
 
-export const cancelBookingById = async (id: string) => {
+export const userCancelBookingById = async (id: string) => {
   const response = await axios.patch(
     `${BASE_URL}/reservations/cancel/${id}`,
     {},
@@ -130,3 +130,52 @@ export const cancelBookingById = async (id: string) => {
   );
   return response.data;
 };
+
+export const tenantCancelBookingById = async (id: string) => {
+  const response = await axios.patch(`${BASE_URL}/payment/cancel/${id}`, {}, {
+    withCredentials: true
+  })
+  return response.data
+}
+
+export const paymentProofUpload = async (payload: {
+  bookingId: string;
+  file: File;
+}) => {
+  const { bookingId, file } = payload;
+
+  if (!bookingId || !file) {
+    throw new Error("Booking ID and file are required for upload.");
+  }
+
+  const formData = new FormData();
+
+  formData.append("proofImage", file);
+
+  try {
+    const endpoint = `${BASE_URL}/reservations/proof/${bookingId}`;
+    const response = await axios.patch(endpoint, formData, {
+      headers: {
+      },
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Failed to upload payment proof:", error);
+    throw new Error("Failed to upload payment proof. Please try again.");
+  }
+};
+
+export const tenantAcceptBookingById = async (id: string) => {
+  const response = await axios.patch(`${BASE_URL}/payment/accept/${id}`, {}, {
+    withCredentials: true
+  })
+  return response.data
+}
+
+export const tenantRejectBookingById = async (id: string) => {
+  const response = await axios.patch(`${BASE_URL}/payment/reject/${id}`, {}, {
+    withCredentials: true
+  })
+  return response.data
+}

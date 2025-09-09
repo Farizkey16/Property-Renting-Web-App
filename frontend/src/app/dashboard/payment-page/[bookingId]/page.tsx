@@ -15,17 +15,21 @@ import {
   Shield,
   FileText,
 } from "lucide-react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import {
   useBookings,
   useBookingById,
   useUserBookingByQuery,
+  useUploadProofMutation,
 } from "@/hooks/useBookings";
 import { format, parseISO } from "date-fns";
 import { formatCurrency } from "@/lib/utils";
 import { usePriceQuote } from "@/hooks/usePriceQuote";
+import { paymentProofUpload } from "@/services/transactions.services";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 
-type PaymentPageParams = {
+export type PaymentPageParams = {
   bookingId: string;
 };
 
@@ -34,8 +38,9 @@ export default function PaymentPage() {
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const params = useParams<PaymentPageParams>();
+  const uploadMutation = useUploadProofMutation();
+  const router = useRouter()
 
-  
   // Fetch ID
   const bookingId = params.bookingId;
 
@@ -48,59 +53,59 @@ export default function PaymentPage() {
 
   // Data Parsing
 
-  let startDateDisplay = "Date not available"
-  let endDateDisplay = "Date not available"
-  let totalPriceDisplay = "Calculating..."
-  
+  let startDateDisplay = "Date not available";
+  let endDateDisplay = "Date not available";
+  let totalPriceDisplay = "Calculating...";
+
   if (booking?.check_in_date) {
-    const startDateObject = parseISO(booking.check_in_date)
-    startDateDisplay = format(startDateObject, "eee, d MMM yyyy")
+    const startDateObject = parseISO(booking.check_in_date);
+    startDateDisplay = format(startDateObject, "eee, d MMM yyyy");
   }
 
   if (booking?.check_out_date) {
-    const endDateObject = parseISO(booking.check_out_date)
-    endDateDisplay = format(endDateObject, "eee, d MMM yyyy")
+    const endDateObject = parseISO(booking.check_out_date);
+    endDateDisplay = format(endDateObject, "eee, d MMM yyyy");
   }
 
   if (booking?.total_price) {
-    totalPriceDisplay = formatCurrency(booking.total_price)
-
+    totalPriceDisplay = formatCurrency(booking.total_price);
   }
-
-  
-
 
   useEffect(() => {
     if (!booking?.payment_deadline) {
-      console.log("Timer Effect: Exiting because booking or payment_deadline is missing.");
+      console.log(
+        "Timer Effect: Exiting because booking or payment_deadline is missing."
+      );
       return;
     }
-  
-    const endTime = DateTime.fromISO(booking.payment_deadline as unknown as string);
-   
+
+    const endTime = DateTime.fromISO(
+      booking.payment_deadline as unknown as string
+    );
+
     if (!endTime.isValid) {
-        console.error("Could not start timer: The date string from the API is in a format Luxon cannot parse with fromISO.");
-        setTimeLeft("Error");
-        return;
+      console.error(
+        "Could not start timer: The date string from the API is in a format Luxon cannot parse with fromISO."
+      );
+      setTimeLeft("Error");
+      return;
     }
 
     const interval = setInterval(() => {
       const now = DateTime.now();
       const diff = endTime.diff(now);
-      
+
       if (diff.toMillis() <= 0) {
-        setTimeLeft("00:00");
+        setTimeLeft("00:00"); 
         clearInterval(interval);
         return;
       }
-      
 
       setTimeLeft(diff.toFormat("mm:ss"));
     }, 1000);
 
-
     return () => clearInterval(interval);
-}, [booking]);
+  }, [booking]);
 
   if (isLoading) {
     return <div className="p-8 text-center">Loading payment details...</div>;
@@ -110,7 +115,6 @@ export default function PaymentPage() {
     return <div className="p-8 text-center text-red-600">Error: {isError}</div>;
   }
 
-  
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -119,7 +123,12 @@ export default function PaymentPage() {
   };
 
   const handleSubmitPayment = async () => {
-    if (!uploadedFile) return;
+    if (!uploadedFile) {
+      toast.warn("Please select a file to upload first.");
+      return;
+    }
+
+    uploadMutation.mutate({bookingId, file: uploadedFile})
 
     setIsUploading(true);
     // Simulate upload process
@@ -128,6 +137,7 @@ export default function PaymentPage() {
 
     // Here you would typically redirect to confirmation page
     console.log("Payment receipt uploaded:", uploadedFile.name);
+    // router.push("/dashboard/booking-confirmation")
   };
 
   return (
@@ -274,11 +284,11 @@ export default function PaymentPage() {
 
                 <Button
                   onClick={handleSubmitPayment}
-                  disabled={!uploadedFile || isUploading}
+                  disabled={!uploadedFile || uploadMutation.isPending}
                   className="w-full bg-emerald-600 hover:bg-emerald-700"
                   size="lg"
                 >
-                  {isUploading ? "Processing..." : "Submit Payment Receipt"}
+                  {uploadMutation.isPending ? "Uploading..." : "Submit Payment Receipt"}
                 </Button>
               </CardContent>
             </Card>

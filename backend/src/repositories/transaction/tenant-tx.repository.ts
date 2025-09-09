@@ -34,13 +34,14 @@ export const ValidateBooking = async (
 };
 
 export const UpdateBookings = async (
-  transaction_id: string,
+  bookingId: string,
   status: BookingStatus,
   tx?: Prisma.TransactionClient
 ) => {
-  const updateBooking = await tx.bookings.update({
+  const db = tx ?? prisma;
+  const updateBooking = await db.bookings.update({
     where: {
-      id: transaction_id,
+      id: bookingId,
     },
     data: {
       status: status,
@@ -49,10 +50,6 @@ export const UpdateBookings = async (
       user_id: true,
     },
   });
-
-  if (!updateBooking) {
-    throw new AppError("Booking cannot be updated", 400);
-  }
 
   return updateBooking.user_id;
 };
@@ -189,7 +186,7 @@ export const FindProofImage = async (
   tx?: Prisma.TransactionClient
 ) => {
   const db = tx ?? prisma;
-  const result = await db.bookings.findUnique({
+  const result = await db.bookings.findFirst({
     where: {
       id: bookingId,
     },
@@ -197,19 +194,6 @@ export const FindProofImage = async (
       proof_image: true,
     },
   });
-
-  if (!result) {
-    throw new AppError("The booking does not exist.", 404);
-  } else {
-    if (result.proof_image) {
-      console.log("Proof image exists:", result.proof_image);
-    } else {
-      console.log(
-        "Booking exists, but a proof image has not been uploaded yet. Cancellation cannot be processed."
-      );
-      return;
-    }
-  }
 
   return result;
 };
@@ -220,10 +204,25 @@ export const getOrderRepository = async (
   tx?: Prisma.TransactionClient
 ) => {
   const db = tx ?? prisma;
-  const orderList = await db.booking.findMany({
+  const orderList = await db.bookings.findMany({
     where: whereClause,
     orderBy: {
-      createdAt: isValidSort(sort) && sort === "asc" ? "asc" : "desc",
+      created_at: isValidSort(sort) && sort === "asc" ? "asc" : "desc",
+    },
+    include: {
+      property: {
+        select: {
+          main_image: true,
+          name: true,
+          city: true,
+        },
+      },
+      booking_rooms: {
+        select: {
+          guests_count: true,
+          price_per_night: true,
+        },
+      },
     },
   });
 
@@ -249,25 +248,70 @@ export const findBookingByIdRepository = async (
   return prisma.bookings.findFirst({
     where,
     select: {
-        id: true,
-        status: true,
-        check_in_date: true,
-        check_out_date: true,
-        total_price: true,    
-        payment_deadline: true,
-        property: { select: { name: true, city: true } },
-        booking_rooms: { include: { room: { select: { name: true } } } },
-        user: { select: { full_name: true } }
-    }
-});
+      id: true,
+      status: true,
+      check_in_date: true,
+      check_out_date: true,
+      total_price: true,
+      payment_deadline: true,
+      property: { select: { name: true, city: true } },
+      booking_rooms: { include: { room: { select: { name: true } } } },
+      user: { select: { full_name: true, email: true } },
+    },
+  });
 };
 
-export const updateProofImageRepository = async (bookingId: string, data: ProofImage, tx?: Prisma.TransactionClient) => {
+export const updateProofImageRepository = async (
+  bookingId: string,
+  data: ProofImage,
+  tx?: Prisma.TransactionClient
+) => {
   const db = tx ?? prisma;
   await db.bookings.update({
     where: {
       id: bookingId,
-      status: "waiting_payment"
-    }, data
-  })
-}
+      status: "waiting_payment",
+    },
+    data,
+  });
+};
+
+export const acceptBookingPayment = async (
+  bookingId: string,
+  tenantId: string
+) => {
+  return prisma.$transaction(async (tx) => {
+    const booking = await tx.bookings.findFirst({
+      where: {
+        id: bookingId,
+        // status: "waiting_confirmation",
+        property: {
+          tenant_id: tenantId,
+        },
+      },
+    });
+
+    if (!booking) {
+      throw new AppError(
+        "Booking not found, not awaiting confirmation, or you are not authorized.",
+        404
+      );
+    }
+
+    const updatedBooking = await tx.bookings.update({
+      where: { id: bookingId },
+      data: {
+        status: "confirmed",
+        paid_at: new Date(),
+      },
+
+      include: {
+        user: { select: { full_name: true, email: true } },
+        property: { select: { name: true, city: true, main_image: true } },
+        booking_rooms: { include: { room: { select: { name: true } } } },
+      },
+    });
+
+    return updatedBooking;
+  });
+};
