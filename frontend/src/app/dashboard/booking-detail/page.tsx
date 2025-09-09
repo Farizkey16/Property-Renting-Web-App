@@ -427,7 +427,7 @@ export default function BookingDetailsForm() {
               </div>
               <CardContent className="p-4">
                 <div className="flex items-center gap-2 mb-2">
-                  <h3 className="font-semibold text-lg">{property?.name}</h3>
+                  <h3 className="font-semibold text-lg">{property && property.name}</h3>
                   <div className="flex text-yellow-400">{"★".repeat(4)}</div>
                 </div>
                 <div className="flex items-center text-sm text-gray-600 mb-2">

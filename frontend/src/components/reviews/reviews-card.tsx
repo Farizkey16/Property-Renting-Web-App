@@ -4,7 +4,6 @@ import { useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { Rating } from "react-simple-star-rating";
 import { Review } from "@/types/reviews/reviews.types";
 import { usePropertyReviews } from "@/hooks/useReviews";
@@ -27,7 +26,8 @@ const ReviewCard = ({ review }: { review: Review }) => {
               src={review.user.profilePicture || "/placeholder.svg"}
               alt={review.user.fullName}
             />
-            <AvatarFallback>{review.user.fullName.charAt(0)}</AvatarFallback>
+
+            {/* <AvatarFallback>{review.user.fullName.charAt(0)}</AvatarFallback> */}
           </Avatar>
           <div>
             <h4 className="font-semibold text-base">{review.user.fullName}</h4>
@@ -47,7 +47,6 @@ const ReviewCard = ({ review }: { review: Review }) => {
         </div>
 
         <div className="text-sm leading-relaxed">
-          {/* FIX: Check if comment exists before trying to access its properties */}
           {review.comment &&
             (isExpanded || !shouldShowToggle
               ? review.comment

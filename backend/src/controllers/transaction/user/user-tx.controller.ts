@@ -73,7 +73,7 @@ class UserTransactions {
         // Create Booking Property
         const newBookings = await tx.bookings.create({
           data: {
-            status: "waiting_payment",
+            status: "waiting_confirmation",
             check_in_date: new Date(checkInDate),
             check_out_date: new Date(checkOutDate),
             total_price: totalPrice,

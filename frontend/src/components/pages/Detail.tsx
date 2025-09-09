@@ -42,6 +42,7 @@ import { DatePickerWithRange } from "../ui/DatePickerPopover";
 import { GuestPicker } from "../ui/GuestPicker";
 import { addDays, format, startOfDay } from "date-fns";
 
+
 export default function PropertyDetailPage() {
 
   const router = useRouter();

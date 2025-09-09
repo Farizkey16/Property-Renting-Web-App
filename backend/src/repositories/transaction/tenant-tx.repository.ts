@@ -270,7 +270,7 @@ export const updateProofImageRepository = async (
   await db.bookings.update({
     where: {
       id: bookingId,
-      status: "waiting_payment",
+      status: "waiting_confirmation",
     },
     data,
   });
@@ -284,7 +284,8 @@ export const acceptBookingPayment = async (
     const booking = await tx.bookings.findFirst({
       where: {
         id: bookingId,
-        // status: "waiting_confirmation",
+        status: "waiting_confirmation",
+
         property: {
           tenant_id: tenantId,
         },
