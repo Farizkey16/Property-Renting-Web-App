@@ -17,9 +17,6 @@ import { useRoomSearch } from "@/hooks/useRoom";
 import { formatCurrency } from "@/lib/utils";
 import { PropertyDetailSkeleton } from "../fragment/loading-error/PropertyDetailSkeleton";
 import { DateRange } from "react-day-picker";
-import { format } from "date-fns";
-import { DatePickerWithRange } from "../ui/DatePickerPopover";
-import { GuestPicker } from "../ui/GuestPicker";
 import { ReviewList } from "../reviews/reviews-card";
 
 interface Review {

@@ -32,8 +32,6 @@ export const getPropertyByIdRepository = async (propertyId: string) => {
     where: { id: propertyId, deleted_at: null },
     select: {
       main_image: true,
-
-    include: {
       property_images: true,
       reviews: true,
       rooms: {
@@ -45,8 +43,8 @@ export const getPropertyByIdRepository = async (propertyId: string) => {
         }
       }
     }
-  });
-};
+  })
+}
 
 export const getTenantWithPropertiesByUserId = async (userId: string) => {
   return prisma.tenants.findUnique({

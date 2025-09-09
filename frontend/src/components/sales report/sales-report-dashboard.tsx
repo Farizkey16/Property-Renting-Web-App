@@ -30,10 +30,8 @@ import {
 import { DateRange } from "react-day-picker";
 import { DatePickerWithRange } from "../ui/DatePickerPopover";
 import { useSalesAggregate, useSalesReport } from "@/hooks/useSalesReport";
-import { keepPreviousData } from "@tanstack/react-query";
 import { Activity, DollarSign, Users } from "lucide-react";
 import { formatCurrency } from "@/lib/utils";
-import { useSalesReport } from "@/hooks/useSalesReport";
 import { keepPreviousData } from "@tanstack/react-query";
 
 

@@ -2,8 +2,6 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
 import { fetchAggregate, fetchSalesReport, ReportFilters } from "@/lib/reports";
 
-import { fetchSalesReport, ReportFilters } from "@/lib/reports";
-
 
 export const useSalesReport = (filters: ReportFilters) => {
     return useQuery({
