@@ -5667,6 +5667,21 @@ Argument `where` of type tenantsWhereUniqueInput needs at least one of `id` or `
 2025-09-16 14:31:50 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
 2025-09-16 14:56:14 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
 
+2025-09-16 15:10:47 [ERROR]: GET /property/tenant | STATUS: 
+Invalid `prisma.tenants.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/repositories/property/property.repository.ts:50:25
+
+  47 }
+  48 
+  49 export const getTenantWithPropertiesByUserId = async (userId: string) => {
+→ 50   return prisma.tenants.findUnique(
+Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"code":"P1001","meta":{"modelName":"tenants","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-16 18:40:03 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 18:43:28 [ERROR]: PATCH /reservations/proof/3c06d13c-a19b-4343-b179-96495017a1d1 | STATUS: Unexpected field | MESSAGE: {"name":"MulterError","message":"Unexpected field","code":"LIMIT_UNEXPECTED_FILE","field":"proofImage","storageErrors":[]}
+
+
 2025-09-10 20:49:25 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
 2025-09-12 19:22:20 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
 2025-09-12 19:46:19 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
@@ -6396,4 +6411,5 @@ Please make sure your database server is running at `aws-0-us-west-1.pooler.supa
 2025-09-16 17:12:23 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
 2025-09-16 17:12:51 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
 2025-09-16 18:33:24 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+
 
