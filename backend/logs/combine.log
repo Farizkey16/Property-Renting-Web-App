@@ -3546,6 +3546,2127 @@ Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
 
 Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"clientVersion":"6.13.0","name":"PrismaClientInitializationError"}
 
+2025-09-11 11:08:58 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-11 11:10:06 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-12 10:06:41 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-12 10:25:16 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-12 11:38:48 [ERROR]: GET /property/eaf4b11b-8dfe-492f-a422-76ca555d9ccd/reviews | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/reviews/review.controller.ts:74:27
+
+  71 );
+  72 
+  73 const [propertyData, totalReviews] = await Promise.all([
+→ 74   prisma.properties.findUnique({
+         where: {
+           id: undefined,
+       ?   AND?: propertiesWhereInput | propertiesWhereInput[],
+       ?   OR?: propertiesWhereInput[],
+       ?   NOT?: propertiesWhereInput | propertiesWhereInput[],
+       ?   tenant_id?: StringFilter | String,
+       ?   name?: StringFilter | String,
+       ?   description?: StringNullableFilter | String | Null,
+       ?   address?: StringFilter | String,
+       ?   city?: StringFilter | String,
+       ?   province?: StringFilter | String,
+       ?   zip_code?: StringFilter | String,
+       ?   latitude?: DecimalFilter | Decimal,
+       ?   longitude?: DecimalFilter | Decimal,
+       ?   main_image?: StringNullableFilter | String | Null,
+       ?   created_at?: DateTimeFilter | DateTime,
+       ?   updated_at?: DateTimeFilter | DateTime,
+       ?   deleted_at?: DateTimeNullableFilter | DateTime | Null,
+       ?   property_category?: EnumPropertyCategoryFilter | PropertyCategory,
+       ?   bookings?: BookingsListRelationFilter,
+       ?   peak_season_rates?: Peak_season_ratesListRelationFilter,
+       ?   tenant?: TenantsScalarRelationFilter | tenantsWhereInput,
+       ?   property_images?: Property_imagesListRelationFilter,
+       ?   reviews?: ReviewsListRelationFilter,
+       ?   rooms?: RoomsListRelationFilter
+         },
+         include: {
+           reviews: {
+             take: 3,
+             skip: 0,
+             orderBy: {
+               created_at: "desc"
+             },
+             include: {
+               user: {
+                 select: {
+                   full_name: true,
+                   profile_picture: true
+                 }
+               }
+             }
+           }
+         }
+       })
+
+Argument `where` of type propertiesWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-12 11:38:50 [ERROR]: GET /property/eaf4b11b-8dfe-492f-a422-76ca555d9ccd/reviews | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/reviews/review.controller.ts:74:27
+
+  71 );
+  72 
+  73 const [propertyData, totalReviews] = await Promise.all([
+→ 74   prisma.properties.findUnique({
+         where: {
+           id: undefined,
+       ?   AND?: propertiesWhereInput | propertiesWhereInput[],
+       ?   OR?: propertiesWhereInput[],
+       ?   NOT?: propertiesWhereInput | propertiesWhereInput[],
+       ?   tenant_id?: StringFilter | String,
+       ?   name?: StringFilter | String,
+       ?   description?: StringNullableFilter | String | Null,
+       ?   address?: StringFilter | String,
+       ?   city?: StringFilter | String,
+       ?   province?: StringFilter | String,
+       ?   zip_code?: StringFilter | String,
+       ?   latitude?: DecimalFilter | Decimal,
+       ?   longitude?: DecimalFilter | Decimal,
+       ?   main_image?: StringNullableFilter | String | Null,
+       ?   created_at?: DateTimeFilter | DateTime,
+       ?   updated_at?: DateTimeFilter | DateTime,
+       ?   deleted_at?: DateTimeNullableFilter | DateTime | Null,
+       ?   property_category?: EnumPropertyCategoryFilter | PropertyCategory,
+       ?   bookings?: BookingsListRelationFilter,
+       ?   peak_season_rates?: Peak_season_ratesListRelationFilter,
+       ?   tenant?: TenantsScalarRelationFilter | tenantsWhereInput,
+       ?   property_images?: Property_imagesListRelationFilter,
+       ?   reviews?: ReviewsListRelationFilter,
+       ?   rooms?: RoomsListRelationFilter
+         },
+         include: {
+           reviews: {
+             take: 3,
+             skip: 0,
+             orderBy: {
+               created_at: "desc"
+             },
+             include: {
+               user: {
+                 select: {
+                   full_name: true,
+                   profile_picture: true
+                 }
+               }
+             }
+           }
+         }
+       })
+
+Argument `where` of type propertiesWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-12 11:38:53 [ERROR]: GET /property/eaf4b11b-8dfe-492f-a422-76ca555d9ccd/reviews | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/reviews/review.controller.ts:74:27
+
+  71 );
+  72 
+  73 const [propertyData, totalReviews] = await Promise.all([
+→ 74   prisma.properties.findUnique({
+         where: {
+           id: undefined,
+       ?   AND?: propertiesWhereInput | propertiesWhereInput[],
+       ?   OR?: propertiesWhereInput[],
+       ?   NOT?: propertiesWhereInput | propertiesWhereInput[],
+       ?   tenant_id?: StringFilter | String,
+       ?   name?: StringFilter | String,
+       ?   description?: StringNullableFilter | String | Null,
+       ?   address?: StringFilter | String,
+       ?   city?: StringFilter | String,
+       ?   province?: StringFilter | String,
+       ?   zip_code?: StringFilter | String,
+       ?   latitude?: DecimalFilter | Decimal,
+       ?   longitude?: DecimalFilter | Decimal,
+       ?   main_image?: StringNullableFilter | String | Null,
+       ?   created_at?: DateTimeFilter | DateTime,
+       ?   updated_at?: DateTimeFilter | DateTime,
+       ?   deleted_at?: DateTimeNullableFilter | DateTime | Null,
+       ?   property_category?: EnumPropertyCategoryFilter | PropertyCategory,
+       ?   bookings?: BookingsListRelationFilter,
+       ?   peak_season_rates?: Peak_season_ratesListRelationFilter,
+       ?   tenant?: TenantsScalarRelationFilter | tenantsWhereInput,
+       ?   property_images?: Property_imagesListRelationFilter,
+       ?   reviews?: ReviewsListRelationFilter,
+       ?   rooms?: RoomsListRelationFilter
+         },
+         include: {
+           reviews: {
+             take: 3,
+             skip: 0,
+             orderBy: {
+               created_at: "desc"
+             },
+             include: {
+               user: {
+                 select: {
+                   full_name: true,
+                   profile_picture: true
+                 }
+               }
+             }
+           }
+         }
+       })
+
+Argument `where` of type propertiesWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-12 11:38:57 [ERROR]: GET /property/eaf4b11b-8dfe-492f-a422-76ca555d9ccd/reviews | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/reviews/review.controller.ts:74:27
+
+  71 );
+  72 
+  73 const [propertyData, totalReviews] = await Promise.all([
+→ 74   prisma.properties.findUnique({
+         where: {
+           id: undefined,
+       ?   AND?: propertiesWhereInput | propertiesWhereInput[],
+       ?   OR?: propertiesWhereInput[],
+       ?   NOT?: propertiesWhereInput | propertiesWhereInput[],
+       ?   tenant_id?: StringFilter | String,
+       ?   name?: StringFilter | String,
+       ?   description?: StringNullableFilter | String | Null,
+       ?   address?: StringFilter | String,
+       ?   city?: StringFilter | String,
+       ?   province?: StringFilter | String,
+       ?   zip_code?: StringFilter | String,
+       ?   latitude?: DecimalFilter | Decimal,
+       ?   longitude?: DecimalFilter | Decimal,
+       ?   main_image?: StringNullableFilter | String | Null,
+       ?   created_at?: DateTimeFilter | DateTime,
+       ?   updated_at?: DateTimeFilter | DateTime,
+       ?   deleted_at?: DateTimeNullableFilter | DateTime | Null,
+       ?   property_category?: EnumPropertyCategoryFilter | PropertyCategory,
+       ?   bookings?: BookingsListRelationFilter,
+       ?   peak_season_rates?: Peak_season_ratesListRelationFilter,
+       ?   tenant?: TenantsScalarRelationFilter | tenantsWhereInput,
+       ?   property_images?: Property_imagesListRelationFilter,
+       ?   reviews?: ReviewsListRelationFilter,
+       ?   rooms?: RoomsListRelationFilter
+         },
+         include: {
+           reviews: {
+             take: 3,
+             skip: 0,
+             orderBy: {
+               created_at: "desc"
+             },
+             include: {
+               user: {
+                 select: {
+                   full_name: true,
+                   profile_picture: true
+                 }
+               }
+             }
+           }
+         }
+       })
+
+Argument `where` of type propertiesWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-12 11:39:17 [ERROR]: GET /property/30b7c57f-fe6f-4c5c-9936-94c689517762/reviews | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/reviews/review.controller.ts:74:27
+
+  71 );
+  72 
+  73 const [propertyData, totalReviews] = await Promise.all([
+→ 74   prisma.properties.findUnique({
+         where: {
+           id: undefined,
+       ?   AND?: propertiesWhereInput | propertiesWhereInput[],
+       ?   OR?: propertiesWhereInput[],
+       ?   NOT?: propertiesWhereInput | propertiesWhereInput[],
+       ?   tenant_id?: StringFilter | String,
+       ?   name?: StringFilter | String,
+       ?   description?: StringNullableFilter | String | Null,
+       ?   address?: StringFilter | String,
+       ?   city?: StringFilter | String,
+       ?   province?: StringFilter | String,
+       ?   zip_code?: StringFilter | String,
+       ?   latitude?: DecimalFilter | Decimal,
+       ?   longitude?: DecimalFilter | Decimal,
+       ?   main_image?: StringNullableFilter | String | Null,
+       ?   created_at?: DateTimeFilter | DateTime,
+       ?   updated_at?: DateTimeFilter | DateTime,
+       ?   deleted_at?: DateTimeNullableFilter | DateTime | Null,
+       ?   property_category?: EnumPropertyCategoryFilter | PropertyCategory,
+       ?   bookings?: BookingsListRelationFilter,
+       ?   peak_season_rates?: Peak_season_ratesListRelationFilter,
+       ?   tenant?: TenantsScalarRelationFilter | tenantsWhereInput,
+       ?   property_images?: Property_imagesListRelationFilter,
+       ?   reviews?: ReviewsListRelationFilter,
+       ?   rooms?: RoomsListRelationFilter
+         },
+         include: {
+           reviews: {
+             take: 3,
+             skip: 0,
+             orderBy: {
+               created_at: "desc"
+             },
+             include: {
+               user: {
+                 select: {
+                   full_name: true,
+                   profile_picture: true
+                 }
+               }
+             }
+           }
+         }
+       })
+
+Argument `where` of type propertiesWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-12 11:39:18 [ERROR]: GET /property/30b7c57f-fe6f-4c5c-9936-94c689517762/reviews | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/reviews/review.controller.ts:74:27
+
+  71 );
+  72 
+  73 const [propertyData, totalReviews] = await Promise.all([
+→ 74   prisma.properties.findUnique({
+         where: {
+           id: undefined,
+       ?   AND?: propertiesWhereInput | propertiesWhereInput[],
+       ?   OR?: propertiesWhereInput[],
+       ?   NOT?: propertiesWhereInput | propertiesWhereInput[],
+       ?   tenant_id?: StringFilter | String,
+       ?   name?: StringFilter | String,
+       ?   description?: StringNullableFilter | String | Null,
+       ?   address?: StringFilter | String,
+       ?   city?: StringFilter | String,
+       ?   province?: StringFilter | String,
+       ?   zip_code?: StringFilter | String,
+       ?   latitude?: DecimalFilter | Decimal,
+       ?   longitude?: DecimalFilter | Decimal,
+       ?   main_image?: StringNullableFilter | String | Null,
+       ?   created_at?: DateTimeFilter | DateTime,
+       ?   updated_at?: DateTimeFilter | DateTime,
+       ?   deleted_at?: DateTimeNullableFilter | DateTime | Null,
+       ?   property_category?: EnumPropertyCategoryFilter | PropertyCategory,
+       ?   bookings?: BookingsListRelationFilter,
+       ?   peak_season_rates?: Peak_season_ratesListRelationFilter,
+       ?   tenant?: TenantsScalarRelationFilter | tenantsWhereInput,
+       ?   property_images?: Property_imagesListRelationFilter,
+       ?   reviews?: ReviewsListRelationFilter,
+       ?   rooms?: RoomsListRelationFilter
+         },
+         include: {
+           reviews: {
+             take: 3,
+             skip: 0,
+             orderBy: {
+               created_at: "desc"
+             },
+             include: {
+               user: {
+                 select: {
+                   full_name: true,
+                   profile_picture: true
+                 }
+               }
+             }
+           }
+         }
+       })
+
+Argument `where` of type propertiesWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-12 11:39:20 [ERROR]: GET /property/30b7c57f-fe6f-4c5c-9936-94c689517762/reviews | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/reviews/review.controller.ts:74:27
+
+  71 );
+  72 
+  73 const [propertyData, totalReviews] = await Promise.all([
+→ 74   prisma.properties.findUnique({
+         where: {
+           id: undefined,
+       ?   AND?: propertiesWhereInput | propertiesWhereInput[],
+       ?   OR?: propertiesWhereInput[],
+       ?   NOT?: propertiesWhereInput | propertiesWhereInput[],
+       ?   tenant_id?: StringFilter | String,
+       ?   name?: StringFilter | String,
+       ?   description?: StringNullableFilter | String | Null,
+       ?   address?: StringFilter | String,
+       ?   city?: StringFilter | String,
+       ?   province?: StringFilter | String,
+       ?   zip_code?: StringFilter | String,
+       ?   latitude?: DecimalFilter | Decimal,
+       ?   longitude?: DecimalFilter | Decimal,
+       ?   main_image?: StringNullableFilter | String | Null,
+       ?   created_at?: DateTimeFilter | DateTime,
+       ?   updated_at?: DateTimeFilter | DateTime,
+       ?   deleted_at?: DateTimeNullableFilter | DateTime | Null,
+       ?   property_category?: EnumPropertyCategoryFilter | PropertyCategory,
+       ?   bookings?: BookingsListRelationFilter,
+       ?   peak_season_rates?: Peak_season_ratesListRelationFilter,
+       ?   tenant?: TenantsScalarRelationFilter | tenantsWhereInput,
+       ?   property_images?: Property_imagesListRelationFilter,
+       ?   reviews?: ReviewsListRelationFilter,
+       ?   rooms?: RoomsListRelationFilter
+         },
+         include: {
+           reviews: {
+             take: 3,
+             skip: 0,
+             orderBy: {
+               created_at: "desc"
+             },
+             include: {
+               user: {
+                 select: {
+                   full_name: true,
+                   profile_picture: true
+                 }
+               }
+             }
+           }
+         }
+       })
+
+Argument `where` of type propertiesWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-12 11:39:24 [ERROR]: GET /property/30b7c57f-fe6f-4c5c-9936-94c689517762/reviews | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/reviews/review.controller.ts:74:27
+
+  71 );
+  72 
+  73 const [propertyData, totalReviews] = await Promise.all([
+→ 74   prisma.properties.findUnique({
+         where: {
+           id: undefined,
+       ?   AND?: propertiesWhereInput | propertiesWhereInput[],
+       ?   OR?: propertiesWhereInput[],
+       ?   NOT?: propertiesWhereInput | propertiesWhereInput[],
+       ?   tenant_id?: StringFilter | String,
+       ?   name?: StringFilter | String,
+       ?   description?: StringNullableFilter | String | Null,
+       ?   address?: StringFilter | String,
+       ?   city?: StringFilter | String,
+       ?   province?: StringFilter | String,
+       ?   zip_code?: StringFilter | String,
+       ?   latitude?: DecimalFilter | Decimal,
+       ?   longitude?: DecimalFilter | Decimal,
+       ?   main_image?: StringNullableFilter | String | Null,
+       ?   created_at?: DateTimeFilter | DateTime,
+       ?   updated_at?: DateTimeFilter | DateTime,
+       ?   deleted_at?: DateTimeNullableFilter | DateTime | Null,
+       ?   property_category?: EnumPropertyCategoryFilter | PropertyCategory,
+       ?   bookings?: BookingsListRelationFilter,
+       ?   peak_season_rates?: Peak_season_ratesListRelationFilter,
+       ?   tenant?: TenantsScalarRelationFilter | tenantsWhereInput,
+       ?   property_images?: Property_imagesListRelationFilter,
+       ?   reviews?: ReviewsListRelationFilter,
+       ?   rooms?: RoomsListRelationFilter
+         },
+         include: {
+           reviews: {
+             take: 3,
+             skip: 0,
+             orderBy: {
+               created_at: "desc"
+             },
+             include: {
+               user: {
+                 select: {
+                   full_name: true,
+                   profile_picture: true
+                 }
+               }
+             }
+           }
+         }
+       })
+
+Argument `where` of type propertiesWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-12 11:41:03 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-12 11:41:15 [ERROR]: GET /property/30b7c57f-fe6f-4c5c-9936-94c689517762/reviews | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/reviews/review.controller.ts:74:27
+
+  71 );
+  72 
+  73 const [propertyData, totalReviews] = await Promise.all([
+→ 74   prisma.properties.findUnique({
+         where: {
+           id: undefined,
+       ?   AND?: propertiesWhereInput | propertiesWhereInput[],
+       ?   OR?: propertiesWhereInput[],
+       ?   NOT?: propertiesWhereInput | propertiesWhereInput[],
+       ?   tenant_id?: StringFilter | String,
+       ?   name?: StringFilter | String,
+       ?   description?: StringNullableFilter | String | Null,
+       ?   address?: StringFilter | String,
+       ?   city?: StringFilter | String,
+       ?   province?: StringFilter | String,
+       ?   zip_code?: StringFilter | String,
+       ?   latitude?: DecimalFilter | Decimal,
+       ?   longitude?: DecimalFilter | Decimal,
+       ?   main_image?: StringNullableFilter | String | Null,
+       ?   created_at?: DateTimeFilter | DateTime,
+       ?   updated_at?: DateTimeFilter | DateTime,
+       ?   deleted_at?: DateTimeNullableFilter | DateTime | Null,
+       ?   property_category?: EnumPropertyCategoryFilter | PropertyCategory,
+       ?   bookings?: BookingsListRelationFilter,
+       ?   peak_season_rates?: Peak_season_ratesListRelationFilter,
+       ?   tenant?: TenantsScalarRelationFilter | tenantsWhereInput,
+       ?   property_images?: Property_imagesListRelationFilter,
+       ?   reviews?: ReviewsListRelationFilter,
+       ?   rooms?: RoomsListRelationFilter
+         },
+         include: {
+           reviews: {
+             take: 3,
+             skip: 0,
+             orderBy: {
+               created_at: "desc"
+             },
+             include: {
+               user: {
+                 select: {
+                   full_name: true,
+                   profile_picture: true
+                 }
+               }
+             }
+           }
+         }
+       })
+
+Argument `where` of type propertiesWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-12 11:41:16 [ERROR]: GET /property/30b7c57f-fe6f-4c5c-9936-94c689517762/reviews | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/reviews/review.controller.ts:74:27
+
+  71 );
+  72 
+  73 const [propertyData, totalReviews] = await Promise.all([
+→ 74   prisma.properties.findUnique({
+         where: {
+           id: undefined,
+       ?   AND?: propertiesWhereInput | propertiesWhereInput[],
+       ?   OR?: propertiesWhereInput[],
+       ?   NOT?: propertiesWhereInput | propertiesWhereInput[],
+       ?   tenant_id?: StringFilter | String,
+       ?   name?: StringFilter | String,
+       ?   description?: StringNullableFilter | String | Null,
+       ?   address?: StringFilter | String,
+       ?   city?: StringFilter | String,
+       ?   province?: StringFilter | String,
+       ?   zip_code?: StringFilter | String,
+       ?   latitude?: DecimalFilter | Decimal,
+       ?   longitude?: DecimalFilter | Decimal,
+       ?   main_image?: StringNullableFilter | String | Null,
+       ?   created_at?: DateTimeFilter | DateTime,
+       ?   updated_at?: DateTimeFilter | DateTime,
+       ?   deleted_at?: DateTimeNullableFilter | DateTime | Null,
+       ?   property_category?: EnumPropertyCategoryFilter | PropertyCategory,
+       ?   bookings?: BookingsListRelationFilter,
+       ?   peak_season_rates?: Peak_season_ratesListRelationFilter,
+       ?   tenant?: TenantsScalarRelationFilter | tenantsWhereInput,
+       ?   property_images?: Property_imagesListRelationFilter,
+       ?   reviews?: ReviewsListRelationFilter,
+       ?   rooms?: RoomsListRelationFilter
+         },
+         include: {
+           reviews: {
+             take: 3,
+             skip: 0,
+             orderBy: {
+               created_at: "desc"
+             },
+             include: {
+               user: {
+                 select: {
+                   full_name: true,
+                   profile_picture: true
+                 }
+               }
+             }
+           }
+         }
+       })
+
+Argument `where` of type propertiesWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-12 11:41:18 [ERROR]: GET /property/30b7c57f-fe6f-4c5c-9936-94c689517762/reviews | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/reviews/review.controller.ts:74:27
+
+  71 );
+  72 
+  73 const [propertyData, totalReviews] = await Promise.all([
+→ 74   prisma.properties.findUnique({
+         where: {
+           id: undefined,
+       ?   AND?: propertiesWhereInput | propertiesWhereInput[],
+       ?   OR?: propertiesWhereInput[],
+       ?   NOT?: propertiesWhereInput | propertiesWhereInput[],
+       ?   tenant_id?: StringFilter | String,
+       ?   name?: StringFilter | String,
+       ?   description?: StringNullableFilter | String | Null,
+       ?   address?: StringFilter | String,
+       ?   city?: StringFilter | String,
+       ?   province?: StringFilter | String,
+       ?   zip_code?: StringFilter | String,
+       ?   latitude?: DecimalFilter | Decimal,
+       ?   longitude?: DecimalFilter | Decimal,
+       ?   main_image?: StringNullableFilter | String | Null,
+       ?   created_at?: DateTimeFilter | DateTime,
+       ?   updated_at?: DateTimeFilter | DateTime,
+       ?   deleted_at?: DateTimeNullableFilter | DateTime | Null,
+       ?   property_category?: EnumPropertyCategoryFilter | PropertyCategory,
+       ?   bookings?: BookingsListRelationFilter,
+       ?   peak_season_rates?: Peak_season_ratesListRelationFilter,
+       ?   tenant?: TenantsScalarRelationFilter | tenantsWhereInput,
+       ?   property_images?: Property_imagesListRelationFilter,
+       ?   reviews?: ReviewsListRelationFilter,
+       ?   rooms?: RoomsListRelationFilter
+         },
+         include: {
+           reviews: {
+             take: 3,
+             skip: 0,
+             orderBy: {
+               created_at: "desc"
+             },
+             include: {
+               user: {
+                 select: {
+                   full_name: true,
+                   profile_picture: true
+                 }
+               }
+             }
+           }
+         }
+       })
+
+Argument `where` of type propertiesWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-12 11:41:22 [ERROR]: GET /property/30b7c57f-fe6f-4c5c-9936-94c689517762/reviews | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/reviews/review.controller.ts:74:27
+
+  71 );
+  72 
+  73 const [propertyData, totalReviews] = await Promise.all([
+→ 74   prisma.properties.findUnique({
+         where: {
+           id: undefined,
+       ?   AND?: propertiesWhereInput | propertiesWhereInput[],
+       ?   OR?: propertiesWhereInput[],
+       ?   NOT?: propertiesWhereInput | propertiesWhereInput[],
+       ?   tenant_id?: StringFilter | String,
+       ?   name?: StringFilter | String,
+       ?   description?: StringNullableFilter | String | Null,
+       ?   address?: StringFilter | String,
+       ?   city?: StringFilter | String,
+       ?   province?: StringFilter | String,
+       ?   zip_code?: StringFilter | String,
+       ?   latitude?: DecimalFilter | Decimal,
+       ?   longitude?: DecimalFilter | Decimal,
+       ?   main_image?: StringNullableFilter | String | Null,
+       ?   created_at?: DateTimeFilter | DateTime,
+       ?   updated_at?: DateTimeFilter | DateTime,
+       ?   deleted_at?: DateTimeNullableFilter | DateTime | Null,
+       ?   property_category?: EnumPropertyCategoryFilter | PropertyCategory,
+       ?   bookings?: BookingsListRelationFilter,
+       ?   peak_season_rates?: Peak_season_ratesListRelationFilter,
+       ?   tenant?: TenantsScalarRelationFilter | tenantsWhereInput,
+       ?   property_images?: Property_imagesListRelationFilter,
+       ?   reviews?: ReviewsListRelationFilter,
+       ?   rooms?: RoomsListRelationFilter
+         },
+         include: {
+           reviews: {
+             take: 3,
+             skip: 0,
+             orderBy: {
+               created_at: "desc"
+             },
+             include: {
+               user: {
+                 select: {
+                   full_name: true,
+                   profile_picture: true
+                 }
+               }
+             }
+           }
+         }
+       })
+
+Argument `where` of type propertiesWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-12 11:41:50 [ERROR]: GET /property/30b7c57f-fe6f-4c5c-9936-94c689517762/reviews | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/reviews/review.controller.ts:74:27
+
+  71 );
+  72 
+  73 const [propertyData, totalReviews] = await Promise.all([
+→ 74   prisma.properties.findUnique({
+         where: {
+           id: undefined,
+       ?   AND?: propertiesWhereInput | propertiesWhereInput[],
+       ?   OR?: propertiesWhereInput[],
+       ?   NOT?: propertiesWhereInput | propertiesWhereInput[],
+       ?   tenant_id?: StringFilter | String,
+       ?   name?: StringFilter | String,
+       ?   description?: StringNullableFilter | String | Null,
+       ?   address?: StringFilter | String,
+       ?   city?: StringFilter | String,
+       ?   province?: StringFilter | String,
+       ?   zip_code?: StringFilter | String,
+       ?   latitude?: DecimalFilter | Decimal,
+       ?   longitude?: DecimalFilter | Decimal,
+       ?   main_image?: StringNullableFilter | String | Null,
+       ?   created_at?: DateTimeFilter | DateTime,
+       ?   updated_at?: DateTimeFilter | DateTime,
+       ?   deleted_at?: DateTimeNullableFilter | DateTime | Null,
+       ?   property_category?: EnumPropertyCategoryFilter | PropertyCategory,
+       ?   bookings?: BookingsListRelationFilter,
+       ?   peak_season_rates?: Peak_season_ratesListRelationFilter,
+       ?   tenant?: TenantsScalarRelationFilter | tenantsWhereInput,
+       ?   property_images?: Property_imagesListRelationFilter,
+       ?   reviews?: ReviewsListRelationFilter,
+       ?   rooms?: RoomsListRelationFilter
+         },
+         include: {
+           reviews: {
+             take: 3,
+             skip: 0,
+             orderBy: {
+               created_at: "desc"
+             },
+             include: {
+               user: {
+                 select: {
+                   full_name: true,
+                   profile_picture: true
+                 }
+               }
+             }
+           }
+         }
+       })
+
+Argument `where` of type propertiesWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-12 11:41:52 [ERROR]: GET /property/30b7c57f-fe6f-4c5c-9936-94c689517762/reviews | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/reviews/review.controller.ts:74:27
+
+  71 );
+  72 
+  73 const [propertyData, totalReviews] = await Promise.all([
+→ 74   prisma.properties.findUnique({
+         where: {
+           id: undefined,
+       ?   AND?: propertiesWhereInput | propertiesWhereInput[],
+       ?   OR?: propertiesWhereInput[],
+       ?   NOT?: propertiesWhereInput | propertiesWhereInput[],
+       ?   tenant_id?: StringFilter | String,
+       ?   name?: StringFilter | String,
+       ?   description?: StringNullableFilter | String | Null,
+       ?   address?: StringFilter | String,
+       ?   city?: StringFilter | String,
+       ?   province?: StringFilter | String,
+       ?   zip_code?: StringFilter | String,
+       ?   latitude?: DecimalFilter | Decimal,
+       ?   longitude?: DecimalFilter | Decimal,
+       ?   main_image?: StringNullableFilter | String | Null,
+       ?   created_at?: DateTimeFilter | DateTime,
+       ?   updated_at?: DateTimeFilter | DateTime,
+       ?   deleted_at?: DateTimeNullableFilter | DateTime | Null,
+       ?   property_category?: EnumPropertyCategoryFilter | PropertyCategory,
+       ?   bookings?: BookingsListRelationFilter,
+       ?   peak_season_rates?: Peak_season_ratesListRelationFilter,
+       ?   tenant?: TenantsScalarRelationFilter | tenantsWhereInput,
+       ?   property_images?: Property_imagesListRelationFilter,
+       ?   reviews?: ReviewsListRelationFilter,
+       ?   rooms?: RoomsListRelationFilter
+         },
+         include: {
+           reviews: {
+             take: 3,
+             skip: 0,
+             orderBy: {
+               created_at: "desc"
+             },
+             include: {
+               user: {
+                 select: {
+                   full_name: true,
+                   profile_picture: true
+                 }
+               }
+             }
+           }
+         }
+       })
+
+Argument `where` of type propertiesWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-12 11:41:54 [ERROR]: GET /property/30b7c57f-fe6f-4c5c-9936-94c689517762/reviews | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/reviews/review.controller.ts:74:27
+
+  71 );
+  72 
+  73 const [propertyData, totalReviews] = await Promise.all([
+→ 74   prisma.properties.findUnique({
+         where: {
+           id: undefined,
+       ?   AND?: propertiesWhereInput | propertiesWhereInput[],
+       ?   OR?: propertiesWhereInput[],
+       ?   NOT?: propertiesWhereInput | propertiesWhereInput[],
+       ?   tenant_id?: StringFilter | String,
+       ?   name?: StringFilter | String,
+       ?   description?: StringNullableFilter | String | Null,
+       ?   address?: StringFilter | String,
+       ?   city?: StringFilter | String,
+       ?   province?: StringFilter | String,
+       ?   zip_code?: StringFilter | String,
+       ?   latitude?: DecimalFilter | Decimal,
+       ?   longitude?: DecimalFilter | Decimal,
+       ?   main_image?: StringNullableFilter | String | Null,
+       ?   created_at?: DateTimeFilter | DateTime,
+       ?   updated_at?: DateTimeFilter | DateTime,
+       ?   deleted_at?: DateTimeNullableFilter | DateTime | Null,
+       ?   property_category?: EnumPropertyCategoryFilter | PropertyCategory,
+       ?   bookings?: BookingsListRelationFilter,
+       ?   peak_season_rates?: Peak_season_ratesListRelationFilter,
+       ?   tenant?: TenantsScalarRelationFilter | tenantsWhereInput,
+       ?   property_images?: Property_imagesListRelationFilter,
+       ?   reviews?: ReviewsListRelationFilter,
+       ?   rooms?: RoomsListRelationFilter
+         },
+         include: {
+           reviews: {
+             take: 3,
+             skip: 0,
+             orderBy: {
+               created_at: "desc"
+             },
+             include: {
+               user: {
+                 select: {
+                   full_name: true,
+                   profile_picture: true
+                 }
+               }
+             }
+           }
+         }
+       })
+
+Argument `where` of type propertiesWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-12 11:41:57 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-12 11:42:02 [ERROR]: GET /property/30b7c57f-fe6f-4c5c-9936-94c689517762/reviews | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/reviews/review.controller.ts:74:27
+
+  71 );
+  72 
+  73 const [propertyData, totalReviews] = await Promise.all([
+→ 74   prisma.properties.findUnique({
+         where: {
+           id: undefined,
+       ?   AND?: propertiesWhereInput | propertiesWhereInput[],
+       ?   OR?: propertiesWhereInput[],
+       ?   NOT?: propertiesWhereInput | propertiesWhereInput[],
+       ?   tenant_id?: StringFilter | String,
+       ?   name?: StringFilter | String,
+       ?   description?: StringNullableFilter | String | Null,
+       ?   address?: StringFilter | String,
+       ?   city?: StringFilter | String,
+       ?   province?: StringFilter | String,
+       ?   zip_code?: StringFilter | String,
+       ?   latitude?: DecimalFilter | Decimal,
+       ?   longitude?: DecimalFilter | Decimal,
+       ?   main_image?: StringNullableFilter | String | Null,
+       ?   created_at?: DateTimeFilter | DateTime,
+       ?   updated_at?: DateTimeFilter | DateTime,
+       ?   deleted_at?: DateTimeNullableFilter | DateTime | Null,
+       ?   property_category?: EnumPropertyCategoryFilter | PropertyCategory,
+       ?   bookings?: BookingsListRelationFilter,
+       ?   peak_season_rates?: Peak_season_ratesListRelationFilter,
+       ?   tenant?: TenantsScalarRelationFilter | tenantsWhereInput,
+       ?   property_images?: Property_imagesListRelationFilter,
+       ?   reviews?: ReviewsListRelationFilter,
+       ?   rooms?: RoomsListRelationFilter
+         },
+         include: {
+           reviews: {
+             take: 3,
+             skip: 0,
+             orderBy: {
+               created_at: "desc"
+             },
+             include: {
+               user: {
+                 select: {
+                   full_name: true,
+                   profile_picture: true
+                 }
+               }
+             }
+           }
+         }
+       })
+
+Argument `where` of type propertiesWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-12 11:42:03 [ERROR]: GET /property/30b7c57f-fe6f-4c5c-9936-94c689517762/reviews | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/reviews/review.controller.ts:74:27
+
+  71 );
+  72 
+  73 const [propertyData, totalReviews] = await Promise.all([
+→ 74   prisma.properties.findUnique({
+         where: {
+           id: undefined,
+       ?   AND?: propertiesWhereInput | propertiesWhereInput[],
+       ?   OR?: propertiesWhereInput[],
+       ?   NOT?: propertiesWhereInput | propertiesWhereInput[],
+       ?   tenant_id?: StringFilter | String,
+       ?   name?: StringFilter | String,
+       ?   description?: StringNullableFilter | String | Null,
+       ?   address?: StringFilter | String,
+       ?   city?: StringFilter | String,
+       ?   province?: StringFilter | String,
+       ?   zip_code?: StringFilter | String,
+       ?   latitude?: DecimalFilter | Decimal,
+       ?   longitude?: DecimalFilter | Decimal,
+       ?   main_image?: StringNullableFilter | String | Null,
+       ?   created_at?: DateTimeFilter | DateTime,
+       ?   updated_at?: DateTimeFilter | DateTime,
+       ?   deleted_at?: DateTimeNullableFilter | DateTime | Null,
+       ?   property_category?: EnumPropertyCategoryFilter | PropertyCategory,
+       ?   bookings?: BookingsListRelationFilter,
+       ?   peak_season_rates?: Peak_season_ratesListRelationFilter,
+       ?   tenant?: TenantsScalarRelationFilter | tenantsWhereInput,
+       ?   property_images?: Property_imagesListRelationFilter,
+       ?   reviews?: ReviewsListRelationFilter,
+       ?   rooms?: RoomsListRelationFilter
+         },
+         include: {
+           reviews: {
+             take: 3,
+             skip: 0,
+             orderBy: {
+               created_at: "desc"
+             },
+             include: {
+               user: {
+                 select: {
+                   full_name: true,
+                   profile_picture: true
+                 }
+               }
+             }
+           }
+         }
+       })
+
+Argument `where` of type propertiesWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-12 11:42:06 [ERROR]: GET /property/30b7c57f-fe6f-4c5c-9936-94c689517762/reviews | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/reviews/review.controller.ts:74:27
+
+  71 );
+  72 
+  73 const [propertyData, totalReviews] = await Promise.all([
+→ 74   prisma.properties.findUnique({
+         where: {
+           id: undefined,
+       ?   AND?: propertiesWhereInput | propertiesWhereInput[],
+       ?   OR?: propertiesWhereInput[],
+       ?   NOT?: propertiesWhereInput | propertiesWhereInput[],
+       ?   tenant_id?: StringFilter | String,
+       ?   name?: StringFilter | String,
+       ?   description?: StringNullableFilter | String | Null,
+       ?   address?: StringFilter | String,
+       ?   city?: StringFilter | String,
+       ?   province?: StringFilter | String,
+       ?   zip_code?: StringFilter | String,
+       ?   latitude?: DecimalFilter | Decimal,
+       ?   longitude?: DecimalFilter | Decimal,
+       ?   main_image?: StringNullableFilter | String | Null,
+       ?   created_at?: DateTimeFilter | DateTime,
+       ?   updated_at?: DateTimeFilter | DateTime,
+       ?   deleted_at?: DateTimeNullableFilter | DateTime | Null,
+       ?   property_category?: EnumPropertyCategoryFilter | PropertyCategory,
+       ?   bookings?: BookingsListRelationFilter,
+       ?   peak_season_rates?: Peak_season_ratesListRelationFilter,
+       ?   tenant?: TenantsScalarRelationFilter | tenantsWhereInput,
+       ?   property_images?: Property_imagesListRelationFilter,
+       ?   reviews?: ReviewsListRelationFilter,
+       ?   rooms?: RoomsListRelationFilter
+         },
+         include: {
+           reviews: {
+             take: 3,
+             skip: 0,
+             orderBy: {
+               created_at: "desc"
+             },
+             include: {
+               user: {
+                 select: {
+                   full_name: true,
+                   profile_picture: true
+                 }
+               }
+             }
+           }
+         }
+       })
+
+Argument `where` of type propertiesWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-12 11:42:10 [ERROR]: GET /property/30b7c57f-fe6f-4c5c-9936-94c689517762/reviews | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/reviews/review.controller.ts:74:27
+
+  71 );
+  72 
+  73 const [propertyData, totalReviews] = await Promise.all([
+→ 74   prisma.properties.findUnique({
+         where: {
+           id: undefined,
+       ?   AND?: propertiesWhereInput | propertiesWhereInput[],
+       ?   OR?: propertiesWhereInput[],
+       ?   NOT?: propertiesWhereInput | propertiesWhereInput[],
+       ?   tenant_id?: StringFilter | String,
+       ?   name?: StringFilter | String,
+       ?   description?: StringNullableFilter | String | Null,
+       ?   address?: StringFilter | String,
+       ?   city?: StringFilter | String,
+       ?   province?: StringFilter | String,
+       ?   zip_code?: StringFilter | String,
+       ?   latitude?: DecimalFilter | Decimal,
+       ?   longitude?: DecimalFilter | Decimal,
+       ?   main_image?: StringNullableFilter | String | Null,
+       ?   created_at?: DateTimeFilter | DateTime,
+       ?   updated_at?: DateTimeFilter | DateTime,
+       ?   deleted_at?: DateTimeNullableFilter | DateTime | Null,
+       ?   property_category?: EnumPropertyCategoryFilter | PropertyCategory,
+       ?   bookings?: BookingsListRelationFilter,
+       ?   peak_season_rates?: Peak_season_ratesListRelationFilter,
+       ?   tenant?: TenantsScalarRelationFilter | tenantsWhereInput,
+       ?   property_images?: Property_imagesListRelationFilter,
+       ?   reviews?: ReviewsListRelationFilter,
+       ?   rooms?: RoomsListRelationFilter
+         },
+         include: {
+           reviews: {
+             take: 3,
+             skip: 0,
+             orderBy: {
+               created_at: "desc"
+             },
+             include: {
+               user: {
+                 select: {
+                   full_name: true,
+                   profile_picture: true
+                 }
+               }
+             }
+           }
+         }
+       })
+
+Argument `where` of type propertiesWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-12 11:42:15 [ERROR]: GET /property/30b7c57f-fe6f-4c5c-9936-94c689517762/reviews | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/reviews/review.controller.ts:74:27
+
+  71 );
+  72 
+  73 const [propertyData, totalReviews] = await Promise.all([
+→ 74   prisma.properties.findUnique({
+         where: {
+           id: undefined,
+       ?   AND?: propertiesWhereInput | propertiesWhereInput[],
+       ?   OR?: propertiesWhereInput[],
+       ?   NOT?: propertiesWhereInput | propertiesWhereInput[],
+       ?   tenant_id?: StringFilter | String,
+       ?   name?: StringFilter | String,
+       ?   description?: StringNullableFilter | String | Null,
+       ?   address?: StringFilter | String,
+       ?   city?: StringFilter | String,
+       ?   province?: StringFilter | String,
+       ?   zip_code?: StringFilter | String,
+       ?   latitude?: DecimalFilter | Decimal,
+       ?   longitude?: DecimalFilter | Decimal,
+       ?   main_image?: StringNullableFilter | String | Null,
+       ?   created_at?: DateTimeFilter | DateTime,
+       ?   updated_at?: DateTimeFilter | DateTime,
+       ?   deleted_at?: DateTimeNullableFilter | DateTime | Null,
+       ?   property_category?: EnumPropertyCategoryFilter | PropertyCategory,
+       ?   bookings?: BookingsListRelationFilter,
+       ?   peak_season_rates?: Peak_season_ratesListRelationFilter,
+       ?   tenant?: TenantsScalarRelationFilter | tenantsWhereInput,
+       ?   property_images?: Property_imagesListRelationFilter,
+       ?   reviews?: ReviewsListRelationFilter,
+       ?   rooms?: RoomsListRelationFilter
+         },
+         include: {
+           reviews: {
+             take: 3,
+             skip: 0,
+             orderBy: {
+               created_at: "desc"
+             },
+             include: {
+               user: {
+                 select: {
+                   full_name: true,
+                   profile_picture: true
+                 }
+               }
+             }
+           }
+         }
+       })
+
+Argument `where` of type propertiesWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-12 11:42:17 [ERROR]: GET /property/30b7c57f-fe6f-4c5c-9936-94c689517762/reviews | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/reviews/review.controller.ts:74:27
+
+  71 );
+  72 
+  73 const [propertyData, totalReviews] = await Promise.all([
+→ 74   prisma.properties.findUnique({
+         where: {
+           id: undefined,
+       ?   AND?: propertiesWhereInput | propertiesWhereInput[],
+       ?   OR?: propertiesWhereInput[],
+       ?   NOT?: propertiesWhereInput | propertiesWhereInput[],
+       ?   tenant_id?: StringFilter | String,
+       ?   name?: StringFilter | String,
+       ?   description?: StringNullableFilter | String | Null,
+       ?   address?: StringFilter | String,
+       ?   city?: StringFilter | String,
+       ?   province?: StringFilter | String,
+       ?   zip_code?: StringFilter | String,
+       ?   latitude?: DecimalFilter | Decimal,
+       ?   longitude?: DecimalFilter | Decimal,
+       ?   main_image?: StringNullableFilter | String | Null,
+       ?   created_at?: DateTimeFilter | DateTime,
+       ?   updated_at?: DateTimeFilter | DateTime,
+       ?   deleted_at?: DateTimeNullableFilter | DateTime | Null,
+       ?   property_category?: EnumPropertyCategoryFilter | PropertyCategory,
+       ?   bookings?: BookingsListRelationFilter,
+       ?   peak_season_rates?: Peak_season_ratesListRelationFilter,
+       ?   tenant?: TenantsScalarRelationFilter | tenantsWhereInput,
+       ?   property_images?: Property_imagesListRelationFilter,
+       ?   reviews?: ReviewsListRelationFilter,
+       ?   rooms?: RoomsListRelationFilter
+         },
+         include: {
+           reviews: {
+             take: 3,
+             skip: 0,
+             orderBy: {
+               created_at: "desc"
+             },
+             include: {
+               user: {
+                 select: {
+                   full_name: true,
+                   profile_picture: true
+                 }
+               }
+             }
+           }
+         }
+       })
+
+Argument `where` of type propertiesWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-12 11:42:19 [ERROR]: GET /property/30b7c57f-fe6f-4c5c-9936-94c689517762/reviews | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/reviews/review.controller.ts:74:27
+
+  71 );
+  72 
+  73 const [propertyData, totalReviews] = await Promise.all([
+→ 74   prisma.properties.findUnique({
+         where: {
+           id: undefined,
+       ?   AND?: propertiesWhereInput | propertiesWhereInput[],
+       ?   OR?: propertiesWhereInput[],
+       ?   NOT?: propertiesWhereInput | propertiesWhereInput[],
+       ?   tenant_id?: StringFilter | String,
+       ?   name?: StringFilter | String,
+       ?   description?: StringNullableFilter | String | Null,
+       ?   address?: StringFilter | String,
+       ?   city?: StringFilter | String,
+       ?   province?: StringFilter | String,
+       ?   zip_code?: StringFilter | String,
+       ?   latitude?: DecimalFilter | Decimal,
+       ?   longitude?: DecimalFilter | Decimal,
+       ?   main_image?: StringNullableFilter | String | Null,
+       ?   created_at?: DateTimeFilter | DateTime,
+       ?   updated_at?: DateTimeFilter | DateTime,
+       ?   deleted_at?: DateTimeNullableFilter | DateTime | Null,
+       ?   property_category?: EnumPropertyCategoryFilter | PropertyCategory,
+       ?   bookings?: BookingsListRelationFilter,
+       ?   peak_season_rates?: Peak_season_ratesListRelationFilter,
+       ?   tenant?: TenantsScalarRelationFilter | tenantsWhereInput,
+       ?   property_images?: Property_imagesListRelationFilter,
+       ?   reviews?: ReviewsListRelationFilter,
+       ?   rooms?: RoomsListRelationFilter
+         },
+         include: {
+           reviews: {
+             take: 3,
+             skip: 0,
+             orderBy: {
+               created_at: "desc"
+             },
+             include: {
+               user: {
+                 select: {
+                   full_name: true,
+                   profile_picture: true
+                 }
+               }
+             }
+           }
+         }
+       })
+
+Argument `where` of type propertiesWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-12 11:42:23 [ERROR]: GET /property/30b7c57f-fe6f-4c5c-9936-94c689517762/reviews | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/reviews/review.controller.ts:74:27
+
+  71 );
+  72 
+  73 const [propertyData, totalReviews] = await Promise.all([
+→ 74   prisma.properties.findUnique({
+         where: {
+           id: undefined,
+       ?   AND?: propertiesWhereInput | propertiesWhereInput[],
+       ?   OR?: propertiesWhereInput[],
+       ?   NOT?: propertiesWhereInput | propertiesWhereInput[],
+       ?   tenant_id?: StringFilter | String,
+       ?   name?: StringFilter | String,
+       ?   description?: StringNullableFilter | String | Null,
+       ?   address?: StringFilter | String,
+       ?   city?: StringFilter | String,
+       ?   province?: StringFilter | String,
+       ?   zip_code?: StringFilter | String,
+       ?   latitude?: DecimalFilter | Decimal,
+       ?   longitude?: DecimalFilter | Decimal,
+       ?   main_image?: StringNullableFilter | String | Null,
+       ?   created_at?: DateTimeFilter | DateTime,
+       ?   updated_at?: DateTimeFilter | DateTime,
+       ?   deleted_at?: DateTimeNullableFilter | DateTime | Null,
+       ?   property_category?: EnumPropertyCategoryFilter | PropertyCategory,
+       ?   bookings?: BookingsListRelationFilter,
+       ?   peak_season_rates?: Peak_season_ratesListRelationFilter,
+       ?   tenant?: TenantsScalarRelationFilter | tenantsWhereInput,
+       ?   property_images?: Property_imagesListRelationFilter,
+       ?   reviews?: ReviewsListRelationFilter,
+       ?   rooms?: RoomsListRelationFilter
+         },
+         include: {
+           reviews: {
+             take: 3,
+             skip: 0,
+             orderBy: {
+               created_at: "desc"
+             },
+             include: {
+               user: {
+                 select: {
+                   full_name: true,
+                   profile_picture: true
+                 }
+               }
+             }
+           }
+         }
+       })
+
+Argument `where` of type propertiesWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-12 11:44:45 [ERROR]: GET /property/30b7c57f-fe6f-4c5c-9936-94c689517762/reviews | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/reviews/review.controller.ts:74:27
+
+  71 );
+  72 
+  73 const [propertyData, totalReviews] = await Promise.all([
+→ 74   prisma.properties.findUnique({
+         where: {
+           id: undefined,
+       ?   AND?: propertiesWhereInput | propertiesWhereInput[],
+       ?   OR?: propertiesWhereInput[],
+       ?   NOT?: propertiesWhereInput | propertiesWhereInput[],
+       ?   tenant_id?: StringFilter | String,
+       ?   name?: StringFilter | String,
+       ?   description?: StringNullableFilter | String | Null,
+       ?   address?: StringFilter | String,
+       ?   city?: StringFilter | String,
+       ?   province?: StringFilter | String,
+       ?   zip_code?: StringFilter | String,
+       ?   latitude?: DecimalFilter | Decimal,
+       ?   longitude?: DecimalFilter | Decimal,
+       ?   main_image?: StringNullableFilter | String | Null,
+       ?   created_at?: DateTimeFilter | DateTime,
+       ?   updated_at?: DateTimeFilter | DateTime,
+       ?   deleted_at?: DateTimeNullableFilter | DateTime | Null,
+       ?   property_category?: EnumPropertyCategoryFilter | PropertyCategory,
+       ?   bookings?: BookingsListRelationFilter,
+       ?   peak_season_rates?: Peak_season_ratesListRelationFilter,
+       ?   tenant?: TenantsScalarRelationFilter | tenantsWhereInput,
+       ?   property_images?: Property_imagesListRelationFilter,
+       ?   reviews?: ReviewsListRelationFilter,
+       ?   rooms?: RoomsListRelationFilter
+         },
+         include: {
+           reviews: {
+             take: 3,
+             skip: 0,
+             orderBy: {
+               created_at: "desc"
+             },
+             include: {
+               user: {
+                 select: {
+                   full_name: true,
+                   profile_picture: true
+                 }
+               }
+             }
+           }
+         }
+       })
+
+Argument `where` of type propertiesWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-12 11:44:46 [ERROR]: GET /property/30b7c57f-fe6f-4c5c-9936-94c689517762/reviews | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/reviews/review.controller.ts:74:27
+
+  71 );
+  72 
+  73 const [propertyData, totalReviews] = await Promise.all([
+→ 74   prisma.properties.findUnique({
+         where: {
+           id: undefined,
+       ?   AND?: propertiesWhereInput | propertiesWhereInput[],
+       ?   OR?: propertiesWhereInput[],
+       ?   NOT?: propertiesWhereInput | propertiesWhereInput[],
+       ?   tenant_id?: StringFilter | String,
+       ?   name?: StringFilter | String,
+       ?   description?: StringNullableFilter | String | Null,
+       ?   address?: StringFilter | String,
+       ?   city?: StringFilter | String,
+       ?   province?: StringFilter | String,
+       ?   zip_code?: StringFilter | String,
+       ?   latitude?: DecimalFilter | Decimal,
+       ?   longitude?: DecimalFilter | Decimal,
+       ?   main_image?: StringNullableFilter | String | Null,
+       ?   created_at?: DateTimeFilter | DateTime,
+       ?   updated_at?: DateTimeFilter | DateTime,
+       ?   deleted_at?: DateTimeNullableFilter | DateTime | Null,
+       ?   property_category?: EnumPropertyCategoryFilter | PropertyCategory,
+       ?   bookings?: BookingsListRelationFilter,
+       ?   peak_season_rates?: Peak_season_ratesListRelationFilter,
+       ?   tenant?: TenantsScalarRelationFilter | tenantsWhereInput,
+       ?   property_images?: Property_imagesListRelationFilter,
+       ?   reviews?: ReviewsListRelationFilter,
+       ?   rooms?: RoomsListRelationFilter
+         },
+         include: {
+           reviews: {
+             take: 3,
+             skip: 0,
+             orderBy: {
+               created_at: "desc"
+             },
+             include: {
+               user: {
+                 select: {
+                   full_name: true,
+                   profile_picture: true
+                 }
+               }
+             }
+           }
+         }
+       })
+
+Argument `where` of type propertiesWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-12 11:44:48 [ERROR]: GET /property/30b7c57f-fe6f-4c5c-9936-94c689517762/reviews | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/reviews/review.controller.ts:74:27
+
+  71 );
+  72 
+  73 const [propertyData, totalReviews] = await Promise.all([
+→ 74   prisma.properties.findUnique({
+         where: {
+           id: undefined,
+       ?   AND?: propertiesWhereInput | propertiesWhereInput[],
+       ?   OR?: propertiesWhereInput[],
+       ?   NOT?: propertiesWhereInput | propertiesWhereInput[],
+       ?   tenant_id?: StringFilter | String,
+       ?   name?: StringFilter | String,
+       ?   description?: StringNullableFilter | String | Null,
+       ?   address?: StringFilter | String,
+       ?   city?: StringFilter | String,
+       ?   province?: StringFilter | String,
+       ?   zip_code?: StringFilter | String,
+       ?   latitude?: DecimalFilter | Decimal,
+       ?   longitude?: DecimalFilter | Decimal,
+       ?   main_image?: StringNullableFilter | String | Null,
+       ?   created_at?: DateTimeFilter | DateTime,
+       ?   updated_at?: DateTimeFilter | DateTime,
+       ?   deleted_at?: DateTimeNullableFilter | DateTime | Null,
+       ?   property_category?: EnumPropertyCategoryFilter | PropertyCategory,
+       ?   bookings?: BookingsListRelationFilter,
+       ?   peak_season_rates?: Peak_season_ratesListRelationFilter,
+       ?   tenant?: TenantsScalarRelationFilter | tenantsWhereInput,
+       ?   property_images?: Property_imagesListRelationFilter,
+       ?   reviews?: ReviewsListRelationFilter,
+       ?   rooms?: RoomsListRelationFilter
+         },
+         include: {
+           reviews: {
+             take: 3,
+             skip: 0,
+             orderBy: {
+               created_at: "desc"
+             },
+             include: {
+               user: {
+                 select: {
+                   full_name: true,
+                   profile_picture: true
+                 }
+               }
+             }
+           }
+         }
+       })
+
+Argument `where` of type propertiesWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-12 11:44:52 [ERROR]: GET /property/30b7c57f-fe6f-4c5c-9936-94c689517762/reviews | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/reviews/review.controller.ts:74:27
+
+  71 );
+  72 
+  73 const [propertyData, totalReviews] = await Promise.all([
+→ 74   prisma.properties.findUnique({
+         where: {
+           id: undefined,
+       ?   AND?: propertiesWhereInput | propertiesWhereInput[],
+       ?   OR?: propertiesWhereInput[],
+       ?   NOT?: propertiesWhereInput | propertiesWhereInput[],
+       ?   tenant_id?: StringFilter | String,
+       ?   name?: StringFilter | String,
+       ?   description?: StringNullableFilter | String | Null,
+       ?   address?: StringFilter | String,
+       ?   city?: StringFilter | String,
+       ?   province?: StringFilter | String,
+       ?   zip_code?: StringFilter | String,
+       ?   latitude?: DecimalFilter | Decimal,
+       ?   longitude?: DecimalFilter | Decimal,
+       ?   main_image?: StringNullableFilter | String | Null,
+       ?   created_at?: DateTimeFilter | DateTime,
+       ?   updated_at?: DateTimeFilter | DateTime,
+       ?   deleted_at?: DateTimeNullableFilter | DateTime | Null,
+       ?   property_category?: EnumPropertyCategoryFilter | PropertyCategory,
+       ?   bookings?: BookingsListRelationFilter,
+       ?   peak_season_rates?: Peak_season_ratesListRelationFilter,
+       ?   tenant?: TenantsScalarRelationFilter | tenantsWhereInput,
+       ?   property_images?: Property_imagesListRelationFilter,
+       ?   reviews?: ReviewsListRelationFilter,
+       ?   rooms?: RoomsListRelationFilter
+         },
+         include: {
+           reviews: {
+             take: 3,
+             skip: 0,
+             orderBy: {
+               created_at: "desc"
+             },
+             include: {
+               user: {
+                 select: {
+                   full_name: true,
+                   profile_picture: true
+                 }
+               }
+             }
+           }
+         }
+       })
+
+Argument `where` of type propertiesWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-12 11:51:35 [ERROR]: GET /property/30b7c57f-fe6f-4c5c-9936-94c689517762/reviews | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/reviews/review.controller.ts:74:27
+
+  71 );
+  72 
+  73 const [propertyData, totalReviews] = await Promise.all([
+→ 74   prisma.properties.findUnique({
+         where: {
+           id: undefined,
+       ?   AND?: propertiesWhereInput | propertiesWhereInput[],
+       ?   OR?: propertiesWhereInput[],
+       ?   NOT?: propertiesWhereInput | propertiesWhereInput[],
+       ?   tenant_id?: StringFilter | String,
+       ?   name?: StringFilter | String,
+       ?   description?: StringNullableFilter | String | Null,
+       ?   address?: StringFilter | String,
+       ?   city?: StringFilter | String,
+       ?   province?: StringFilter | String,
+       ?   zip_code?: StringFilter | String,
+       ?   latitude?: DecimalFilter | Decimal,
+       ?   longitude?: DecimalFilter | Decimal,
+       ?   main_image?: StringNullableFilter | String | Null,
+       ?   created_at?: DateTimeFilter | DateTime,
+       ?   updated_at?: DateTimeFilter | DateTime,
+       ?   deleted_at?: DateTimeNullableFilter | DateTime | Null,
+       ?   property_category?: EnumPropertyCategoryFilter | PropertyCategory,
+       ?   bookings?: BookingsListRelationFilter,
+       ?   peak_season_rates?: Peak_season_ratesListRelationFilter,
+       ?   tenant?: TenantsScalarRelationFilter | tenantsWhereInput,
+       ?   property_images?: Property_imagesListRelationFilter,
+       ?   reviews?: ReviewsListRelationFilter,
+       ?   rooms?: RoomsListRelationFilter
+         },
+         include: {
+           reviews: {
+             take: 3,
+             skip: 0,
+             orderBy: {
+               created_at: "desc"
+             },
+             include: {
+               user: {
+                 select: {
+                   full_name: true,
+                   profile_picture: true
+                 }
+               }
+             }
+           }
+         }
+       })
+
+Argument `where` of type propertiesWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-12 11:51:37 [ERROR]: GET /property/30b7c57f-fe6f-4c5c-9936-94c689517762/reviews | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/reviews/review.controller.ts:74:27
+
+  71 );
+  72 
+  73 const [propertyData, totalReviews] = await Promise.all([
+→ 74   prisma.properties.findUnique({
+         where: {
+           id: undefined,
+       ?   AND?: propertiesWhereInput | propertiesWhereInput[],
+       ?   OR?: propertiesWhereInput[],
+       ?   NOT?: propertiesWhereInput | propertiesWhereInput[],
+       ?   tenant_id?: StringFilter | String,
+       ?   name?: StringFilter | String,
+       ?   description?: StringNullableFilter | String | Null,
+       ?   address?: StringFilter | String,
+       ?   city?: StringFilter | String,
+       ?   province?: StringFilter | String,
+       ?   zip_code?: StringFilter | String,
+       ?   latitude?: DecimalFilter | Decimal,
+       ?   longitude?: DecimalFilter | Decimal,
+       ?   main_image?: StringNullableFilter | String | Null,
+       ?   created_at?: DateTimeFilter | DateTime,
+       ?   updated_at?: DateTimeFilter | DateTime,
+       ?   deleted_at?: DateTimeNullableFilter | DateTime | Null,
+       ?   property_category?: EnumPropertyCategoryFilter | PropertyCategory,
+       ?   bookings?: BookingsListRelationFilter,
+       ?   peak_season_rates?: Peak_season_ratesListRelationFilter,
+       ?   tenant?: TenantsScalarRelationFilter | tenantsWhereInput,
+       ?   property_images?: Property_imagesListRelationFilter,
+       ?   reviews?: ReviewsListRelationFilter,
+       ?   rooms?: RoomsListRelationFilter
+         },
+         include: {
+           reviews: {
+             take: 3,
+             skip: 0,
+             orderBy: {
+               created_at: "desc"
+             },
+             include: {
+               user: {
+                 select: {
+                   full_name: true,
+                   profile_picture: true
+                 }
+               }
+             }
+           }
+         }
+       })
+
+Argument `where` of type propertiesWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-12 11:51:40 [ERROR]: GET /property/30b7c57f-fe6f-4c5c-9936-94c689517762/reviews | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/reviews/review.controller.ts:74:27
+
+  71 );
+  72 
+  73 const [propertyData, totalReviews] = await Promise.all([
+→ 74   prisma.properties.findUnique({
+         where: {
+           id: undefined,
+       ?   AND?: propertiesWhereInput | propertiesWhereInput[],
+       ?   OR?: propertiesWhereInput[],
+       ?   NOT?: propertiesWhereInput | propertiesWhereInput[],
+       ?   tenant_id?: StringFilter | String,
+       ?   name?: StringFilter | String,
+       ?   description?: StringNullableFilter | String | Null,
+       ?   address?: StringFilter | String,
+       ?   city?: StringFilter | String,
+       ?   province?: StringFilter | String,
+       ?   zip_code?: StringFilter | String,
+       ?   latitude?: DecimalFilter | Decimal,
+       ?   longitude?: DecimalFilter | Decimal,
+       ?   main_image?: StringNullableFilter | String | Null,
+       ?   created_at?: DateTimeFilter | DateTime,
+       ?   updated_at?: DateTimeFilter | DateTime,
+       ?   deleted_at?: DateTimeNullableFilter | DateTime | Null,
+       ?   property_category?: EnumPropertyCategoryFilter | PropertyCategory,
+       ?   bookings?: BookingsListRelationFilter,
+       ?   peak_season_rates?: Peak_season_ratesListRelationFilter,
+       ?   tenant?: TenantsScalarRelationFilter | tenantsWhereInput,
+       ?   property_images?: Property_imagesListRelationFilter,
+       ?   reviews?: ReviewsListRelationFilter,
+       ?   rooms?: RoomsListRelationFilter
+         },
+         include: {
+           reviews: {
+             take: 3,
+             skip: 0,
+             orderBy: {
+               created_at: "desc"
+             },
+             include: {
+               user: {
+                 select: {
+                   full_name: true,
+                   profile_picture: true
+                 }
+               }
+             }
+           }
+         }
+       })
+
+Argument `where` of type propertiesWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-12 11:51:44 [ERROR]: GET /property/30b7c57f-fe6f-4c5c-9936-94c689517762/reviews | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/reviews/review.controller.ts:74:27
+
+  71 );
+  72 
+  73 const [propertyData, totalReviews] = await Promise.all([
+→ 74   prisma.properties.findUnique({
+         where: {
+           id: undefined,
+       ?   AND?: propertiesWhereInput | propertiesWhereInput[],
+       ?   OR?: propertiesWhereInput[],
+       ?   NOT?: propertiesWhereInput | propertiesWhereInput[],
+       ?   tenant_id?: StringFilter | String,
+       ?   name?: StringFilter | String,
+       ?   description?: StringNullableFilter | String | Null,
+       ?   address?: StringFilter | String,
+       ?   city?: StringFilter | String,
+       ?   province?: StringFilter | String,
+       ?   zip_code?: StringFilter | String,
+       ?   latitude?: DecimalFilter | Decimal,
+       ?   longitude?: DecimalFilter | Decimal,
+       ?   main_image?: StringNullableFilter | String | Null,
+       ?   created_at?: DateTimeFilter | DateTime,
+       ?   updated_at?: DateTimeFilter | DateTime,
+       ?   deleted_at?: DateTimeNullableFilter | DateTime | Null,
+       ?   property_category?: EnumPropertyCategoryFilter | PropertyCategory,
+       ?   bookings?: BookingsListRelationFilter,
+       ?   peak_season_rates?: Peak_season_ratesListRelationFilter,
+       ?   tenant?: TenantsScalarRelationFilter | tenantsWhereInput,
+       ?   property_images?: Property_imagesListRelationFilter,
+       ?   reviews?: ReviewsListRelationFilter,
+       ?   rooms?: RoomsListRelationFilter
+         },
+         include: {
+           reviews: {
+             take: 3,
+             skip: 0,
+             orderBy: {
+               created_at: "desc"
+             },
+             include: {
+               user: {
+                 select: {
+                   full_name: true,
+                   profile_picture: true
+                 }
+               }
+             }
+           }
+         }
+       })
+
+Argument `where` of type propertiesWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-12 11:51:50 [ERROR]: GET /property/30b7c57f-fe6f-4c5c-9936-94c689517762/reviews | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/reviews/review.controller.ts:74:27
+
+  71 );
+  72 
+  73 const [propertyData, totalReviews] = await Promise.all([
+→ 74   prisma.properties.findUnique({
+         where: {
+           id: undefined,
+       ?   AND?: propertiesWhereInput | propertiesWhereInput[],
+       ?   OR?: propertiesWhereInput[],
+       ?   NOT?: propertiesWhereInput | propertiesWhereInput[],
+       ?   tenant_id?: StringFilter | String,
+       ?   name?: StringFilter | String,
+       ?   description?: StringNullableFilter | String | Null,
+       ?   address?: StringFilter | String,
+       ?   city?: StringFilter | String,
+       ?   province?: StringFilter | String,
+       ?   zip_code?: StringFilter | String,
+       ?   latitude?: DecimalFilter | Decimal,
+       ?   longitude?: DecimalFilter | Decimal,
+       ?   main_image?: StringNullableFilter | String | Null,
+       ?   created_at?: DateTimeFilter | DateTime,
+       ?   updated_at?: DateTimeFilter | DateTime,
+       ?   deleted_at?: DateTimeNullableFilter | DateTime | Null,
+       ?   property_category?: EnumPropertyCategoryFilter | PropertyCategory,
+       ?   bookings?: BookingsListRelationFilter,
+       ?   peak_season_rates?: Peak_season_ratesListRelationFilter,
+       ?   tenant?: TenantsScalarRelationFilter | tenantsWhereInput,
+       ?   property_images?: Property_imagesListRelationFilter,
+       ?   reviews?: ReviewsListRelationFilter,
+       ?   rooms?: RoomsListRelationFilter
+         },
+         include: {
+           reviews: {
+             take: 3,
+             skip: 0,
+             orderBy: {
+               created_at: "desc"
+             },
+             include: {
+               user: {
+                 select: {
+                   full_name: true,
+                   profile_picture: true
+                 }
+               }
+             }
+           }
+         }
+       })
+
+Argument `where` of type propertiesWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-12 11:52:52 [ERROR]: GET /property/30b7c57f-fe6f-4c5c-9936-94c689517762/reviews | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/reviews/review.controller.ts:74:27
+
+  71 );
+  72 
+  73 const [propertyData, totalReviews] = await Promise.all([
+→ 74   prisma.properties.findUnique({
+         where: {
+           id: undefined,
+       ?   AND?: propertiesWhereInput | propertiesWhereInput[],
+       ?   OR?: propertiesWhereInput[],
+       ?   NOT?: propertiesWhereInput | propertiesWhereInput[],
+       ?   tenant_id?: StringFilter | String,
+       ?   name?: StringFilter | String,
+       ?   description?: StringNullableFilter | String | Null,
+       ?   address?: StringFilter | String,
+       ?   city?: StringFilter | String,
+       ?   province?: StringFilter | String,
+       ?   zip_code?: StringFilter | String,
+       ?   latitude?: DecimalFilter | Decimal,
+       ?   longitude?: DecimalFilter | Decimal,
+       ?   main_image?: StringNullableFilter | String | Null,
+       ?   created_at?: DateTimeFilter | DateTime,
+       ?   updated_at?: DateTimeFilter | DateTime,
+       ?   deleted_at?: DateTimeNullableFilter | DateTime | Null,
+       ?   property_category?: EnumPropertyCategoryFilter | PropertyCategory,
+       ?   bookings?: BookingsListRelationFilter,
+       ?   peak_season_rates?: Peak_season_ratesListRelationFilter,
+       ?   tenant?: TenantsScalarRelationFilter | tenantsWhereInput,
+       ?   property_images?: Property_imagesListRelationFilter,
+       ?   reviews?: ReviewsListRelationFilter,
+       ?   rooms?: RoomsListRelationFilter
+         },
+         include: {
+           reviews: {
+             take: 3,
+             skip: 0,
+             orderBy: {
+               created_at: "desc"
+             },
+             include: {
+               user: {
+                 select: {
+                   full_name: true,
+                   profile_picture: true
+                 }
+               }
+             }
+           }
+         }
+       })
+
+Argument `where` of type propertiesWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-12 11:52:53 [ERROR]: GET /property/30b7c57f-fe6f-4c5c-9936-94c689517762/reviews | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/reviews/review.controller.ts:74:27
+
+  71 );
+  72 
+  73 const [propertyData, totalReviews] = await Promise.all([
+→ 74   prisma.properties.findUnique({
+         where: {
+           id: undefined,
+       ?   AND?: propertiesWhereInput | propertiesWhereInput[],
+       ?   OR?: propertiesWhereInput[],
+       ?   NOT?: propertiesWhereInput | propertiesWhereInput[],
+       ?   tenant_id?: StringFilter | String,
+       ?   name?: StringFilter | String,
+       ?   description?: StringNullableFilter | String | Null,
+       ?   address?: StringFilter | String,
+       ?   city?: StringFilter | String,
+       ?   province?: StringFilter | String,
+       ?   zip_code?: StringFilter | String,
+       ?   latitude?: DecimalFilter | Decimal,
+       ?   longitude?: DecimalFilter | Decimal,
+       ?   main_image?: StringNullableFilter | String | Null,
+       ?   created_at?: DateTimeFilter | DateTime,
+       ?   updated_at?: DateTimeFilter | DateTime,
+       ?   deleted_at?: DateTimeNullableFilter | DateTime | Null,
+       ?   property_category?: EnumPropertyCategoryFilter | PropertyCategory,
+       ?   bookings?: BookingsListRelationFilter,
+       ?   peak_season_rates?: Peak_season_ratesListRelationFilter,
+       ?   tenant?: TenantsScalarRelationFilter | tenantsWhereInput,
+       ?   property_images?: Property_imagesListRelationFilter,
+       ?   reviews?: ReviewsListRelationFilter,
+       ?   rooms?: RoomsListRelationFilter
+         },
+         include: {
+           reviews: {
+             take: 3,
+             skip: 0,
+             orderBy: {
+               created_at: "desc"
+             },
+             include: {
+               user: {
+                 select: {
+                   full_name: true,
+                   profile_picture: true
+                 }
+               }
+             }
+           }
+         }
+       })
+
+Argument `where` of type propertiesWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-12 11:52:55 [ERROR]: GET /property/30b7c57f-fe6f-4c5c-9936-94c689517762/reviews | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/reviews/review.controller.ts:74:27
+
+  71 );
+  72 
+  73 const [propertyData, totalReviews] = await Promise.all([
+→ 74   prisma.properties.findUnique({
+         where: {
+           id: undefined,
+       ?   AND?: propertiesWhereInput | propertiesWhereInput[],
+       ?   OR?: propertiesWhereInput[],
+       ?   NOT?: propertiesWhereInput | propertiesWhereInput[],
+       ?   tenant_id?: StringFilter | String,
+       ?   name?: StringFilter | String,
+       ?   description?: StringNullableFilter | String | Null,
+       ?   address?: StringFilter | String,
+       ?   city?: StringFilter | String,
+       ?   province?: StringFilter | String,
+       ?   zip_code?: StringFilter | String,
+       ?   latitude?: DecimalFilter | Decimal,
+       ?   longitude?: DecimalFilter | Decimal,
+       ?   main_image?: StringNullableFilter | String | Null,
+       ?   created_at?: DateTimeFilter | DateTime,
+       ?   updated_at?: DateTimeFilter | DateTime,
+       ?   deleted_at?: DateTimeNullableFilter | DateTime | Null,
+       ?   property_category?: EnumPropertyCategoryFilter | PropertyCategory,
+       ?   bookings?: BookingsListRelationFilter,
+       ?   peak_season_rates?: Peak_season_ratesListRelationFilter,
+       ?   tenant?: TenantsScalarRelationFilter | tenantsWhereInput,
+       ?   property_images?: Property_imagesListRelationFilter,
+       ?   reviews?: ReviewsListRelationFilter,
+       ?   rooms?: RoomsListRelationFilter
+         },
+         include: {
+           reviews: {
+             take: 3,
+             skip: 0,
+             orderBy: {
+               created_at: "desc"
+             },
+             include: {
+               user: {
+                 select: {
+                   full_name: true,
+                   profile_picture: true
+                 }
+               }
+             }
+           }
+         }
+       })
+
+Argument `where` of type propertiesWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-12 11:52:59 [ERROR]: GET /property/30b7c57f-fe6f-4c5c-9936-94c689517762/reviews | STATUS: 
+Invalid `prisma.properties.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/reviews/review.controller.ts:74:27
+
+  71 );
+  72 
+  73 const [propertyData, totalReviews] = await Promise.all([
+→ 74   prisma.properties.findUnique({
+         where: {
+           id: undefined,
+       ?   AND?: propertiesWhereInput | propertiesWhereInput[],
+       ?   OR?: propertiesWhereInput[],
+       ?   NOT?: propertiesWhereInput | propertiesWhereInput[],
+       ?   tenant_id?: StringFilter | String,
+       ?   name?: StringFilter | String,
+       ?   description?: StringNullableFilter | String | Null,
+       ?   address?: StringFilter | String,
+       ?   city?: StringFilter | String,
+       ?   province?: StringFilter | String,
+       ?   zip_code?: StringFilter | String,
+       ?   latitude?: DecimalFilter | Decimal,
+       ?   longitude?: DecimalFilter | Decimal,
+       ?   main_image?: StringNullableFilter | String | Null,
+       ?   created_at?: DateTimeFilter | DateTime,
+       ?   updated_at?: DateTimeFilter | DateTime,
+       ?   deleted_at?: DateTimeNullableFilter | DateTime | Null,
+       ?   property_category?: EnumPropertyCategoryFilter | PropertyCategory,
+       ?   bookings?: BookingsListRelationFilter,
+       ?   peak_season_rates?: Peak_season_ratesListRelationFilter,
+       ?   tenant?: TenantsScalarRelationFilter | tenantsWhereInput,
+       ?   property_images?: Property_imagesListRelationFilter,
+       ?   reviews?: ReviewsListRelationFilter,
+       ?   rooms?: RoomsListRelationFilter
+         },
+         include: {
+           reviews: {
+             take: 3,
+             skip: 0,
+             orderBy: {
+               created_at: "desc"
+             },
+             include: {
+               user: {
+                 select: {
+                   full_name: true,
+                   profile_picture: true
+                 }
+               }
+             }
+           }
+         }
+       })
+
+Argument `where` of type propertiesWhereUniqueInput needs at least one of `id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-12 11:54:20 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-14 03:47:14 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-14 04:48:01 [ERROR]: POST /reservations/create | STATUS: Please enter the required fields | MESSAGE: {"statusCode":400,"success":false,"message":"Please enter the required fields"}
+2025-09-14 04:48:09 [ERROR]: POST /reservations/create | STATUS: Please enter the required fields | MESSAGE: {"statusCode":400,"success":false,"message":"Please enter the required fields"}
+2025-09-14 04:54:48 [ERROR]: PATCH /reservations/proof/8ba2b3a0-140f-44a3-8195-f32e71f5cd89 | STATUS: Unexpected field | MESSAGE: {"name":"MulterError","message":"Unexpected field","code":"LIMIT_UNEXPECTED_FILE","field":"proofImage","storageErrors":[]}
+2025-09-14 04:54:56 [ERROR]: PATCH /reservations/proof/8ba2b3a0-140f-44a3-8195-f32e71f5cd89 | STATUS: Unexpected field | MESSAGE: {"name":"MulterError","message":"Unexpected field","code":"LIMIT_UNEXPECTED_FILE","field":"proofImage","storageErrors":[]}
+2025-09-14 05:19:36 [ERROR]: PATCH /reservations/proof/e69640c3-0fee-4963-a989-2e83d9a8d843 | STATUS: Unexpected field | MESSAGE: {"name":"MulterError","message":"Unexpected field","code":"LIMIT_UNEXPECTED_FILE","field":"proofImage","storageErrors":[]}
+2025-09-14 05:25:20 [ERROR]: PATCH /reservations/cancel/1e9c9b28-b8c3-4692-966d-ca07eec39cc9 | STATUS: Invalid transaction ID | MESSAGE: {"statusCode":400,"success":false,"message":"Invalid transaction ID"}
+2025-09-14 05:25:40 [ERROR]: PATCH /reservations/cancel/1e9c9b28-b8c3-4692-966d-ca07eec39cc9 | STATUS: Invalid transaction ID | MESSAGE: {"statusCode":400,"success":false,"message":"Invalid transaction ID"}
+2025-09-14 05:25:59 [ERROR]: PATCH /reservations/cancel/1e9c9b28-b8c3-4692-966d-ca07eec39cc9 | STATUS: Invalid transaction ID | MESSAGE: {"statusCode":400,"success":false,"message":"Invalid transaction ID"}
+2025-09-14 05:26:05 [ERROR]: PATCH /reservations/cancel/e69640c3-0fee-4963-a989-2e83d9a8d843 | STATUS: Invalid transaction ID | MESSAGE: {"statusCode":400,"success":false,"message":"Invalid transaction ID"}
+2025-09-14 05:26:31 [ERROR]: PATCH /reservations/cancel/1e9c9b28-b8c3-4692-966d-ca07eec39cc9 | STATUS: Invalid transaction ID | MESSAGE: {"statusCode":400,"success":false,"message":"Invalid transaction ID"}
+2025-09-14 05:27:06 [ERROR]: PATCH /reservations/cancel/1e9c9b28-b8c3-4692-966d-ca07eec39cc9 | STATUS: Invalid transaction ID | MESSAGE: {"statusCode":400,"success":false,"message":"Invalid transaction ID"}
+2025-09-14 05:27:40 [ERROR]: PATCH /reservations/cancel/1e9c9b28-b8c3-4692-966d-ca07eec39cc9 | STATUS: Invalid transaction ID | MESSAGE: {"statusCode":400,"success":false,"message":"Invalid transaction ID"}
+2025-09-14 05:28:13 [ERROR]: PATCH /reservations/cancel/fe7b64c7-6b3c-45d9-a2e9-0ca0179247c3 | STATUS: Invalid transaction ID | MESSAGE: {"statusCode":400,"success":false,"message":"Invalid transaction ID"}
+2025-09-14 05:30:02 [ERROR]: PATCH /reservations/cancel/1e9c9b28-b8c3-4692-966d-ca07eec39cc9 | STATUS: Invalid transaction ID | MESSAGE: {"statusCode":400,"success":false,"message":"Invalid transaction ID"}
+2025-09-14 05:30:59 [ERROR]: PATCH /reservations/cancel/c18491d0-c085-489f-abaf-3c9d8e2a0ecb | STATUS: Invalid transaction ID | MESSAGE: {"statusCode":400,"success":false,"message":"Invalid transaction ID"}
+2025-09-15 10:55:06 [ERROR]: GET /reservations/get | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-15 10:55:07 [ERROR]: GET /reservations/get | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-15 10:55:09 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-15 10:55:21 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 00:08:30 [ERROR]: POST /auth/login | STATUS: Invalid password | MESSAGE: {"statusCode":401,"success":false,"message":"Invalid password"}
+2025-09-16 00:57:40 [ERROR]: GET /payment/availability | STATUS: 
+Invalid `prisma.tenants.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/tenant/tenant-tx.controller.ts:340:49
+
+  337   );
+  338 }
+  339 
+→ 340 const tenantRecord = await prisma.tenants.findUnique({
+        where: {
+          user_id: undefined,
+      ?   id?: String,
+      ?   AND?: tenantsWhereInput | tenantsWhereInput[],
+      ?   OR?: tenantsWhereInput[],
+      ?   NOT?: tenantsWhereInput | tenantsWhereInput[],
+      ?   company_name?: StringFilter | String,
+      ?   address?: StringFilter | String,
+      ?   phone_number?: StringFilter | String,
+      ?   logo?: StringNullableFilter | String | Null,
+      ?   created_at?: DateTimeFilter | DateTime,
+      ?   updated_at?: DateTimeFilter | DateTime,
+      ?   properties?: PropertiesListRelationFilter,
+      ?   user?: UsersScalarRelationFilter | usersWhereInput
+        },
+        select: {
+          id: true
+        }
+      })
+
+Argument `where` of type tenantsWhereUniqueInput needs at least one of `id` or `user_id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-16 00:57:57 [ERROR]: GET /payment/availability | STATUS: 
+Invalid `prisma.tenants.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/tenant/tenant-tx.controller.ts:340:49
+
+  337   );
+  338 }
+  339 
+→ 340 const tenantRecord = await prisma.tenants.findUnique({
+        where: {
+          user_id: undefined,
+      ?   id?: String,
+      ?   AND?: tenantsWhereInput | tenantsWhereInput[],
+      ?   OR?: tenantsWhereInput[],
+      ?   NOT?: tenantsWhereInput | tenantsWhereInput[],
+      ?   company_name?: StringFilter | String,
+      ?   address?: StringFilter | String,
+      ?   phone_number?: StringFilter | String,
+      ?   logo?: StringNullableFilter | String | Null,
+      ?   created_at?: DateTimeFilter | DateTime,
+      ?   updated_at?: DateTimeFilter | DateTime,
+      ?   properties?: PropertiesListRelationFilter,
+      ?   user?: UsersScalarRelationFilter | usersWhereInput
+        },
+        select: {
+          id: true
+        }
+      })
+
+Argument `where` of type tenantsWhereUniqueInput needs at least one of `id` or `user_id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-16 00:57:57 [ERROR]: GET /payment/availability | STATUS: 
+Invalid `prisma.tenants.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/tenant/tenant-tx.controller.ts:340:49
+
+  337   );
+  338 }
+  339 
+→ 340 const tenantRecord = await prisma.tenants.findUnique({
+        where: {
+          user_id: undefined,
+      ?   id?: String,
+      ?   AND?: tenantsWhereInput | tenantsWhereInput[],
+      ?   OR?: tenantsWhereInput[],
+      ?   NOT?: tenantsWhereInput | tenantsWhereInput[],
+      ?   company_name?: StringFilter | String,
+      ?   address?: StringFilter | String,
+      ?   phone_number?: StringFilter | String,
+      ?   logo?: StringNullableFilter | String | Null,
+      ?   created_at?: DateTimeFilter | DateTime,
+      ?   updated_at?: DateTimeFilter | DateTime,
+      ?   properties?: PropertiesListRelationFilter,
+      ?   user?: UsersScalarRelationFilter | usersWhereInput
+        },
+        select: {
+          id: true
+        }
+      })
+
+Argument `where` of type tenantsWhereUniqueInput needs at least one of `id` or `user_id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-16 00:58:36 [ERROR]: GET /payment/availability | STATUS: 
+Invalid `prisma.tenants.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/tenant/tenant-tx.controller.ts:340:49
+
+  337   );
+  338 }
+  339 
+→ 340 const tenantRecord = await prisma.tenants.findUnique({
+        where: {
+          user_id: undefined,
+      ?   id?: String,
+      ?   AND?: tenantsWhereInput | tenantsWhereInput[],
+      ?   OR?: tenantsWhereInput[],
+      ?   NOT?: tenantsWhereInput | tenantsWhereInput[],
+      ?   company_name?: StringFilter | String,
+      ?   address?: StringFilter | String,
+      ?   phone_number?: StringFilter | String,
+      ?   logo?: StringNullableFilter | String | Null,
+      ?   created_at?: DateTimeFilter | DateTime,
+      ?   updated_at?: DateTimeFilter | DateTime,
+      ?   properties?: PropertiesListRelationFilter,
+      ?   user?: UsersScalarRelationFilter | usersWhereInput
+        },
+        select: {
+          id: true
+        }
+      })
+
+Argument `where` of type tenantsWhereUniqueInput needs at least one of `id` or `user_id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-16 00:58:37 [ERROR]: GET /payment/availability | STATUS: 
+Invalid `prisma.tenants.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/tenant/tenant-tx.controller.ts:340:49
+
+  337   );
+  338 }
+  339 
+→ 340 const tenantRecord = await prisma.tenants.findUnique({
+        where: {
+          user_id: undefined,
+      ?   id?: String,
+      ?   AND?: tenantsWhereInput | tenantsWhereInput[],
+      ?   OR?: tenantsWhereInput[],
+      ?   NOT?: tenantsWhereInput | tenantsWhereInput[],
+      ?   company_name?: StringFilter | String,
+      ?   address?: StringFilter | String,
+      ?   phone_number?: StringFilter | String,
+      ?   logo?: StringNullableFilter | String | Null,
+      ?   created_at?: DateTimeFilter | DateTime,
+      ?   updated_at?: DateTimeFilter | DateTime,
+      ?   properties?: PropertiesListRelationFilter,
+      ?   user?: UsersScalarRelationFilter | usersWhereInput
+        },
+        select: {
+          id: true
+        }
+      })
+
+Argument `where` of type tenantsWhereUniqueInput needs at least one of `id` or `user_id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
+2025-09-16 14:31:48 [ERROR]: POST /auth/logout | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 14:31:50 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 14:56:14 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+
 2025-09-10 20:49:25 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
 2025-09-12 19:22:20 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
 2025-09-12 19:46:19 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
@@ -4275,3 +6396,4 @@ Please make sure your database server is running at `aws-0-us-west-1.pooler.supa
 2025-09-16 17:12:23 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
 2025-09-16 17:12:51 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
 2025-09-16 18:33:24 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+

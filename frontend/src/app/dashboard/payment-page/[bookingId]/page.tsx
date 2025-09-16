@@ -28,6 +28,8 @@ import { usePriceQuote } from "@/hooks/usePriceQuote";
 import { paymentProofUpload } from "@/services/transactions.services";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import Script from "next/script";
+import { SnapMidtrans } from "@/components/ui/snap-midtrans";
 
 export type PaymentPageParams = {
   bookingId: string;
@@ -50,6 +52,8 @@ export default function PaymentPage() {
     isLoading,
     isError,
   } = useUserBookingByQuery(bookingId);
+
+  console.log("Fetching data from bookingID:", booking, bookingId)
 
   // Data Parsing
 
@@ -141,6 +145,13 @@ export default function PaymentPage() {
   };
 
   return (
+    <>
+    <Script
+    id="midtrans-snap-script"
+    src="https://app.sandbox.midtrans.com/snap/snap.js"
+    data-client-key={process.env.NEXT_PUBLIC_MIDTRANS_CLIENT_KEY}
+    strategy="afterInteractive"/>
+
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         {/* Header */}
@@ -234,6 +245,10 @@ export default function PaymentPage() {
               </CardContent>
             </Card>
 
+            {/* Pay with Midtrans */}
+
+            <SnapMidtrans bookingId={bookingId}/>
+
             {/* Upload Receipt */}
             <Card className="py-6">
               <CardHeader>
@@ -296,5 +311,6 @@ export default function PaymentPage() {
         </div>
       </div>
     </div>
+    </>
   );
 }

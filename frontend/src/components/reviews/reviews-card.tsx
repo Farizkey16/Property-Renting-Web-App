@@ -36,7 +36,13 @@ const ReviewCard = ({ review }: { review: Review }) => {
 
         <div className="flex items-center gap-2 mb-2">
           <div className="flex items-center gap-1">
-            <Rating initialValue={review.rating} readonly size={20} />
+            <Rating
+              className="flex flex-row"
+              initialValue={review.rating}
+              SVGstyle={{ display: "inline" }}
+              readonly
+              size={20}
+            />
           </div>
           <span className="text-sm text-muted-foreground">
             {new Date(review.createdAt).toLocaleDateString("en-US", {
@@ -75,6 +81,11 @@ const ReviewCard = ({ review }: { review: Review }) => {
 };
 
 export const ReviewList = ({ propertyId }: { propertyId: string }) => {
+  console.log(
+    "%c2. ReviewList component received this ID:",
+    "color: green; font-weight: bold;",
+    propertyId
+  );
 
   const {
     data,
@@ -86,11 +97,8 @@ export const ReviewList = ({ propertyId }: { propertyId: string }) => {
     isFetchingNextPage,
   } = usePropertyReviews(propertyId);
 
-
   if (isLoading) return <div>Loading reviews...</div>;
   if (isError) return <div>An error occurred: {error.message}</div>;
-
-   console.log("1. Attempting to fetch reviews for data:", data);
 
   const allReviews = data?.pages.flatMap((page) => page.data) || [];
 

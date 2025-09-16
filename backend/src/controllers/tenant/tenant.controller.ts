@@ -46,6 +46,7 @@ class TenantController {
       next(error);
     }
   }
+  
 }
 
 export default TenantController;

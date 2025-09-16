@@ -203,6 +203,7 @@ class UserTransactions {
           check_in_date: true,
           check_out_date: true,
           payment_deadline: true,
+          amount: true,
           booking_rooms: {
             select: {
               id: true,
@@ -374,8 +375,6 @@ class UserTransactions {
       if (!bookingId) {
         throw new AppError("Invalid transaction ID", 400);
       }
-
-      console.log("booking Id is: ", bookingId);
 
       const proof = await FindProofImage(bookingId);
 

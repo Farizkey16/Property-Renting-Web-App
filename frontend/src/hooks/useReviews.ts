@@ -2,6 +2,9 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { fetchReviews } from "@/services/reviews.service";
 
 export const usePropertyReviews = (propertyId: string) => {
+
+    console.log('%c3. usePropertyReviews hook is using this ID:', 'color: orange; font-weight: bold;', propertyId);
+
   return useInfiniteQuery({
     queryKey: ["reviews", propertyId],
     queryFn: ({ pageParam }) => fetchReviews({ propertyId, pageParam }),
@@ -16,5 +19,6 @@ export const usePropertyReviews = (propertyId: string) => {
 
       return undefined;
     },
+    enabled: !!propertyId
   });
 };

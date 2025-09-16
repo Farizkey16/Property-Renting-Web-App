@@ -31,7 +31,7 @@ export const fetchReviews = async ({
     withCredentials: true,
   });
 
-  return response.data;
+  return response.data
 };
 
 export const createReview = async (payload: CreateReviewPayload) => {

@@ -34,22 +34,25 @@ class TenantTransactions {
 
       const bookingId = req.params.id;
 
-      const updatedBooking = await acceptBookingPayment(bookingId, role.tenant_id)
+      const updatedBooking = await acceptBookingPayment(
+        bookingId,
+        role.tenant_id
+      );
 
-      console.log("--- Full Booking Data for Email/Reminder ---", updatedBooking);
-
+      console.log(
+        "--- Full Booking Data for Email/Reminder ---",
+        updatedBooking
+      );
 
       // Send Booking Confirmation
-      await sendUserBookingConfirmation(
-       updatedBooking
-      );
+      await sendUserBookingConfirmation(updatedBooking);
 
       // Scheduling Reminder
       await scheduleReminder(bookingId);
 
       res.json({
         message: "Payment successful, booking created",
-        data: updatedBooking
+        data: updatedBooking,
       });
     } catch (error) {
       next(error);
@@ -315,6 +318,94 @@ class TenantTransactions {
         });
       }
       res.status(200).json({ data: bookings });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public getAvailability = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const user = res.locals.decrypt;
+      if (user.role !== "tenant") {
+        throw new AppError(
+          "Forbidden: You do not have permission to access this resource.",
+          403
+        );
+      }
+
+      const tenantRecord = await prisma.tenants.findUnique({
+        where: {
+          user_id: user.userId,
+        },
+      });
+
+      const tenantId = tenantRecord?.id;
+
+      const { startDate, endDate } = req.query;
+
+      if (
+        !startDate ||
+        !endDate ||
+        typeof startDate !== "string" ||
+        typeof endDate !== "string"
+      ) {
+        throw new AppError(
+          "Start and end date query parameters are required.",
+          400
+        );
+      }
+
+      const bookings = await prisma.bookings.findMany({
+        where: {
+          property: {
+            tenant_id: tenantId,
+          },
+          status: {
+            in: ["confirmed", "waiting_confirmation"],
+          },
+          check_in_date: {
+            lte: new Date(endDate),
+          },
+          check_out_date: {
+            gte: new Date(startDate),
+          },
+        },
+        include: {
+          booking_rooms: {
+            select: {
+              room: {
+                select: {
+                  name: true,
+                },
+              },
+            },
+          },
+        },
+      });
+
+      const events = bookings.flatMap((booking) => {
+        return booking.booking_rooms.map((br) => {
+          return {
+            id: booking.id,
+            title: `${br.room.name} - Booked`,
+            start: booking.check_in_date,
+            end: booking.check_out_date,
+            backgroundColor:
+              booking.status === "confirmed" ? "#CA3433" : "#16A34A",
+            borderColor: booking.status === "confirmed" ? "#CA3433" : "#16A34A",
+          };
+        });
+      });
+
+      res.status(200).json({
+        success: true,
+        message: "Availability successfully fetched.",
+        data: events,
+      });
     } catch (error) {
       next(error);
     }

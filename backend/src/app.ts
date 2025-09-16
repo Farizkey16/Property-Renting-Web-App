@@ -1,6 +1,6 @@
 import express, { Application, Response, Request, NextFunction } from "express";
 import cors from "cors";
-import qs from 'qs'
+import qs from "qs";
 import dotenv from "dotenv";
 dotenv.config();
 import AuthRouter from "./routes/auth.router";
@@ -16,6 +16,7 @@ import { startAllWorkersAndSchedules } from "./services/scheduler.service";
 import PricingQuoteController from "./controllers/pricing/pricing.controller";
 import PricingRouter from "./routes/pricing.router";
 import ReviewRouter from "./routes/review.router";
+import MidtransRouter from "./routes/midtrans.router";
 
 const PORT: string | number = process.env.PORT || 4000;
 
@@ -38,9 +39,9 @@ class App {
         credentials: true,
       })
     );
-    this.app.set('query parser', (str: string) => {
-      return qs.parse(str, {arrayLimit: 20})
-    })
+    this.app.set("query parser", (str: string) => {
+      return qs.parse(str, { arrayLimit: 20 });
+    });
   }
 
   private route(): void {
@@ -51,8 +52,9 @@ class App {
     const roomRouter = new RoomRouter();
     const tenantTxRouter = new TenantTxRouter();
     const userTxRouter = new UserTxRouter();
-    const pricingRouter = new PricingRouter
-    const reviewRouter = new ReviewRouter
+    const pricingRouter = new PricingRouter();
+    const reviewRouter = new ReviewRouter();
+    const midtransRouter = new MidtransRouter();
     this.app.get("/", (req: Request, res: Response) => {
       res.status(200).json("<h1> Welcome to Property Renting Web App</h1>");
     });
@@ -63,27 +65,33 @@ class App {
     this.app.use("/room", roomRouter.getRouter());
     this.app.use("/payment", tenantTxRouter.getRouter());
     this.app.use("/reservations", userTxRouter.getRouter());
-    this.app.use("/pricing", pricingRouter.getRouter())
-    this.app.use("/reviews", reviewRouter.getRouter())
+    this.app.use("/pricing", pricingRouter.getRouter());
+    this.app.use("/reviews", reviewRouter.getRouter());
+    this.app.use("/midtrans", midtransRouter.getRouter())
   }
 
   // error handling
   private errorHandler(): void {
     this.app.use(
       (error: any, req: Request, res: Response, next: NextFunction) => {
-        const statusCode = error.statusCode || 500
-        const message = error.message || "An unexpected internal server error occurred."
+        const statusCode = error.statusCode || 500;
+        const message =
+          error.message || "An unexpected internal server error occurred.";
         logger.error(
-          `${req.method} ${req.path} | STATUS: ${error.message} | MESSAGE: ${JSON.stringify(error)}`
+          `${req.method} ${req.path} | STATUS: ${
+            error.message
+          } | MESSAGE: ${JSON.stringify(error)}`
         );
-        res.status(statusCode).json({message: message, statusCode: statusCode});
+        res
+          .status(statusCode)
+          .json({ message: message, statusCode: statusCode });
       }
     );
   }
 
   public start(): void {
     this.app.listen(PORT, () => {
-      console.log(`API RUNNING AT: http://localhost:${PORT}`)
+      console.log(`API RUNNING AT: http://localhost:${PORT}`);
       startAllWorkersAndSchedules();
     });
   }

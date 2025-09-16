@@ -27,7 +27,7 @@ const BookingsPage = () => {
     const urlStatus = searchParams.get("status");
     const status: BookingStatus = isValidBookingStatus(urlStatus)
       ? urlStatus
-      : "waiting_payment";
+      : "waiting_confirmation";
     const urlSort = searchParams.get("sort");
     const sort: SortStatus = isValidSort(urlSort) ? urlSort : "asc";
 

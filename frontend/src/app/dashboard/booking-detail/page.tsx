@@ -405,6 +405,7 @@ export default function BookingDetailsForm() {
               </CardContent>
             </Card>
 
+                
             <Button
               onClick={handleContinue}
               className="w-full bg-green-600 hover:bg-green-700 text-white py-3 text-base font-medium"

@@ -14,8 +14,8 @@ import { formatCurrency } from "@/lib/utils";
 
 const getStatusColor = (status: string) => {
   switch (status) {
-    case "confirmed":
-      return "bg-green-100 text-green-700 hover:bg-green-100";
+    case "waiting_confirmation":
+      return "bg-gray-100 text-green-700 hover:bg-green-100";
     case "pending":
       return "bg-yellow-100 text-yellow-700 hover:bg-yellow-100";
     case "cancelled":
@@ -163,7 +163,7 @@ export const BookingCard = ({ booking, role }: BookingCardProps) => {
                     </Button>
                   ) : ""}
 
-                  {booking.status === "waiting_payment" && (
+                  {booking.status === "waiting_payment" || booking.status === "waiting_confirmation" && (
                     <Button
                       variant="outline"
                       size="sm"

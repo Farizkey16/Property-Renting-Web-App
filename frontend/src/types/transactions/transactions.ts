@@ -65,6 +65,7 @@ export interface BookingsApiResponse {
 // Type Guard Booking Status
 export const VALID_BOOKING_STATUS = [
   "waiting_payment",
+  "waiting_confirmation",
   "confirmed",
   "canceled",
   "canceled_by_tenant",

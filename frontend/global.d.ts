@@ -1,0 +1,6 @@
+
+
+
+interface Window {
+    snap: any
+}

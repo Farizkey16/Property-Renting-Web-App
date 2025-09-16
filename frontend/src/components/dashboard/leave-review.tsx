@@ -59,10 +59,12 @@ export const LeaveReviewForm = ({ bookingId }: LeaveReviewFormProps) => {
         <div className="space-y-4 py-4">
           <div className="text-center">
             <Rating
+              className="flex"
               onClick={(rate) => setRating(rate)}
               initialValue={rating}
               size={40}
               transition
+              SVGstyle={{'display': 'inline'}}
             />
           </div>
           <div>
@@ -73,6 +75,7 @@ export const LeaveReviewForm = ({ bookingId }: LeaveReviewFormProps) => {
               value={comment}
               onChange={(e) => setComment(e.target.value)}
               className="mt-2"
+              
             />
           </div>
         </div>

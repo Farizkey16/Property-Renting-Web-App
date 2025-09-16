@@ -120,9 +120,9 @@ export const fetchTenantBookings = async (filters: FetchBookingsParams) => {
   return response.data.data;
 };
 
-export const userCancelBookingById = async (id: string) => {
+export const userCancelBookingById = async (bookingId: string) => {
   const response = await axios.patch(
-    `${BASE_URL}/reservations/cancel/${id}`,
+    `${BASE_URL}/reservations/cancel/${bookingId}`,
     {},
     {
       withCredentials: true,
