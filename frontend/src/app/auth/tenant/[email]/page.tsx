@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,43 +7,47 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useRegisterTenant } from "@/hooks/useTenant";
 import Image from "next/image";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  registerTenantSchema,
+  RegisterTenantSchema,
+} from "@/lib/validation/tenant";
+import { useState } from "react";
 
 export default function RegisterTenantPage() {
   const { email } = useParams<{ email: string }>();
   const decodedEmail = decodeURIComponent(email);
   const router = useRouter();
 
-  const [form, setForm] = useState({
-    company_name: "",
-    address: "",
-    phone_number: "",
-  });
-  const [logoFile, setLogoFile] = useState<File | null>(null);
-
   const { mutate: registerTenant, isPending, isError } = useRegisterTenant();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
-  };
+  const [logoPreview, setLogoPreview] = useState<string | null>(null);
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setLogoFile(e.target.files[0]);
-    }
-  };
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm<RegisterTenantSchema>({
+    resolver: zodResolver(registerTenantSchema),
+    defaultValues: {
+      email: decodedEmail,
+      company_name: "",
+      address: "",
+      phone_number: "",
+      logo: undefined as unknown as File,
+    },
+  });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email || !logoFile) return;
-
+  const onSubmit = (data: RegisterTenantSchema) => {
     registerTenant(
       {
         email: decodedEmail,
-        company_name: form.company_name,
-        address: form.address,
-        phone_number: form.phone_number,
-        logo: logoFile,
+        company_name: data.company_name,
+        address: data.address,
+        phone_number: data.phone_number,
+        logo: data.logo,
       },
       {
         onSuccess: () => {
@@ -66,59 +69,64 @@ export default function RegisterTenantPage() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+              {/* Company Name */}
               <div>
                 <Label htmlFor="company_name">Company Name</Label>
-                <Input
-                  id="company_name"
-                  name="company_name"
-                  value={form.company_name}
-                  onChange={handleChange}
-                  required
-                  className="mt-2"
-                />
+                <Input id="company_name" {...register("company_name")} />
+                {errors.company_name && (
+                  <p className="text-sm text-red-500 mt-1">
+                    {errors.company_name.message}
+                  </p>
+                )}
               </div>
 
+              {/* Address */}
               <div>
                 <Label htmlFor="address">Address</Label>
-                <Input
-                  id="address"
-                  name="address"
-                  value={form.address}
-                  onChange={handleChange}
-                  required
-                  className="mt-2"
-                />
+                <Input id="address" {...register("address")} />
+                {errors.address && (
+                  <p className="text-sm text-red-500 mt-1">
+                    {errors.address.message}
+                  </p>
+                )}
               </div>
 
+              {/* Phone Number */}
               <div>
                 <Label htmlFor="phone_number">Phone Number</Label>
-                <Input
-                  id="phone_number"
-                  name="phone_number"
-                  value={form.phone_number}
-                  onChange={handleChange}
-                  required
-                  className="mt-2"
-                />
+                <Input id="phone_number" {...register("phone_number")} />
+                {errors.phone_number && (
+                  <p className="text-sm text-red-500 mt-1">
+                    {errors.phone_number.message}
+                  </p>
+                )}
               </div>
 
+              {/* Logo */}
               <div>
                 <Label htmlFor="logo">Company Logo</Label>
                 <Input
                   id="logo"
-                  name="logo"
                   type="file"
                   accept="image/*"
-                  onChange={handleFileChange}
-                  required
-                  className="mt-2"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      setValue("logo", file, { shouldValidate: true });
+                      setLogoPreview(URL.createObjectURL(file));
+                    }
+                  }}
                 />
-                {/* Image Preview */}
-                {logoFile && (
+                {errors.logo && (
+                  <p className="text-sm text-red-500 mt-1">
+                    {errors.logo.message}
+                  </p>
+                )}
+                {logoPreview && (
                   <div className="mt-4 flex justify-center">
                     <Image
-                      src={URL.createObjectURL(logoFile)}
+                      src={logoPreview}
                       alt="Logo Preview"
                       width={150}
                       height={150}
@@ -130,8 +138,10 @@ export default function RegisterTenantPage() {
 
               <Button type="submit" className="w-full" disabled={isPending}>
                 {isPending ? "Loading..." : "Register Tenant"}
-                {isError && "Error"}
               </Button>
+              {isError && (
+                <p className="text-sm text-red-500 mt-2">Failed to register</p>
+              )}
             </form>
           </CardContent>
         </Card>

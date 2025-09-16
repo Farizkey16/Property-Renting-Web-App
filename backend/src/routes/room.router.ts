@@ -32,7 +32,7 @@ class RoomRouter {
       uploaderMemory().array("images", 3),
       this.roomRouter.updateRoom
     );
-    this.route.delete(
+    this.route.patch(
       "/delete/:id",
       verifyToken,
       onlyTenant,

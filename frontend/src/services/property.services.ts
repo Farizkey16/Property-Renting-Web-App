@@ -85,7 +85,7 @@ export const fetchPropertyByLocation = async (
   const response = await axios.get(
     `${BASE_URL}/property/nearby?${params.toString()}`
   );
-
+  console.log(response.data);
   return response.data;
 };
 
@@ -124,5 +124,13 @@ export const updatePropertyService = async (
     }
   );
 
+  return response.data;
+};
+
+export const softDeletePropertyService = async (id: string) => {
+  const response = await axios.patch(`${BASE_URL}/property/delete/${id}`, {
+    withCredentials: true,
+  });
+  console.log(response.data);
   return response.data;
 };

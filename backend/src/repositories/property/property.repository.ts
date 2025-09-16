@@ -19,6 +19,7 @@ export const getAllPropertiesRepository = async (filters: {
         ? (property_category as PropertyCategory)
         : undefined,
       name: name ? { contains: name, mode: "insensitive" } : undefined,
+      deleted_at: null,
     },
     orderBy: { created_at: "desc" },
     include: {
@@ -34,17 +35,18 @@ export const getPropertyByIdRepository = async (propertyId: string) => {
       main_image: true,
       property_images: true,
       reviews: true,
+
       rooms: {
         select: {
           id: true,
           name: true,
           room_images: true,
           room_availability: true,
-        }
-      }
-    }
-  })
-}
+        },
+      },
+    },
+  });
+};
 
 export const getTenantWithPropertiesByUserId = async (userId: string) => {
   return prisma.tenants.findUnique({
@@ -113,11 +115,11 @@ export const findNearbyPropertiesRepository = async (
       CROSS JOIN dates d
       LEFT JOIN room_availability ra 
         ON ra.room_id = r.id AND ra.date = d.date
-      WHERE
-        (${minPrice ? `r.base_price >= ${minPrice}` : "TRUE"})
-        AND (${maxPrice ? `r.base_price <= ${maxPrice}` : "TRUE"})
-        AND (${guests ? `r.capacity >= ${guests}` : "TRUE"})
-        AND (${rooms ? `r.total_rooms >= ${rooms}` : "TRUE"})
+      WHERE r.deleted_at IS NULL
+        AND ($6::int IS NULL OR r.base_price >= $6)
+        AND ($7::int IS NULL OR r.base_price <= $7)
+        AND ($8::int IS NULL OR r.capacity >= $8)
+        AND ($9::int IS NULL OR r.total_rooms >= $9)
       GROUP BY r.id
       HAVING COUNT(ra.date) FILTER (WHERE ra.is_available = true) = COUNT(d.date)
     )
@@ -156,7 +158,8 @@ export const findNearbyPropertiesRepository = async (
       ) AS rooms
     FROM properties p
     LEFT JOIN available_rooms ar ON ar.property_id = p.id
-    ${category ? `WHERE p.property_category = '${category}'` : ""}
+    WHERE p.deleted_at IS NULL
+      AND ($10::text IS NULL OR p.property_category = $10::"PropertyCategory")
     GROUP BY 
       p.id, p.name, p.description, p.address, p.city, 
       p.province, p.zip_code, p.latitude, p.longitude, 
@@ -177,7 +180,12 @@ export const findNearbyPropertiesRepository = async (
     checkOut,
     lat,
     lng,
-    radius
+    radius,
+    minPrice ?? null,
+    maxPrice ?? null,
+    guests ?? null,
+    rooms ?? null,
+    category ?? null
   );
 };
 

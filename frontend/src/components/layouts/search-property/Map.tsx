@@ -3,100 +3,91 @@
 import Map, { Marker, Popup } from "react-map-gl/mapbox";
 import "mapbox-gl/dist/mapbox-gl.css";
 import React, { useState, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
-import { usePropertiesByLocation } from "@/hooks/useProperty";
 import { FaHome } from "react-icons/fa";
 import Image from "next/image";
 
+// Room type
+type Room = {
+  id: string;
+  name: string;
+  description: string;
+  capacity: number;
+  base_price: number;
+  total_rooms: number;
+  image?: string;
+};
+
+// Property type
 type Property = {
   id: string;
   name: string;
   address: string;
+  city: string;
+  province: string;
+  description: string;
   latitude: string;
   longitude: string;
   distance: number;
-  image?: string; // tambahkan field image
+  main_image?: string;
+  property_category: string;
+  rooms: Room[];
 };
 
-const MapPages = ({
-  children,
-}: {
-  children: (props: {
+// Props
+interface MapPagesProps {
+  children?: (props: {
     userLocation: { latitude: number; longitude: number } | null;
   }) => React.ReactNode;
-}) => {
-  const searchParams = useSearchParams();
+  properties: Property[];
+  checkIn?: string;
+  checkOut?: string;
+}
 
-  const queryLat = searchParams.get("lat");
-  const queryLng = searchParams.get("lng");
-  const queryZoom = searchParams.get("zoom");
-
+const MapPages: React.FC<MapPagesProps> = ({ children, properties }) => {
   const [viewState, setViewState] = useState({
-    longitude: 106.8456,
-    latitude: -6.2088,
-    zoom: 12,
+    longitude: 112.58335,
+    latitude: -8.1190028,
+    zoom: 13,
   });
 
   const [userLocation, setUserLocation] = useState<{
     latitude: number;
     longitude: number;
   } | null>(null);
-
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(
     null
   );
 
+  // Ambil lokasi user
   useEffect(() => {
-    if (queryLat && queryLng) {
-      setViewState((prev) => ({
-        ...prev,
-        latitude: parseFloat(queryLat),
-        longitude: parseFloat(queryLng),
-        zoom: queryZoom ? parseFloat(queryZoom) : prev.zoom,
-      }));
-      setUserLocation({
-        latitude: parseFloat(queryLat),
-        longitude: parseFloat(queryLng),
-      });
-    } else if ("geolocation" in navigator) {
+    if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          setViewState((prev) => ({
-            ...prev,
-            latitude,
-            longitude,
-          }));
+        (pos) => {
+          const { latitude, longitude } = pos.coords;
           setUserLocation({ latitude, longitude });
+          setViewState((prev) => ({ ...prev, latitude, longitude }));
         },
-        (error) => {
-          console.warn("User denied location or error occurred", error);
+        () => {
+          setUserLocation({ latitude: -8.1190028, longitude: 112.58335 });
         }
       );
     }
-  }, [queryLat, queryLng, queryZoom]);
+  }, []);
 
-  // fetch property untuk marker
-  const { data } = usePropertiesByLocation(
-    userLocation?.latitude ?? 0,
-    userLocation?.longitude ?? 0,
-    5
-  );
-
-  const properties: Property[] = data?.properties ?? [];
+  console.log("properties in Map:", properties);
 
   return (
     <div className="flex flex-col lg:flex-row w-full max-w-full overflow-x-hidden">
       {/* Map Section */}
       <div className="w-full lg:flex-1 relative p-2">
-        <div className="h-[220px] lg:h-[500px] rounded-xl overflow-hidden shadow">
+        <div className="h-[300px] md:h-[400px] lg:h-[500px] rounded-xl overflow-hidden shadow">
           <Map
             {...viewState}
             onMove={(evt) => setViewState(evt.viewState)}
             mapStyle="mapbox://styles/ariska-adi/cmetwjjft000501s98r0t28p6"
             mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}
             style={{ width: "100%", height: "100%" }}>
-            {/* Marker user */}
+            {/* User marker */}
             {userLocation && (
               <Marker
                 latitude={userLocation.latitude}
@@ -109,7 +100,7 @@ const MapPages = ({
               </Marker>
             )}
 
-            {/* Marker property */}
+            {/* Property markers */}
             {properties.map((p) => (
               <Marker
                 key={p.id}
@@ -117,31 +108,32 @@ const MapPages = ({
                 longitude={Number(p.longitude)}
                 anchor="bottom"
                 onClick={() => setSelectedProperty(p)}>
-                <div className="w-8 h-8">
-                  <FaHome className="w-full h-full text-blue-600 bg-white rounded-full p-1 shadow-md hover:scale-110 transition-transform cursor-pointer" />
+                <div className="w-8 h-8 flex items-center justify-center z-50">
+                  <FaHome className="text-blue-600 bg-white rounded-full p-1 shadow-md w-6 h-6 cursor-pointer" />
                 </div>
               </Marker>
             ))}
 
-            {/* Popup property */}
+            {/* Popup */}
             {selectedProperty && (
               <Popup
                 latitude={Number(selectedProperty.latitude)}
                 longitude={Number(selectedProperty.longitude)}
                 anchor="top"
                 closeOnClick={false}
-                onClose={() => setSelectedProperty(null)}
-                className="z-50 max-w-xs">
-                <div className="text-sm space-y-2">
+                onClose={() => setSelectedProperty(null)}>
+                <div className="text-sm space-y-2 max-w-xs">
                   <h4 className="font-semibold">{selectedProperty.name}</h4>
                   <p className="text-gray-600">{selectedProperty.address}</p>
                   <p className="text-xs text-gray-500">
                     {selectedProperty.distance.toFixed(2)} km away
                   </p>
-                  {selectedProperty.image && (
+                  {selectedProperty.main_image && (
                     <Image
-                      src={selectedProperty.image}
+                      src={selectedProperty.main_image}
                       alt={selectedProperty.name}
+                      width={300}
+                      height={150}
                       className="w-full h-24 object-cover rounded-md"
                     />
                   )}
@@ -152,14 +144,14 @@ const MapPages = ({
         </div>
       </div>
 
-      {/* Sidebar */}
-      <div
-        className="w-full lg:w-[420px] bg-white border-t lg:border-t-0 lg:border-l 
-               flex flex-col lg:h-[500px] max-w-full">
-        <div className="flex-1 overflow-y-auto p-4">
-          {children({ userLocation })}
+      {/* Sidebar / Children */}
+      {children && (
+        <div className="w-full lg:w-[420px] bg-white border-t lg:border-t-0 lg:border-l flex flex-col lg:h-[500px] max-w-full">
+          <div className="flex-1 overflow-y-auto p-4">
+            {children({ userLocation })}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

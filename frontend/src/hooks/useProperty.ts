@@ -1,10 +1,10 @@
 import {
   createPropertyServices,
   fetchAllProperties,
-  fetchPropertyById,
   fetchPropertyByLocation,
   fetchPropertyByTenant,
   getPropertyById,
+  softDeletePropertyService,
   updatePropertyService,
 } from "@/services/property.services";
 import {
@@ -19,6 +19,7 @@ export const useProperties = (filters: PropertyFilters = {}) => {
     queryKey: ["properties", filters],
     queryFn: () => fetchAllProperties(filters),
     select: (data) => data.properties,
+    staleTime: 60 * 1000,
   });
 };
 
@@ -74,6 +75,7 @@ export const usePropertiesByLocation = (
         guests,
         rooms
       ),
+
     enabled: !!latitude && !!longitude && !!radius && !!checkIn && !!checkOut,
     staleTime: 1000 * 60 * 5,
   });
@@ -102,5 +104,11 @@ export const useUpdateProperty = () => {
       console.error(error);
       alert("Failed to update property");
     },
+  });
+};
+
+export const useSoftDeleteProperty = () => {
+  return useMutation({
+    mutationFn: (id: string) => softDeletePropertyService(id),
   });
 };

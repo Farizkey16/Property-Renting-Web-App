@@ -3,6 +3,7 @@ import { RoomsType } from "../../types/rooms/rooms.types";
 import { Decimal } from "@prisma/client/runtime/library";
 import dayjs from "../../utils/dayjs";
 import { Prisma } from "../../../prisma/generated/client";
+import AppError from "../../errors/AppError";
 
 const LOCAL_TZ = "Asia/Jakarta";
 
@@ -90,7 +91,7 @@ export const getRoomAvailabilityWithPriceRepository = async (
   const endDate = dayjs(checkOut).tz(LOCAL_TZ).startOf("day").toDate();
 
   const room = await prisma.rooms.findUnique({
-    where: { id: room_id },
+    where: { id: room_id, deleted_at: null },
     include: { peak_season_rates: true },
   });
 
@@ -145,7 +146,7 @@ export const getRoomAvailabilityWithPriceRepository = async (
 
 export const findRoomRepository = async (property_id: string) => {
   return await prisma.rooms.findMany({
-    where: { property_id },
+    where: { property_id, deleted_at: null },
     include: {
       property: true,
     },
@@ -233,14 +234,26 @@ export const getRoomByPropertyAndNameRepository = async (
 
 export const findRoomByIdRepository = async (id: string) => {
   return await prisma.rooms.findUnique({
-    where: { id },
+    where: { id, deleted_at: null },
   });
 };
 
 export const deleteRoomByIdRepository = async (id: string) => {
-  return await prisma.rooms.delete({
-    where: { id },
+  const result = await prisma.rooms.updateMany({
+    where: {
+      id: id,
+      deleted_at: null,
+    },
+    data: {
+      deleted_at: new Date(),
+    },
   });
+
+  if (result.count === 0) {
+    throw new AppError("Property not found or already deleted", 404);
+  }
+
+  return true;
 };
 
 export const updateRoomByIdRepository = async (
@@ -268,14 +281,14 @@ export const updateRoomByIdRepository = async (
   };
 
   return await prisma.rooms.update({
-    where: { id },
+    where: { id, deleted_at: null },
     data: updateData,
   });
 };
 
 export const getRoomByIdRepository = async (id: string) => {
   return await prisma.rooms.findUnique({
-    where: { id },
+    where: { id, deleted_at: null },
     select: {
       name: true,
       description: true,
@@ -284,6 +297,7 @@ export const getRoomByIdRepository = async (id: string) => {
       total_rooms: true,
       room_images: true,
       base_price: true,
+      property_id: true,
     },
   });
 };

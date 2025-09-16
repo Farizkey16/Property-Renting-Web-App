@@ -2,8 +2,10 @@ import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
 import type { LucideIcon } from "lucide-react";
+import { DeleteDialog } from "@/components/fragment/button-action/DeleteDialog";
 
 interface PropertyCardProps {
+  id: string;
   name: string;
   city: string;
   category: string;
@@ -52,12 +54,20 @@ export function PropertyCard({
               className="p-2 rounded-lg bg-muted text-blue-500 hover:bg-blue-100">
               <EditIcon className="w-5 h-5" />
             </Link>
-            <button
-              type="button"
-              onClick={onDelete}
-              className="p-2 rounded-lg bg-muted text-red-500 hover:bg-red-100">
-              <DeleteIcon className="w-5 h-5" />
-            </button>
+
+            {/* Delete with confirmation */}
+            <DeleteDialog
+              title="Delete Property"
+              description={`Are you sure you want to delete "${name}"?`}
+              onConfirm={onDelete ?? (() => {})}
+              trigger={
+                <button
+                  type="button"
+                  className="p-2 rounded-lg bg-muted text-red-500 hover:bg-red-100">
+                  <DeleteIcon className="w-5 h-5" />
+                </button>
+              }
+            />
           </div>
         </div>
       </CardContent>

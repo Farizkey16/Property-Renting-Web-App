@@ -1,5 +1,222 @@
-2025-09-07 16:57:02 [ERROR]: GET /property/nearby | STATUS: checkIn and checkOut are required | MESSAGE: {"statusCode":400,"success":false,"message":"checkIn and checkOut are required"}
-2025-09-07 17:13:01 [ERROR]: GET /user/me | STATUS: 
+2025-09-15 20:01:20 [ERROR]: GET /property/nearby | STATUS: 
+Invalid `prisma.$queryRawUnsafe()` invocation:
+
+
+Raw query failed. Code: `42601`. Message: `ERROR: syntax error at or near "WHERE"` | MESSAGE: {"code":"P2010","meta":{"code":"42601","message":"ERROR: syntax error at or near \"WHERE\""},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-15 20:01:25 [ERROR]: GET /property/nearby | STATUS: 
+Invalid `prisma.$queryRawUnsafe()` invocation:
+
+
+Raw query failed. Code: `42601`. Message: `ERROR: syntax error at or near "WHERE"` | MESSAGE: {"code":"P2010","meta":{"code":"42601","message":"ERROR: syntax error at or near \"WHERE\""},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-15 20:01:50 [ERROR]: GET /property/nearby | STATUS: 
+Invalid `prisma.$queryRawUnsafe()` invocation:
+
+
+Raw query failed. Code: `42601`. Message: `ERROR: syntax error at or near "WHERE"` | MESSAGE: {"code":"P2010","meta":{"code":"42601","message":"ERROR: syntax error at or near \"WHERE\""},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-15 20:01:52 [ERROR]: GET /property/nearby | STATUS: 
+Invalid `prisma.$queryRawUnsafe()` invocation:
+
+
+Raw query failed. Code: `42601`. Message: `ERROR: syntax error at or near "WHERE"` | MESSAGE: {"code":"P2010","meta":{"code":"42601","message":"ERROR: syntax error at or near \"WHERE\""},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-15 20:01:56 [ERROR]: GET /property/nearby | STATUS: 
+Invalid `prisma.$queryRawUnsafe()` invocation:
+
+
+Raw query failed. Code: `42601`. Message: `ERROR: syntax error at or near "WHERE"` | MESSAGE: {"code":"P2010","meta":{"code":"42601","message":"ERROR: syntax error at or near \"WHERE\""},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-15 20:02:01 [ERROR]: GET /property/nearby | STATUS: 
+Invalid `prisma.$queryRawUnsafe()` invocation:
+
+
+Raw query failed. Code: `42601`. Message: `ERROR: syntax error at or near "WHERE"` | MESSAGE: {"code":"P2010","meta":{"code":"42601","message":"ERROR: syntax error at or near \"WHERE\""},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-15 20:02:53 [ERROR]: GET /property/nearby | STATUS: 
+Invalid `prisma.$queryRawUnsafe()` invocation:
+
+
+Raw query failed. Code: `42601`. Message: `ERROR: syntax error at or near "WHERE"` | MESSAGE: {"code":"P2010","meta":{"code":"42601","message":"ERROR: syntax error at or near \"WHERE\""},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-15 20:08:14 [ERROR]: GET /property/nearby | STATUS: 
+Invalid `prisma.$queryRawUnsafe()` invocation:
+
+
+Raw query failed. Code: `42883`. Message: `ERROR: operator does not exist: "PropertyCategory" = text
+HINT: No operator matches the given name and argument types. You might need to add explicit type casts.` | MESSAGE: {"code":"P2010","meta":{"code":"42883","message":"ERROR: operator does not exist: \"PropertyCategory\" = text\nHINT: No operator matches the given name and argument types. You might need to add explicit type casts."},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-15 20:08:16 [ERROR]: GET /property/nearby | STATUS: 
+Invalid `prisma.$queryRawUnsafe()` invocation:
+
+
+Raw query failed. Code: `42883`. Message: `ERROR: operator does not exist: "PropertyCategory" = text
+HINT: No operator matches the given name and argument types. You might need to add explicit type casts.` | MESSAGE: {"code":"P2010","meta":{"code":"42883","message":"ERROR: operator does not exist: \"PropertyCategory\" = text\nHINT: No operator matches the given name and argument types. You might need to add explicit type casts."},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-15 20:08:16 [ERROR]: GET /property/nearby | STATUS: 
+Invalid `prisma.$queryRawUnsafe()` invocation:
+
+
+Raw query failed. Code: `42883`. Message: `ERROR: operator does not exist: "PropertyCategory" = text
+HINT: No operator matches the given name and argument types. You might need to add explicit type casts.` | MESSAGE: {"code":"P2010","meta":{"code":"42883","message":"ERROR: operator does not exist: \"PropertyCategory\" = text\nHINT: No operator matches the given name and argument types. You might need to add explicit type casts."},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-15 20:08:19 [ERROR]: GET /property/nearby | STATUS: 
+Invalid `prisma.$queryRawUnsafe()` invocation:
+
+
+Raw query failed. Code: `42883`. Message: `ERROR: operator does not exist: "PropertyCategory" = text
+HINT: No operator matches the given name and argument types. You might need to add explicit type casts.` | MESSAGE: {"code":"P2010","meta":{"code":"42883","message":"ERROR: operator does not exist: \"PropertyCategory\" = text\nHINT: No operator matches the given name and argument types. You might need to add explicit type casts."},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-15 20:08:24 [ERROR]: GET /property/nearby | STATUS: 
+Invalid `prisma.$queryRawUnsafe()` invocation:
+
+
+Raw query failed. Code: `42883`. Message: `ERROR: operator does not exist: "PropertyCategory" = text
+HINT: No operator matches the given name and argument types. You might need to add explicit type casts.` | MESSAGE: {"code":"P2010","meta":{"code":"42883","message":"ERROR: operator does not exist: \"PropertyCategory\" = text\nHINT: No operator matches the given name and argument types. You might need to add explicit type casts."},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-15 20:08:48 [ERROR]: GET /property/nearby | STATUS: 
+Invalid `prisma.$queryRawUnsafe()` invocation:
+
+
+Raw query failed. Code: `42883`. Message: `ERROR: operator does not exist: "PropertyCategory" = text
+HINT: No operator matches the given name and argument types. You might need to add explicit type casts.` | MESSAGE: {"code":"P2010","meta":{"code":"42883","message":"ERROR: operator does not exist: \"PropertyCategory\" = text\nHINT: No operator matches the given name and argument types. You might need to add explicit type casts."},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-16 13:14:37 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 13:19:12 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 13:22:45 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 13:22:55 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 13:27:18 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 13:30:32 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 13:31:07 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 13:34:32 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 13:39:22 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 13:51:13 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 13:57:09 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 13:57:20 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 13:57:45 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 13:57:51 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 14:05:36 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 14:06:09 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 14:12:28 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 14:19:54 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 14:20:54 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 14:21:42 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 14:30:59 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 14:31:21 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 14:32:38 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 14:34:10 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 14:34:26 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 14:39:59 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 14:40:21 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 14:46:27 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 14:47:20 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 14:53:14 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 14:57:48 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 15:02:11 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 15:02:20 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 15:05:42 [ERROR]: GET /property/all | STATUS: 
+Invalid `prisma.properties.findMany()` invocation in
+D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\property\property.repository.ts:16:28
+
+  13 }) => {
+  14   const { property_category, name } = filters;
+  15 
+→ 16   return prisma.properties.findMany(
+Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"code":"P1001","meta":{"modelName":"properties","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-16 15:05:44 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 15:05:49 [ERROR]: GET /room/search | STATUS: 
+Invalid `prisma.rooms.findMany()` invocation in
+D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\rooms\rooms.repository.ts:170:29
+
+  167   checkIn?: string,
+  168   checkOut?: string
+  169 ) => {
+→ 170   return await prisma.rooms.findMany(
+Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"code":"P1001","meta":{"modelName":"rooms","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-16 15:05:55 [ERROR]: GET /room/search | STATUS: 
+Invalid `prisma.rooms.findMany()` invocation in
+D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\rooms\rooms.repository.ts:170:29
+
+  167   checkIn?: string,
+  168   checkOut?: string
+  169 ) => {
+→ 170   return await prisma.rooms.findMany(
+Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"code":"P1001","meta":{"modelName":"rooms","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-16 15:06:59 [ERROR]: GET /property/all | STATUS: 
+Invalid `prisma.properties.findMany()` invocation in
+D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\property\property.repository.ts:16:28
+
+  13 }) => {
+  14   const { property_category, name } = filters;
+  15 
+→ 16   return prisma.properties.findMany(
+Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"code":"P1001","meta":{"modelName":"properties","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-16 15:11:40 [ERROR]: GET /property/all | STATUS: 
+Invalid `prisma.properties.findMany()` invocation in
+D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\property\property.repository.ts:16:28
+
+  13 }) => {
+  14   const { property_category, name } = filters;
+  15 
+→ 16   return prisma.properties.findMany(
+Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"code":"P1001","meta":{"modelName":"properties","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-16 15:11:47 [ERROR]: GET /property/all | STATUS: 
+Invalid `prisma.properties.findMany()` invocation in
+D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\property\property.repository.ts:16:28
+
+  13 }) => {
+  14   const { property_category, name } = filters;
+  15 
+→ 16   return prisma.properties.findMany(
+Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"code":"P1001","meta":{"modelName":"properties","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-16 15:11:52 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 15:11:55 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 15:12:24 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 15:19:32 [ERROR]: GET /property/all | STATUS: 
+Invalid `prisma.properties.findMany()` invocation in
+D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\property\property.repository.ts:16:28
+
+  13 }) => {
+  14   const { property_category, name } = filters;
+  15 
+→ 16   return prisma.properties.findMany(
+Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"code":"P1001","meta":{"modelName":"properties","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-16 15:19:37 [ERROR]: GET /property/all | STATUS: 
+Invalid `prisma.properties.findMany()` invocation in
+D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\property\property.repository.ts:16:28
+
+  13 }) => {
+  14   const { property_category, name } = filters;
+  15 
+→ 16   return prisma.properties.findMany(
+Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"code":"P1001","meta":{"modelName":"properties","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-16 15:19:43 [ERROR]: GET /property/all | STATUS: 
+Invalid `prisma.properties.findMany()` invocation in
+D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\property\property.repository.ts:16:28
+
+  13 }) => {
+  14   const { property_category, name } = filters;
+  15 
+→ 16   return prisma.properties.findMany(
+Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"code":"P1001","meta":{"modelName":"properties","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-16 15:19:50 [ERROR]: GET /property/all | STATUS: 
+Invalid `prisma.properties.findMany()` invocation in
+D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\property\property.repository.ts:16:28
+
+  13 }) => {
+  14   const { property_category, name } = filters;
+  15 
+→ 16   return prisma.properties.findMany(
+Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"code":"P1001","meta":{"modelName":"properties","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-16 15:19:53 [ERROR]: GET /user/me | STATUS: 
 Invalid `prisma.users.findUnique()` invocation in
 D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\user\user.respository.ts:7:23
 
@@ -10,852 +227,248 @@ D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\user\
 Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
 
 Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"code":"P1001","meta":{"modelName":"users","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
-2025-09-07 21:37:20 [ERROR]: GET /room/search | STATUS: 
-Invalid `prisma.rooms.findMany()` invocation in
-D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\rooms\rooms.repository.ts:165:29
+2025-09-16 15:20:01 [ERROR]: GET /property/all | STATUS: 
+Invalid `prisma.properties.findMany()` invocation in
+D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\property\property.repository.ts:16:28
 
-  162   checkIn?: string,
-  163   checkOut?: string
-  164 ) => {
-→ 165   return await prisma.rooms.findMany(
+  13 }) => {
+  14   const { property_category, name } = filters;
+  15 
+→ 16   return prisma.properties.findMany(
+Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"code":"P1001","meta":{"modelName":"properties","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-16 15:20:12 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 15:20:14 [ERROR]: GET /property/all | STATUS: 
+Invalid `prisma.properties.findMany()` invocation in
+D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\property\property.repository.ts:16:28
+
+  13 }) => {
+  14   const { property_category, name } = filters;
+  15 
+→ 16   return prisma.properties.findMany(
+Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"code":"P1001","meta":{"modelName":"properties","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-16 15:20:17 [ERROR]: GET /property/all | STATUS: 
+Invalid `prisma.properties.findMany()` invocation in
+D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\property\property.repository.ts:16:28
+
+  13 }) => {
+  14   const { property_category, name } = filters;
+  15 
+→ 16   return prisma.properties.findMany(
+Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"code":"P1001","meta":{"modelName":"properties","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-16 15:20:23 [ERROR]: GET /property/all | STATUS: 
+Invalid `prisma.properties.findMany()` invocation in
+D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\property\property.repository.ts:16:28
+
+  13 }) => {
+  14   const { property_category, name } = filters;
+  15 
+→ 16   return prisma.properties.findMany(
+Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"code":"P1001","meta":{"modelName":"properties","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-16 15:20:30 [ERROR]: GET /property/all | STATUS: 
+Invalid `prisma.properties.findMany()` invocation in
+D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\property\property.repository.ts:16:28
+
+  13 }) => {
+  14   const { property_category, name } = filters;
+  15 
+→ 16   return prisma.properties.findMany(
+Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"code":"P1001","meta":{"modelName":"properties","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-16 15:21:38 [ERROR]: GET /property/all | STATUS: 
+Invalid `prisma.properties.findMany()` invocation in
+D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\property\property.repository.ts:16:28
+
+  13 }) => {
+  14   const { property_category, name } = filters;
+  15 
+→ 16   return prisma.properties.findMany(
 Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
 
 Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"clientVersion":"6.13.0","name":"PrismaClientInitializationError"}
-2025-09-07 22:09:32 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
-2025-09-07 22:14:59 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
-2025-09-07 22:16:18 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
-2025-09-07 22:16:22 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
-2025-09-07 22:39:13 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
-2025-09-07 22:44:35 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
-2025-09-07 22:53:20 [ERROR]: POST /auth/register | STATUS: User already exist | MESSAGE: {"statusCode":400,"success":false,"message":"User already exist"}
-2025-09-07 22:54:14 [ERROR]: POST /auth/register | STATUS: User already exist | MESSAGE: {"statusCode":400,"success":false,"message":"User already exist"}
-2025-09-08 19:49:32 [ERROR]: GET /room/search | STATUS: 
-Invalid `prisma.rooms.findMany()` invocation in
-D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\rooms\rooms.repository.ts:172:29
+2025-09-16 15:21:44 [ERROR]: GET /property/all | STATUS: 
+Invalid `prisma.properties.findMany()` invocation in
+D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\property\property.repository.ts:16:28
 
-  169   checkIn?: string,
-  170   checkOut?: string
-  171 ) => {
-→ 172   return await prisma.rooms.findMany(
-Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
-
-Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"code":"P1001","meta":{"modelName":"rooms","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
-2025-09-08 19:49:38 [ERROR]: GET /room/search | STATUS: 
-Invalid `prisma.rooms.findMany()` invocation in
-D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\rooms\rooms.repository.ts:172:29
-
-  169   checkIn?: string,
-  170   checkOut?: string
-  171 ) => {
-→ 172   return await prisma.rooms.findMany(
-Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
-
-Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"code":"P1001","meta":{"modelName":"rooms","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
-2025-09-08 21:43:24 [ERROR]: GET /room/search | STATUS: 
-Invalid `prisma.rooms.findMany()` invocation in
-D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\rooms\rooms.repository.ts:173:29
-
-  170   checkIn?: string,
-  171   checkOut?: string
-  172 ) => {
-→ 173   return await prisma.rooms.findMany(
-Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
-
-Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"code":"P1001","meta":{"modelName":"rooms","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
-2025-09-08 21:43:30 [ERROR]: GET /room/search | STATUS: 
-Invalid `prisma.rooms.findMany()` invocation in
-D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\rooms\rooms.repository.ts:173:29
-
-  170   checkIn?: string,
-  171   checkOut?: string
-  172 ) => {
-→ 173   return await prisma.rooms.findMany(
-Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
-
-Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"code":"P1001","meta":{"modelName":"rooms","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
-2025-09-09 17:53:02 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
-2025-09-09 17:58:49 [ERROR]: POST /auth/login | STATUS: User not found | MESSAGE: {"statusCode":400,"success":false,"message":"User not found"}
-2025-09-09 18:00:01 [ERROR]: POST /auth/login | STATUS: Invalid password | MESSAGE: {"statusCode":401,"success":false,"message":"Invalid password"}
-2025-09-09 18:00:09 [ERROR]: POST /auth/login | STATUS: Invalid password | MESSAGE: {"statusCode":401,"success":false,"message":"Invalid password"}
-2025-09-09 18:00:23 [ERROR]: POST /auth/login | STATUS: Invalid password | MESSAGE: {"statusCode":401,"success":false,"message":"Invalid password"}
-2025-09-09 18:18:37 [ERROR]: GET /user/me | STATUS: 
-Invalid `prisma.users.findUnique()` invocation in
-D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\user\user.respository.ts:7:23
-
-  4 import AppError from "../../errors/AppError";
-  5 
-  6 export const findUserById = async (userId: string) => {
-→ 7   return prisma.users.findUnique(
-Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
-
-Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"code":"P1001","meta":{"modelName":"users","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
-2025-09-09 18:38:25 [ERROR]: GET /room/search | STATUS: 
-Invalid `prisma.rooms.findMany()` invocation in
-D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\rooms\rooms.repository.ts:173:29
-
-  170   checkIn?: string,
-  171   checkOut?: string
-  172 ) => {
-→ 173   return await prisma.rooms.findMany(
-Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
-
-Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"code":"P1001","meta":{"modelName":"rooms","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
-2025-09-09 19:01:52 [ERROR]: GET /room/search | STATUS: 
-Invalid `prisma.rooms.findMany()` invocation in
-D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\rooms\rooms.repository.ts:169:29
-
-  166   checkIn?: string,
-  167   checkOut?: string
-  168 ) => {
-→ 169   return await prisma.rooms.findMany(
-Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
-
-Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. {"code":"P1001","meta":{"modelName":"properties","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
-2025-09-07 01:30:08 [ERROR]: POST /reservations/create | STATUS: Room is not available | MESSAGE: {"statusCode":409,"success":false,"message":"Room is not available"}
-2025-09-07 01:31:31 [ERROR]: PATCH /reservations/proof/b3cd6476-1b92-4cbc-8729-194c31562556 | STATUS: Unexpected field | MESSAGE: {"name":"MulterError","message":"Unexpected field","code":"LIMIT_UNEXPECTED_FILE","field":"proofImage","storageErrors":[]}
-2025-09-07 01:31:48 [ERROR]: PATCH /reservations/proof/b3cd6476-1b92-4cbc-8729-194c31562556 | STATUS: Unexpected field | MESSAGE: {"name":"MulterError","message":"Unexpected field","code":"LIMIT_UNEXPECTED_FILE","field":"proofImage","storageErrors":[]}
-2025-09-07 01:38:42 [ERROR]: PATCH /reservations/proof/dd731114-b990-4f0f-92f8-b5c4852b9f53 | STATUS: Unexpected field | MESSAGE: {"name":"MulterError","message":"Unexpected field","code":"LIMIT_UNEXPECTED_FILE","field":"proofImage","storageErrors":[]}
-2025-09-07 01:46:43 [ERROR]: PATCH /reservations/proof/dd731114-b990-4f0f-92f8-b5c4852b9f53 | STATUS: Unexpected field | MESSAGE: {"name":"MulterError","message":"Unexpected field","code":"LIMIT_UNEXPECTED_FILE","field":"proofImage","storageErrors":[]}
-2025-09-07 01:47:44 [ERROR]: PATCH /reservations/proof/dd731114-b990-4f0f-92f8-b5c4852b9f53 | STATUS: Unexpected field | MESSAGE: {"name":"MulterError","message":"Unexpected field","code":"LIMIT_UNEXPECTED_FILE","field":"proofImage","storageErrors":[]}
-2025-09-07 01:51:42 [ERROR]: GET /reservations/dd731114-b990-4f0f-92f8-b5c4852b9f53 | STATUS: 
-Invalid `prisma.bookings.findFirst()` invocation in
-/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/repositories/transaction/tenant-tx.repository.ts:249:26
-
-  246   where.user_id = identity.userId;
-  247 }
-  248 
-→ 249 return prisma.bookings.findFirst(
-Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
-
-Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"code":"P1001","meta":{"modelName":"bookings","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
-2025-09-07 01:54:29 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
-2025-09-07 01:57:51 [ERROR]: GET /payment/orders | STATUS: Cannot read properties of undefined (reading 'findMany') | MESSAGE: {}
-2025-09-07 01:57:52 [ERROR]: GET /payment/orders | STATUS: Cannot read properties of undefined (reading 'findMany') | MESSAGE: {}
-2025-09-07 01:57:54 [ERROR]: GET /payment/orders | STATUS: Cannot read properties of undefined (reading 'findMany') | MESSAGE: {}
-2025-09-07 01:57:58 [ERROR]: GET /payment/orders | STATUS: Cannot read properties of undefined (reading 'findMany') | MESSAGE: {}
-2025-09-07 02:25:36 [ERROR]: GET /payment/orders | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
-2025-09-07 02:58:11 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
-2025-09-07 02:58:13 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
-2025-09-07 02:58:17 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
-2025-09-07 02:58:22 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
-2025-09-07 02:58:38 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
-2025-09-07 02:58:50 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
-2025-09-07 02:59:44 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
-2025-09-07 03:00:13 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
-2025-09-07 03:00:17 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
-2025-09-07 03:00:20 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
-2025-09-07 03:00:23 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
-2025-09-07 03:00:28 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
-2025-09-07 03:02:51 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
-2025-09-07 03:02:53 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
-2025-09-07 03:02:56 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
-2025-09-07 03:03:01 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
-2025-09-07 03:03:23 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
-2025-09-07 03:03:25 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
-2025-09-07 03:03:28 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
-2025-09-07 03:03:35 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
-2025-09-07 03:03:43 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
-2025-09-07 03:03:57 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
-2025-09-07 03:03:59 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
-2025-09-07 03:04:02 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
-2025-09-07 03:04:08 [ERROR]: GET /payment/orders/tenant | STATUS: Booking not found. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found."}
-2025-09-07 03:10:29 [ERROR]: GET /payment/orders/tenant | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
-2025-09-07 03:10:30 [ERROR]: GET /payment/orders/tenant | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
-2025-09-07 03:10:32 [ERROR]: GET /payment/orders/tenant | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
-2025-09-07 03:10:36 [ERROR]: GET /payment/orders/tenant | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
-2025-09-07 03:10:40 [ERROR]: GET /payment/orders/tenant | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
-2025-09-07 03:12:34 [ERROR]: GET /payment/orders/tenant | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
-2025-09-07 03:12:42 [ERROR]: GET /payment/orders/tenant | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
-2025-09-07 03:12:43 [ERROR]: GET /payment/orders/tenant | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
-2025-09-07 03:12:45 [ERROR]: GET /payment/orders/tenant | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
-2025-09-07 03:12:49 [ERROR]: GET /payment/orders/tenant | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
-2025-09-07 03:13:28 [ERROR]: GET /payment/orders/tenant | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
-2025-09-07 03:13:29 [ERROR]: GET /payment/orders/tenant | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
-2025-09-07 03:13:31 [ERROR]: GET /payment/orders/tenant | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
-2025-09-07 03:13:35 [ERROR]: GET /payment/orders/tenant | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
-2025-09-07 03:14:51 [ERROR]: GET /payment/orders/tenant | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
-2025-09-07 03:14:52 [ERROR]: GET /payment/orders/tenant | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
-2025-09-07 03:14:54 [ERROR]: GET /payment/orders/tenant | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
-2025-09-07 03:14:58 [ERROR]: GET /payment/orders/tenant | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
-2025-09-07 03:15:38 [ERROR]: GET /payment/orders/tenant | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
-2025-09-07 03:15:39 [ERROR]: GET /payment/orders/tenant | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
-2025-09-07 03:15:41 [ERROR]: GET /payment/orders/tenant | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
-2025-09-07 03:15:45 [ERROR]: GET /payment/orders/tenant | STATUS: Tenant ID not found in token for tenant user. | MESSAGE: {"statusCode":403,"success":false,"message":"Tenant ID not found in token for tenant user."}
-2025-09-07 03:16:19 [ERROR]: GET /payment/orders/tenant | STATUS: Cannot read properties of undefined (reading 'findMany') | MESSAGE: {}
-2025-09-07 03:16:20 [ERROR]: GET /payment/orders/tenant | STATUS: Cannot read properties of undefined (reading 'findMany') | MESSAGE: {}
-2025-09-07 03:16:22 [ERROR]: GET /payment/orders/tenant | STATUS: Cannot read properties of undefined (reading 'findMany') | MESSAGE: {}
-2025-09-07 03:16:26 [ERROR]: GET /payment/orders/tenant | STATUS: Cannot read properties of undefined (reading 'findMany') | MESSAGE: {}
-2025-09-07 03:17:26 [ERROR]: GET /payment/orders/tenant | STATUS: Cannot read properties of undefined (reading 'findMany') | MESSAGE: {}
-2025-09-07 03:17:31 [ERROR]: GET /payment/orders/tenant | STATUS: Cannot read properties of undefined (reading 'findMany') | MESSAGE: {}
-2025-09-07 03:17:32 [ERROR]: GET /payment/orders/tenant | STATUS: Cannot read properties of undefined (reading 'findMany') | MESSAGE: {}
-2025-09-07 03:17:34 [ERROR]: GET /payment/orders/tenant | STATUS: Cannot read properties of undefined (reading 'findMany') | MESSAGE: {}
-2025-09-07 03:17:39 [ERROR]: GET /payment/orders/tenant | STATUS: Cannot read properties of undefined (reading 'findMany') | MESSAGE: {}
-2025-09-07 03:24:17 [ERROR]: GET /payment/orders/tenant | STATUS: Cannot read properties of undefined (reading 'findMany') | MESSAGE: {}
-2025-09-07 03:24:20 [ERROR]: GET /payment/orders/tenant | STATUS: Cannot read properties of undefined (reading 'findMany') | MESSAGE: {}
-2025-09-07 03:24:24 [ERROR]: GET /payment/orders/tenant | STATUS: Cannot read properties of undefined (reading 'findMany') | MESSAGE: {}
-2025-09-07 03:24:29 [ERROR]: GET /payment/orders/tenant | STATUS: Cannot read properties of undefined (reading 'findMany') | MESSAGE: {}
-2025-09-07 03:25:25 [ERROR]: GET /payment/orders/tenant | STATUS: 
-Invalid `db.bookings.findMany()` invocation in
-/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/repositories/transaction/tenant-tx.repository.ts:223:39
-
-  220   tx?: Prisma.TransactionClient
-  221 ) => {
-  222   const db = tx ?? prisma;
-→ 223   const orderList = await db.bookings.findMany({
-          where: {
-            property: {
-              tenant_id: "44773eca-8e8c-4696-a2c4-b2cf7d792612"
-            },
-            status: {
-              in: [
-                "waiting_payment"
-              ]
-            }
-          },
-          orderBy: {
-            createdAt: "asc",
-            ~~~~~~~~~
-        ?   id?: SortOrder,
-        ?   user_id?: SortOrder,
-        ?   property_id?: SortOrder,
-        ?   status?: SortOrder,
-        ?   check_in_date?: SortOrder,
-        ?   check_out_date?: SortOrder,
-        ?   total_price?: SortOrder,
-        ?   payment_deadline?: SortOrder,
-        ?   created_at?: SortOrder,
-        ?   updated_at?: SortOrder,
-        ?   amount?: SortOrder,
-        ?   paid_at?: SortOrder | SortOrderInput,
-        ?   proof_image?: SortOrder | SortOrderInput,
-        ?   booking_rooms?: booking_roomsOrderByRelationAggregateInput,
-        ?   property?: propertiesOrderByWithRelationInput,
-        ?   user?: usersOrderByWithRelationInput,
-        ?   reviews?: reviewsOrderByRelationAggregateInput
-          }
-        })
-
-Unknown argument `createdAt`. Did you mean `created_at`? Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
-2025-09-07 03:25:27 [ERROR]: GET /payment/orders/tenant | STATUS: 
-Invalid `db.bookings.findMany()` invocation in
-/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/repositories/transaction/tenant-tx.repository.ts:223:39
-
-  220   tx?: Prisma.TransactionClient
-  221 ) => {
-  222   const db = tx ?? prisma;
-→ 223   const orderList = await db.bookings.findMany({
-          where: {
-            property: {
-              tenant_id: "44773eca-8e8c-4696-a2c4-b2cf7d792612"
-            },
-            status: {
-              in: [
-                "waiting_payment"
-              ]
-            }
-          },
-          orderBy: {
-            createdAt: "asc",
-            ~~~~~~~~~
-        ?   id?: SortOrder,
-        ?   user_id?: SortOrder,
-        ?   property_id?: SortOrder,
-        ?   status?: SortOrder,
-        ?   check_in_date?: SortOrder,
-        ?   check_out_date?: SortOrder,
-        ?   total_price?: SortOrder,
-        ?   payment_deadline?: SortOrder,
-        ?   created_at?: SortOrder,
-        ?   updated_at?: SortOrder,
-        ?   amount?: SortOrder,
-        ?   paid_at?: SortOrder | SortOrderInput,
-        ?   proof_image?: SortOrder | SortOrderInput,
-        ?   booking_rooms?: booking_roomsOrderByRelationAggregateInput,
-        ?   property?: propertiesOrderByWithRelationInput,
-        ?   user?: usersOrderByWithRelationInput,
-        ?   reviews?: reviewsOrderByRelationAggregateInput
-          }
-        })
-
-Unknown argument `createdAt`. Did you mean `created_at`? Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
-2025-09-07 03:25:31 [ERROR]: GET /payment/orders/tenant | STATUS: 
-Invalid `db.bookings.findMany()` invocation in
-/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/repositories/transaction/tenant-tx.repository.ts:223:39
-
-  220   tx?: Prisma.TransactionClient
-  221 ) => {
-  222   const db = tx ?? prisma;
-→ 223   const orderList = await db.bookings.findMany({
-          where: {
-            property: {
-              tenant_id: "44773eca-8e8c-4696-a2c4-b2cf7d792612"
-            },
-            status: {
-              in: [
-                "waiting_payment"
-              ]
-            }
-          },
-          orderBy: {
-            createdAt: "asc",
-            ~~~~~~~~~
-        ?   id?: SortOrder,
-        ?   user_id?: SortOrder,
-        ?   property_id?: SortOrder,
-        ?   status?: SortOrder,
-        ?   check_in_date?: SortOrder,
-        ?   check_out_date?: SortOrder,
-        ?   total_price?: SortOrder,
-        ?   payment_deadline?: SortOrder,
-        ?   created_at?: SortOrder,
-        ?   updated_at?: SortOrder,
-        ?   amount?: SortOrder,
-        ?   paid_at?: SortOrder | SortOrderInput,
-        ?   proof_image?: SortOrder | SortOrderInput,
-        ?   booking_rooms?: booking_roomsOrderByRelationAggregateInput,
-        ?   property?: propertiesOrderByWithRelationInput,
-        ?   user?: usersOrderByWithRelationInput,
-        ?   reviews?: reviewsOrderByRelationAggregateInput
-          }
-        })
-
-Unknown argument `createdAt`. Did you mean `created_at`? Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
-2025-09-07 03:25:36 [ERROR]: GET /payment/orders/tenant | STATUS: 
-Invalid `db.bookings.findMany()` invocation in
-/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/repositories/transaction/tenant-tx.repository.ts:223:39
-
-  220   tx?: Prisma.TransactionClient
-  221 ) => {
-  222   const db = tx ?? prisma;
-→ 223   const orderList = await db.bookings.findMany({
-          where: {
-            property: {
-              tenant_id: "44773eca-8e8c-4696-a2c4-b2cf7d792612"
-            },
-            status: {
-              in: [
-                "waiting_payment"
-              ]
-            }
-          },
-          orderBy: {
-            createdAt: "asc",
-            ~~~~~~~~~
-        ?   id?: SortOrder,
-        ?   user_id?: SortOrder,
-        ?   property_id?: SortOrder,
-        ?   status?: SortOrder,
-        ?   check_in_date?: SortOrder,
-        ?   check_out_date?: SortOrder,
-        ?   total_price?: SortOrder,
-        ?   payment_deadline?: SortOrder,
-        ?   created_at?: SortOrder,
-        ?   updated_at?: SortOrder,
-        ?   amount?: SortOrder,
-        ?   paid_at?: SortOrder | SortOrderInput,
-        ?   proof_image?: SortOrder | SortOrderInput,
-        ?   booking_rooms?: booking_roomsOrderByRelationAggregateInput,
-        ?   property?: propertiesOrderByWithRelationInput,
-        ?   user?: usersOrderByWithRelationInput,
-        ?   reviews?: reviewsOrderByRelationAggregateInput
-          }
-        })
-
-Unknown argument `createdAt`. Did you mean `created_at`? Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
-2025-09-07 03:43:59 [ERROR]: PATCH /reservations/cancel/dd731114-b990-4f0f-92f8-b5c4852b9f53 | STATUS: Unauthorized access, only user can access this route | MESSAGE: {"statusCode":403,"success":false,"message":"Unauthorized access, only user can access this route"}
-2025-09-07 04:05:09 [ERROR]: PATCH /payment/cancel/dd731114-b990-4f0f-92f8-b5c4852b9f53 | STATUS: Cannot read properties of undefined (reading 'bookings') | MESSAGE: {}
-2025-09-07 04:06:50 [ERROR]: PATCH /payment/cancel/dd731114-b990-4f0f-92f8-b5c4852b9f53 | STATUS: Cannot read properties of undefined (reading 'bookings') | MESSAGE: {}
-2025-09-07 04:08:08 [ERROR]: PATCH /payment/cancel/dd731114-b990-4f0f-92f8-b5c4852b9f53 | STATUS: The booking does not exist. | MESSAGE: {"statusCode":404,"success":false,"message":"The booking does not exist."}
-2025-09-07 04:11:20 [ERROR]: PATCH /payment/cancel/dd731114-b990-4f0f-92f8-b5c4852b9f53 | STATUS: Cannot read properties of undefined (reading 'bookings') | MESSAGE: {}
-2025-09-07 04:11:33 [ERROR]: PATCH /payment/cancel/dd731114-b990-4f0f-92f8-b5c4852b9f53 | STATUS: Cannot read properties of undefined (reading 'bookings') | MESSAGE: {}
-2025-09-07 04:12:20 [ERROR]: PATCH /payment/cancel/b3cd6476-1b92-4cbc-8729-194c31562556 | STATUS: Cannot read properties of undefined (reading 'bookings') | MESSAGE: {}
-2025-09-07 04:12:41 [ERROR]: PATCH /payment/cancel/dd731114-b990-4f0f-92f8-b5c4852b9f53 | STATUS: Cannot read properties of undefined (reading 'bookings') | MESSAGE: {}
-2025-09-07 04:13:54 [ERROR]: PATCH /payment/cancel/dd731114-b990-4f0f-92f8-b5c4852b9f53 | STATUS: Cannot read properties of undefined (reading 'bookings') | MESSAGE: {}
-2025-09-07 04:42:00 [ERROR]: PATCH /payment/accept/c8e672de-8f47-4d6a-81f2-b4b97ab369b5 | STATUS: 
-Invalid `prisma.users.findUnique()` invocation in
-/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/repositories/user/user.respository.ts:43:35
-
-  40   });
-  41 };
-  42 export const getEmailAndFullnameById = async (userId: string) => {
-→ 43   const user = await prisma.users.findUnique({
-         where: {
-           id: {
-             user_id: "c54675ef-4f94-4ccd-99c9-14225ae8fb6e"
-           }
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-         },
-         select: {
-           email: true,
-           full_name: true
-         }
-       })
-
-Argument `id`: Invalid value provided. Expected String, provided Object. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
-2025-09-07 04:44:48 [ERROR]: PATCH /payment/accept/c8e672de-8f47-4d6a-81f2-b4b97ab369b5 | STATUS: 
-Invalid `prisma.users.findUnique()` invocation in
-/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/repositories/user/user.respository.ts:43:35
-
-  40   });
-  41 };
-  42 export const getEmailAndFullnameById = async (userId: string) => {
-→ 43   const user = await prisma.users.findUnique({
-         where: {
-           id: {
-             user_id: "c54675ef-4f94-4ccd-99c9-14225ae8fb6e"
-           }
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-         },
-         select: {
-           email: true,
-           full_name: true
-         }
-       })
-
-Argument `id`: Invalid value provided. Expected String, provided Object. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
-2025-09-07 04:47:29 [ERROR]: PATCH /payment/accept/c8e672de-8f47-4d6a-81f2-b4b97ab369b5 | STATUS: Invalid time value | MESSAGE: {}
-2025-09-07 04:48:08 [ERROR]: PATCH /payment/accept/c8e672de-8f47-4d6a-81f2-b4b97ab369b5 | STATUS: Invalid time value | MESSAGE: {}
-2025-09-07 05:47:26 [ERROR]: PATCH /payment/accept/d34b1bfc-ef2b-4bd7-9488-fcfb77d92d9b | STATUS: Booking not found, not awaiting confirmation, or you are not authorized. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found, not awaiting confirmation, or you are not authorized."}
-2025-09-07 05:47:47 [ERROR]: PATCH /payment/accept/d34b1bfc-ef2b-4bd7-9488-fcfb77d92d9b | STATUS: Booking not found, not awaiting confirmation, or you are not authorized. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found, not awaiting confirmation, or you are not authorized."}
-2025-09-07 05:48:02 [ERROR]: PATCH /payment/accept/d34b1bfc-ef2b-4bd7-9488-fcfb77d92d9b | STATUS: Booking not found, not awaiting confirmation, or you are not authorized. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found, not awaiting confirmation, or you are not authorized."}
-2025-09-07 05:50:07 [ERROR]: PATCH /payment/accept/d34b1bfc-ef2b-4bd7-9488-fcfb77d92d9b | STATUS: Invalid time value | MESSAGE: {}
-2025-09-08 00:28:30 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
-2025-09-08 01:10:47 [ERROR]: POST /reservations/c8e672de-8f47-4d6a-81f2-b4b97ab369b5/reviews | STATUS: Review already submitted. | MESSAGE: {"statusCode":409,"success":false,"message":"Review already submitted."}
-2025-09-08 03:56:07 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
-2025-09-08 03:56:15 [ERROR]: POST /auth/login | STATUS: Invalid password | MESSAGE: {"statusCode":401,"success":false,"message":"Invalid password"}
-2025-09-08 04:15:41 [ERROR]: GET /tenant/sales-report | STATUS: 
-Invalid `prisma.tenants.findUnique()` invocation in
-/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/tenant-report/tenant-report.controller.ts:33:49
-
-  30   throw new AppError("Only tenants are authorized for access.", 403);
-  31 }
-  32 
-→ 33 const tenantRecord = await prisma.tenants.findUnique({
-       where: {
-         user_id: undefined,
-     ?   id?: String,
-     ?   AND?: tenantsWhereInput | tenantsWhereInput[],
-     ?   OR?: tenantsWhereInput[],
-     ?   NOT?: tenantsWhereInput | tenantsWhereInput[],
-     ?   company_name?: StringFilter | String,
-     ?   address?: StringFilter | String,
-     ?   phone_number?: StringFilter | String,
-     ?   logo?: StringNullableFilter | String | Null,
-     ?   created_at?: DateTimeFilter | DateTime,
-     ?   updated_at?: DateTimeFilter | DateTime,
-     ?   properties?: PropertiesListRelationFilter,
-     ?   user?: UsersScalarRelationFilter | usersWhereInput
-       }
-     })
-
-Argument `where` of type tenantsWhereUniqueInput needs at least one of `id` or `user_id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
-2025-09-08 04:15:42 [ERROR]: GET /tenant/sales-report | STATUS: 
-Invalid `prisma.tenants.findUnique()` invocation in
-/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/tenant-report/tenant-report.controller.ts:33:49
-
-  30   throw new AppError("Only tenants are authorized for access.", 403);
-  31 }
-  32 
-→ 33 const tenantRecord = await prisma.tenants.findUnique({
-       where: {
-         user_id: undefined,
-     ?   id?: String,
-     ?   AND?: tenantsWhereInput | tenantsWhereInput[],
-     ?   OR?: tenantsWhereInput[],
-     ?   NOT?: tenantsWhereInput | tenantsWhereInput[],
-     ?   company_name?: StringFilter | String,
-     ?   address?: StringFilter | String,
-     ?   phone_number?: StringFilter | String,
-     ?   logo?: StringNullableFilter | String | Null,
-     ?   created_at?: DateTimeFilter | DateTime,
-     ?   updated_at?: DateTimeFilter | DateTime,
-     ?   properties?: PropertiesListRelationFilter,
-     ?   user?: UsersScalarRelationFilter | usersWhereInput
-       }
-     })
-
-Argument `where` of type tenantsWhereUniqueInput needs at least one of `id` or `user_id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
-2025-09-08 04:15:44 [ERROR]: GET /tenant/sales-report | STATUS: 
-Invalid `prisma.tenants.findUnique()` invocation in
-/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/tenant-report/tenant-report.controller.ts:33:49
-
-  30   throw new AppError("Only tenants are authorized for access.", 403);
-  31 }
-  32 
-→ 33 const tenantRecord = await prisma.tenants.findUnique({
-       where: {
-         user_id: undefined,
-     ?   id?: String,
-     ?   AND?: tenantsWhereInput | tenantsWhereInput[],
-     ?   OR?: tenantsWhereInput[],
-     ?   NOT?: tenantsWhereInput | tenantsWhereInput[],
-     ?   company_name?: StringFilter | String,
-     ?   address?: StringFilter | String,
-     ?   phone_number?: StringFilter | String,
-     ?   logo?: StringNullableFilter | String | Null,
-     ?   created_at?: DateTimeFilter | DateTime,
-     ?   updated_at?: DateTimeFilter | DateTime,
-     ?   properties?: PropertiesListRelationFilter,
-     ?   user?: UsersScalarRelationFilter | usersWhereInput
-       }
-     })
-
-Argument `where` of type tenantsWhereUniqueInput needs at least one of `id` or `user_id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
-2025-09-08 04:15:48 [ERROR]: GET /tenant/sales-report | STATUS: 
-Invalid `prisma.tenants.findUnique()` invocation in
-/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/tenant-report/tenant-report.controller.ts:33:49
-
-  30   throw new AppError("Only tenants are authorized for access.", 403);
-  31 }
-  32 
-→ 33 const tenantRecord = await prisma.tenants.findUnique({
-       where: {
-         user_id: undefined,
-     ?   id?: String,
-     ?   AND?: tenantsWhereInput | tenantsWhereInput[],
-     ?   OR?: tenantsWhereInput[],
-     ?   NOT?: tenantsWhereInput | tenantsWhereInput[],
-     ?   company_name?: StringFilter | String,
-     ?   address?: StringFilter | String,
-     ?   phone_number?: StringFilter | String,
-     ?   logo?: StringNullableFilter | String | Null,
-     ?   created_at?: DateTimeFilter | DateTime,
-     ?   updated_at?: DateTimeFilter | DateTime,
-     ?   properties?: PropertiesListRelationFilter,
-     ?   user?: UsersScalarRelationFilter | usersWhereInput
-       }
-     })
-
-Argument `where` of type tenantsWhereUniqueInput needs at least one of `id` or `user_id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
-2025-09-09 14:37:42 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
-2025-09-09 14:40:15 [ERROR]: GET /tenant/sales-report | STATUS: 
-Invalid `prisma.tenants.findUnique()` invocation in
-/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/tenant-report/tenant-report.controller.ts:33:49
-
-  30   throw new AppError("Only tenants are authorized for access.", 403);
-  31 }
-  32 
-→ 33 const tenantRecord = await prisma.tenants.findUnique({
-       where: {
-         user_id: undefined,
-     ?   id?: String,
-     ?   AND?: tenantsWhereInput | tenantsWhereInput[],
-     ?   OR?: tenantsWhereInput[],
-     ?   NOT?: tenantsWhereInput | tenantsWhereInput[],
-     ?   company_name?: StringFilter | String,
-     ?   address?: StringFilter | String,
-     ?   phone_number?: StringFilter | String,
-     ?   logo?: StringNullableFilter | String | Null,
-     ?   created_at?: DateTimeFilter | DateTime,
-     ?   updated_at?: DateTimeFilter | DateTime,
-     ?   properties?: PropertiesListRelationFilter,
-     ?   user?: UsersScalarRelationFilter | usersWhereInput
-       }
-     })
-
-Argument `where` of type tenantsWhereUniqueInput needs at least one of `id` or `user_id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
-2025-09-09 14:40:16 [ERROR]: GET /tenant/sales-report | STATUS: 
-Invalid `prisma.tenants.findUnique()` invocation in
-/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/tenant-report/tenant-report.controller.ts:33:49
-
-  30   throw new AppError("Only tenants are authorized for access.", 403);
-  31 }
-  32 
-→ 33 const tenantRecord = await prisma.tenants.findUnique({
-       where: {
-         user_id: undefined,
-     ?   id?: String,
-     ?   AND?: tenantsWhereInput | tenantsWhereInput[],
-     ?   OR?: tenantsWhereInput[],
-     ?   NOT?: tenantsWhereInput | tenantsWhereInput[],
-     ?   company_name?: StringFilter | String,
-     ?   address?: StringFilter | String,
-     ?   phone_number?: StringFilter | String,
-     ?   logo?: StringNullableFilter | String | Null,
-     ?   created_at?: DateTimeFilter | DateTime,
-     ?   updated_at?: DateTimeFilter | DateTime,
-     ?   properties?: PropertiesListRelationFilter,
-     ?   user?: UsersScalarRelationFilter | usersWhereInput
-       }
-     })
-
-Argument `where` of type tenantsWhereUniqueInput needs at least one of `id` or `user_id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
-2025-09-09 14:40:18 [ERROR]: GET /tenant/sales-report | STATUS: 
-Invalid `prisma.tenants.findUnique()` invocation in
-/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/tenant-report/tenant-report.controller.ts:33:49
-
-  30   throw new AppError("Only tenants are authorized for access.", 403);
-  31 }
-  32 
-→ 33 const tenantRecord = await prisma.tenants.findUnique({
-       where: {
-         user_id: undefined,
-     ?   id?: String,
-     ?   AND?: tenantsWhereInput | tenantsWhereInput[],
-     ?   OR?: tenantsWhereInput[],
-     ?   NOT?: tenantsWhereInput | tenantsWhereInput[],
-     ?   company_name?: StringFilter | String,
-     ?   address?: StringFilter | String,
-     ?   phone_number?: StringFilter | String,
-     ?   logo?: StringNullableFilter | String | Null,
-     ?   created_at?: DateTimeFilter | DateTime,
-     ?   updated_at?: DateTimeFilter | DateTime,
-     ?   properties?: PropertiesListRelationFilter,
-     ?   user?: UsersScalarRelationFilter | usersWhereInput
-       }
-     })
-
-Argument `where` of type tenantsWhereUniqueInput needs at least one of `id` or `user_id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
-2025-09-09 14:40:22 [ERROR]: GET /tenant/sales-report | STATUS: 
-Invalid `prisma.tenants.findUnique()` invocation in
-/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/tenant-report/tenant-report.controller.ts:33:49
-
-  30   throw new AppError("Only tenants are authorized for access.", 403);
-  31 }
-  32 
-→ 33 const tenantRecord = await prisma.tenants.findUnique({
-       where: {
-         user_id: undefined,
-     ?   id?: String,
-     ?   AND?: tenantsWhereInput | tenantsWhereInput[],
-     ?   OR?: tenantsWhereInput[],
-     ?   NOT?: tenantsWhereInput | tenantsWhereInput[],
-     ?   company_name?: StringFilter | String,
-     ?   address?: StringFilter | String,
-     ?   phone_number?: StringFilter | String,
-     ?   logo?: StringNullableFilter | String | Null,
-     ?   created_at?: DateTimeFilter | DateTime,
-     ?   updated_at?: DateTimeFilter | DateTime,
-     ?   properties?: PropertiesListRelationFilter,
-     ?   user?: UsersScalarRelationFilter | usersWhereInput
-       }
-     })
-
-Argument `where` of type tenantsWhereUniqueInput needs at least one of `id` or `user_id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
-2025-09-09 14:42:28 [ERROR]: GET /tenant/sales-report | STATUS: 
-Invalid `prisma.tenants.findUnique()` invocation in
-/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/tenant-report/tenant-report.controller.ts:35:49
-
-  32 
-  33 console.log("Printing user:", user.role, user.id)
-  34 
-→ 35 const tenantRecord = await prisma.tenants.findUnique({
-       where: {
-         user_id: undefined,
-     ?   id?: String,
-     ?   AND?: tenantsWhereInput | tenantsWhereInput[],
-     ?   OR?: tenantsWhereInput[],
-     ?   NOT?: tenantsWhereInput | tenantsWhereInput[],
-     ?   company_name?: StringFilter | String,
-     ?   address?: StringFilter | String,
-     ?   phone_number?: StringFilter | String,
-     ?   logo?: StringNullableFilter | String | Null,
-     ?   created_at?: DateTimeFilter | DateTime,
-     ?   updated_at?: DateTimeFilter | DateTime,
-     ?   properties?: PropertiesListRelationFilter,
-     ?   user?: UsersScalarRelationFilter | usersWhereInput
-       }
-     })
-
-Argument `where` of type tenantsWhereUniqueInput needs at least one of `id` or `user_id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
-2025-09-09 14:42:29 [ERROR]: GET /tenant/sales-report | STATUS: 
-Invalid `prisma.tenants.findUnique()` invocation in
-/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/tenant-report/tenant-report.controller.ts:35:49
-
-  32 
-  33 console.log("Printing user:", user.role, user.id)
-  34 
-→ 35 const tenantRecord = await prisma.tenants.findUnique({
-       where: {
-         user_id: undefined,
-     ?   id?: String,
-     ?   AND?: tenantsWhereInput | tenantsWhereInput[],
-     ?   OR?: tenantsWhereInput[],
-     ?   NOT?: tenantsWhereInput | tenantsWhereInput[],
-     ?   company_name?: StringFilter | String,
-     ?   address?: StringFilter | String,
-     ?   phone_number?: StringFilter | String,
-     ?   logo?: StringNullableFilter | String | Null,
-     ?   created_at?: DateTimeFilter | DateTime,
-     ?   updated_at?: DateTimeFilter | DateTime,
-     ?   properties?: PropertiesListRelationFilter,
-     ?   user?: UsersScalarRelationFilter | usersWhereInput
-       }
-     })
-
-Argument `where` of type tenantsWhereUniqueInput needs at least one of `id` or `user_id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
-2025-09-09 14:42:32 [ERROR]: GET /tenant/sales-report | STATUS: 
-Invalid `prisma.tenants.findUnique()` invocation in
-/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/tenant-report/tenant-report.controller.ts:35:49
-
-  32 
-  33 console.log("Printing user:", user.role, user.id)
-  34 
-→ 35 const tenantRecord = await prisma.tenants.findUnique({
-       where: {
-         user_id: undefined,
-     ?   id?: String,
-     ?   AND?: tenantsWhereInput | tenantsWhereInput[],
-     ?   OR?: tenantsWhereInput[],
-     ?   NOT?: tenantsWhereInput | tenantsWhereInput[],
-     ?   company_name?: StringFilter | String,
-     ?   address?: StringFilter | String,
-     ?   phone_number?: StringFilter | String,
-     ?   logo?: StringNullableFilter | String | Null,
-     ?   created_at?: DateTimeFilter | DateTime,
-     ?   updated_at?: DateTimeFilter | DateTime,
-     ?   properties?: PropertiesListRelationFilter,
-     ?   user?: UsersScalarRelationFilter | usersWhereInput
-       }
-     })
-
-Argument `where` of type tenantsWhereUniqueInput needs at least one of `id` or `user_id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
-2025-09-09 14:42:36 [ERROR]: GET /tenant/sales-report | STATUS: 
-Invalid `prisma.tenants.findUnique()` invocation in
-/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/tenant-report/tenant-report.controller.ts:35:49
-
-  32 
-  33 console.log("Printing user:", user.role, user.id)
-  34 
-→ 35 const tenantRecord = await prisma.tenants.findUnique({
-       where: {
-         user_id: undefined,
-     ?   id?: String,
-     ?   AND?: tenantsWhereInput | tenantsWhereInput[],
-     ?   OR?: tenantsWhereInput[],
-     ?   NOT?: tenantsWhereInput | tenantsWhereInput[],
-     ?   company_name?: StringFilter | String,
-     ?   address?: StringFilter | String,
-     ?   phone_number?: StringFilter | String,
-     ?   logo?: StringNullableFilter | String | Null,
-     ?   created_at?: DateTimeFilter | DateTime,
-     ?   updated_at?: DateTimeFilter | DateTime,
-     ?   properties?: PropertiesListRelationFilter,
-     ?   user?: UsersScalarRelationFilter | usersWhereInput
-       }
-     })
-
-Argument `where` of type tenantsWhereUniqueInput needs at least one of `id` or `user_id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
-2025-09-09 14:43:22 [ERROR]: GET /tenant/sales-report | STATUS: 
-Invalid `prisma.tenants.findUnique()` invocation in
-/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/tenant-report/tenant-report.controller.ts:34:49
-
-  31   throw new AppError("Only tenants are authorized for access.", 403);
-  32 }
-  33 
-→ 34 const tenantRecord = await prisma.tenants.findUnique({
-       where: {
-         user_id: undefined,
-     ?   id?: String,
-     ?   AND?: tenantsWhereInput | tenantsWhereInput[],
-     ?   OR?: tenantsWhereInput[],
-     ?   NOT?: tenantsWhereInput | tenantsWhereInput[],
-     ?   company_name?: StringFilter | String,
-     ?   address?: StringFilter | String,
-     ?   phone_number?: StringFilter | String,
-     ?   logo?: StringNullableFilter | String | Null,
-     ?   created_at?: DateTimeFilter | DateTime,
-     ?   updated_at?: DateTimeFilter | DateTime,
-     ?   properties?: PropertiesListRelationFilter,
-     ?   user?: UsersScalarRelationFilter | usersWhereInput
-       }
-     })
-
-Argument `where` of type tenantsWhereUniqueInput needs at least one of `id` or `user_id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
-2025-09-09 14:43:24 [ERROR]: GET /tenant/sales-report | STATUS: 
-Invalid `prisma.tenants.findUnique()` invocation in
-/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/tenant-report/tenant-report.controller.ts:34:49
-
-  31   throw new AppError("Only tenants are authorized for access.", 403);
-  32 }
-  33 
-→ 34 const tenantRecord = await prisma.tenants.findUnique({
-       where: {
-         user_id: undefined,
-     ?   id?: String,
-     ?   AND?: tenantsWhereInput | tenantsWhereInput[],
-     ?   OR?: tenantsWhereInput[],
-     ?   NOT?: tenantsWhereInput | tenantsWhereInput[],
-     ?   company_name?: StringFilter | String,
-     ?   address?: StringFilter | String,
-     ?   phone_number?: StringFilter | String,
-     ?   logo?: StringNullableFilter | String | Null,
-     ?   created_at?: DateTimeFilter | DateTime,
-     ?   updated_at?: DateTimeFilter | DateTime,
-     ?   properties?: PropertiesListRelationFilter,
-     ?   user?: UsersScalarRelationFilter | usersWhereInput
-       }
-     })
-
-Argument `where` of type tenantsWhereUniqueInput needs at least one of `id` or `user_id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
-2025-09-09 14:43:26 [ERROR]: GET /tenant/sales-report | STATUS: 
-Invalid `prisma.tenants.findUnique()` invocation in
-/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/tenant-report/tenant-report.controller.ts:34:49
-
-  31   throw new AppError("Only tenants are authorized for access.", 403);
-  32 }
-  33 
-→ 34 const tenantRecord = await prisma.tenants.findUnique({
-       where: {
-         user_id: undefined,
-     ?   id?: String,
-     ?   AND?: tenantsWhereInput | tenantsWhereInput[],
-     ?   OR?: tenantsWhereInput[],
-     ?   NOT?: tenantsWhereInput | tenantsWhereInput[],
-     ?   company_name?: StringFilter | String,
-     ?   address?: StringFilter | String,
-     ?   phone_number?: StringFilter | String,
-     ?   logo?: StringNullableFilter | String | Null,
-     ?   created_at?: DateTimeFilter | DateTime,
-     ?   updated_at?: DateTimeFilter | DateTime,
-     ?   properties?: PropertiesListRelationFilter,
-     ?   user?: UsersScalarRelationFilter | usersWhereInput
-       }
-     })
-
-Argument `where` of type tenantsWhereUniqueInput needs at least one of `id` or `user_id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
-2025-09-09 14:43:30 [ERROR]: GET /tenant/sales-report | STATUS: 
-Invalid `prisma.tenants.findUnique()` invocation in
-/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/tenant-report/tenant-report.controller.ts:34:49
-
-  31   throw new AppError("Only tenants are authorized for access.", 403);
-  32 }
-  33 
-→ 34 const tenantRecord = await prisma.tenants.findUnique({
-       where: {
-         user_id: undefined,
-     ?   id?: String,
-     ?   AND?: tenantsWhereInput | tenantsWhereInput[],
-     ?   OR?: tenantsWhereInput[],
-     ?   NOT?: tenantsWhereInput | tenantsWhereInput[],
-     ?   company_name?: StringFilter | String,
-     ?   address?: StringFilter | String,
-     ?   phone_number?: StringFilter | String,
-     ?   logo?: StringNullableFilter | String | Null,
-     ?   created_at?: DateTimeFilter | DateTime,
-     ?   updated_at?: DateTimeFilter | DateTime,
-     ?   properties?: PropertiesListRelationFilter,
-     ?   user?: UsersScalarRelationFilter | usersWhereInput
-       }
-     })
-
-Argument `where` of type tenantsWhereUniqueInput needs at least one of `id` or `user_id` arguments. Available options are marked with ?. | MESSAGE: {"name":"PrismaClientValidationError","clientVersion":"6.13.0"}
-2025-09-09 15:46:42 [ERROR]: GET /tenant/sales-report | STATUS: 
-Invalid `prisma.tenants.findUnique()` invocation in
-/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/tenant-report/tenant-report.controller.ts:34:49
-
-  31   throw new AppError("Only tenants are authorized for access.", 403);
-  32 }
-  33 
-→ 34 const tenantRecord = await prisma.tenants.findUnique(
+  13 }) => {
+  14   const { property_category, name } = filters;
+  15 
+→ 16   return prisma.properties.findMany(
 Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
 
 Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"clientVersion":"6.13.0","name":"PrismaClientInitializationError"}
-2025-09-09 17:05:02 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
-2025-09-09 17:47:53 [ERROR]: PATCH /reservations/proof/1e9c9b28-b8c3-4692-966d-ca07eec39cc9 | STATUS: Unexpected field | MESSAGE: {"name":"MulterError","message":"Unexpected field","code":"LIMIT_UNEXPECTED_FILE","field":"proofImage","storageErrors":[]}
-2025-09-09 18:27:30 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
-2025-09-09 18:30:30 [ERROR]: PATCH /payment/accept/b3cd6476-1b92-4cbc-8729-194c31562556 | STATUS: Booking not found, not awaiting confirmation, or you are not authorized. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found, not awaiting confirmation, or you are not authorized."}
-2025-09-09 18:31:09 [ERROR]: PATCH /payment/accept/b3cd6476-1b92-4cbc-8729-194c31562556 | STATUS: Booking not found, not awaiting confirmation, or you are not authorized. | MESSAGE: {"statusCode":404,"success":false,"message":"Booking not found, not awaiting confirmation, or you are not authorized."}
+2025-09-16 15:21:59 [ERROR]: GET /property/all | STATUS: 
+Invalid `prisma.properties.findMany()` invocation in
+D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\property\property.repository.ts:16:28
+
+  13 }) => {
+  14   const { property_category, name } = filters;
+  15 
+→ 16   return prisma.properties.findMany(
+Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
 
 Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"clientVersion":"6.13.0","name":"PrismaClientInitializationError"}
+2025-09-16 15:23:00 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 15:23:04 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 15:26:36 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 15:26:49 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 15:29:14 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 15:29:24 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 15:31:12 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 15:32:16 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 15:32:27 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 15:34:05 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 15:34:18 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 15:39:41 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 15:41:44 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 15:41:55 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 15:43:33 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 15:44:01 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 15:45:33 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 15:47:50 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 15:54:13 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 15:56:08 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 15:56:27 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 15:57:58 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 15:58:12 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 15:59:42 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 15:59:57 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 16:03:53 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 16:04:12 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 16:06:56 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 16:07:47 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 16:09:31 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 16:09:41 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 16:10:58 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 16:11:12 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 16:22:52 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 16:23:18 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 16:23:30 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 16:25:21 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 16:35:10 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 16:44:16 [ERROR]: GET /property/all | STATUS: 
+Invalid `prisma.properties.findMany()` invocation in
+D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\property\property.repository.ts:16:28
 
+  13 }) => {
+  14   const { property_category, name } = filters;
+  15 
+→ 16   return prisma.properties.findMany(
+Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"code":"P1001","meta":{"modelName":"properties","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-16 16:44:30 [ERROR]: GET /property/all | STATUS: 
+Invalid `prisma.properties.findMany()` invocation in
+D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\property\property.repository.ts:16:28
+
+  13 }) => {
+  14   const { property_category, name } = filters;
+  15 
+→ 16   return prisma.properties.findMany(
+Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"code":"P1001","meta":{"modelName":"properties","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-16 17:06:41 [ERROR]: GET /property/all | STATUS: 
+Invalid `prisma.properties.findMany()` invocation in
+D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\property\property.repository.ts:16:28
+
+  13 }) => {
+  14   const { property_category, name } = filters;
+  15 
+→ 16   return prisma.properties.findMany(
+Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"code":"P1001","meta":{"modelName":"properties","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-16 17:06:42 [ERROR]: GET /property/all | STATUS: 
+Invalid `prisma.properties.findMany()` invocation in
+D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\property\property.repository.ts:16:28
+
+  13 }) => {
+  14   const { property_category, name } = filters;
+  15 
+→ 16   return prisma.properties.findMany(
+Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"code":"P1001","meta":{"modelName":"properties","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-16 17:06:44 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 17:06:49 [ERROR]: GET /property/all | STATUS: 
+Invalid `prisma.properties.findMany()` invocation in
+D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\property\property.repository.ts:16:28
+
+  13 }) => {
+  14   const { property_category, name } = filters;
+  15 
+→ 16   return prisma.properties.findMany(
+Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"code":"P1001","meta":{"modelName":"properties","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-16 17:06:55 [ERROR]: GET /property/all | STATUS: 
+Invalid `prisma.properties.findMany()` invocation in
+D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\property\property.repository.ts:16:28
+
+  13 }) => {
+  14   const { property_category, name } = filters;
+  15 
+→ 16   return prisma.properties.findMany(
+Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"code":"P1001","meta":{"modelName":"properties","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-16 17:06:59 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 17:07:02 [ERROR]: GET /property/all | STATUS: 
+Invalid `prisma.properties.findMany()` invocation in
+D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\property\property.repository.ts:16:28
+
+  13 }) => {
+  14   const { property_category, name } = filters;
+  15 
+→ 16   return prisma.properties.findMany(
+Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"code":"P1001","meta":{"modelName":"properties","database_location":"aws-0-us-west-1.pooler.supabase.com:6543"},"clientVersion":"6.13.0","name":"PrismaClientKnownRequestError"}
+2025-09-16 17:08:45 [ERROR]: GET /property/all | STATUS: 
+Invalid `prisma.properties.findMany()` invocation in
+D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\property\property.repository.ts:16:28
+
+  13 }) => {
+  14   const { property_category, name } = filters;
+  15 
+→ 16   return prisma.properties.findMany(
+Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"clientVersion":"6.13.0","name":"PrismaClientInitializationError"}
+2025-09-16 17:08:45 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 17:08:50 [ERROR]: GET /property/all | STATUS: 
+Invalid `prisma.properties.findMany()` invocation in
+D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\property\property.repository.ts:16:28
+
+  13 }) => {
+  14   const { property_category, name } = filters;
+  15 
+→ 16   return prisma.properties.findMany(
+Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"clientVersion":"6.13.0","name":"PrismaClientInitializationError"}
+2025-09-16 17:08:56 [ERROR]: GET /property/all | STATUS: 
+Invalid `prisma.properties.findMany()` invocation in
+D:\adi\purwhadika\FINPRO\Property Renting Web App\backend\src\repositories\property\property.repository.ts:16:28
+
+  13 }) => {
+  14   const { property_category, name } = filters;
+  15 
+→ 16   return prisma.properties.findMany(
+Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | MESSAGE: {"clientVersion":"6.13.0","name":"PrismaClientInitializationError"}
+2025-09-16 17:09:58 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 17:10:28 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 17:12:23 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 17:12:51 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}
+2025-09-16 18:33:24 [ERROR]: GET /user/me | STATUS: Unauthorized | MESSAGE: {"statusCode":401,"success":false,"message":"Unauthorized"}

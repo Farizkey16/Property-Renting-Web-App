@@ -191,7 +191,7 @@ export default function PropertyDiscovery({ category }: { category?: string }) {
   return (
     <div className="flex h-auto bg-gray-50">
       <div className="flex-1 flex flex-col">
-        <MapPages>
+        <MapPages properties={data?.properties ?? []}>
           {() => (
             <div className="p-4 space-y-4">
               <Dialog>

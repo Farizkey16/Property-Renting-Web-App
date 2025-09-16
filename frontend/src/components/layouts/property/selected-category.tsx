@@ -24,7 +24,7 @@ export function PropertyPage() {
           router.push(`?${params.toString()}`);
         }}
       />
-      <PropertyGrid category={category} />
+      <PropertyGrid />
     </div>
   );
 }

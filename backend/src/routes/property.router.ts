@@ -13,7 +13,7 @@ class PropertyRouter {
   constructor() {
     this.route = Router();
     this.propertyController = new PropertyController();
-    this.reviewController = new BookingReviews;
+    this.reviewController = new BookingReviews();
     this.initializeRoutes();
   }
 
@@ -26,7 +26,7 @@ class PropertyRouter {
       this.propertyController.createProperty
     );
     this.route.get("/all", this.propertyController.getAllProperties);
-    this.route.get("/:propertyId/reviews", this.reviewController.getReviews)
+    this.route.get("/:propertyId/reviews", this.reviewController.getReviews);
     this.route.get("/get/:id", this.propertyController.getPropertyById);
     this.route.get("/nearby", this.propertyController.getPropertyByLocation);
     this.route.get(
@@ -41,7 +41,12 @@ class PropertyRouter {
       uploaderMemory().single("main_image"),
       this.propertyController.updateProperty
     );
-    this.route.delete("/delete/:id", this.propertyController.deleteProperty);
+    this.route.patch(
+      "/delete/:id",
+      verifyToken,
+      // onlyTenant,
+      this.propertyController.deleteProperty
+    );
   }
 
   public getRouter(): Router {

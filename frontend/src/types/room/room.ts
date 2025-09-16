@@ -35,3 +35,16 @@ export interface CreateRoomType {
   image: File[];
   weekend_peak?: { type: "percentage" | "nominal"; value: number };
 }
+
+export interface EditRoomType {
+  id: string;
+  name: string;
+  description: string;
+  base_price: number;
+  capacity: number;
+  total_rooms: number;
+  image: File[];
+  oldImages?: string[];
+  property_id: string;
+  weekend_peak?: { type: "percentage" | "nominal"; value: number };
+}

@@ -4,7 +4,6 @@ import type React from "react";
 import { useState } from "react";
 import {
   LayoutDashboard,
-  DollarSign,
   HelpCircle,
   Settings,
   Menu,

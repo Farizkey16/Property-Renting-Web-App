@@ -46,6 +46,7 @@ export function PropertyGrid({ filters = {} }: PropertyGridProps) {
                   roomname: room.name,
                 },
               }}
+              target="_blank"
               className="block">
               <PropertyCard property={property} room={room} />
             </Link>

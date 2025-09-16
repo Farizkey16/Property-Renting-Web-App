@@ -61,7 +61,7 @@ export function PropertyTypeNav({ activeCategory }: PropertyTypeNavProps) {
                   }`}
                 />
                 <span
-                  className={`text-xs whitespace-nowrap text-center ${
+                  className={`text-xs font-bold whitespace-nowrap text-center ${
                     isActive ? "text-blue-600 font-medium" : "text-gray-600"
                   }`}>
                   {type.label}

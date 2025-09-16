@@ -3,9 +3,11 @@ import React from "react";
 
 const page = () => {
   return (
-    <div>
+    <main className="min-h-screen flex flex-col">
+      <div className="relative h-[70px] bg-cover bg-center "></div>
+      {/* Content */}
       <SerachPage />
-    </div>
+    </main>
   );
 };
 

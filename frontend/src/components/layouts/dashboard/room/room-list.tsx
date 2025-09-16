@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Pencil, Trash2 } from "lucide-react";
 import { formatCurrency, formatDate } from "@/lib/utils";
 import Link from "next/link";
+import { DeleteDialog } from "@/components/fragment/button-action/DeleteDialog";
+import { useDeleteRoom } from "@/hooks/useRoom";
 
 interface RoomListProps {
   rooms: Array<{
@@ -27,6 +29,7 @@ const statusColors: Record<string, string> = {
 };
 
 export function RoomList({ rooms }: RoomListProps) {
+  const { mutateAsync: deleteRoom, isPending } = useDeleteRoom();
   return (
     <div>
       <div>
@@ -99,13 +102,29 @@ export function RoomList({ rooms }: RoomListProps) {
                   </td>
                   <td className="flex justify-evenly items-center py-3 px-3  ">
                     <Link href={`/dashboard/property/room/edit/${room.id}`}>
-                      <Button variant="ghost" size="icon">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="cursor-pointer">
                         <Pencil className="w-4 h-4" />
                       </Button>
                     </Link>
-                    <Button variant="destructive" size="icon">
-                      <Trash2 className="w-4 h-4" />
-                    </Button>
+                    <DeleteDialog
+                      title="Delete Room"
+                      description="Are you sure you want to delete this room?"
+                      onConfirm={async () => {
+                        await deleteRoom(room.id);
+                        alert("Room deleted successfully");
+                      }}
+                      trigger={
+                        <Button
+                          variant="destructive"
+                          size="icon"
+                          disabled={isPending}>
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
+                      }
+                    />
                   </td>
                 </tr>
               ))}

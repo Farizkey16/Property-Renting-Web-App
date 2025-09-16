@@ -15,8 +15,6 @@ const HomePage = () => {
 
   const [filters, setFilters] = useState<PropertyFilters>({
     property_category: category || undefined,
-    sortBy: "date",
-    order: "desc",
   });
 
   useEffect(() => {
@@ -26,8 +24,19 @@ const HomePage = () => {
     }));
   }, [category]);
 
+  useEffect(() => {
+    if (category) {
+      const el = document.getElementById("properties");
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+  }, [category]);
+
   return (
-    <div className="min-h-screen bg-gray-50 overflow-x-hidden">
+    <section
+      className="min-h-screen bg-gray-50 overflow-x-hidden"
+      id="properties">
       <PropertyTypeNav
         activeCategory={category}
         onSelectCategory={(value) => {
@@ -37,7 +46,7 @@ const HomePage = () => {
           } else {
             params.delete("category");
           }
-          router.push(`?${params.toString()}`);
+          router.push(`?${params.toString()}`, { scroll: false });
         }}
       />
 
@@ -47,9 +56,10 @@ const HomePage = () => {
             setFilters((prev) => ({ ...prev, ...newFilters }))
           }
         />
+
         <PropertyGrid filters={filters} />
       </div>
-    </div>
+    </section>
   );
 };
 

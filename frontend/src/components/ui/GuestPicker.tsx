@@ -79,7 +79,7 @@ export function GuestPicker({ value, onChange }: GuestPickerProps) {
           <span>{triggerText}</span>
         </button>
       </PopoverTrigger>
-      <PopoverContent className="w-80 p-4 space-y-4 bg-gray-50">
+      <PopoverContent className="w-80 p-4 space-y-4 bg-gray-50 z-50 rounded-2xl border border-gray-300 shadow-xl">
         <Counter
           title="Guests"
           description="Ages 13 or above"

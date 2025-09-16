@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   description: "Homz",
 };
 
-export default function RootLayout({
+export default function DashboardProtectedLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

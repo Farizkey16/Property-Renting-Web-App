@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { CalendarIcon, LucideMapPin, Search } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { GuestPicker } from "@/components/ui/GuestPicker";
-import { format } from "date-fns";
+import { addDays, format } from "date-fns";
 
 interface MapboxFeature {
   id: string;
@@ -126,7 +126,7 @@ export default function InputDate() {
   const canSearch = !!coords && !!checkIn && !!checkOut && !geoLoading;
 
   return (
-    <div className="w-full flex flex-col lg:flex-row items-stretch border rounded-4xl bg-white p-4 lg:p-0 gap-2 lg:gap-0 shadow-sm">
+    <div className="w-full flex flex-col lg:flex-row items-stretch border-2 rounded-4xl bg-white p-4 lg:p-0 gap-2 lg:gap-0 shadow-md  border-gray-200 ">
       {/* Location Input */}
       <div className="relative flex-1 px-2 lg:px-4">
         <input
@@ -134,13 +134,13 @@ export default function InputDate() {
           value={location}
           onChange={(e) => handleInputChange(e.target.value)}
           placeholder="Where are you going?"
-          className="w-full px-2 py-2 lg:py-3 focus:outline-none text-gray-600 placeholder-gray-400"
+          className="w-full px-2 py-2 lg:py-3 focus:outline-none text-gray-600 placeholder-gray-400 font-bold"
           onFocus={() => setShowSuggestions(true)}
         />
         {showSuggestions && (
           <ul className="absolute top-full left-0 right-0 bg-white border rounded-lg mt-1 max-h-60 overflow-auto shadow-md z-50">
             <li
-              className="px-4 py-2 cursor-pointer hover:bg-gray-100 font-medium text-blue-600 flex items-center"
+              className="px-4 py-2 cursor-pointer hover:bg-gray-100  text-blue-600 flex items-center font-bold"
               onMouseDown={handleSelectNearby}>
               <LucideMapPin className="w-4 h-4 mr-1" />
               Find nearby
@@ -148,7 +148,7 @@ export default function InputDate() {
             {suggestions.map((place) => (
               <li
                 key={place.id}
-                className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                className="px-4 py-2 cursor-pointer hover:bg-gray-100 text-left"
                 onMouseDown={() => handleSelectSuggestion(place)}>
                 {place.place_name}
               </li>
@@ -165,7 +165,7 @@ export default function InputDate() {
             className="flex-1 flex items-center px-4 py-2 text-left hover:bg-gray-50"
             onClick={() => setOpenCheckIn(!openCheckIn)}>
             <CalendarIcon className="w-4 h-4 text-gray-400 mr-2" />
-            <span className="text-sm text-gray-600">
+            <span className="text-sm text-gray-600 font-bold">
               {checkIn ? format(checkIn, "LLL dd") : "Check in"}
             </span>
           </button>
@@ -176,8 +176,8 @@ export default function InputDate() {
             selected={checkIn}
             onSelect={(date) => {
               setCheckIn(date);
-              setOpenCheckIn(false); // Tutup popover check-in
-              setOpenCheckOut(true); // Langsung buka popover check-out
+              setOpenCheckIn(false);
+              setOpenCheckOut(true);
             }}
             disabled={{ before: new Date() }}
           />
@@ -192,7 +192,7 @@ export default function InputDate() {
             className="flex-1 flex items-center px-4 py-2 text-left hover:bg-gray-50"
             onClick={() => setOpenCheckOut(!openCheckOut)}>
             <CalendarIcon className="w-4 h-4 text-gray-400 mr-2" />
-            <span className="text-sm text-gray-600">
+            <span className="text-sm text-gray-600 font-bold">
               {checkOut ? format(checkOut, "LLL dd") : "Check out"}
             </span>
           </button>
@@ -203,15 +203,15 @@ export default function InputDate() {
             selected={checkOut}
             onSelect={(date) => {
               setCheckOut(date);
-              setOpenCheckOut(false); // Tutup setelah pilih
+              setOpenCheckOut(false);
             }}
-            disabled={{ before: checkIn ?? new Date() }}
+            disabled={{ before: checkIn ? addDays(checkIn, 1) : new Date() }}
           />
         </PopoverContent>
       </Popover>
 
       {/* Guests Picker */}
-      <div className="flex flex-1 flex-col lg:flex-row items-stretch lg:items-center lg:border-l lg:border-gray-200">
+      <div className="flex flex-1 flex-col lg:flex-row items-stretch lg:items-center lg:border-l lg:border-gray-200 font-bold">
         <GuestPicker value={guests} onChange={handleGuestsChange} />
       </div>
 

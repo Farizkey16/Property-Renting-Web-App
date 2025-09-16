@@ -8,6 +8,7 @@ import {
 } from "../../services/rooms/rooms.services";
 import AppError from "../../errors/AppError";
 import { getRoomByIdRepository } from "../../repositories/rooms/rooms.repository";
+import { findTenantByUserId } from "../../repositories/tenant/tenant.repository";
 
 class RoomsController {
   public async getRoomsController(
@@ -126,7 +127,14 @@ class RoomsController {
     next: NextFunction
   ): Promise<void> {
     try {
-      const { id } = req.params;
+      const userId = res.locals.decrypt.userId;
+      const tenant = await findTenantByUserId(userId);
+
+      if (!tenant) {
+        throw new AppError("Tenant not found", 404);
+      }
+      const id = req.params.id;
+
       const response = await deleteRoomByIdService(id);
       res
         .status(200)

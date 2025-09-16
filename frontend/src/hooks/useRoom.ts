@@ -1,11 +1,12 @@
 import {
   createRoom,
-  deleteRoom,
+  editRoom,
   fetchAllRooms,
   fetchRoomById,
   fetchRoomsByQuery,
+  softDeleteRoom,
 } from "@/services/room.service";
-import { CreateRoomType } from "@/types/room/room";
+import { CreateRoomType, EditRoomType } from "@/types/room/room";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 export const useRoom = () => {
@@ -41,8 +42,14 @@ export const useCreateRoom = () => {
   });
 };
 
+export const useEditRoom = () => {
+  return useMutation({
+    mutationFn: (room: EditRoomType) => editRoom(room.id, room),
+  });
+};
+
 export const useDeleteRoom = () => {
   return useMutation({
-    mutationFn: (id: string) => deleteRoom(id),
+    mutationFn: (id: string) => softDeleteRoom(id),
   });
 };

@@ -3,7 +3,10 @@
 import React from "react";
 import { PropertyCard } from "./card-property";
 import { Pencil, Plus, Trash2Icon } from "lucide-react";
-import { usePropertyByTenant } from "@/hooks/useProperty";
+import {
+  usePropertyByTenant,
+  useSoftDeleteProperty,
+} from "@/hooks/useProperty";
 import { Property } from "@/types/property/property";
 import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
@@ -11,6 +14,7 @@ import { RoomList } from "../room/room-list";
 
 const PropertyLayout = () => {
   const { data, isLoading, isError } = usePropertyByTenant();
+  const { mutate: deleteProperty } = useSoftDeleteProperty();
 
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Failed to load data</p>;
@@ -36,6 +40,7 @@ const PropertyLayout = () => {
           {properties.map((property) => (
             <PropertyCard
               key={property.id}
+              id={property.id}
               name={property.name}
               city={property.city}
               category={property.property_category}
@@ -44,6 +49,9 @@ const PropertyLayout = () => {
               EditIcon={Pencil}
               DeleteIcon={Trash2Icon}
               editHref={`/dashboard/property/edit/${property.id}`}
+              onDelete={() => {
+                deleteProperty(property.id);
+              }}
             />
           ))}
         </div>

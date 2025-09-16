@@ -1,181 +1,113 @@
 "use client";
 
-import { Search, Bell, Menu } from "lucide-react";
+import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import Link from "next/link";
-import { useFetchMe } from "@/hooks/useUser";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { useRouter } from "next/navigation";
-import InputDate from "@/components/fragment/inputDate/inputDate";
+import { useState, useEffect } from "react";
+import { useMediaQuery } from "@/hooks/use-media-query";
+import { usePathname } from "next/navigation";
+import AuthHeader from "./authHeader";
+
+const navLinks = [
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Properties", href: "/#properties" },
+  { label: "Destination", href: "/#destination" },
+];
 
 export function Header() {
-  const { data: user, isLoading } = useFetchMe();
-  const isLoggedIn = !!user;
-  const router = useRouter();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const isMobile = useMediaQuery("(max-width: 768px)");
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const onScroll = () => setIsScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const isWhiteText =
+    !isScrolled &&
+    (pathname === "/" ||
+      pathname === "/about" ||
+      pathname.includes("#EventCategory"));
 
   return (
-    <header className="bg-white border-b border-gray-200 px-4 py-3">
-      <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
-        {/* Left - Logo */}
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 py-4 px-4 md:px-8 flex justify-between items-center transition-all duration-300 ${
+        isScrolled || !isWhiteText ? "bg-white shadow-sm" : "bg-transparent"
+      }`}>
+      <div className="w-full max-w-7xl mx-auto flex items-center justify-between gap-4">
+        {/* Logo */}
         <Link href="/" className="flex items-center space-x-2 flex-shrink-0">
           <div className="w-8 h-8 bg-black rounded flex items-center justify-center">
             <span className="text-white text-sm font-bold">h</span>
           </div>
-          <span className="text-xl font-semibold">homz</span>
+          <span
+            className={`text-xl lg:text-2xl font-semibold ${
+              isWhiteText ? "text-white" : "text-black"
+            }`}>
+            homz
+          </span>
         </Link>
 
-        {/* Center - Search Bar (hidden on mobile) */}
-        <div className="hidden lg:flex flex-1 justify-center px-4">
-          <InputDate />
-        </div>
-
-        {/* Right - Desktop Actions */}
-        {isLoading ? (
-          <span className="text-sm text-gray-500">Loading...</span>
-        ) : isLoggedIn ? (
-          <div className="hidden lg:flex items-center space-x-4">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  className="flex items-center space-x-2 px-2 hover:bg-transparent">
-                  <Avatar className="w-8 h-8">
-                    {user?.profile_picture ? (
-                      <AvatarImage src={user.profile_picture} />
-                    ) : (
-                      <AvatarFallback>
-                        {user?.full_name?.charAt(0).toUpperCase() || "U"}
-                      </AvatarFallback>
-                    )}
-                  </Avatar>
-                  <span className="text-sm font-medium">{user?.full_name}</span>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-48">
-                <DropdownMenuLabel className="font-normal">
-                  <div className="flex flex-col space-y-1">
-                    <p className="text-sm font-medium leading-none">
-                      {user?.full_name}
-                    </p>
-                    <p className="text-xs leading-none text-muted-foreground">
-                      {user?.email}
-                    </p>
-                  </div>
-                </DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                {user?.is_verified ? (
-                  <DropdownMenuItem onClick={() => router.push("/dashboard")}>
-                    My Profile
-                  </DropdownMenuItem>
-                ) : (
-                  <DropdownMenuItem
-                    onClick={() =>
-                      router.push(`/auth/verify-email/${user?.email}`)
-                    }>
-                    Verify Email
-                  </DropdownMenuItem>
-                )}
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-        ) : (
-          <Link href="/auth/login">
-            <Button className="bg-blue-500 hover:bg-blue-600 text-white rounded-3xl cursor-pointer hidden lg:block">
-              Login
-            </Button>
-          </Link>
-        )}
-
-        {/* Mobile Actions */}
-        <div className="flex lg:hidden items-center space-x-2">
-          {/* Search trigger on mobile */}
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="outline" size="sm" className="rounded-full">
-                <Search className="w-4 h-4 mr-1" />
-                Search
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="top" className="p-4">
-              <SheetHeader>
-                <SheetTitle>Rent Property</SheetTitle>
-                <SheetDescription>
-                  Select dates, category, and other details to rent your chosen
-                  property.
-                </SheetDescription>
-              </SheetHeader>
-              <InputDate />
-            </SheetContent>
-          </Sheet>
-
-          <Button variant="ghost" size="icon">
-            <Bell className="w-4 h-4" />
-          </Button>
-
-          <Sheet>
+        {/* Navigation */}
+        {isMobile ? (
+          <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon">
-                <Menu className="w-5 h-5" />
+                <Menu
+                  className={`h-6 w-6 ${
+                    isWhiteText ? "text-white" : "text-gray-500"
+                  }`}
+                />
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-64">
               <SheetHeader>
-                <SheetTitle>Rent Property</SheetTitle>
-                <SheetDescription>
-                  Select dates, category, and other details to rent your chosen
-                  property.
-                </SheetDescription>
+                <SheetTitle className="text-lg font-semibold">Menu</SheetTitle>
               </SheetHeader>
-              <div className="flex flex-col space-y-4 mt-8">
-                {isLoggedIn ? (
-                  <>
-                    <div className="flex items-center space-x-2 px-3">
-                      <Avatar className="w-8 h-8">
-                        <AvatarImage
-                          src={user?.profile_picture || "/placeholder.svg"}
-                        />
-                        <AvatarFallback>
-                          {user?.full_name?.charAt(0).toUpperCase() || "U"}
-                        </AvatarFallback>
-                      </Avatar>
-                      <span className="text-sm font-medium">
-                        {user?.full_name || "User"}
-                      </span>
-                    </div>
-                    <Button
-                      variant="ghost"
-                      className="justify-start"
-                      onClick={() => router.push("/dashboard")}>
-                      Dashboard
-                    </Button>
-                  </>
-                ) : (
-                  <Link href="/auth/login">
-                    <Button className="bg-blue-500 hover:bg-blue-600 text-white w-full ">
-                      Login
-                    </Button>
+              <nav className="mt-6 flex flex-col gap-4">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setIsMenuOpen(false)}
+                    className="text-gray-700 hover:text-black transition-colors">
+                    {link.label}
                   </Link>
-                )}
+                ))}
+              </nav>
+              <div className="mt-6 border-t pt-4">
+                <AuthHeader />
               </div>
             </SheetContent>
           </Sheet>
-        </div>
+        ) : (
+          <div className="flex items-center gap-6">
+            <nav className="flex gap-6">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`hover:text-blue-500 font-bold transition-colors ${
+                    isWhiteText ? "text-white" : "text-gray-500"
+                  }`}>
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
+            <AuthHeader />
+          </div>
+        )}
       </div>
     </header>
   );

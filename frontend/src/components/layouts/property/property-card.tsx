@@ -12,7 +12,7 @@ interface PropertyCardProps {
 export function PropertyCard({ property, room }: PropertyCardProps) {
   return (
     <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow cursor-pointer w-full">
-      <div className="relative">
+      <div className="relative hover:scale-105 transition-all duration-200">
         <Image
           src={room.image || "/placeholder.svg"}
           alt={room.name}
@@ -21,14 +21,14 @@ export function PropertyCard({ property, room }: PropertyCardProps) {
           className="w-full h-40 sm:h-48 object-cover"
         />
         {property.property_category && (
-          <Badge className="absolute top-2 sm:top-3 left-2 sm:left-3 bg-blue-500 text-white border-0 text-xs">
+          <Badge className="absolute top-2 sm:top-3 left-2 sm:left-3 bg-blue-500 text-white border-0 text-xs ">
             {property.property_category}
           </Badge>
         )}
       </div>
 
       <div className="p-3 sm:p-4">
-        <h3 className="font-semibold text-gray-900 text-sm sm:text-base line-clamp-2 mb-1">
+        <h3 className="font-bold text-gray-900 text-sm sm:text-base line-clamp-2 mb-1">
           {room.name}
         </h3>
 

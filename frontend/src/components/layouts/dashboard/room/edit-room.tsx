@@ -7,26 +7,55 @@ import { Label } from "@/components/ui/label";
 import { useParams, useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { CreateRoomType } from "@/types/room/room";
-import { useCreateRoom } from "@/hooks/useRoom";
+import { EditRoomType } from "@/types/room/room";
+import { useEditRoom, useRoomById } from "@/hooks/useRoom";
 
 const EditRoomForm = () => {
-  const { property_id } = useParams<{ property_id: string }>();
+  const { id } = useParams<{ id: string }>();
   const router = useRouter();
 
-  const [form, setForm] = useState<CreateRoomType>({
-    property_id,
+  const { data, isLoading } = useRoomById(id);
+  const editRoom = useEditRoom();
+
+  const [form, setForm] = useState<EditRoomType>({
+    id,
+    property_id: "",
     name: "",
     description: "",
     base_price: 0,
     capacity: 0,
     total_rooms: 0,
-    image: [] as File[],
+    image: [],
+    oldImages: [],
     weekend_peak: { type: "nominal", value: 0 },
   });
 
   const [previews, setPreviews] = useState<string[]>([]);
-  const createRoom = useCreateRoom();
+  const [existingImages, setExistingImages] = useState<string[]>([]);
+
+  // init data ketika fetch selesai
+  useEffect(() => {
+    if (data?.response) {
+      const room = data.response;
+      setForm((prev) => ({
+        ...prev,
+        id,
+        property_id: room.property_id,
+        name: room.name,
+        description: room.description,
+        base_price: Number(room.base_price),
+        capacity: room.capacity,
+        total_rooms: room.total_rooms,
+        oldImages: room.room_images.map(
+          (img: { image_url: string }) => img.image_url
+        ),
+        weekend_peak: room.weekend_peak || { type: "nominal", value: 0 },
+      }));
+      setExistingImages(
+        room.room_images.map((img: { image_url: string }) => img.image_url)
+      );
+    }
+  }, [data, id]);
 
   useEffect(() => {
     return () => {
@@ -36,8 +65,8 @@ const EditRoomForm = () => {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files ? Array.from(e.target.files) : [];
-    if (files.length > 3) {
-      alert("Maksimal hanya 3 gambar");
+    if (files.length + existingImages.length > 3) {
+      alert("Maksimal hanya 3 gambar (lama + baru)");
       return;
     }
     setForm((prev) => ({ ...prev, image: files }));
@@ -56,39 +85,31 @@ const EditRoomForm = () => {
     }));
   };
 
+  const handleDeleteOldImage = (url: string) => {
+    setExistingImages((prev) => prev.filter((img) => img !== url));
+    setForm((prev) => ({
+      ...prev,
+      oldImages: prev.oldImages?.filter((img) => img !== url),
+    }));
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const payload: CreateRoomType & { image: File[] } = {
-      ...form,
-      image: form.image as File[],
-    };
-    createRoom.mutate(payload, {
+    editRoom.mutate(form, {
       onSuccess: () => {
-        alert("Room created!");
+        alert("Room updated!");
         router.push("/dashboard/property");
       },
     });
   };
 
-  const resetForm = () => {
-    setForm({
-      property_id,
-      name: "",
-      description: "",
-      base_price: 0,
-      capacity: 0,
-      total_rooms: 0,
-      image: [] as File[],
-      weekend_peak: { type: "nominal", value: 0 },
-    });
-    setPreviews([]);
-  };
+  if (isLoading) return <p className="p-4">Loading...</p>;
 
   return (
     <div className="flex-1 p-4 lg:p-8">
       <Card className="w-full max-w-4xl mx-auto p-8">
         <CardHeader className="pb-4">
-          <CardTitle className="text-xl font-semibold">Create Room</CardTitle>
+          <CardTitle className="text-xl font-semibold">Edit Room</CardTitle>
         </CardHeader>
 
         <CardContent>
@@ -154,8 +175,35 @@ const EditRoomForm = () => {
               </div>
             </div>
 
+            {/* Existing images */}
+            {existingImages.length > 0 && (
+              <div>
+                <Label>Existing Images</Label>
+                <div className="mt-2 flex gap-4 flex-wrap">
+                  {existingImages.map((src, idx) => (
+                    <div key={idx} className="relative">
+                      <Image
+                        src={src}
+                        alt={`Room Image ${idx + 1}`}
+                        width={120}
+                        height={120}
+                        className="rounded-lg border shadow-sm object-cover"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => handleDeleteOldImage(src)}
+                        className="absolute top-1 right-1 bg-red-500 text-white text-xs px-2 py-1 rounded">
+                        X
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* New upload */}
             <div>
-              <Label htmlFor="images">Room Images (max 3)</Label>
+              <Label htmlFor="images">Add New Images (max 3)</Label>
               <Input
                 id="images"
                 type="file"
@@ -169,7 +217,7 @@ const EditRoomForm = () => {
                     <Image
                       key={idx}
                       src={src}
-                      alt={`Room Image ${idx + 1}`}
+                      alt={`New Room Image ${idx + 1}`}
                       width={120}
                       height={120}
                       className="rounded-lg border shadow-sm object-cover"
@@ -179,6 +227,7 @@ const EditRoomForm = () => {
               )}
             </div>
 
+            {/* Weekend Peak */}
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <Label htmlFor="weekend_peak_type">Weekend Peak Type</Label>
@@ -224,15 +273,15 @@ const EditRoomForm = () => {
               <Button
                 type="button"
                 variant="outline"
-                onClick={resetForm}
+                onClick={() => router.back()}
                 className="flex-1">
-                Discard Changes
+                Cancel
               </Button>
               <Button
                 type="submit"
-                disabled={createRoom.isPending}
+                disabled={editRoom.isPending}
                 className="flex-1 bg-orange-500 hover:bg-orange-600">
-                {createRoom.isPending ? "Saving..." : "Save Changes"}
+                {editRoom.isPending ? "Saving..." : "Save Changes"}
               </Button>
             </div>
           </form>
