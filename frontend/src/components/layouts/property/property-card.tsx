@@ -14,7 +14,7 @@ export function PropertyCard({ property, room }: PropertyCardProps) {
     <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow cursor-pointer w-full">
       <div className="relative hover:scale-105 transition-all duration-200">
         <Image
-          src={room.image || "/placeholder.svg"}
+          src={room.image || "public/roomplaceholder.svg"}
           alt={room.name}
           width={300}
           height={200}

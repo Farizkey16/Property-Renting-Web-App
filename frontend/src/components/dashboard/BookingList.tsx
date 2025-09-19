@@ -11,13 +11,15 @@ type BookingListProps = {
   bookings?: Booking[];
   isLoading: boolean;
   isError: boolean;
-  role?: 'tenant' | 'user'
+  isFetching:boolean;
+  role: 'tenant' | 'user'
 };
 
 export const BookingList = ({
   bookings,
   isLoading,
   isError,
+  isFetching,
   role
 }: BookingListProps) => {
   if (isLoading) {
@@ -58,9 +60,9 @@ export const BookingList = ({
   }
 
   return (
-    <div className="grid gap-4">
+    <div className={`grid transition-opacity ${isFetching ? 'opacity-60' : 'opacity-100'}`}>
       {bookings.map((booking) => (
-        <BookingCard key={booking.id} booking={booking} role={role!}/>
+        <BookingCard key={booking.id} booking={booking} role={role}/>
       ))}
     </div>
   );

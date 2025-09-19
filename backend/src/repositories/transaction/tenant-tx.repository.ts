@@ -215,14 +215,18 @@ export const getOrderRepository = async (
           main_image: true,
           name: true,
           city: true,
-        },
+        }, 
       },
       booking_rooms: {
-        select: {
-          guests_count: true,
-          price_per_night: true,
+        include: {
+          room: {
+            select: {
+              name: true
+            }
+          }
         },
       },
+      
     },
   });
 

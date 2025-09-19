@@ -40,15 +40,18 @@ export function middleware(req: NextRequest) {
         "/dashboard/history",
         "/dashboard/bookings",
         "/dashboard/notifications",
+        "/dashboard/booking-detail",
+        "/dashboard/payment-page",
+        "/dashboard/booking-confirmation/:bookingId"
       ];
 
       const isAllowed = allowed.some(
         (path) => pathname === path || pathname.startsWith(`${path}/`)
       );
 
-      if (!isAllowed) {
-        return NextResponse.redirect(new URL("/dashboard", req.url));
-      }
+      // if (!isAllowed) {
+      //   return NextResponse.redirect(new URL("/dashboard", req.url));
+      // }
     }
   }
 

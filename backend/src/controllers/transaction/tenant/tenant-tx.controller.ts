@@ -39,11 +39,6 @@ class TenantTransactions {
         role.tenant_id
       );
 
-      console.log(
-        "--- Full Booking Data for Email/Reminder ---",
-        updatedBooking
-      );
-
       // Send Booking Confirmation
       await sendUserBookingConfirmation(updatedBooking);
 
@@ -69,20 +64,20 @@ class TenantTransactions {
 
       // Validate Transaction ID
 
-      const transactionId = req.params.id;
+      const bookingId = req.params.id;
 
-      if (!transactionId) {
+      if (!bookingId) {
         throw new AppError("Invalid transaction ID", 400);
       }
 
       const rejectProcess = await prisma.$transaction(async (tx) => {
         // Validate Property --> repository selects property key
-        await ValidateBooking(transactionId, role.userId, tx);
+        await ValidateBooking(bookingId, role.userId, tx);
 
         // Update booking and Return UserID
 
         const userID = await UpdateBookings(
-          transactionId,
+          bookingId,
           "waiting_payment",
           tx
         );
@@ -102,7 +97,7 @@ class TenantTransactions {
       });
 
       // Send Rejection Notification
-      await sendRejectionNotification(transactionId, rejectProcess.userID);
+      await sendRejectionNotification(bookingId, rejectProcess.userID);
 
       res.json({
         message: "Payment rejected, booking updated",
@@ -184,12 +179,6 @@ class TenantTransactions {
       const whereClause: Prisma.bookingsWhereInput = {};
 
       if (tenant.role === "tenant") {
-        if (!tenant.id) {
-          throw new AppError(
-            "Tenant ID not found in token for tenant user.",
-            403
-          );
-        }
         whereClause.property = {
           tenant_id: tenant.id,
         };

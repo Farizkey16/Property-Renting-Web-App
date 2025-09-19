@@ -37,9 +37,9 @@ export default function BookingConfirmation() {
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-sm">H</span>
+              <span className="text-primary-foreground font-bold text-sm">h</span>
             </div>
-            <span className="font-bold text-xl text-foreground">hide</span>
+            <span className="font-bold text-xl text-foreground">homz</span>
           </div>
           <nav className="hidden md:flex items-center space-x-6">
             <a href="#" className="text-muted hover:text-foreground transition-colors">

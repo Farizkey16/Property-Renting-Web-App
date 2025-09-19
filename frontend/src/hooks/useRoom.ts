@@ -8,7 +8,7 @@ import {
   softDeleteRoom,
 } from "@/services/room.service";
 import { CreateRoomType, EditRoomType } from "@/types/room/room";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const useRoom = () => {
   return useQuery({
@@ -61,7 +61,18 @@ export const useEditRoom = () => {
 };
 
 export const useDeleteRoom = () => {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: (id: string) => softDeleteRoom(id),
-  });
+    onSuccess: () => {
+      console.log("Room deleted, invalidating property list...");
+
+      queryClient.invalidateQueries({ queryKey: ["property-by-tenant"] });
+    },
+    onError: (error) => {
+      console.error("Failed to delete room:", error);
+      alert("Error: Could not delete the room.");
+  },
+});
 };

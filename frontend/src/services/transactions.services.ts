@@ -4,6 +4,7 @@ import {
   BookingApiResponse,
   BookingsApiResponse,
   BookingStatus,
+  PaginatedBookings,
 } from "@/types/transactions/transactions";
 import qs from "qs";
 
@@ -13,6 +14,7 @@ export interface FetchBookingsParams {
   startDate?: string;
   endDate?: string;
   bookingId?: string;
+  page?: number;
 }
 
 export type FlexibleBookingParams = Omit<FetchBookingsParams, "status"> & {
@@ -46,7 +48,7 @@ export const createBooking = async (bookingData: CreateBookingPayload) => {
 
 export const fetchBookings = async <T extends FlexibleBookingParams>(
   query: T
-): Promise<Booking[]> => {
+): Promise<PaginatedBookings> => {
   try {
     const endpoint = `${BASE_URL}/reservations/get`;
     const response = await axios.get<BookingsApiResponse>(endpoint, {
@@ -68,14 +70,12 @@ export const fetchBookings = async <T extends FlexibleBookingParams>(
 
 export const fetchTenantBookingById = async (bookingId: string) => {
   try {
-    // The endpoint matches a standard REST pattern for getting a single resource
     const response = await axios.get<BookingApiResponse>(
       `${BASE_URL}/payment/orders/${bookingId}`,
       {
         withCredentials: true,
       }
     );
-    // Assuming your controller nests the result in a 'data' property
     return response.data.data;
   } catch (error) {
     console.error(`Failed to fetch booking with ID ${bookingId}:`, error);
@@ -117,7 +117,7 @@ export const fetchTenantBookings = async (filters: FetchBookingsParams) => {
     params: filters,
     withCredentials: true,
   });
-  return response.data.data;
+  return response.data;
 };
 
 export const userCancelBookingById = async (bookingId: string) => {

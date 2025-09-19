@@ -160,6 +160,7 @@ export const proofUploadService = async (
   bookingId: string,
   file?: Express.Multer.File
 ) => {
+
   const existingUserBooking = await checkBookingAndUserId(bookingId, userId);
   if (!existingUserBooking) {
     throw new AppError("User tied with certain booking ID is not found.", 404);

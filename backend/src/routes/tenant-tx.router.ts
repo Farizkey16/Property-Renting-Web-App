@@ -19,14 +19,6 @@ class TenantTransactionsRouter {
   private initializeRoutes() {
     this.route.get(
       "/availability",
-
-      (req, res, next) => {
-        console.log(
-          "✅ TRACER: The /availability route in this router was hit!"
-        );
-        // next() is crucial - it passes the request to the next function in the chain
-        next();
-      },
       verifyToken,
       this.tenantTrx.getAvailability
     );

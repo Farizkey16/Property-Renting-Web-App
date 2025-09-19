@@ -70,6 +70,7 @@ export const createRoomService = async (
 
   // insert peak season rates kalau ada weekend_peak
   if (weekend_peak) {
+    console.log("at controller: Weekend Peak consists of:", weekend_peak.type, weekend_peak.value)
     const today = dayjs().tz("Asia/Jakarta").startOf("day"); // pakai timezone lokal
     const endDate = today.add(6, "month");
     const peakRatesData: any[] = [];

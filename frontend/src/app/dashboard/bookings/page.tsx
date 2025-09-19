@@ -1,7 +1,7 @@
-"use client";
+"use client"
 
-import { Card, CardContent, CardHeader} from "@/components/ui/card";
-import { useBookings, useTenantBookings, useUserBookings } from "@/hooks/useBookings";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { useTenantBookings, useUserBookings } from "@/hooks/useBookings";
 import { useMemo } from "react";
 import { useFetchMe } from "@/hooks/useUser";
 import type { FetchBookingsParams } from "@/services/transactions.services";
@@ -15,15 +15,18 @@ import {
 import { BookingList } from "@/components/dashboard/BookingList";
 import { BookingsToolbar } from "@/components/dashboard/BookingToolbar";
 
+
 const BookingsPage = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { data: user, isLoading: isUserLoading } = useFetchMe()
+  const { data: user, isLoading: isUserLoading } = useFetchMe();
 
-  const role = user?.role
+  const role = user?.role;
+  
 
   // State Management
   const filters = useMemo(() => {
+    const page = parseInt(searchParams.get("page") as string);
     const urlStatus = searchParams.get("status");
     const status: BookingStatus = isValidBookingStatus(urlStatus)
       ? urlStatus
@@ -36,14 +39,27 @@ const BookingsPage = () => {
       sort: sort,
       startDate: searchParams.get("start") ?? undefined,
       endDate: searchParams.get("end") ?? undefined,
-      bookingId: searchParams.get("id") ?? undefined,
+      bookingId: searchParams.get("bookingId") ?? undefined,
+      page: page,
     };
   }, [searchParams]);
 
-  const userQuery = useUserBookings(filters, { enabled: role === 'user'});
-  const tenantQuery = useTenantBookings(filters, { enabled: role === 'tenant'})
+  const userQuery = useUserBookings(filters, { enabled: role === "user" });
+  const tenantQuery = useTenantBookings(filters, {
+    enabled: role === "tenant",
+  });
 
-  const {data: bookings, isLoading, isError} = role === 'tenant' ? tenantQuery : userQuery
+  const {
+    data: response,
+    isLoading,
+    isError,
+    isFetching
+  } = role === "tenant" ? tenantQuery : userQuery;
+
+  const bookings = response?.data;
+  const meta = response?.meta;
+
+  console.log("fetching from:", response)
 
   type FilterKeys = keyof FetchBookingsParams;
 
@@ -66,6 +82,12 @@ const BookingsPage = () => {
     router.push(`/dashboard/bookings`);
   };
 
+  const handlePageChange = (newPage: number) => {
+    const current = new URLSearchParams(Array.from(searchParams.entries()));
+    current.set("page", String(newPage));
+    router.push(`/dashboard/bookings?${current.toString()}`);
+  };
+
   return (
     <div className="p-6">
       <Card className="w-full max-w-7xl mx-auto">
@@ -77,13 +99,17 @@ const BookingsPage = () => {
           />
         </CardHeader>
 
-        <CardContent>
-          <BookingList
+        <CardContent className="py-6">
+          {meta && meta.totalPages > 1 && (
+            <PaginationControls meta={meta} onPageChange={handlePageChange} />
+          )}
+          {role && <BookingList
             bookings={bookings}
             isLoading={isLoading}
+            isFetching={isFetching}
             isError={isError}
             role={role}
-          />
+          />}
         </CardContent>
       </Card>
     </div>

@@ -1,12 +1,14 @@
 import { fetchBookings, fetchTenantBookingById, fetchTenantBookings, fetchUserBookingById, fetchUserBookings, paymentProofUpload, tenantAcceptBookingById, tenantCancelBookingById, tenantRejectBookingById, userCancelBookingById } from "@/services/transactions.services";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import type { FetchBookingsParams, FlexibleBookingParams } from "@/services/transactions.services";
 import { toast } from "react-toastify";
 
 export const useBookings = <T extends FlexibleBookingParams>(params: T) => {
+  const { status, sort, startDate, endDate, bookingId, page } = params;
   return useQuery({
-    queryKey: ["bookings", params],
+    queryKey: ["bookings", status, sort, startDate, endDate, bookingId, page ],
     queryFn: () => fetchBookings(params),
+    placeholderData: keepPreviousData
   });
 };
 
@@ -27,17 +29,21 @@ export const useUserBookingByQuery = (bookingId: string | null | undefined) =>{
 }
 
 export const useUserBookings = (filters: FetchBookingsParams, options: {enabled: boolean}) => {
+   const { status, sort, startDate, endDate, bookingId, page } = filters;
   return useQuery({
-    queryKey: ['bookings', 'user', filters],
+    queryKey: ['bookings', 'user', status, sort, startDate, endDate, bookingId, page ],
     queryFn: () => fetchUserBookings(filters),
+    placeholderData: keepPreviousData,
     enabled: options.enabled
   });
 };
 
 export const useTenantBookings = (filters: FetchBookingsParams, options: {enabled: boolean}) => {
+  const { status, sort, startDate, endDate, bookingId, page } = filters;
   return useQuery({
-    queryKey: ['bookings', 'tenant', filters],
+    queryKey: ['bookings', 'tenant', status, sort, startDate, endDate, bookingId, page],
     queryFn: () => fetchTenantBookings(filters),
+    placeholderData: keepPreviousData,
     enabled: options.enabled
   });
 };

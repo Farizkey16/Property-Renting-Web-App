@@ -50,7 +50,10 @@ export const createRoom = async (room: CreateRoomType) => {
   formData.append("base_price", room.base_price.toString());
   formData.append("capacity", room.capacity.toString());
   formData.append("total_rooms", room.total_rooms.toString());
-  formData.append("weekend_peak", JSON.stringify(room.weekend_peak));
+  if (room.weekend_peak) {
+    formData.append("weekend_peak[type]", room.weekend_peak.type);
+    formData.append("weekend_peak[value]", room.weekend_peak.value.toString());
+  }
 
   room.image.forEach((file) => {
     formData.append("images", file);

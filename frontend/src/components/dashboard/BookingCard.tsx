@@ -2,15 +2,15 @@ import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import { Card, CardContent } from "../ui/card";
 import { Booking } from "@/types/transactions/transactions";
-import { MapPin, Calendar, Users } from "lucide-react";
+import { MapPin, Calendar, Users, ShieldCheck } from "lucide-react";
 import {
   useCancelBookingByRole,
   useTenantAcceptBooking,
-  useTenantCancelBooking,
   useTenantRejectBooking,
-  useUserCancelBooking,
 } from "@/hooks/useBookings";
 import { formatCurrency } from "@/lib/utils";
+import { ViewProofModal } from "../ui/view-proof";
+import { LeaveReviewForm } from "./leave-review";
 
 const getStatusColor = (status: string) => {
   switch (status) {
@@ -32,15 +32,21 @@ export type BookingCardProps = {
 
 export const BookingCard = ({ booking, role }: BookingCardProps) => {
   const cancelBookingMutation = useCancelBookingByRole(role);
-  const acceptBookingMutation = useTenantAcceptBooking()
-  const rejectBookingMutation = useTenantRejectBooking()
+  const acceptBookingMutation = useTenantAcceptBooking();
+  const rejectBookingMutation = useTenantRejectBooking();
   const guests = booking.booking_rooms.reduce(
     (acc, num) => acc + num.guests_count,
     0
   );
+  const roomName = booking.booking_rooms.map((br) => br.room.name).join(", ");
   const price = booking.amount;
 
-  console.log("Booking data:", booking);
+  const isTenantActionRequired =
+    role === "tenant" && booking.status === "waiting_confirmation";
+  const canUserCancel =
+    role === "user" &&
+    ((!booking.proof_image && booking.status === "waiting_payment") ||
+      booking.status === "waiting_confirmation")
 
   const handleCancel = (bookingId: string) => {
     if (window.confirm("Are you sure you want to cancel this booking?")) {
@@ -50,19 +56,19 @@ export const BookingCard = ({ booking, role }: BookingCardProps) => {
 
   const handleAccept = (bookingId: string) => {
     if (window.confirm("Are you sure you want to accept this booking?")) {
-      acceptBookingMutation.mutate(bookingId)
+      acceptBookingMutation.mutate(bookingId);
     }
-  }
+  };
 
   const handleReject = (bookingId: string) => {
     if (window.confirm("Are you sure you want to reject this booking?")) {
-      rejectBookingMutation.mutate(bookingId)
+      rejectBookingMutation.mutate(bookingId);
     }
-  }
+  };
 
   return (
-    <CardContent className="px-1 py-4">
-      <div className="space-y-4">
+    <CardContent className="px-1 py-1">
+      <div className="space-y-1">
         {/* Render a single booking card for the passed booking prop */}
         <Card key={booking.id} className="border border-gray-200">
           <CardContent className="p-4">
@@ -81,8 +87,13 @@ export const BookingCard = ({ booking, role }: BookingCardProps) => {
                 <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
                   <div>
                     <h3 className="font-semibold text-gray-900">
-                      {booking?.property?.name}
+                      {booking?.property?.name} - {roomName}
                     </h3>
+                    <h6 className="font-semibold text-[12px] text-gray-800">
+                      Booking Reference ID:{" "}
+                      {booking.id.slice(0, 6).toUpperCase()}
+                    </h6>
+
                     <div className="flex items-center text-sm text-gray-500 mt-1">
                       <MapPin className="w-4 h-4 mr-1" />
                       {booking.property?.city}
@@ -114,7 +125,7 @@ export const BookingCard = ({ booking, role }: BookingCardProps) => {
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-2 pt-2">
-                  {role === "tenant" ? (
+                  {isTenantActionRequired ? (
                     <Button
                       size="sm"
                       className="bg-orange-500 hover:bg-orange-600 cursor-pointer"
@@ -124,16 +135,10 @@ export const BookingCard = ({ booking, role }: BookingCardProps) => {
                       Accept
                     </Button>
                   ) : (
-                    <Button
-                      size="sm"
-                      className="bg-orange-500 hover:bg-orange-600 cursor-pointer"
-                    >
-                      {" "}
-                      View Booking
-                    </Button>
+                    ""
                   )}
 
-                  {role === "tenant" ? (
+                  {isTenantActionRequired ? (
                     <Button
                       size="sm"
                       className="bg-red-500 hover:bg-red-600 cursor-pointer"
@@ -143,27 +148,22 @@ export const BookingCard = ({ booking, role }: BookingCardProps) => {
                       Reject
                     </Button>
                   ) : (
-                    <Button
-                      size="sm"
-                      className="bg-red-500 hover:bg-red-600 cursor-pointer"
-                    >
-                      {" "}
-                      Modify Booking
-                    </Button>
+                    ""
                   )}
 
-                  {role === "tenant" ? (
-                    <Button
-                      size="sm"
-                      className="bg-blue-500 hover:bg-blue-600 cursor-pointer"
-                      onClick={() => handleAccept(booking.id)}
-                    >
-                      {" "}
-                      View Proof
-                    </Button>
-                  ) : ""}
+                  {role === 'tenant' && (
+                    <ViewProofModal
+                      proof_image={booking.proof_image}
+                      status={booking.status}
+                    />
+                  )}
 
-                  {booking.status === "waiting_payment" || booking.status === "waiting_confirmation" && (
+                  {canUserCancel ? (
+                    <div className="inline-flex items-center justify-center rounded-md text-sm font-medium h-8 px-3 gap-2 bg-emerald-50 text-emerald-800 border border-emerald-200 dark:bg-emerald-900/50 dark:text-emerald-300 dark:border-emerald-800">
+                      <ShieldCheck className="h-4 w-4" />
+                      <span>Paid with Midtrans</span>
+                    </div>
+                  ) : (
                     <Button
                       variant="outline"
                       size="sm"
@@ -174,6 +174,14 @@ export const BookingCard = ({ booking, role }: BookingCardProps) => {
                       Cancel
                     </Button>
                   )}
+
+                  {booking.status === "confirmed" &&
+                    role === "user" &&
+                    new Date(booking.check_out_date) < new Date() && (
+                      <>
+                        <LeaveReviewForm bookingId={booking.id} />
+                      </>
+                    )}
                 </div>
               </div>
             </div>

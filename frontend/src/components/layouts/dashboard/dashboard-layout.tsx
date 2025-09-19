@@ -28,7 +28,6 @@ const sidebarTenant = [
   { icon: Building, label: "Properties", link: "/dashboard/property" },
   { icon: Grid3X3, label: "Bookings", link: "/dashboard/bookings" },
   { icon: BarChart3, label: "Analytics", link: "/dashboard/analytics" },
-  { icon: Bell, label: "Notifications", link: "/dashboard/notifications" },
 ];
 
 const sidebarUser = [
@@ -36,11 +35,6 @@ const sidebarUser = [
   { icon: Building, label: "Past Bookings", link: "/dashboard/history" },
   { icon: Grid3X3, label: "Bookings", link: "/dashboard/bookings" },
   { icon: Bell, label: "Notifications", link: "/dashboard/notifications" },
-];
-
-const helpItems = [
-  { icon: HelpCircle, label: "Help & Center" },
-  { icon: Settings, label: "Settings" },
 ];
 
 interface DashboardLayoutProps {
@@ -129,27 +123,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                 })}
               </nav>
             </div>
-
-            {/* Help & Support */}
-            <div>
-              <h3 className="text-sidebar-foreground/60 text-xs font-medium uppercase tracking-wider mb-3">
-                HELP & SUPPORT
-              </h3>
-              <nav className="space-y-1">
-                {helpItems.map((item, index) => (
-                  <Link
-                    key={index}
-                    href="/dashboard/settings"
-                    className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-sidebar-foreground hover:bg-black/10 transition-colors">
-                    <item.icon className="w-5 h-5" />
-                    <span>{item.label}</span>
-                  </Link>
-                ))}
-                <div className="mt-4">
-                  <ButtonLogout />
-                </div>
-              </nav>
-            </div>
+              <ButtonLogout/>
           </div>
         </div>
       </div>

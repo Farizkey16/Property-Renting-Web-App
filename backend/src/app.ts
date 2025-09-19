@@ -67,7 +67,7 @@ class App {
     this.app.use("/reservations", userTxRouter.getRouter());
     this.app.use("/pricing", pricingRouter.getRouter());
     this.app.use("/reviews", reviewRouter.getRouter());
-    this.app.use("/midtrans", midtransRouter.getRouter())
+    this.app.use("/midtrans", midtransRouter.getRouter());
   }
 
   // error handling
@@ -77,10 +77,13 @@ class App {
         const statusCode = error.statusCode || 500;
         const message =
           error.message || "An unexpected internal server error occurred.";
+        // logger.error(
+        //   `${req.method} ${req.path} | STATUS: ${
+        //     error.message
+        //   } | MESSAGE: ${JSON.stringify(error)}`
+        // );
         logger.error(
-          `${req.method} ${req.path} | STATUS: ${
-            error.message
-          } | MESSAGE: ${JSON.stringify(error)}`
+          `${req.method} ${req.path} | MESSAGE: ${error.message} | STACK: ${error.stack}`
         );
         res
           .status(statusCode)
