@@ -12,6 +12,7 @@ import {
   getRoomAvailabilityWithPriceRepository,
   getRoomByIdRepository,
   getRoomByPropertyAndNameRepository,
+  getRoomByPropertyAndNameRepositoryDetail,
   getRoomDefaultAvailabilityWithPriceRepository,
   updateRoomByIdRepository,
 } from "../../repositories/rooms/rooms.repository";
@@ -240,6 +241,22 @@ export const getRoomByPropertyAndNameService = async (
     ];
   }
 
+  return room;
+};
+
+export const getRoomByPropertyAndNameServiceDetail = async (
+  propertyname: string,
+  roomname: string
+) => {
+  const rooms = await getRoomByPropertyAndNameRepositoryDetail(
+    propertyname,
+    roomname
+  );
+
+  if (!rooms || rooms.length === 0) {
+    throw new AppError("Room not found", 404);
+  }
+  const room = rooms[0];
   return room;
 };
 

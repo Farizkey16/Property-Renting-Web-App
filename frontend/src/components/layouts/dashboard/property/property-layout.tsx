@@ -11,12 +11,13 @@ import { Property } from "@/types/property/property";
 import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
 import { RoomList } from "../room/room-list";
+import LoadingSpinner from "@/components/fragment/loading-error/LoadingSpinner";
 
 const PropertyLayout = () => {
   const { data, isLoading, isError } = usePropertyByTenant();
   const { mutate: deleteProperty } = useSoftDeleteProperty();
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <LoadingSpinner />;
   if (isError) return <p>Failed to load data</p>;
 
   const properties: Property[] = data?.properties || [];

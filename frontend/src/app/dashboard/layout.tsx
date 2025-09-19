@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Homz",
-  description: "Homz",
+  title: "Homz | Dashboard",
+  description: "Homz | Dashboard",
 };
 
 export default function DashboardProtectedLayout({

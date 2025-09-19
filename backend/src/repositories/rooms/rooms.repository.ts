@@ -232,6 +232,45 @@ export const getRoomByPropertyAndNameRepository = async (
   });
 };
 
+export const getRoomByPropertyAndNameRepositoryDetail = async (
+  propertyname: string,
+  roomname: string
+) => {
+  return await prisma.rooms.findMany({
+    where: {
+      AND: [
+        propertyname
+          ? {
+              property: {
+                name: {
+                  contains: String(propertyname),
+                  mode: "insensitive",
+                },
+              },
+            }
+          : {},
+        roomname
+          ? {
+              name: {
+                contains: String(roomname),
+                mode: "insensitive",
+              },
+            }
+          : {},
+      ],
+    },
+    include: {
+      property: {
+        include: {
+          property_images: true,
+          reviews: true,
+        },
+      },
+      room_images: true,
+    },
+  });
+};
+
 export const findRoomByIdRepository = async (id: string) => {
   return await prisma.rooms.findUnique({
     where: { id, deleted_at: null },

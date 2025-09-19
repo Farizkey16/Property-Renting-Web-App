@@ -75,13 +75,13 @@ export function Header() {
               <SheetHeader>
                 <SheetTitle className="text-lg font-semibold">Menu</SheetTitle>
               </SheetHeader>
-              <nav className="mt-6 flex flex-col gap-4">
+              <nav className="mt-6 flex flex-col gap-4 p-2 font-bold">
                 {navLinks.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
                     onClick={() => setIsMenuOpen(false)}
-                    className="text-gray-700 hover:text-black transition-colors">
+                    className="text-gray-500 hover:text-black transition-colors">
                     {link.label}
                   </Link>
                 ))}

@@ -30,7 +30,7 @@ export const useRegisterUser = () => {
   });
 };
 
-export const useNewOtp = () => {
+export const useNewOtpVerification = () => {
   return useMutation({
     mutationFn: ({ email }: { email: string }) => newOtP(email),
   });

@@ -8,6 +8,7 @@ import { useFetchMe } from "@/hooks/useUser";
 import { useUpdateTenant } from "@/hooks/useTenant"; // import hook baru
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import LoadingSpinner from "@/components/fragment/loading-error/LoadingSpinner";
 
 const TenantDashboard = () => {
   const { data: user, isLoading } = useFetchMe();
@@ -49,7 +50,7 @@ const TenantDashboard = () => {
     });
   };
 
-  if (isLoading) return <p className="p-4">Loading...</p>;
+  if (isLoading) return <LoadingSpinner />;
   if (!tenant) return <p className="p-4">No tenant data found</p>;
 
   return (

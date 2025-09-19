@@ -17,6 +17,7 @@ class RoomRouter {
   private initializeRoutes() {
     this.route.get("/all", this.roomRouter.getRoomsController);
     this.route.get("/search", this.roomRouter.getRoomByPropertyAndName);
+    this.route.get("/details", this.roomRouter.getRoomByPropertyAndNameDetail);
     this.route.get("/get/:id", this.roomRouter.getRoomById);
     this.route.post(
       "/create",

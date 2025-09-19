@@ -27,8 +27,19 @@ export const fetchRoomsByQuery = async (
     return null;
   }
 
-  console.log(response.data.response[0]);
   return response.data.response[0];
+};
+
+export const fetchRoomsDetailsByQuery = async (
+  propertyname?: string,
+  roomname?: string
+) => {
+  const response = await axios.get(`${BASE_URL}/room/details`, {
+    params: { propertyname, roomname },
+  });
+  console.log(response?.data?.response);
+  const result = response?.data?.response;
+  return result;
 };
 
 export const createRoom = async (room: CreateRoomType) => {

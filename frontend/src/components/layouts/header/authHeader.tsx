@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import { useFetchMe } from "@/hooks/useUser";
-import { Bell } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -23,7 +23,7 @@ const AuthHeader = () => {
   return (
     <div>
       {isLoading ? (
-        <span className="text-sm text-gray-500">Loading...</span>
+        <Loader2 className="w-8 h-8 animate-spin text-blue-500" />
       ) : isLoggedIn ? (
         <>
           {/* Desktop Auth */}
@@ -33,7 +33,9 @@ const AuthHeader = () => {
                 <Button className="flex items-center space-x-2 px-2 hover:bg-gray-50 bg-white ">
                   <Avatar className="w-8 h-8">
                     {user?.profile_picture ? (
-                      <AvatarImage src={user.profile_picture} />
+                      <AvatarImage
+                        src={user.profile_picture || "/placeholder.svg"}
+                      />
                     ) : (
                       <AvatarFallback className="text-black font-bold ">
                         {user?.full_name?.charAt(0).toUpperCase() || "U"}
@@ -74,20 +76,38 @@ const AuthHeader = () => {
             </DropdownMenu>
           </div>
 
-          {/* Mobile Auth */}
-          <div className="flex lg:hidden items-center space-x-2">
-            <Button variant="ghost" size="icon">
-              <Bell className="w-4 h-4" />
-            </Button>
-            <Avatar className="w-8 h-8">
+          {/* Mobile Auth - langsung tampil */}
+          <div className="flex lg:hidden items-center gap-3 space-x-2 p-2">
+            <Avatar className="w-10 h-10 ">
               {user?.profile_picture ? (
-                <AvatarImage src={user.profile_picture} />
+                <AvatarImage
+                  src={user.profile_picture || "/placeholder.svg"}
+                  alt="Profile"
+                />
               ) : (
-                <AvatarFallback>
+                <AvatarFallback className="text-sm font-bold">
                   {user?.full_name?.charAt(0).toUpperCase() || "U"}
                 </AvatarFallback>
               )}
             </Avatar>
+
+            <div className="flex flex-col space-y-1">
+              <p className="text-sm font-medium truncate">{user?.full_name}</p>
+              <p className="text-xs text-muted-foreground truncate">
+                {user?.email}
+              </p>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="p-0 h-auto text-blue-600 justify-start"
+                onClick={() =>
+                  user?.is_verified
+                    ? router.push("/dashboard")
+                    : router.push(`/auth/verify-email/${user?.email}`)
+                }>
+                {user?.is_verified ? "My Profile" : "Verify Email"}
+              </Button>
+            </div>
           </div>
         </>
       ) : (
@@ -102,7 +122,7 @@ const AuthHeader = () => {
           {/* Mobile Login Button */}
           <div className="flex lg:hidden">
             <Link href="/auth/login">
-              <Button className="bg-blue-500 hover:bg-blue-600 text-white">
+              <Button className="bg-blue-500 hover:bg-blue-600 text-white text-sm px-4 py-2">
                 Login
               </Button>
             </Link>

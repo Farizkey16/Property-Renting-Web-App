@@ -58,7 +58,7 @@ const EditPropertyForm = () => {
         zip_code: property.zip_code,
         latitude: property.latitude,
         longitude: property.longitude,
-        main_image: null, // default kosong, user bisa upload baru
+        main_image: null,
         property_category: property.property_category as PropertyCategory,
       });
 

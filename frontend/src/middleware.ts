@@ -15,7 +15,6 @@ export function middleware(req: NextRequest) {
   const { pathname, search } = req.nextUrl;
 
   if (pathname.startsWith("/dashboard")) {
-    // harus login
     if (!token || token.trim() === "") {
       const loginUrl = new URL("/auth/login", req.url);
       loginUrl.searchParams.set("from", `${pathname}${search}`);
@@ -43,9 +42,9 @@ export function middleware(req: NextRequest) {
         "/dashboard/notifications",
       ];
 
-      const isAllowed =
-        pathname === "/dashboard" ||
-        allowed.slice(1).some((path) => pathname.startsWith(path));
+      const isAllowed = allowed.some(
+        (path) => pathname === path || pathname.startsWith(`${path}/`)
+      );
 
       if (!isAllowed) {
         return NextResponse.redirect(new URL("/dashboard", req.url));

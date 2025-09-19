@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter, useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -18,6 +18,7 @@ import { useState } from "react";
 export default function RegisterTenantPage() {
   const { email } = useParams<{ email: string }>();
   const decodedEmail = decodeURIComponent(email);
+
   const router = useRouter();
 
   const { mutate: registerTenant, isPending, isError } = useRegisterTenant();
@@ -43,7 +44,7 @@ export default function RegisterTenantPage() {
   const onSubmit = (data: RegisterTenantSchema) => {
     registerTenant(
       {
-        email: decodedEmail,
+        email: decodedEmail || "",
         company_name: data.company_name,
         address: data.address,
         phone_number: data.phone_number,

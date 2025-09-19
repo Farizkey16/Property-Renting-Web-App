@@ -41,7 +41,7 @@ export const registerService = async (data: any) => {
     password_hash: await hashPassword(password_hash),
     is_verified: false,
     verify_otp: verificationOtp,
-    verify_otp_expires_at: new Date(Date.now() + 15 * 60 * 1000),
+    verify_otp_expires_at: new Date(Date.now() + 60 * 60 * 1000),
   });
 
   await transport.sendMail({
@@ -156,7 +156,7 @@ export const newOtpService = async (data: any) => {
   const newOtpUser = await createNewOtp({
     email,
     verify_otp: verificationOtp,
-    verify_otp_expires_at: new Date(Date.now() + 15 * 60 * 1000),
+    verify_otp_expires_at: new Date(Date.now() + 60 * 60 * 1000),
   });
 
   await transport.sendMail({

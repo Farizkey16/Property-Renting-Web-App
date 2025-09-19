@@ -4,6 +4,7 @@ import {
   fetchAllRooms,
   fetchRoomById,
   fetchRoomsByQuery,
+  fetchRoomsDetailsByQuery,
   softDeleteRoom,
 } from "@/services/room.service";
 import { CreateRoomType, EditRoomType } from "@/types/room/room";
@@ -32,7 +33,18 @@ export const useRoomSearch = (
   return useQuery({
     queryKey: ["rooms", propertyname, roomname, checkIn, checkOut],
     queryFn: () => fetchRoomsByQuery(propertyname, roomname, checkIn, checkOut),
-    enabled: !!propertyname || !!roomname,
+    enabled: !!propertyname && !!roomname && !!checkIn && !!checkOut,
+  });
+};
+
+export const useRoomDetailSearch = (
+  propertyname?: string,
+  roomname?: string
+) => {
+  return useQuery({
+    queryKey: ["roomsDetails", propertyname, roomname],
+    queryFn: () => fetchRoomsDetailsByQuery(propertyname, roomname),
+    enabled: !!propertyname && !!roomname,
   });
 };
 

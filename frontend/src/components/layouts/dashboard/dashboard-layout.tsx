@@ -20,6 +20,7 @@ import { useFetchMe } from "@/hooks/useUser";
 import { ButtonLogout } from "@/components/fragment/button-action/buttonAction";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import LoadingSpinner from "@/components/fragment/loading-error/LoadingSpinner";
 
 const sidebarTenant = [
   { icon: User, label: "Profile", link: "/dashboard" },
@@ -52,7 +53,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
   const pathname = usePathname();
 
   if (isLoading) {
-    return <div className="p-6">Loading...</div>;
+    return <LoadingSpinner />;
   }
   if (error) {
     return <div className="p-6 text-red-500">Failed to load user</div>;

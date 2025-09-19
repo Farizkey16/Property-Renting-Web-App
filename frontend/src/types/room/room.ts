@@ -48,3 +48,59 @@ export interface EditRoomType {
   property_id: string;
   weekend_peak?: { type: "percentage" | "nominal"; value: number };
 }
+
+export interface RoomImage {
+  id: string;
+  room_id: string;
+  image_url: string;
+  created_at: string;
+}
+
+export interface Review {
+  id: string;
+  userName: string;
+  userAvatar: string;
+  yearsOnPlatform: number;
+  rating: number;
+  date: string;
+  content: string;
+  isExpanded?: boolean;
+}
+
+export interface Property {
+  id: string;
+  name: string;
+  description: string;
+  address: string;
+  city: string;
+  province: string;
+  zip_code?: string;
+  latitude: string;
+  longitude: string;
+  main_image: string;
+  created_at: string;
+  updated_at?: string;
+  deleted_at: string | null;
+  property_category: string;
+  property_images: string[];
+  reviews: Review[];
+}
+
+export interface RoomDetailData {
+  id: string;
+  name: string;
+  description: string;
+  base_price: string;
+  capacity: number;
+  image: string;
+  created_at: string;
+  updated_at?: string;
+  deleted_at: string | null;
+  total_rooms?: number;
+  property: Property;
+  room_images?: RoomImage[];
+}
+
+export interface RoomDetailProps {
+  data: RoomDetailData;
+}

@@ -3,6 +3,7 @@ import {
   createRoomService,
   deleteRoomByIdService,
   getRoomByPropertyAndNameService,
+  getRoomByPropertyAndNameServiceDetail,
   getRoomsService,
   updateRoomService,
 } from "../../services/rooms/rooms.services";
@@ -41,6 +42,29 @@ class RoomsController {
         roomname as string,
         checkIn ? String(checkIn) : undefined,
         checkOut ? String(checkOut) : undefined
+      );
+
+      res.status(200).send({ message: "Room found", success: true, response });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  public async getRoomByPropertyAndNameDetail(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
+    try {
+      const { propertyname, roomname } = req.query;
+
+      if (!propertyname || !roomname) {
+        throw new AppError("propertyname and roomname are required", 404);
+      }
+
+      const response = await getRoomByPropertyAndNameServiceDetail(
+        propertyname as string,
+        roomname as string
       );
 
       res.status(200).send({ message: "Room found", success: true, response });

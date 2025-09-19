@@ -9,23 +9,22 @@ import { CheckCircle } from "lucide-react";
 import Image from "next/image";
 import React, { useState, useEffect, useRef } from "react";
 import { useFetchMe, useUpdateProfile } from "@/hooks/useUser";
+import LoadingSpinner from "@/components/fragment/loading-error/LoadingSpinner";
 
 const UserDashboard = () => {
   const { data: user, isLoading } = useFetchMe();
 
-  // local state form
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
-  const [preview, setPreview] = useState("/placeholder.svg");
+  const [preview, setPreview] = useState("/avatar.png");
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
-  // isi data awal kalau ada user
   useEffect(() => {
     if (user) {
       setFullName(user.full_name || "");
       setEmail(user.email || "");
-      setPreview(user.profile_picture || "/placeholder.svg");
+      setPreview(user.profile_picture || "/avatar.png");
     }
   }, [user]);
 
@@ -52,7 +51,7 @@ const UserDashboard = () => {
     }
   };
 
-  if (isLoading) return <p className="p-4">Loading...</p>;
+  if (isLoading) return <LoadingSpinner />;
   if (!user) return <p className="p-4">No user data found</p>;
 
   return (
@@ -69,9 +68,10 @@ const UserDashboard = () => {
           <div className="flex flex-col items-center gap-4 lg:w-1/3">
             <div className="relative w-40 h-40 rounded-full overflow-hidden border">
               <Image
-                src={preview || "/avatar.png"}
+                src={preview && preview.trim() !== "" ? preview : "/avatar.png"}
                 alt="Profile Picture"
                 fill
+                unoptimized
                 className="object-cover"
               />
             </div>

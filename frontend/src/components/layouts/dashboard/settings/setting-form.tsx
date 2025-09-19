@@ -33,7 +33,6 @@ export default function SettingsForm() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [isLoading, setIsLoading] = useState(false);
 
-  // OTP Dialog State
   const [otpDialog, setOtpDialog] = useState({
     isOpen: false,
     purpose: null as "email" | "password" | null,
@@ -41,10 +40,9 @@ export default function SettingsForm() {
   });
 
   const resetPasswordMutation = useResetPassword();
-  const changeEmailOtpMutation = useChangeEmailOtp(); // ✅ ganti pakai useChangeEmailOtp
+  const changeEmailOtpMutation = useChangeEmailOtp();
   const verifyEmailMutation = useVerifyEmail();
 
-  // ✅ Validators
   const validateEmail = (email: string): string | null => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email.trim()) return "Email is required";
@@ -69,7 +67,6 @@ export default function SettingsForm() {
     }
   };
 
-  // ✅ OTP Handling
   const handleOtpChange = (value: string, index: number) => {
     if (!/^\d?$/.test(value)) return;
     const newCode = [...otpDialog.code];
@@ -135,7 +132,7 @@ export default function SettingsForm() {
         {
           onSuccess: () => {
             setFormData((prev) => ({ ...prev, email: "" }));
-            alert("Email updated successfully ✅");
+            alert("Email updated successfully ");
             setOtpDialog({
               isOpen: false,
               purpose: null,
@@ -143,7 +140,7 @@ export default function SettingsForm() {
             });
           },
           onError: () => {
-            alert("Failed to update email ❌");
+            alert("Failed to update email ");
           },
           onSettled: () => setIsLoading(false),
         }
@@ -151,7 +148,6 @@ export default function SettingsForm() {
     }
   };
 
-  // ✅ Forms
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const emailError = validateEmail(formData.email);
@@ -160,7 +156,7 @@ export default function SettingsForm() {
       return;
     }
     setErrors({});
-    await changeEmailOtpMutation.mutateAsync(formData.email); // ✅ ganti di sini
+    await changeEmailOtpMutation.mutateAsync(formData.email);
     setOtpDialog((prev) => ({ ...prev, isOpen: true, purpose: "email" }));
   };
 
@@ -183,7 +179,7 @@ export default function SettingsForm() {
     }
 
     setErrors({});
-    await changeEmailOtpMutation.mutateAsync(formData.email); // ❌ sebelumnya newOtpMutation, biarkan password tetap pakai newOtp kalau perlu
+    await changeEmailOtpMutation.mutateAsync(formData.email);
     setOtpDialog((prev) => ({ ...prev, isOpen: true, purpose: "password" }));
   };
 
@@ -196,7 +192,7 @@ export default function SettingsForm() {
         </p>
       </div>
 
-      {/* ✅ Change Email */}
+      {/* Change Email */}
       <Card className="p-4">
         <CardHeader>
           <CardTitle>Email Address</CardTitle>
@@ -229,7 +225,7 @@ export default function SettingsForm() {
         </CardContent>
       </Card>
 
-      {/* ✅ Change Password */}
+      {/* Change Password */}
       <Card className="p-4">
         <CardHeader>
           <CardTitle>Password</CardTitle>
@@ -290,7 +286,7 @@ export default function SettingsForm() {
         </CardContent>
       </Card>
 
-      {/* ✅ OTP Dialog */}
+      {/* OTP Dialog */}
       <Dialog
         open={otpDialog.isOpen}
         onOpenChange={(open) =>

@@ -15,7 +15,11 @@ const validationHandling = (
 };
 
 export const regisValidation = [
-  body("full_name").notEmpty().withMessage("Username is required"),
+  body("full_name")
+    .notEmpty()
+    .withMessage("Username is required")
+    .isLength({ min: 3 })
+    .withMessage("Username must be at least 3 characters"),
   body("email").isEmail().withMessage("Invalid email format"),
   body("password_hash")
     .isStrongPassword({
@@ -28,13 +32,22 @@ export const regisValidation = [
     .withMessage(
       "Password must be 6+ characters with uppercase, lowercase, and number"
     ),
+  body("role").isIn(["user", "tenant"]).withMessage("Invalid role"),
   validationHandling,
 ];
 
-// export const loginValidation = [
-//   body("email").isEmail().withMessage("Invalid email format"),
-//   body("password")
-//     .isLength({ min: 6 })
-//     .withMessage("Password is required and must be at least 6 characters"),
-//   validationHandling,
-// ];
+export const loginValidation = [
+  body("email").isEmail().withMessage("Invalid email format"),
+  body("password_hash")
+    .isStrongPassword({
+      minLength: 6,
+      minLowercase: 1,
+      minUppercase: 1,
+      minNumbers: 1,
+      minSymbols: 0,
+    })
+    .withMessage(
+      "Password must be at least 6 characters with uppercase, lowercase, and number"
+    ),
+  validationHandling,
+];
