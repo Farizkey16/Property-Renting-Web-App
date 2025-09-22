@@ -1,4 +1,4 @@
-import CreateProperty from "@/components/layouts/dashboard/property/create-property";
+import CreateProperty from "@/components/layouts/dashboard/property/create/create-property";
 import React from "react";
 
 const page = () => {

@@ -12,15 +12,13 @@ import {
 } from "../../repositories/property/property.repository";
 import { PropertyTypes } from "../../types/property/property.types";
 
-export const getAllPropertiesService = async (filter: {
+export const getAllPropertiesService = async (params: {
   property_category?: string;
   name?: string;
+  page: number;
+  limit: number;
 }) => {
-  const response = await getAllPropertiesRepository({
-    property_category: filter.property_category,
-    name: filter.name,
-  });
-  return response;
+  return getAllPropertiesRepository(params);
 };
 
 export const getPropertyByIdService = async (id: string) => {

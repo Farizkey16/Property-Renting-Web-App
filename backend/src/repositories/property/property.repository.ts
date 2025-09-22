@@ -1,4 +1,4 @@
-import { PropertyCategory } from "../../../prisma/generated/client";
+import { Prisma, PropertyCategory } from "../../../prisma/generated/client";
 import { prisma } from "../../config/prisma";
 import AppError from "../../errors/AppError";
 import {
@@ -7,35 +7,55 @@ import {
 } from "../../types/property/property.types";
 import { parsePropertyCategory } from "../../utils/propertyCategory";
 
-export const getAllPropertiesRepository = async (filters: {
+export const getAllPropertiesRepository = async ({
+  property_category,
+  name,
+  page,
+  limit,
+}: {
   property_category?: string;
   name?: string;
+  page: number;
+  limit: number;
 }) => {
-  const { property_category, name } = filters;
+  const skip = (page - 1) * limit;
 
-  return prisma.properties.findMany({
-    where: {
-      property_category: property_category
-        ? (property_category as PropertyCategory)
-        : undefined,
-      name: name ? { contains: name, mode: "insensitive" } : undefined,
-      deleted_at: null,
-    },
-    orderBy: { created_at: "desc" },
-    include: {
-      rooms: true,
-    },
-  });
+  const propertyWhere = {
+    property_category: property_category
+      ? (property_category as PropertyCategory)
+      : undefined,
+    name: name
+      ? { contains: name, mode: Prisma.QueryMode.insensitive }
+      : undefined,
+    deleted_at: null,
+  };
+
+  const [data, total] = await Promise.all([
+    prisma.rooms.findMany({
+      skip,
+      take: limit,
+      orderBy: { created_at: "desc" },
+      include: {
+        property: true,
+      },
+      where: {
+        property: propertyWhere,
+      },
+    }),
+    prisma.rooms.count({
+      where: {
+        property: propertyWhere,
+      },
+    }),
+  ]);
+
+  return { data, total };
 };
 
 export const getPropertyByIdRepository = async (propertyId: string) => {
   return prisma.properties.findUnique({
     where: { id: propertyId, deleted_at: null },
-    select: {
-      main_image: true,
-      property_images: true,
-      reviews: true,
-
+    include: {
       rooms: {
         select: {
           id: true,

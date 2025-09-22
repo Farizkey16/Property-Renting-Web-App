@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
 import Providers from "../providers";
 import { DashboardLayout } from "@/components/layouts/dashboard/dashboard-layout";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,6 +32,7 @@ export default function DashboardProtectedLayout({
         <Providers>
           <DashboardLayout>{children}</DashboardLayout>
         </Providers>
+        <Toaster richColors position="top-right" />
       </body>
     </html>
   );

@@ -18,7 +18,8 @@ class PropertyController {
     res: Response,
     next: NextFunction
   ): Promise<void> {
-    const { property_category, name } = req.query;
+    const { property_category, name, page = "1", limit = "8" } = req.query;
+
     try {
       if (
         property_category &&
@@ -28,13 +29,22 @@ class PropertyController {
       ) {
         throw new AppError("Invalid property category", 400);
       }
-      const properties = await getAllPropertiesService({
+
+      const { data, total } = await getAllPropertiesService({
         property_category: property_category as PropertyCategory,
         name: name as string,
+        page: Number(page),
+        limit: Number(limit),
       });
-      res
-        .status(200)
-        .send({ message: "Properties found", success: true, properties });
+
+      res.status(200).send({
+        message: "Properties found",
+        success: true,
+        properties: data,
+        total,
+        page: Number(page),
+        limit: Number(limit),
+      });
     } catch (error) {
       next(error);
     }

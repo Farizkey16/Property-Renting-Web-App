@@ -124,3 +124,41 @@
 html {
   scroll-behavior: smooth;
 }
+
+/* Sonner toast default */
+.sonner-toast {
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Success toast */
+.sonner-toast.sonner-success {
+  background-color: #22c55e; /* hijau */
+  color: white;
+}
+
+/* Error toast */
+.sonner-toast.sonner-error {
+  background-color: #ef4444; /* merah */
+  color: white;
+}
+
+/* Warning toast */
+.sonner-toast.sonner-warning {
+  background-color: #f59e0b; /* kuning/orange */
+  color: black;
+}
+
+/* Info toast */
+.sonner-toast.sonner-info {
+  background-color: #3b82f6; /* biru */
+  color: white;
+}
+
+/* Optional: styling title / description */
+.sonner-toast strong {
+  font-weight: 600;
+}

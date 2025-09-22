@@ -10,9 +10,9 @@ export function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">homz</h3>
             <p className="text-gray-400 text-sm">
-              homz is your trusted platform for booking villas, apartments,
-              homestays, and hotels. Find the perfect accommodation for your
-              next trip quickly and easily.
+              Homz adalah platform sewa properti modern yang memudahkan
+              masyarakat Indonesia menemukan hunian dengan cepat, aman, dan
+              nyaman.
             </p>
           </div>
 
@@ -27,7 +27,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/properties"
+                  href="/#properties"
                   className="text-gray-400 hover:text-white">
                   Properties
                 </Link>
@@ -39,9 +39,9 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/contact"
+                  href="/#destination"
                   className="text-gray-400 hover:text-white">
-                  Contact
+                  Desitnation
                 </Link>
               </li>
             </ul>

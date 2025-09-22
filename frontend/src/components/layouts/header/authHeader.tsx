@@ -30,7 +30,7 @@ const AuthHeader = () => {
           <div className="hidden lg:flex items-center space-x-4 border-l border-gray-200 pl-4">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button className="flex items-center space-x-2 px-2 hover:bg-gray-50 bg-white ">
+                <Button className="flex items-center space-x-2 px-2 hover:bg-gray-50 bg-white cursor-pointer">
                   <Avatar className="w-8 h-8">
                     {user?.profile_picture ? (
                       <AvatarImage
@@ -99,7 +99,7 @@ const AuthHeader = () => {
               <Button
                 variant="ghost"
                 size="sm"
-                className="p-0 h-auto text-blue-600 justify-start"
+                className="p-0 h-auto text-blue-600 justify-start cursor-pointer"
                 onClick={() =>
                   user?.is_verified
                     ? router.push("/dashboard")

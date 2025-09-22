@@ -25,7 +25,6 @@ export const useUpdateTenant = () => {
         data.logo!
       ),
     onSuccess: () => {
-      alert("Profile Tenant updated!");
       queryClient.invalidateQueries({ queryKey: ["me"] });
     },
   });

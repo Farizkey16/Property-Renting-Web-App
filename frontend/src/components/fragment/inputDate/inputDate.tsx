@@ -1,6 +1,5 @@
 "use client";
 
-import * as React from "react";
 import { Calendar } from "@/components/ui/calendar";
 import {
   Popover,
@@ -8,10 +7,11 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
-import { CalendarIcon, LucideMapPin, Search } from "lucide-react";
+import { CalendarIcon, Loader2, LucideMapPin, Search } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { GuestPicker } from "@/components/ui/GuestPicker";
 import { addDays, format } from "date-fns";
+import { useState } from "react";
 
 interface MapboxFeature {
   id: string;
@@ -20,23 +20,24 @@ interface MapboxFeature {
 }
 
 export default function InputDate() {
-  const [checkIn, setCheckIn] = React.useState<Date | undefined>();
-  const [checkOut, setCheckOut] = React.useState<Date | undefined>();
-  const [openCheckIn, setOpenCheckIn] = React.useState(false);
-  const [openCheckOut, setOpenCheckOut] = React.useState(false);
+  const [checkIn, setCheckIn] = useState<Date | undefined>();
+  const [checkOut, setCheckOut] = useState<Date | undefined>();
+  const [openCheckIn, setOpenCheckIn] = useState(false);
+  const [openCheckOut, setOpenCheckOut] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const [guests, setGuests] = React.useState({
+  const [guests, setGuests] = useState({
     guests: 1,
     rooms: 1,
   });
-  const [location, setLocation] = React.useState("");
-  const [coords, setCoords] = React.useState<{
+  const [location, setLocation] = useState("");
+  const [coords, setCoords] = useState<{
     lat: number;
     lng: number;
   } | null>(null);
-  const [suggestions, setSuggestions] = React.useState<MapboxFeature[]>([]);
-  const [showSuggestions, setShowSuggestions] = React.useState(false);
-  const [geoLoading, setGeoLoading] = React.useState(false);
+  const [suggestions, setSuggestions] = useState<MapboxFeature[]>([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [geoLoading, setGeoLoading] = useState(false);
 
   const router = useRouter();
 
@@ -107,6 +108,8 @@ export default function InputDate() {
     if (!coords) return alert("Pilih lokasi terlebih dahulu!");
     if (!checkIn) return alert("Pilih tanggal check-in!");
     if (!checkOut) return alert("Pilih tanggal check-out!");
+
+    setLoading(true);
 
     const params = new URLSearchParams({
       latitude: coords.lat.toString(),
@@ -218,11 +221,20 @@ export default function InputDate() {
       {/* Search Button */}
       <div className="flex justify-end lg:flex-none items-center rounded-r-4xl">
         <Button
-          className="rounded-full w-full h-full lg:w-auto"
+          className="rounded-full w-full h-full lg:w-auto flex items-center justify-center gap-2 cursor-pointer"
           onClick={handleSearch}
-          disabled={!canSearch}>
-          <Search className="w-4 h-4 mr-2" />
-          Search
+          disabled={!canSearch || loading}>
+          {loading ? (
+            <>
+              <Loader2 className="w-4 h-4 animate-spin" />
+              Loading...
+            </>
+          ) : (
+            <>
+              <Search className="w-4 h-4" />
+              Search
+            </>
+          )}
         </Button>
       </div>
     </div>

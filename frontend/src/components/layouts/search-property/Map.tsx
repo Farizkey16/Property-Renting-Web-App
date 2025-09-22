@@ -6,7 +6,6 @@ import React, { useState, useEffect } from "react";
 import { FaHome } from "react-icons/fa";
 import Image from "next/image";
 
-// Room type
 type Room = {
   id: string;
   name: string;
@@ -17,7 +16,6 @@ type Room = {
   image?: string;
 };
 
-// Property type
 type Property = {
   id: string;
   name: string;
@@ -33,11 +31,8 @@ type Property = {
   rooms: Room[];
 };
 
-// Props
 interface MapPagesProps {
-  children?: (props: {
-    userLocation: { latitude: number; longitude: number } | null;
-  }) => React.ReactNode;
+  children?: React.ReactNode; // ✅ bukan function lagi
   properties: Property[];
   checkIn?: string;
   checkOut?: string;
@@ -58,7 +53,6 @@ const MapPages: React.FC<MapPagesProps> = ({ children, properties }) => {
     null
   );
 
-  // Ambil lokasi user
   useEffect(() => {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(
@@ -74,8 +68,6 @@ const MapPages: React.FC<MapPagesProps> = ({ children, properties }) => {
     }
   }, []);
 
-  console.log("properties in Map:", properties);
-
   return (
     <div className="flex flex-col lg:flex-row w-full max-w-full overflow-x-hidden">
       {/* Map Section */}
@@ -87,7 +79,6 @@ const MapPages: React.FC<MapPagesProps> = ({ children, properties }) => {
             mapStyle="mapbox://styles/ariska-adi/cmetwjjft000501s98r0t28p6"
             mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}
             style={{ width: "100%", height: "100%" }}>
-            {/* User marker */}
             {userLocation && (
               <Marker
                 latitude={userLocation.latitude}
@@ -100,7 +91,6 @@ const MapPages: React.FC<MapPagesProps> = ({ children, properties }) => {
               </Marker>
             )}
 
-            {/* Property markers */}
             {properties.map((p) => (
               <Marker
                 key={p.id}
@@ -114,7 +104,6 @@ const MapPages: React.FC<MapPagesProps> = ({ children, properties }) => {
               </Marker>
             ))}
 
-            {/* Popup */}
             {selectedProperty && (
               <Popup
                 latitude={Number(selectedProperty.latitude)}
@@ -147,9 +136,7 @@ const MapPages: React.FC<MapPagesProps> = ({ children, properties }) => {
       {/* Sidebar / Children */}
       {children && (
         <div className="w-full lg:w-[420px] bg-white border-t lg:border-t-0 lg:border-l flex flex-col lg:h-[500px] max-w-full">
-          <div className="flex-1 overflow-y-auto p-4">
-            {children({ userLocation })}
-          </div>
+          <div className="flex-1 overflow-y-auto p-4">{children}</div>
         </div>
       )}
     </div>

@@ -40,7 +40,7 @@ export function PropertyTypeNav({ activeCategory }: PropertyTypeNavProps) {
       params.delete("category");
     }
 
-    router.push(`?${params.toString()}`);
+    router.push(`?${params.toString()}#properties`, { scroll: false });
   };
 
   return (

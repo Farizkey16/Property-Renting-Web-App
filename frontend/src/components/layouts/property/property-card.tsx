@@ -28,11 +28,14 @@ export function PropertyCard({ property, room }: PropertyCardProps) {
       </div>
 
       <div className="p-3 sm:p-4">
-        <h3 className="font-bold text-gray-900 text-sm sm:text-base line-clamp-2 mb-1">
+        <h3 className="font-bold text-gray-900 text-sm sm:text-base line-clamp-1 ">
+          {property.name}
+        </h3>
+        <h3 className="font-bold text-gray-700 text-sm sm:text-base line-clamp-1 mb-1">
           {room.name}
         </h3>
 
-        <p className="text-xs sm:text-sm text-gray-600 mb-3 line-clamp-2">
+        <p className="text-xs sm:text-sm text-gray-600 mb-3 line-clamp-1">
           <MapPin className="w-4 h-4 inline mr-1" />
           {property.address}, {property.city}, {property.province}
         </p>

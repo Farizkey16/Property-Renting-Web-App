@@ -26,7 +26,6 @@ export const useUpdateProfile = () => {
     mutationFn: (data: { full_name: string; profile_picture?: File }) =>
       updateProfile(data.full_name, data.profile_picture!),
     onSuccess: () => {
-      alert("Profile updated!");
       queryClient.invalidateQueries({ queryKey: ["me"] });
     },
   });

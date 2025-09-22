@@ -10,8 +10,16 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 export const fetchAllProperties = async (params?: {
   property_category?: string;
   name?: string;
+  page?: number;
+  limit?: number;
 }) => {
-  const response = await axios.get(`${BASE_URL}/property/all`, { params });
+  const response = await axios.get(`${BASE_URL}/property/all`, {
+    params: {
+      ...params,
+      page: params?.page ?? 1,
+      limit: params?.limit ?? 8,
+    },
+  });
   console.log(response.data);
   return response.data;
 };

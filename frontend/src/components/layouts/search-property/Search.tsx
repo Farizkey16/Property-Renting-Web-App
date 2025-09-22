@@ -1,10 +1,6 @@
-"use client";
-
-import { useState, useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
+import { Filter } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { Slider } from "@/components/ui/slider";
 import {
   Dialog,
   DialogContent,
@@ -12,31 +8,32 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Filter } from "lucide-react";
+
 import MapPages from "./Map";
-import { usePropertiesByLocation } from "@/hooks/useProperty";
-import { formatCurrency } from "@/lib/utils";
 import { PropertyCard } from "../property/property-card";
-import { ApiProperty } from "@/types/room/room";
-import Link from "next/link";
-import MapLoading from "@/components/fragment/loading-error/MapLoading";
 import FileNotFoundPages from "@/components/fragment/loading-error/FileNotFound";
+import { ApiProperty } from "@/types/room/room";
+import { fetchPropertyByLocation } from "@/services/property.services";
+import FilterSidebar from "./FilterSidebar";
 
-export default function PropertyDiscovery({ category }: { category?: string }) {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-
+export default async function PropertyDiscovery({
+  searchParams,
+  category,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+  category?: string;
+}) {
   // Query params
-  const queryLat = searchParams.get("latitude");
-  const queryLng = searchParams.get("longitude");
-  const queryRadius = searchParams.get("radius") || "5";
-  const queryCheckIn = searchParams.get("checkIn") || "";
-  const queryCheckOut = searchParams.get("checkOut") || "";
-  const queryCategory = category || searchParams.get("category") || "";
-  const queryMinPrice = searchParams.get("minPrice") || "0";
-  const queryMaxPrice = searchParams.get("maxPrice") || "5000000";
-  const queryGuests = searchParams.get("guests") || "1";
-  const queryRooms = searchParams.get("rooms") || "1";
+  const queryLat = searchParams.latitude as string | undefined;
+  const queryLng = searchParams.longitude as string | undefined;
+  const queryRadius = (searchParams.radius as string) || "5";
+  const queryCheckIn = (searchParams.checkIn as string) || "";
+  const queryCheckOut = (searchParams.checkOut as string) || "";
+  const queryCategory = category || (searchParams.category as string) || "";
+  const queryMinPrice = (searchParams.minPrice as string) || "0";
+  const queryMaxPrice = (searchParams.maxPrice as string) || "5000000";
+  const queryGuests = (searchParams.guests as string) || "1";
+  const queryRooms = (searchParams.rooms as string) || "1";
 
   // Default location
   const defaultLat = -8.135751241420579;
@@ -44,155 +41,30 @@ export default function PropertyDiscovery({ category }: { category?: string }) {
   const latitude = queryLat ? parseFloat(queryLat) : defaultLat;
   const longitude = queryLng ? parseFloat(queryLng) : defaultLng;
 
-  // Radius state
-  const [tempRadius, setTempRadius] = useState<number[]>([
-    parseInt(queryRadius),
-  ]);
-  const [radius, setRadius] = useState<number[]>([parseInt(queryRadius)]);
+  try {
+    const data = await fetchPropertyByLocation(
+      latitude,
+      longitude,
+      parseInt(queryRadius),
+      queryCheckIn || undefined,
+      queryCheckOut || undefined,
+      queryCategory || undefined,
+      parseInt(queryMinPrice),
+      parseInt(queryMaxPrice),
+      Number(queryGuests),
+      Number(queryRooms)
+    );
 
-  // Price state
-  const [tempRange, setTempRange] = useState<number[]>([
-    parseInt(queryMinPrice),
-    parseInt(queryMaxPrice),
-  ]);
-  const [priceRange, setPriceRange] = useState<number[]>([
-    parseInt(queryMinPrice),
-    parseInt(queryMaxPrice),
-  ]);
+    const noOrInvalidProperties =
+      !data?.properties ||
+      data.properties.length === 0 ||
+      parseInt(queryMinPrice) >= parseInt(queryMaxPrice) ||
+      parseInt(queryRadius) <= 0;
 
-  // Date state
-  const [checkIn, setCheckIn] = useState<string>(queryCheckIn);
-  const [checkOut, setCheckOut] = useState<string>(queryCheckOut);
-
-  // Debounce radius & price range
-  useEffect(() => {
-    const handler = setTimeout(() => setRadius(tempRadius), 500);
-    return () => clearTimeout(handler);
-  }, [tempRadius]);
-
-  useEffect(() => {
-    const handler = setTimeout(() => setPriceRange(tempRange), 500);
-    return () => clearTimeout(handler);
-  }, [tempRange]);
-
-  useEffect(() => {
-    const params = new URLSearchParams();
-
-    // Lokasi
-    params.set("latitude", latitude.toString());
-    params.set("longitude", longitude.toString());
-
-    // Radius
-    params.set("radius", radius[0].toString());
-
-    // Price
-    params.set("minPrice", priceRange[0].toString());
-    params.set("maxPrice", priceRange[1].toString());
-
-    // Guests & Rooms
-    params.set("guests", queryGuests.toString());
-    params.set("rooms", queryRooms.toString());
-
-    // Date
-    if (checkIn) params.set("checkIn", checkIn);
-    if (checkOut) params.set("checkOut", checkOut);
-
-    // Category
-    if (queryCategory) params.set("category", queryCategory);
-
-    // Update URL tanpa reload
-    router.replace(`/property?${params.toString()}`);
-  }, [
-    latitude,
-    longitude,
-    radius,
-    priceRange,
-    checkIn,
-    checkOut,
-    queryCategory,
-    router,
-    queryGuests,
-    queryRooms,
-  ]);
-
-  // Fetch properties
-  const { data, isLoading, isError } = usePropertiesByLocation(
-    latitude,
-    longitude,
-    radius[0],
-    checkIn || undefined,
-    checkOut || undefined,
-    queryCategory || undefined,
-    priceRange[0],
-    priceRange[1],
-    Number(queryGuests),
-    Number(queryRooms)
-  );
-
-  // Filter Sidebar
-  const FilterSidebar = () => (
-    <div className="space-y-6 p-4">
-      {/* Radius */}
-      <div className="space-y-2">
-        <Label className="text-sm font-medium">Radius ({radius[0]} km)</Label>
-        <Slider
-          value={tempRadius}
-          onValueChange={setTempRadius}
-          min={1}
-          max={20}
-          step={1}
-        />
-      </div>
-      {/* Price */}
-      <div className="space-y-2">
-        <Label className="text-sm font-medium">
-          Price ({formatCurrency(priceRange[0])} –{" "}
-          {formatCurrency(priceRange[1])})
-        </Label>
-        <Slider
-          value={tempRange}
-          onValueChange={setTempRange}
-          min={0}
-          max={5_000_000}
-          step={500_000}
-          className="max-w-sm"
-        />
-      </div>
-      {/* Date picker */}
-      <div className="space-y-2">
-        <Label className="text-sm font-medium">Check-in & Check-out</Label>
-        <div className="flex gap-2">
-          <input
-            type="date"
-            value={checkIn}
-            onChange={(e) => setCheckIn(e.target.value)}
-            className="border rounded p-1"
-          />
-          <input
-            type="date"
-            value={checkOut}
-            onChange={(e) => setCheckOut(e.target.value)}
-            className="border rounded p-1"
-          />
-        </div>
-      </div>
-    </div>
-  );
-
-  if (isLoading) return <MapLoading />;
-  if (isError) return <FileNotFoundPages />;
-
-  const noOrInvalidProperties =
-    !data?.properties ||
-    data.properties.length === 0 ||
-    priceRange[0] >= priceRange[1] ||
-    radius[0] <= 0;
-
-  return (
-    <div className="flex h-auto bg-gray-50">
-      <div className="flex-1 flex flex-col">
-        <MapPages properties={data?.properties ?? []}>
-          {() => (
+    return (
+      <div className="flex h-auto bg-gray-50">
+        <div className="flex-1 flex flex-col">
+          <MapPages properties={data?.properties ?? []}>
             <div className="p-4 space-y-4">
               <Dialog>
                 <DialogTrigger asChild>
@@ -218,8 +90,8 @@ export default function PropertyDiscovery({ category }: { category?: string }) {
                         query: {
                           propertyname: property.name,
                           roomname: room.name,
-                          checkIn,
-                          checkOut,
+                          checkIn: queryCheckIn,
+                          checkOut: queryCheckOut,
                           guests: queryGuests,
                           rooms: queryRooms,
                         },
@@ -242,9 +114,12 @@ export default function PropertyDiscovery({ category }: { category?: string }) {
                 </div>
               )}
             </div>
-          )}
-        </MapPages>
+          </MapPages>
+        </div>
       </div>
-    </div>
-  );
+    );
+  } catch (error) {
+    console.log(error);
+    return <FileNotFoundPages />;
+  }
 }

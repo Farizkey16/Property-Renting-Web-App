@@ -36,7 +36,7 @@ export default function LoginPage() {
     handleSubmit,
     formState: { errors },
   } = useForm<LoginSchema>({
-    // resolver: zodResolver(loginSchema),
+    resolver: zodResolver(loginSchema),
     defaultValues: {
       email: "",
       password: "",
@@ -113,7 +113,10 @@ export default function LoginPage() {
               </div>
 
               {/* Submit */}
-              <Button type="submit" className="w-full" disabled={isPending}>
+              <Button
+                type="submit"
+                className="w-full curson-pointer"
+                disabled={isPending}>
                 {isPending ? "Loading..." : "Login"}
               </Button>
             </form>

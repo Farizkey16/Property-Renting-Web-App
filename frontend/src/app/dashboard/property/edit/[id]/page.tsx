@@ -1,4 +1,4 @@
-import EditPropertyForm from "@/components/layouts/dashboard/property/edit-property";
+import EditPropertyForm from "@/components/layouts/dashboard/property/edit/edit-property";
 import React from "react";
 
 const EditProperty = () => {
