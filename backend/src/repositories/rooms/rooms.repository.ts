@@ -263,7 +263,18 @@ export const getRoomByPropertyAndNameRepositoryDetail = async (
       property: {
         include: {
           property_images: true,
-          reviews: true,
+          reviews: {
+            select: {
+              id: true,
+              rating: true,
+              comment: true
+            }
+          },
+          _count: {
+            select: {
+              reviews: true
+            }
+          },
         },
       },
       room_images: true,

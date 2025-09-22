@@ -61,7 +61,7 @@ class BookingReviews {
     try {
       const { propertyId } = req.params;
       const page = Number(req.query.page) || 1;
-      const limit = Number(req.query.limit) || 5;
+      const limit = Number(req.query.limit) || 3;
       const skip = (page - 1) * limit;
 
       const [propertyData, totalReviews] = await Promise.all([

@@ -25,7 +25,7 @@ class TenantTransactionsRouter {
     this.route.get(
       "/orders/tenant",
       verifyToken,
-      this.tenantTrx.getTenantReservations
+      this.tenantTrx.getReservations
     );
 
     this.route.patch(

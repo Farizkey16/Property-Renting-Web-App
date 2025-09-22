@@ -11,6 +11,11 @@ import {
 import { formatCurrency } from "@/lib/utils";
 import { ViewProofModal } from "../ui/view-proof";
 import { LeaveReviewForm } from "./leave-review";
+import { toast } from "react-toastify";
+import { useRef, useState } from "react";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { Spinner } from "../ui/shadcn-io/spinner";
 
 const getStatusColor = (status: string) => {
   switch (status) {
@@ -31,6 +36,11 @@ export type BookingCardProps = {
 };
 
 export const BookingCard = ({ booking, role }: BookingCardProps) => {
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [uploadFile, setUploadFile] = useState<File | null>(null);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const router = useRouter();
   const cancelBookingMutation = useCancelBookingByRole(role);
   const acceptBookingMutation = useTenantAcceptBooking();
   const rejectBookingMutation = useTenantRejectBooking();
@@ -41,12 +51,15 @@ export const BookingCard = ({ booking, role }: BookingCardProps) => {
   const roomName = booking.booking_rooms.map((br) => br.room.name).join(", ");
   const price = booking.amount;
 
+  const bookingId = booking.id;
+
   const isTenantActionRequired =
     role === "tenant" && booking.status === "waiting_confirmation";
+
   const canUserCancel =
-    role === "user" &&
+    role !== "tenant" &&
     ((!booking.proof_image && booking.status === "waiting_payment") ||
-      booking.status === "waiting_confirmation")
+      booking.status === "waiting_confirmation");
 
   const handleCancel = (bookingId: string) => {
     if (window.confirm("Are you sure you want to cancel this booking?")) {
@@ -63,6 +76,49 @@ export const BookingCard = ({ booking, role }: BookingCardProps) => {
   const handleReject = (bookingId: string) => {
     if (window.confirm("Are you sure you want to reject this booking?")) {
       rejectBookingMutation.mutate(bookingId);
+    }
+  };
+
+  const hasReviewed = booking._count?.reviews
+  
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-64 py-3">
+        <Spinner />
+      </div>
+    );
+  }
+
+  const handleButtonClick = async () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleReuploadProof = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const file = event.target.files?.[0];
+
+    if (file) {
+      setIsLoading(true);
+      const formData = new FormData();
+      formData.append("proof_image", file);
+
+      try {
+        await axios.patch(
+          `http://localhost:4000/reservations/proof/${bookingId}`,
+          formData,
+          { withCredentials: true }
+        );
+        toast.success("Payment proof uploaded successfully!");
+        setIsSuccessModalOpen(true);
+        router.push("/dashboard/bookings");
+      } catch (error: any) {
+        toast.error(
+          error.response?.data?.message || "Upload failed. Please try again."
+        );
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
@@ -109,7 +165,7 @@ export const BookingCard = ({ booking, role }: BookingCardProps) => {
                   <div className="flex items-center text-gray-600">
                     <Calendar className="w-4 h-4 mr-2" />
                     <span>
-                      {new Date(booking.check_in_date).toLocaleDateString()} -{" "}
+                      {new Date(booking.check_in_date).toLocaleDateString()} - {" "}
                       {new Date(booking.check_out_date).toLocaleDateString()}
                     </span>
                   </div>
@@ -151,19 +207,25 @@ export const BookingCard = ({ booking, role }: BookingCardProps) => {
                     ""
                   )}
 
-                  {role === 'tenant' && (
-                    <ViewProofModal
-                      proof_image={booking.proof_image}
-                      status={booking.status}
-                    />
+                  <ViewProofModal
+                    proof_image={booking.proof_image}
+                    status={booking.status}
+                    role={role}
+                  />
+                  <input
+                    type="file"
+                    ref={fileInputRef}
+                    onChange={handleReuploadProof}
+                    accept="image/png, image/jpg, image/jpeg"
+                    style={{ display: "none" }}
+                  />
+                  {role === "user" && booking.status === "waiting_payment" && (
+                    <Button size="sm" className="cursor-pointer" onClick={handleButtonClick}>
+                      Resubmit Payment Proof
+                    </Button>
                   )}
 
-                  {canUserCancel ? (
-                    <div className="inline-flex items-center justify-center rounded-md text-sm font-medium h-8 px-3 gap-2 bg-emerald-50 text-emerald-800 border border-emerald-200 dark:bg-emerald-900/50 dark:text-emerald-300 dark:border-emerald-800">
-                      <ShieldCheck className="h-4 w-4" />
-                      <span>Paid with Midtrans</span>
-                    </div>
-                  ) : (
+                  {canUserCancel && (
                     <Button
                       variant="outline"
                       size="sm"
@@ -176,7 +238,7 @@ export const BookingCard = ({ booking, role }: BookingCardProps) => {
                   )}
 
                   {booking.status === "confirmed" &&
-                    role === "user" &&
+                    role === "user" && !hasReviewed &&
                     new Date(booking.check_out_date) < new Date() && (
                       <>
                         <LeaveReviewForm bookingId={booking.id} />

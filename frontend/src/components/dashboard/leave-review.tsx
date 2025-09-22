@@ -24,6 +24,7 @@ interface LeaveReviewFormProps {
 export const LeaveReviewForm = ({ bookingId }: LeaveReviewFormProps) => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
+  const [commentFill, setCommentFill] = useState(false)
   const queryClient = useQueryClient();
 
   const createReviewMutation = useMutation({
@@ -75,7 +76,6 @@ export const LeaveReviewForm = ({ bookingId }: LeaveReviewFormProps) => {
               value={comment}
               onChange={(e) => setComment(e.target.value)}
               className="mt-2"
-              
             />
           </div>
         </div>

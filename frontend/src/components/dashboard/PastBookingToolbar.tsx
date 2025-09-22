@@ -15,7 +15,7 @@ type BookingsToolbarProps = {
   onClearFilters: () => void;
 };
 
-export const BookingsToolbar = ({
+export const PastBookingsToolbar = ({
   filters,
   onFilterChange,
   onClearFilters,
@@ -29,7 +29,7 @@ export const BookingsToolbar = ({
 
   return (
     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 py-5">
-      <CardTitle className="text-xl font-semibold">Your Bookings</CardTitle>
+      <CardTitle className="text-xl font-semibold">Your Past Bookings</CardTitle>
       <div className="flex flex-col sm:flex-row gap-3">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />

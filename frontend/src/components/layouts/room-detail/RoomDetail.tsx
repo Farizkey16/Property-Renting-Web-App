@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Heart, Star } from "lucide-react";
 import Image from "next/image";
-import { ReviewList } from "@/components/reviews/reviews-card";
+import { ReviewList } from "@/components/features/reviews/reviews-card";
 import { RoomDetailProps } from "@/types/room/room";
 
 export default function RoomDetail({ data }: RoomDetailProps) {
@@ -10,6 +10,9 @@ export default function RoomDetail({ data }: RoomDetailProps) {
   }
 
   const propertyId = data?.property?.id;
+  const reviewsCount = data.property._count.reviews
+  const ratingSum = data.property.reviews.reduce((acc, review)=> acc + review.rating, 0)
+  const ratingDisplay = ratingSum/reviewsCount
 
   return (
     <div className="lg:col-span-2 space-y-6">
@@ -51,8 +54,8 @@ export default function RoomDetail({ data }: RoomDetailProps) {
             </h1>
             <div className="flex items-center gap-2 mt-2">
               <Star className="w-4 h-4 fill-current text-yellow-400" />
-              <span className="text-sm font-medium">4.6</span>
-              <span className="text-sm text-gray-500">(241 ratings)</span>
+              <span className="text-sm font-medium">{ratingDisplay.toFixed(1)}</span>
+              <span className="text-sm text-gray-500">{`${reviewsCount} Ratings`}</span>
             </div>
           </div>
           <button aria-label="Add to wishlist">

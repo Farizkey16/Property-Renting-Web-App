@@ -32,6 +32,7 @@ export const getFilteredBookings = async (whereClause: PrismaFromClient.bookings
           check_in_date: true,
           check_out_date: true,
           payment_deadline: true,
+          proof_image: true,
           amount: true,
           booking_rooms: {
             select: {

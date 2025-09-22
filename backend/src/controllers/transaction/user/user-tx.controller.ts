@@ -31,7 +31,7 @@ class UserTransactions {
 
       const userId = role.userId;
       console.log("userId from token:", userId);
-      
+
       const {
         propertyId,
         checkInDate,
@@ -142,7 +142,6 @@ class UserTransactions {
     next: NextFunction
   ) => {
     try {
-      console.log("Full query object received from frontend:", req.query);
       const {
         status,
         check_in_date: startDate,
@@ -152,21 +151,21 @@ class UserTransactions {
       } = req.query;
       const userId = res.locals.decrypt.userId;
       console.log("userId from token:", userId);
-      
-      let page = 1
-      let limit = 5
 
-      if (req.query.page && typeof req.query.page === 'string') {
+      let page = 1;
+      let limit = 5;
+
+      if (req.query.page && typeof req.query.page === "string") {
         const parsedPage = parseInt(req.query.page, 10);
         if (!isNaN(parsedPage) && parsedPage > 0) {
-          page = parsedPage
+          page = parsedPage;
         }
       }
 
-      if (req.query.limit && typeof req.query.limit === 'string') {
+      if (req.query.limit && typeof req.query.limit === "string") {
         const parsedLimit = parseInt(req.query.limit, 10);
         if (!isNaN(parsedLimit) && parsedLimit > 0) {
-          limit = parsedLimit
+          limit = parsedLimit;
         }
       }
 
@@ -179,8 +178,8 @@ class UserTransactions {
       if (bookingId && typeof bookingId === "string") {
         whereClause.id = {
           startsWith: bookingId,
-          mode: "insensitive"
-        }
+          mode: "insensitive",
+        };
       }
 
       // Status Filter
@@ -209,7 +208,12 @@ class UserTransactions {
         }
       }
 
-      const bookings = await getFilteredBookings(whereClause, sort, page, limit)
+      const bookings = await getFilteredBookings(
+        whereClause,
+        sort,
+        page,
+        limit
+      );
 
       res.status(200).json({
         success: true,

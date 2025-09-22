@@ -4,7 +4,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 type FetchReviewsParams = {
   propertyId: string;
-  pageParam?: number;
+  page?: number;
 };
 
 export interface CreateReviewPayload {
@@ -20,12 +20,12 @@ export interface ReplyReviewPayload {
 
 export const fetchReviews = async ({
   propertyId,
-  pageParam = 1,
+  page = 1,
 }: FetchReviewsParams) => {
   const endpoint = `${BASE_URL}/property/${propertyId}/reviews`;
   const response = await axios.get(endpoint, {
     params: {
-      page: pageParam,
+      page: page,
       limit: 3,
     },
     withCredentials: true,

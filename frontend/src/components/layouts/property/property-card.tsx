@@ -50,7 +50,7 @@ export function PropertyCard({ property, room }: PropertyCardProps) {
             </div>
             <div className="flex items-center space-x-1 text-xs sm:text-sm text-gray-600">
               <Users className="w-4 h-4" />
-              <span>{room.capacity} tamu</span>
+              <span>{room.capacity}</span>
             </div>
           </div>
         )}

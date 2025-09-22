@@ -23,25 +23,39 @@ export interface Booking {
   booking_rooms: {
     guests_count: number;
     price_per_night: number;
-    room: Room
+    room: Room;
   }[];
+  _count: {
+    reviews: number
+  }
 }
 
 export interface Room {
   name: string;
-  propertyId: string
+  propertyId: string;
 }
 
 export interface Meta {
-  page: number,
-  limit: number,
-  totalPages: number,
-  totalItems: number,
+  page: number;
+  limit: number;
+  totalPages: number;
+  totalItems: number;
+}
+
+export interface Filters {
+  status:
+    | "waiting_payment"
+    | "confirmed"
+    | "canceled"
+    | "canceled_by_tenant"
+    | "waiting_confirmation"
+    | "expired";
+  sort: "asc" | "desc" | undefined
 }
 
 export interface PaginatedBookings {
-  data: Booking[],
-  meta: Meta
+  data: Booking[];
+  meta: Meta;
 }
 
 export interface BookingApiResponse {
@@ -53,7 +67,7 @@ export interface BookingApiResponse {
 export interface BookingsApiResponse {
   message: string;
   success: boolean;
-  data: PaginatedBookings
+  data: PaginatedBookings;
 }
 
 // Type Guard Booking Status

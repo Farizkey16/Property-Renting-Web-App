@@ -7,6 +7,7 @@ import {
   PaginatedBookings,
 } from "@/types/transactions/transactions";
 import qs from "qs";
+import { cookies } from "next/headers";
 
 export interface FetchBookingsParams {
   status?: BookingStatus;
@@ -14,7 +15,8 @@ export interface FetchBookingsParams {
   startDate?: string;
   endDate?: string;
   bookingId?: string;
-  page?: number;
+  page?: number | string;
+  role?: "user" | "tenant"
 }
 
 export type FlexibleBookingParams = Omit<FetchBookingsParams, "status"> & {
@@ -102,23 +104,31 @@ export const fetchUserBookingById = async (bookingId: string) => {
   }
 };
 
-export const fetchUserBookings = async (filters: FetchBookingsParams) => {
-  const endpoint = `${BASE_URL}/reservations/get`;
-  const response = await axios.get(endpoint, {
-    params: filters,
-    withCredentials: true,
-  });
-  return response.data.data;
-};
+// export const fetchUserBookings = async (searchParams: URLSearchParams) => {
+//   const endpoint = `${BASE_URL}/reservations/get`;
+//   const cookieStore = await cookies()
+//   const token = cookieStore.get("accessToken")?.value
+//   const response = await axios.get(endpoint, {
+//     params: searchParams,
+//     headers: {
+//       'Cookie': token ? `accessToken=${token}` : ''
+//     }
+//   });
+//   return response.data.data;
+// };
 
-export const fetchTenantBookings = async (filters: FetchBookingsParams) => {
-  const endpoint = `${BASE_URL}/payment/orders/tenant`;
-  const response = await axios.get(endpoint, {
-    params: filters,
-    withCredentials: true,
-  });
-  return response.data;
-};
+// export const fetchTenantBookings = async (searchParams: URLSearchParams) => {
+//   const endpoint = `${BASE_URL}/payment/orders/tenant`;
+//   const cookieStore = await cookies()
+//   const token = cookieStore.get("accessToken")?.value
+//   const response = await axios.get(endpoint, {
+//     params: searchParams,
+//     headers: {
+//       'Cookie': token ? `accessToken=${token}` : ''
+//     }
+//   });
+//   return response.data;
+// };
 
 export const userCancelBookingById = async (bookingId: string) => {
   const response = await axios.patch(

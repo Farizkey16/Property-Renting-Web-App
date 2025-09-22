@@ -28,12 +28,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { DateRange } from "react-day-picker";
-import { DatePickerWithRange } from "../ui/DatePickerPopover";
 import { useSalesAggregate, useSalesReport } from "@/hooks/useSalesReport";
 import { Activity, DollarSign, Users } from "lucide-react";
 import { formatCurrency } from "@/lib/utils";
-import { keepPreviousData } from "@tanstack/react-query";
-import { AnalyticsDateRangePicker } from "../ui/AnalyticsDatePicker";
+import { AnalyticsDateRangePicker } from "../../fragment/date-picker/AnalyticsDatePicker";
 
 ChartJS.register(
   CategoryScale,

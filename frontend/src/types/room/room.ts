@@ -83,6 +83,9 @@ export interface Property {
   deleted_at: string | null;
   property_category: string;
   property_images: string[];
+  _count: {
+    reviews: number;
+  };
   reviews: Review[];
 }
 

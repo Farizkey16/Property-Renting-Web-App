@@ -14,9 +14,10 @@ import { ShieldCheck } from "lucide-react";
 interface ProofProps {
   proof_image: string;
   status: BookingStatus;
+  role: "user" | "tenant"
 }
 
-export function ViewProofModal({ proof_image, status }: ProofProps) {
+export function ViewProofModal({ proof_image, status, role }: ProofProps) {
 
   if (proof_image === null && status === "confirmed") {
     return(
@@ -26,7 +27,7 @@ export function ViewProofModal({ proof_image, status }: ProofProps) {
     </div>);
   }
 
-  if (proof_image) {
+  if ((role === "user"|| role === "tenant" ) && proof_image && status === "waiting_confirmation") {
     return (
       <Dialog>
         <DialogTrigger asChild>
@@ -53,6 +54,4 @@ export function ViewProofModal({ proof_image, status }: ProofProps) {
       </Dialog>
     );
   }
-
-  return null;
 }

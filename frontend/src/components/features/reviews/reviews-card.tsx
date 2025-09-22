@@ -7,6 +7,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Rating } from "react-simple-star-rating";
 import { Review } from "@/types/reviews/reviews.types";
 import { usePropertyReviews } from "@/hooks/useReviews";
+import { fetchReviews } from "@/services/reviews.service";
+import { PaginationControl } from "@/components/fragment/pagination-control/PaginationControl";
+import { Spinner } from "@/components/ui/shadcn-io/spinner";
 
 interface ReviewsCardProps {
   reviews: Review[];
@@ -21,18 +24,18 @@ const ReviewCard = ({ review }: { review: Review }) => {
     <Card className="border-0 shadow-none p-0">
       <CardContent className="p-3">
         <div className="flex items-start gap-3 mb-3">
-          <Avatar className="w-12 h-12">
+          <Avatar className="w-7 h-7">
             <AvatarImage
               src={review.user.profilePicture || "/placeholder.svg"}
-              alt={review.user.fullName}
+              alt={review.user.full_name}
             />
-
-            {/* <AvatarFallback>{review.user.fullName.charAt(0)}</AvatarFallback> */}
+            <AvatarFallback>{review.user.full_name.charAt(0)}</AvatarFallback>
           </Avatar>
           <div>
-            <h4 className="font-semibold text-base">{review.user.fullName}</h4>
+            <h4 className="font-semibold text-base">{review.user.full_name}</h4>
           </div>
         </div>
+        
 
         <div className="flex items-center gap-2 mb-2">
           <div className="flex items-center gap-1">
@@ -44,13 +47,14 @@ const ReviewCard = ({ review }: { review: Review }) => {
               size={20}
             />
           </div>
-          <span className="text-sm text-muted-foreground">
-            {new Date(review.createdAt).toLocaleDateString("en-US", {
+          <span className="text-sm text-muted-foreground mt-1">
+            {new Date(review.created_at).toLocaleDateString("en-US", {
               month: "long",
               year: "numeric",
             })}
           </span>
         </div>
+        
 
         <div className="text-sm leading-relaxed">
           {review.comment &&
@@ -81,26 +85,21 @@ const ReviewCard = ({ review }: { review: Review }) => {
 };
 
 export const ReviewList = ({ propertyId }: { propertyId: string }) => {
-  console.log(
-    "%c2. ReviewList component received this ID:",
-    "color: green; font-weight: bold;",
-    propertyId
+  const [currentPage, setCurrentPage] = useState(1);
+  const { data: reviews, error, isError, isLoading } = usePropertyReviews(
+    propertyId,
+    currentPage
   );
 
-  const {
-    data,
-    error,
-    isError,
-    isLoading,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-  } = usePropertyReviews(propertyId);
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage)
+  };
 
-  if (isLoading) return <div>Loading reviews...</div>;
+  if (isLoading) return <div><Spinner/></div>;
   if (isError) return <div>An error occurred: {error.message}</div>;
 
-  const allReviews = data?.pages.flatMap((page) => page.data) || [];
+  const allReviews = reviews.data
+  const meta = reviews.meta
 
   if (allReviews.length === 0) {
     return <div className="text-center py-8">No reviews yet.</div>;
@@ -114,13 +113,7 @@ export const ReviewList = ({ propertyId }: { propertyId: string }) => {
         ))}
       </div>
 
-      <div className="mt-8 text-center">
-        {hasNextPage && (
-          <Button onClick={() => fetchNextPage()} disabled={isFetchingNextPage}>
-            {isFetchingNextPage ? "Loading more..." : "Show More Reviews"}
-          </Button>
-        )}
-      </div>
+      <PaginationControl totalItems={meta.totalItems} pageSize={meta.limit} currentPage={currentPage} onPageChange={handlePageChange}/>
     </div>
   );
 };

@@ -2,11 +2,11 @@
 
 import axios from "axios";
 import { useState } from "react";
-import { Button } from "./button";
+import { Button } from "@/components/ui/button";
 import { toast } from "react-toastify";
-import { Card } from "./card";
+import { Card } from "@/components/ui/card";
 import { useRouter } from "next/navigation";
-import { Dialog, DialogContent, DialogTitle, DialogDescription, DialogFooter, DialogHeader } from "./dialog";
+import { Dialog, DialogContent, DialogTitle, DialogDescription, DialogFooter, DialogHeader } from "@/components/ui/dialog";
 import { CheckCircle } from "lucide-react";
 
 

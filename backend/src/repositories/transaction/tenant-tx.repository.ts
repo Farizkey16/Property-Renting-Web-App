@@ -153,15 +153,15 @@ export const OverlappingBooking = async (
 
 export const UpdateRoomAvailability = async (
   roomId: string,
-  data: string[],
+  date: string[],
   availability: Boolean,
   tx?: Prisma.TransactionClient
 ) => {
   const earliestCheckIn = new Date(
-    Math.min(...data.map((date: any) => new Date(date).getTime()))
+    Math.min(...date.map((date: any) => new Date(date).getTime()))
   );
   const latestCheckOut = new Date(
-    Math.max(...data.map((date: any) => new Date(date).getTime()))
+    Math.max(...date.map((date: any) => new Date(date).getTime()))
   );
 
   const db = tx ?? prisma;
@@ -215,18 +215,17 @@ export const getOrderRepository = async (
           main_image: true,
           name: true,
           city: true,
-        }, 
+        },
       },
       booking_rooms: {
         include: {
           room: {
             select: {
-              name: true
-            }
-          }
+              name: true,
+            },
+          },
         },
       },
-      
     },
   });
 
@@ -270,14 +269,32 @@ export const updateProofImageRepository = async (
   data: ProofImage,
   tx?: Prisma.TransactionClient
 ) => {
+  console.log("Attempting to update booking with ID:", bookingId);
   const db = tx ?? prisma;
   await db.bookings.update({
     where: {
       id: bookingId,
-      status: "waiting_confirmation",
+      status: { in: ["waiting_confirmation", "waiting_payment"] },
     },
     data,
   });
+};
+
+export const findBookingIncludeBookingRooms = async (
+  bookingId: string,
+  tx?: Prisma.TransactionClient
+) => {
+  const db = tx ?? prisma;
+  const booking_rooms = await db.bookings.findUnique({
+    where: {
+      id: bookingId,
+    },
+    include: {
+      booking_rooms: true,
+    },
+  });
+
+  return booking_rooms;
 };
 
 export const acceptBookingPayment = async (
@@ -289,7 +306,6 @@ export const acceptBookingPayment = async (
       where: {
         id: bookingId,
         status: "waiting_confirmation",
-
         property: {
           tenant_id: tenantId,
         },

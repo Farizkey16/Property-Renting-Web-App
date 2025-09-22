@@ -3,7 +3,7 @@ type FetchReviewList = {
 }
 
 export interface ReviewUser {
-    fullName: string;
+    full_name: string;
     profilePicture: string | null;
 }
 
@@ -12,6 +12,6 @@ export interface Review {
     rating: number;
     comment: string | null;
     tenantReply: string | null;
-    createdAt: string;
+    created_at: string;
     user: ReviewUser
 }

@@ -34,15 +34,6 @@ export default function BookingDetailsForm() {
     email: "",
     countryCode: "+62",
     mobileNumber: "",
-    requests: {
-      nonSmoking: false,
-      highFloor: false,
-      checkInTime: false,
-      connectingRooms: false,
-      bedType: false,
-      checkOutTime: false,
-      others: false,
-    },
   });
   const router = useRouter();
 
@@ -103,12 +94,6 @@ export default function BookingDetailsForm() {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleRequestChange = (request: string, checked: boolean) => {
-    setFormData((prev) => ({
-      ...prev,
-      requests: { ...prev.requests, [request]: checked },
-    }));
-  };
 
   const handleContinue = () => {
     const checkInDate = searchParams.get("checkIn");
@@ -117,9 +102,6 @@ export default function BookingDetailsForm() {
     const roomId = searchParams.get("roomId");
     const guests = searchParams.get("guests");
     const quantity = searchParams.get("rooms")
-
-    console.log('quantity is:', quantity)
-
 
     if (!propertyId || !roomId || !checkInDate || !checkOutDate || !guests || !quantity) {
       alert(
@@ -144,8 +126,6 @@ export default function BookingDetailsForm() {
       taxesAndFees: priceDetails?.taxesAndFees,
     };
 
-    console.log("Booking form submitted:", finalBookingPayload);
-
     createBookingMutation.mutate(finalBookingPayload);
   };
 
@@ -155,10 +135,7 @@ export default function BookingDetailsForm() {
       <div className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center gap-4">
-            <div className="w-8 h-8 bg-black rounded flex items-center justify-center">
-              <span className="text-white font-bold text-sm">h</span>
-            </div>
-            <span className="font-semibold text-lg">hide</span>
+
           </div>
         </div>
       </div>
@@ -254,118 +231,6 @@ export default function BookingDetailsForm() {
               </CardContent>
             </Card>
 
-            {/* Special Requests */}
-            <Card className="py-6">
-              <CardHeader>
-                <CardTitle className="text-xl font-semibold">
-                  Let us know if you have any request
-                </CardTitle>
-                <p className="text-gray-600 text-sm">
-                  You will know the availability of your additional request
-                  during check-in. Extra charges may incur but you can still
-                  cancel your request later.
-                </p>
-              </CardHeader>
-              <CardContent>
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div className="space-y-4">
-                    <div className="flex items-center space-x-2">
-                      <Checkbox
-                        id="nonSmoking"
-                        checked={formData.requests.nonSmoking}
-                        onCheckedChange={(checked) =>
-                          handleRequestChange("nonSmoking", checked as boolean)
-                        }
-                      />
-                      <Label htmlFor="nonSmoking" className="text-sm">
-                        Non-smoking Room
-                      </Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Checkbox
-                        id="highFloor"
-                        checked={formData.requests.highFloor}
-                        onCheckedChange={(checked) =>
-                          handleRequestChange("highFloor", checked as boolean)
-                        }
-                      />
-                      <Label htmlFor="highFloor" className="text-sm">
-                        High Floor
-                      </Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Checkbox
-                        id="checkInTime"
-                        checked={formData.requests.checkInTime}
-                        onCheckedChange={(checked) =>
-                          handleRequestChange("checkInTime", checked as boolean)
-                        }
-                      />
-                      <Label htmlFor="checkInTime" className="text-sm">
-                        Check-in Time
-                      </Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Checkbox
-                        id="others"
-                        checked={formData.requests.others}
-                        onCheckedChange={(checked) =>
-                          handleRequestChange("others", checked as boolean)
-                        }
-                      />
-                      <Label htmlFor="others" className="text-sm">
-                        Others
-                      </Label>
-                    </div>
-                  </div>
-                  <div className="space-y-4">
-                    <div className="flex items-center space-x-2">
-                      <Checkbox
-                        id="connectingRooms"
-                        checked={formData.requests.connectingRooms}
-                        onCheckedChange={(checked) =>
-                          handleRequestChange(
-                            "connectingRooms",
-                            checked as boolean
-                          )
-                        }
-                      />
-                      <Label htmlFor="connectingRooms" className="text-sm">
-                        Connecting Rooms
-                      </Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Checkbox
-                        id="bedType"
-                        checked={formData.requests.bedType}
-                        onCheckedChange={(checked) =>
-                          handleRequestChange("bedType", checked as boolean)
-                        }
-                      />
-                      <Label htmlFor="bedType" className="text-sm">
-                        Bed Type
-                      </Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Checkbox
-                        id="checkOutTime"
-                        checked={formData.requests.checkOutTime}
-                        onCheckedChange={(checked) =>
-                          handleRequestChange(
-                            "checkOutTime",
-                            checked as boolean
-                          )
-                        }
-                      />
-                      <Label htmlFor="checkOutTime" className="text-sm">
-                        Check-out Time
-                      </Label>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
             {/* Price Summary */}
             <Card className="py-6">
               <CardHeader>
@@ -428,7 +293,7 @@ export default function BookingDetailsForm() {
               </div>
               <CardContent className="p-4">
                 <div className="flex items-center gap-2 mb-2">
-                  <h3 className="font-semibold text-lg">{property && property.name}</h3>
+                  <h3 className="font-semibold text-lg">{property?.name}</h3>
                   <div className="flex text-yellow-400">{"★".repeat(4)}</div>
                 </div>
                 <div className="flex items-center text-sm text-gray-600 mb-2">

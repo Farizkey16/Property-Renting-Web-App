@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
+import "react-toastify/dist/ReactToastify.css"
 import Providers from "../providers";
 import { Header } from "@/components/layouts/header/header";
 import { Footer } from "@/components/layouts/footer/footer";
+import { ToastContainer } from "react-toastify";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,6 +34,7 @@ export default async function RootLayout({
         <Providers>
           <Header />
           {children}
+          <ToastContainer/>
           <Footer />
         </Providers>
       </body>

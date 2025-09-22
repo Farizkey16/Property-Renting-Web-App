@@ -17,7 +17,7 @@ import { formatCurrency } from "@/lib/utils";
 import { DateRange } from "react-day-picker";
 import { addDays, format, startOfDay } from "date-fns";
 import { CardBookingSkeleton } from "@/components/fragment/loading-error/PropertyDetailSkeleton";
-import { DatePickerWithRange } from "@/components/ui/DatePickerPopover";
+import { DatePickerWithRange } from "@/components/fragment/date-picker/DatePickerPopover";
 import { GuestPicker } from "@/components/ui/GuestPicker";
 
 interface Review {

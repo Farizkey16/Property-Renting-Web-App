@@ -4,6 +4,7 @@ import AppError from "../../../errors/AppError";
 import {
   acceptBookingPayment,
   findBookingByIdRepository,
+  findBookingIncludeBookingRooms,
   findBookingRoomsByBookingId,
   FindProofImage,
   getOrderRepository,
@@ -21,6 +22,8 @@ import {
 } from "../../../services/transaction/transaction.service";
 import { Prisma } from "../../../../prisma/generated/client";
 import { isValidBookingStatus } from "../../../types/transaction/transactions.types";
+import { getFilteredBookings } from "../../../repositories/transaction/user-tx.repository";
+import { getDatesBetween } from "../../../utils/getDatesBetween";
 
 class TenantTransactions {
   public acceptPayment = async (
@@ -30,7 +33,6 @@ class TenantTransactions {
   ) => {
     try {
       const role = res.locals.decrypt.role;
-      // Validate Transaction ID
 
       const bookingId = req.params.id;
 
@@ -62,9 +64,9 @@ class TenantTransactions {
     try {
       const role = res.locals.decrypt.role;
 
-      // Validate Transaction ID
-
       const bookingId = req.params.id;
+
+      console.log("Fetching from bookingId:", bookingId)
 
       if (!bookingId) {
         throw new AppError("Invalid transaction ID", 400);
@@ -76,32 +78,35 @@ class TenantTransactions {
 
         // Update booking and Return UserID
 
-        const userID = await UpdateBookings(
-          bookingId,
-          "waiting_payment",
-          tx
-        );
+        const userId = await UpdateBookings(bookingId, "waiting_payment", tx);
+
+        const booking = await findBookingIncludeBookingRooms(bookingId, tx)
+
+        const datesToUpdate = getDatesBetween(booking.check_in_date, booking.check_out_date)
+        
+        const roomId = booking.booking_rooms.room_id
+
 
         // Validate user
-        const user = await getEmailAndFullnameById(userID);
+        const user = await getEmailAndFullnameById(userId);
 
         // Update Availability
         await UpdateRoomAvailability(
-          userID.booking_rooms.room_id,
-          userID,
+          roomId,
+          datesToUpdate,
           true,
           tx
         );
 
-        return { userID, user };
+        return { userId, user };
       });
 
       // Send Rejection Notification
-      await sendRejectionNotification(bookingId, rejectProcess.userID);
+      await sendRejectionNotification(bookingId, rejectProcess.userId);
 
       res.json({
         message: "Payment rejected, booking updated",
-        userID: rejectProcess.userID,
+        userID: rejectProcess.userId,
       });
     } catch (error) {
       next(error);
@@ -120,26 +125,26 @@ class TenantTransactions {
         throw new AppError("Invalid booking ID", 400);
       }
 
-      // Find Payment Proof
-      const result = await FindProofImage(bookingId);
+      // // Find Payment Proof
+      // const result = await FindProofImage(bookingId);
 
-      if (!result) {
-        throw new AppError("The booking does not exist.", 404);
-      } else {
-        if (result.proof_image) {
-          console.log(
-            "Proof image exists, booking cannot be cancelled.",
-            result.proof_image
-          );
-          return;
-        } else {
-          console.log(
-            "Booking exists, but a proof image has not been uploaded yet. Cancelling booking..."
-          );
-        }
-      }
+      // if (!result) {
+      //   throw new AppError("The booking does not exist.", 404);
+      // } else {
+      //   if (result.proof_image) {
+      //     console.log(
+      //       "Proof image exists, booking cannot be cancelled.",
+      //       result.proof_image
+      //     );
+      //     return;
+      //   } else {
+      //     console.log(
+      //       "Booking exists, but a proof image has not been uploaded yet. Cancelling booking..."
+      //     );
+      //   }
+      // }
 
-      console.log("proof:", result);
+      // console.log("proof:", result);
 
       // Update Status to Canceled
       const cancelledBooking = await UpdateBookings(
@@ -245,29 +250,27 @@ class TenantTransactions {
     }
   };
 
-  public getTenantReservations = async (
+  public getReservations = async (
     req: Request,
     res: Response,
     next: NextFunction
   ) => {
     try {
-      const user = res.locals.decrypt;
-      if (user.role !== "tenant") {
-        throw new AppError(
-          "Forbidden: You do not have permission to access this resource.",
-          403
-        );
-      }
+      const {
+        status,
+        check_in_date: startDate,
+        check_out_date: endDate,
+        sort,
+        bookingId,
+      } = req.query;
 
-      if (!user.userId) {
-        throw new AppError(
-          "Tenant ID not found in token for tenant user.",
-          403
-        );
-      }
+      const userId = res.locals.decrypt.userId;
+
+      let page = 1;
+      let limit = 5;
 
       const tenantRecord = await prisma.tenants.findUnique({
-        where: { user_id: user.userId },
+        where: { user_id: userId },
       });
 
       if (!tenantRecord) {
@@ -275,7 +278,19 @@ class TenantTransactions {
       }
       const tenantId = tenantRecord.id;
 
-      const { status, sort, end, start, bookingId } = req.query;
+      if (req.query.page && typeof req.query.page === "string") {
+        const parsedPage = parseInt(req.query.page, 10);
+        if (!isNaN(parsedPage) && parsedPage > 0) {
+          page = parsedPage;
+        }
+      }
+
+      if (req.query.limit && typeof req.query.limit === "string") {
+        const parsedLimit = parseInt(req.query.limit, 10);
+        if (!isNaN(parsedLimit) && parsedLimit > 0) {
+          limit = parsedLimit;
+        }
+      }
 
       const whereClause: Prisma.bookingsWhereInput = {
         property: {
@@ -292,21 +307,29 @@ class TenantTransactions {
         }
       }
 
-      if (end && typeof end === "string") {
-        whereClause.check_out_date = { lte: new Date(end) };
+      if (endDate && typeof endDate === "string") {
+        whereClause.check_out_date = { lte: new Date(endDate) };
       }
 
-      const bookings = await getOrderRepository(
+      const bookings = await getFilteredBookings(
         whereClause,
-        sort as string | undefined
+        sort,
+        page,
+        limit
       );
-      if (bookings.length === 0) {
+      if (bookings.data.length === 0) {
         return res.status(200).json({
           message: "No orders found for this tenant matching the criteria.",
           data: [],
         });
       }
-      res.status(200).json({ data: bookings });
+      res
+        .status(200)
+        .json({
+          success: true,
+          message: "Reservations successfully fetched.",
+          data: bookings,
+        });
     } catch (error) {
       next(error);
     }

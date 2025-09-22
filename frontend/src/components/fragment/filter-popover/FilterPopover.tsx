@@ -1,32 +1,37 @@
-// app/dashboard/bookings/components/FilterPopover.tsx
+"use client";
 
-'use client';
-
-import * as Popover from '@radix-ui/react-popover';
-import { Filter } from 'lucide-react';
+import * as Popover from "@radix-ui/react-popover";
+import { Filter } from "lucide-react";
 
 // Import styled components from your UI library
-import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
+} from "@/components/ui/select";
 
 // Import the types and constants
-import { FetchBookingsParams } from '@/services/transactions.services';
-import { VALID_BOOKING_STATUS, BookingStatus } from '@/types/transactions/transactions';
-import { useState } from 'react';
-
+import { FetchBookingsParams } from "@/services/transactions.services";
+import {
+  VALID_BOOKING_STATUS,
+  BookingStatus,
+} from "@/types/transactions/transactions";
+import { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 // Define the component's props
 type FilterPopoverProps = {
   filters: FetchBookingsParams;
-  onFilterChange: (key: keyof FetchBookingsParams, value: string | null) => void;
+  onFilterChange: (
+    key: keyof FetchBookingsParams,
+    value: string | null
+  ) => void;
   onClearFilters: () => void;
 };
 
@@ -35,7 +40,6 @@ export const FilterPopover = ({
   onFilterChange,
   onClearFilters,
 }: FilterPopoverProps) => {
-
   return (
     <Popover.Root>
       <Popover.Trigger asChild>
@@ -56,7 +60,7 @@ export const FilterPopover = ({
                 Refine the results based on your criteria.
               </p>
             </div>
-            
+
             <div className="grid gap-4">
               {/* --- Status Filter --- */}
               <div className="grid grid-cols-4 items-center gap-4">
@@ -65,7 +69,7 @@ export const FilterPopover = ({
                 </Label>
                 <Select
                   value={filters.status}
-                  onValueChange={(value) => onFilterChange('status', value)}
+                  onValueChange={(value) => onFilterChange("status", value)}
                 >
                   <SelectTrigger className="col-span-3">
                     <SelectValue placeholder="Select a status" />
@@ -73,7 +77,9 @@ export const FilterPopover = ({
                   <SelectContent>
                     {VALID_BOOKING_STATUS.map((status) => (
                       <SelectItem key={status} value={status}>
-                        {status.replace(/_/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase())}
+                        {status
+                          .replace(/_/g, " ")
+                          .replace(/\b\w/g, (l) => l.toUpperCase())}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -87,7 +93,7 @@ export const FilterPopover = ({
                 </Label>
                 <Select
                   value={filters.sort}
-                  onValueChange={(value) => onFilterChange('sort', value)}
+                  onValueChange={(value) => onFilterChange("sort", value)}
                 >
                   <SelectTrigger className="col-span-3">
                     <SelectValue placeholder="Select order" />
@@ -108,8 +114,30 @@ export const FilterPopover = ({
                   id="start-date"
                   type="date"
                   className="col-span-3"
-                  value={filters.startDate || ''}
-                  onChange={(e) => onFilterChange('startDate', e.target.value)}
+                  value={filters.startDate || ""}
+                  onChange={(e) => onFilterChange("startDate", e.target.value)}
+                />
+                {/* <DatePicker
+                  selected={
+                    filters.startDate ? new Date(filters.startDate) : undefined
+                  }
+                  onChange={(date: Date | null) => onFilterChange("startDate", date)}
+                  className="col-span-3"
+                  placeholderText="YYYY-MM-DD"
+                  dateFormat="yyyy-MM-dd"
+                /> */}
+              </div>
+
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="start-date" className="text-right">
+                  End Date
+                </Label>
+                <Input
+                  id="end-date"
+                  type="date"
+                  className="col-span-3"
+                  value={filters.endDate || ""}
+                  onChange={(e) => onFilterChange("endDate", e.target.value)}
                 />
               </div>
             </div>
