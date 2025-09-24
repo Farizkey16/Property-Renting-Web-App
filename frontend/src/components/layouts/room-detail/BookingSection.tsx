@@ -18,7 +18,7 @@ import { addDays, format, startOfDay } from "date-fns";
 import { CardBookingSkeleton } from "@/components/fragment/loading-error/PropertyDetailSkeleton";
 import { DatePickerWithRange } from "@/components/fragment/date-picker/DatePickerPopover";
 import { GuestPicker } from "@/components/ui/GuestPicker";
-import { PeakRate, PriceSection } from "./PriceSection";
+import { PriceSection } from "./PriceSection";
 
 export default function BookingSectionPage() {
   const router = useRouter();
@@ -147,7 +147,7 @@ export default function BookingSectionPage() {
     const checkOut = format(dateRange.to, "yyyy-MM-dd");
 
     router.push(
-      `/dashboard/booking-detail?propertyId=${propertyId}&roomId=${roomId}&checkIn=${checkIn}&checkOut=${checkOut}&guests=${totalGuests}&rooms=${rooms}`
+      `/dashboard/booking-detail?propertyId=${propertyId}&roomId=${roomId}&checkIn=${checkIn}&checkOut=${checkOut}&guests=${totalGuests}&rooms=${rooms}&total=${priceData?.total}`
     );
   };
 

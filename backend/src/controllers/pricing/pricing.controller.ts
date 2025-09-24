@@ -10,10 +10,11 @@ class PricingQuoteController {
     next: NextFunction
   ) => {
     try {
-      const { roomId, checkIn, checkOut } = req.query as {
+      const { roomId, checkIn, checkOut, total } = req.query as {
         roomId: string;
         checkIn: string;
         checkOut: string;
+        total: string;
       };
 
       const room = await prisma.rooms.findUnique({ where: { id: roomId } });
@@ -32,9 +33,10 @@ class PricingQuoteController {
         throw new AppError("Check-out date must be after check-in date.", 400);
       }
 
-      const subtotal = nights * pricePerNight;
-      const taxesAndFees = subtotal * 0.1;
-      const totalPrice = subtotal + taxesAndFees;
+      const subtotalBasePrice = nights * pricePerNight;
+      const taxesAndFees = subtotalBasePrice * 0.1;
+      const subtotal = Number(total);
+      const totalPrice = Number(total) + Number(taxesAndFees);
 
       res.status(200).json({
         nights,
@@ -49,4 +51,4 @@ class PricingQuoteController {
   };
 }
 
-export default PricingQuoteController
+export default PricingQuoteController;

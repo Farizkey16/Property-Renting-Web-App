@@ -6,6 +6,7 @@ export interface FetchPriceParams {
   roomId: string;
   checkIn: string;
   checkOut: string;
+  total: string;
 }
 
 export const fetchPriceQuote = async (params: FetchPriceParams) => {
