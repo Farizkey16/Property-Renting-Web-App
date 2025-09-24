@@ -13,7 +13,7 @@ const LoginGoogle = () => {
     <div className="flex flex-col gap-2">
       <Button
         variant="outline"
-        className="flex items-center gap-2 w-full"
+        className="flex items-center gap-2 w-full cursor-pointer"
         onClick={handleGoogleLogin}>
         <FcGoogle className="text-red-500" /> Continue with Google
       </Button>

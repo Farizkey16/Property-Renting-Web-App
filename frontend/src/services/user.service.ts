@@ -33,7 +33,7 @@ export const updateProfile = async (
 };
 
 export const newOtp = async () => {
-  const response = await axios.post(
+  const response = await axios.patch(
     `${BASE_URL}/user/otp-password`,
     {},
     {

@@ -159,7 +159,7 @@ export default function VerifyEmail() {
               {/* Submit */}
               <Button
                 type="submit"
-                className="w-full mt-4"
+                className="w-full mt-4 cursor-pointer"
                 disabled={isVerifyPending}>
                 {isVerifyPending ? "Loading..." : "Verify"}
                 {isError && "Error"}

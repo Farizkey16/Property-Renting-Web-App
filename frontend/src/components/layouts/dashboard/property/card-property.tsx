@@ -30,7 +30,6 @@ export function PropertyCard({
 }: PropertyCardProps) {
   return (
     <Card className="overflow-hidden hover:shadow-lg transition">
-      {/* Thumbnail */}
       {mainImage && (
         <div className="relative h-32 w-full">
           <Image src={mainImage} alt={name} fill className="object-cover" />
@@ -51,7 +50,7 @@ export function PropertyCard({
           <div className="flex gap-2">
             <Link
               href={editHref}
-              className="p-2 rounded-lg bg-muted text-blue-500 hover:bg-blue-100">
+              className="p-2 rounded-lg bg-muted text-blue-500 hover:bg-blue-100 cursor-pointer">
               <EditIcon className="w-5 h-5" />
             </Link>
 
@@ -63,7 +62,7 @@ export function PropertyCard({
               trigger={
                 <button
                   type="button"
-                  className="p-2 rounded-lg bg-muted text-red-500 hover:bg-red-100">
+                  className="p-2 rounded-lg bg-muted text-red-500 hover:bg-red-100 cursor-pointer">
                   <DeleteIcon className="w-5 h-5" />
                 </button>
               }

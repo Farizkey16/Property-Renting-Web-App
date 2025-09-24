@@ -1,71 +1,48 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
+  DialogDescription,
 } from "@/components/ui/dialog";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { useChangeEmailOtp, useResetPassword } from "@/hooks/useUser";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import ChangeEmailForm from "./email/ChangeEmailForm";
+import ChangePasswordForm from "./password/ChangePasswordForm";
 import { useVerifyEmail } from "@/hooks/useAuth";
-
-interface FormErrors {
-  email?: string;
-  currentPassword?: string;
-  newPassword?: string;
-}
+import {
+  useChangeEmailOtp,
+  useNewOtp,
+  useResetPassword,
+} from "@/hooks/useUser";
+import { toast } from "sonner";
 
 export default function SettingsForm() {
-  const [formData, setFormData] = useState({
-    email: "",
-    currentPassword: "",
-    newPassword: "",
-  });
-
-  const [errors, setErrors] = useState<FormErrors>({});
-  const [isLoading, setIsLoading] = useState(false);
-
   const [otpDialog, setOtpDialog] = useState({
     isOpen: false,
     purpose: null as "email" | "password" | null,
     code: ["", "", "", "", "", ""],
   });
 
-  const resetPasswordMutation = useResetPassword();
+  const [formData, setFormData] = useState({
+    email: "",
+    currentPassword: "",
+    newPassword: "",
+  });
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Email mutations (tetap sama)
   const changeEmailOtpMutation = useChangeEmailOtp();
   const verifyEmailMutation = useVerifyEmail();
 
-  const validateEmail = (email: string): string | null => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!email.trim()) return "Email is required";
-    if (!emailRegex.test(email)) return "Please enter a valid email address";
-    return null;
-  };
-
-  const validatePassword = (password: string, isNew = false): string | null => {
-    if (!password.trim())
-      return `${isNew ? "New" : "Current"} password is required`;
-    if (password.length < 8) return "Password must be at least 8 characters";
-    if (isNew && !/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(password)) {
-      return "New password must contain uppercase, lowercase, and number";
-    }
-    return null;
-  };
-
-  const updateFormData = (field: keyof typeof formData, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
-    if (errors[field as keyof FormErrors]) {
-      setErrors((prev) => ({ ...prev, [field]: undefined }));
-    }
-  };
+  // Password mutations baru
+  const resetPasswordMutation = useResetPassword();
+  const newOtpMutation = useNewOtp();
 
   const handleOtpChange = (value: string, index: number) => {
     if (!/^\d?$/.test(value)) return;
@@ -113,16 +90,14 @@ export default function SettingsForm() {
               currentPassword: "",
               newPassword: "",
             }));
-            alert("Password updated successfully ");
+            toast.success("Password updated successfully");
             setOtpDialog({
               isOpen: false,
               purpose: null,
               code: ["", "", "", "", "", ""],
             });
           },
-          onError: () => {
-            alert("Failed to update password ");
-          },
+          onError: () => toast.error("Failed to update password"),
           onSettled: () => setIsLoading(false),
         }
       );
@@ -132,55 +107,18 @@ export default function SettingsForm() {
         {
           onSuccess: () => {
             setFormData((prev) => ({ ...prev, email: "" }));
-            alert("Email updated successfully ");
+            toast.success("Email updated successfully");
             setOtpDialog({
               isOpen: false,
               purpose: null,
               code: ["", "", "", "", "", ""],
             });
           },
-          onError: () => {
-            alert("Failed to update email ");
-          },
+          onError: () => toast.error("Failed to update email"),
           onSettled: () => setIsLoading(false),
         }
       );
     }
-  };
-
-  const handleEmailSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const emailError = validateEmail(formData.email);
-    if (emailError) {
-      setErrors({ email: emailError });
-      return;
-    }
-    setErrors({});
-    await changeEmailOtpMutation.mutateAsync(formData.email);
-    setOtpDialog((prev) => ({ ...prev, isOpen: true, purpose: "email" }));
-  };
-
-  const handlePasswordSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const newErrors: FormErrors = {};
-    const currentError = validatePassword(formData.currentPassword);
-    const newError = validatePassword(formData.newPassword, true);
-
-    if (currentError) newErrors.currentPassword = currentError;
-    if (newError) newErrors.newPassword = newError;
-    if (formData.currentPassword === formData.newPassword) {
-      newErrors.newPassword =
-        "New password must be different from current password";
-    }
-
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return;
-    }
-
-    setErrors({});
-    await changeEmailOtpMutation.mutateAsync(formData.email);
-    setOtpDialog((prev) => ({ ...prev, isOpen: true, purpose: "password" }));
   };
 
   return (
@@ -192,99 +130,22 @@ export default function SettingsForm() {
         </p>
       </div>
 
-      {/* Change Email */}
-      <Card className="p-4">
-        <CardHeader>
-          <CardTitle>Email Address</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleEmailSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="email">New Email Address</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="Enter your new email address"
-                value={formData.email}
-                onChange={(e) => updateFormData("email", e.target.value)}
-                className={errors.email ? "border-destructive" : ""}
-              />
-              {errors.email && (
-                <Alert variant="destructive">
-                  <AlertDescription>{errors.email}</AlertDescription>
-                </Alert>
-              )}
-            </div>
-            <Button
-              type="submit"
-              disabled={!formData.email.trim() || isLoading}
-              className="w-full sm:w-auto">
-              Update Email
-            </Button>
-          </form>
-        </CardContent>
-      </Card>
+      {/* Change Email: logic lama tetap */}
+      <ChangeEmailForm
+        formData={formData}
+        setFormData={setFormData}
+        changeEmailOtpMutation={changeEmailOtpMutation}
+        setOtpDialog={setOtpDialog}
+        isLoading={isLoading}
+      />
 
-      {/* Change Password */}
-      <Card className="p-4">
-        <CardHeader>
-          <CardTitle>Password</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handlePasswordSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="currentPassword">Current Password</Label>
-              <Input
-                id="currentPassword"
-                type="password"
-                placeholder="Enter your current password"
-                value={formData.currentPassword}
-                onChange={(e) =>
-                  updateFormData("currentPassword", e.target.value)
-                }
-                className={errors.currentPassword ? "border-destructive" : ""}
-              />
-              {errors.currentPassword && (
-                <Alert variant="destructive">
-                  <AlertDescription>{errors.currentPassword}</AlertDescription>
-                </Alert>
-              )}
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="newPassword">New Password</Label>
-              <Input
-                id="newPassword"
-                type="password"
-                placeholder="Enter your new password"
-                value={formData.newPassword}
-                onChange={(e) => updateFormData("newPassword", e.target.value)}
-                className={errors.newPassword ? "border-destructive" : ""}
-              />
-              {errors.newPassword && (
-                <Alert variant="destructive">
-                  <AlertDescription>{errors.newPassword}</AlertDescription>
-                </Alert>
-              )}
-              <p className="text-sm text-muted-foreground">
-                Password must be at least 8 characters with uppercase,
-                lowercase, and number
-              </p>
-            </div>
-
-            <Button
-              type="submit"
-              disabled={
-                !formData.currentPassword.trim() ||
-                !formData.newPassword.trim() ||
-                isLoading
-              }
-              className="w-full sm:w-auto">
-              {isLoading ? "Updating..." : "Update Password"}
-            </Button>
-          </form>
-        </CardContent>
-      </Card>
+      <ChangePasswordForm
+        formData={formData}
+        setFormData={setFormData}
+        newOtpMutation={newOtpMutation}
+        setOtpDialog={setOtpDialog}
+        isLoading={isLoading}
+      />
 
       {/* OTP Dialog */}
       <Dialog

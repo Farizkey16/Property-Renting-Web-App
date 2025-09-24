@@ -77,14 +77,13 @@ const TenantDashboard = () => {
   if (!tenant) return <p className="p-4">No tenant data found</p>;
 
   return (
-    <div className="flex-1 p-4 lg:p-2">
-      <Card className="w-full max-w-4xl mx-auto p-4">
-        <CardHeader className="pb-4">
-          <CardTitle className="text-xl font-semibold">
+    <div className="flex-1 p-4 lg:p-8">
+      <Card className="w-full max-w-7xl mx-auto p-8">
+        <CardHeader className="pb-4 lg:pb-6">
+          <CardTitle className="text-xl lg:text-2xl font-semibold">
             Tenant Information
           </CardTitle>
         </CardHeader>
-
         <CardContent>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div>

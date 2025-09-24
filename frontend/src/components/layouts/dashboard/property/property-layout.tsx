@@ -12,6 +12,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
 import { RoomList } from "../room/room-list";
 import LoadingSpinner from "@/components/fragment/loading-error/LoadingSpinner";
+import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 const PropertyLayout = () => {
   const { data, isLoading, isError } = usePropertyByTenant();
@@ -25,10 +27,8 @@ const PropertyLayout = () => {
   return (
     <main className="flex-1 overflow-auto p-6">
       <div className="space-y-6">
-        {/* Property Cards */}
         <h1 className="text-2xl font-bold">List of Properties</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {/* Card "Add New Property" */}
           <Link href="/dashboard/property/create">
             <Card className="overflow-hidden cursor-pointer hover:shadow-lg transition">
               <CardContent className="flex flex-col items-center justify-center h-80 text-muted-foreground">
@@ -52,23 +52,25 @@ const PropertyLayout = () => {
               editHref={`/dashboard/property/edit/${property.id}`}
               onDelete={() => {
                 deleteProperty(property.id);
+                toast.success("Property deleted!");
               }}
             />
           ))}
         </div>
       </div>
 
-      {/* Rooms per property */}
       <div className="mt-10 space-y-6">
         {properties.map((property) => (
           <div key={property.id}>
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-semibold">{property.name} - Rooms</h2>
-              <Link
-                href={`/dashboard/property/room/create/${property.id}`}
-                className="text-sm text-blue-500 hover:underline">
-                + Add New Room
-              </Link>
+              <Button asChild className="bg-blue-500">
+                <Link
+                  href={`/dashboard/property/room/create/${property.id}`}
+                  className="text-sm text-blue-500 hover:underline">
+                  + Add New Room
+                </Link>
+              </Button>
             </div>
             <RoomList rooms={property.rooms || []} />
           </div>

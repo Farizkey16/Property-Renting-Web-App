@@ -38,6 +38,27 @@ export const useRoomSearch = (
   });
 };
 
+export const useRoomPricing = (
+  propertyname?: string,
+  roomname?: string,
+  checkIn?: string,
+  checkOut?: string
+) => {
+  return useQuery({
+    queryKey: ["roomPricing", propertyname, roomname, checkIn, checkOut],
+    queryFn: () => fetchRoomsByQuery(propertyname, roomname, checkIn, checkOut),
+    enabled: !!propertyname && !!roomname && !!checkIn && !!checkOut,
+    select: (data) => {
+      if (!data) return null;
+      return {
+        base_price: data.base_price,
+        total: data.pricing?.total,
+        peak_season_rates: data.peak_season_rates,
+      };
+    },
+  });
+};
+
 export const useRoomDetailSearch = (
   propertyname?: string,
   roomname?: string
@@ -74,8 +95,8 @@ export const useDeleteRoom = () => {
     onError: (error) => {
       console.error("Failed to delete room:", error);
       alert("Error: Could not delete the room.");
-  },
-});
+    },
+  });
 };
 
 export const useRoomAvailability = (params: RoomAvailabilityParams) => {

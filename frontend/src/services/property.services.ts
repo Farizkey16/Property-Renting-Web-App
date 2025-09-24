@@ -136,9 +136,13 @@ export const updatePropertyService = async (
 };
 
 export const softDeletePropertyService = async (id: string) => {
-  const response = await axios.patch(`${BASE_URL}/property/delete/${id}`, {
-    withCredentials: true,
-  });
+  const response = await axios.patch(
+    `${BASE_URL}/property/delete/${id}`,
+    {},
+    {
+      withCredentials: true,
+    }
+  );
   console.log(response.data);
   return response.data;
 };

@@ -70,7 +70,9 @@ export default function LoginPage() {
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               {/* Email */}
               <div>
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email" className="mb-2">
+                  Email
+                </Label>
                 <Input
                   id="email"
                   type="email"
@@ -84,9 +86,10 @@ export default function LoginPage() {
                 )}
               </div>
 
-              {/* Password with eye toggle */}
               <div>
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="password" className="mb-2">
+                  Password
+                </Label>
                 <div className="relative">
                   <Input
                     id="password"
@@ -115,7 +118,7 @@ export default function LoginPage() {
               {/* Submit */}
               <Button
                 type="submit"
-                className="w-full curson-pointer"
+                className="w-full cursor-pointer"
                 disabled={isPending}>
                 {isPending ? "Loading..." : "Login"}
               </Button>

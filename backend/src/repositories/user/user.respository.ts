@@ -21,10 +21,12 @@ export const changePasswordUser = async (
 };
 
 export const getEmailById = async (userId: string) => {
+  console.log("Looking for user:", userId);
   const user = await prisma.users.findUnique({
     where: { id: userId },
     select: { email: true },
   });
+  console.log("DB result:", user);
   return user?.email;
 };
 

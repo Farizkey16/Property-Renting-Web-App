@@ -102,10 +102,20 @@ class RoomsController {
           }
         : undefined;
 
+      const custom_peaks = req.body.custom_peaks
+        ? req.body.custom_peaks.map((p: any) => ({
+            start_date: new Date(p.start_date),
+            end_date: new Date(p.end_date),
+            type: p.type as "percentage" | "nominal",
+            value: Number(p.value),
+          }))
+        : [];
+
       const response = await createRoomService(
         req.body,
         req.files as Express.Multer.File[],
-        weekend_peak
+        weekend_peak,
+        custom_peaks
       );
       res
         .status(200)
@@ -122,6 +132,7 @@ class RoomsController {
   ): Promise<void> {
     try {
       const { id } = req.params;
+
       const weekend_peak = req.body.weekend_peak
         ? {
             type: req.body.weekend_peak.type as "percentage" | "nominal",
@@ -129,14 +140,25 @@ class RoomsController {
           }
         : undefined;
 
+      const custom_peaks = req.body.custom_peaks
+        ? req.body.custom_peaks.map((p: any) => ({
+            start_date: new Date(p.start_date),
+            end_date: new Date(p.end_date),
+            type: p.type as "percentage" | "nominal",
+            value: Number(p.value),
+          }))
+        : [];
+
       const response = await updateRoomService(
         id,
         req.body,
         req.files as Express.Multer.File[],
-        weekend_peak
+        weekend_peak,
+        custom_peaks
       );
+
       res.status(200).send({
-        message: "Room updated suscessfully",
+        message: "Room updated successfully",
         success: true,
         response,
       });

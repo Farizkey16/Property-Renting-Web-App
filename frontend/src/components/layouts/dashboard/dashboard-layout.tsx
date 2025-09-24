@@ -30,7 +30,7 @@ const sidebarTenant = [
 
 const sidebarUser = [
   { icon: LayoutDashboard, label: "Profile", link: "/dashboard" },
-  { icon: Building, label: "Past Bookings", link: "/dashboard/history" },
+  { icon: Building, label: "Past Bookings", link: "/dashboard/pastbookings" },
   { icon: Grid3X3, label: "Bookings", link: "/dashboard/bookings" },
 ];
 

@@ -26,6 +26,7 @@ export const fetchRoomsByQuery = async (
   if (!response.data.response || response.data.response.length === 0) {
     return null;
   }
+  console.log(response.data.response[0]);
 
   return response.data.response[0];
 };
@@ -54,6 +55,14 @@ export const createRoom = async (room: CreateRoomType) => {
     formData.append("weekend_peak[type]", room.weekend_peak.type);
     formData.append("weekend_peak[value]", room.weekend_peak.value.toString());
   }
+  if (room.custom_peaks && room.custom_peaks.length > 0) {
+    room.custom_peaks.forEach((peak, index) => {
+      formData.append(`custom_peaks[${index}][start_date]`, peak.start_date);
+      formData.append(`custom_peaks[${index}][end_date]`, peak.end_date);
+      formData.append(`custom_peaks[${index}][type]`, peak.type);
+      formData.append(`custom_peaks[${index}][value]`, peak.value.toString());
+    });
+  }
 
   room.image.forEach((file) => {
     formData.append("images", file);
@@ -77,30 +86,45 @@ export const fetchRoomById = async (id: string) => {
 };
 
 export const editRoom = async (id: string, room: EditRoomType) => {
-  const formdata = new FormData();
-  formdata.append("name", room.name);
-  formdata.append("description", room.description);
-  formdata.append("base_price", room.base_price.toString());
-  formdata.append("capacity", room.capacity.toString());
-  formdata.append("total_rooms", room.total_rooms.toString());
-  formdata.append("weekend_peak", JSON.stringify(room.weekend_peak));
-
+  const formData = new FormData();
+  formData.append("name", room.name);
+  formData.append("description", room.description);
+  formData.append("base_price", room.base_price.toString());
+  formData.append("capacity", room.capacity.toString());
+  formData.append("total_rooms", room.total_rooms.toString());
+  formData.append("property_id", room.property_id.toString());
+  if (room.weekend_peak) {
+    formData.append("weekend_peak[type]", room.weekend_peak.type);
+    formData.append("weekend_peak[value]", room.weekend_peak.value.toString());
+  }
+  if (room.custom_peaks && room.custom_peaks.length > 0) {
+    room.custom_peaks.forEach((peak, index) => {
+      formData.append(`custom_peaks[${index}][start_date]`, peak.start_date);
+      formData.append(`custom_peaks[${index}][end_date]`, peak.end_date);
+      formData.append(`custom_peaks[${index}][type]`, peak.type);
+      formData.append(`custom_peaks[${index}][value]`, peak.value.toString());
+    });
+  }
   room.image.forEach((file) => {
-    formdata.append("images", file);
+    formData.append("images", file);
   });
 
   if (room.oldImages && room.oldImages.length > 0) {
     room.oldImages.forEach((url) => {
-      formdata.append("oldImages", url);
+      formData.append("oldImages", url);
     });
   }
 
-  const response = await axios.patch(`${BASE_URL}/room/edit/${id}`, formdata, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-    withCredentials: true,
-  });
+  const response = await axios.patch(
+    `${BASE_URL}/room/update/${id}`,
+    formData,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      withCredentials: true,
+    }
+  );
 
   console.log(response.data);
   return response.data;

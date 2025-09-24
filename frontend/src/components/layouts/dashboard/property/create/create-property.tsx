@@ -98,14 +98,13 @@ export default function CreatePropertyForm() {
   }, [setValue]);
 
   return (
-    <div className="flex-1 p-4 lg:p-8 space-y-8">
-      <Card className="w-full max-w-4xl mx-auto p-8">
-        <CardHeader className="pb-4">
-          <CardTitle className="text-xl font-semibold">
+    <div className="flex-1 p-4 lg:p-8">
+      <Card className="w-full max-w-7xl mx-auto p-8 ">
+        <CardHeader className="pb-4 lg:pb-6">
+          <CardTitle className="text-xl lg:text-2xl font-semibold">
             Create New Property
           </CardTitle>
         </CardHeader>
-
         <CardContent>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             {/* Basic fields */}

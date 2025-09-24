@@ -24,6 +24,7 @@ import { useUpdateProperty, usePropertyById } from "@/hooks/useProperty";
 
 import { ViewState } from "react-map-gl/mapbox";
 import PropertyMap from "../PropertyMap";
+import LoadingSpinner from "@/components/fragment/loading-error/LoadingSpinner";
 
 const EditPropertyForm = () => {
   const router = useRouter();
@@ -104,7 +105,6 @@ const EditPropertyForm = () => {
     }
   }, [property, reset]);
 
-  // kalau klik map update latitude/longitude
   const handleSelectLocation = (lat: number, lng: number) => {
     setValue("latitude", lat.toString());
     setValue("longitude", lng.toString());
@@ -136,13 +136,15 @@ const EditPropertyForm = () => {
     );
   };
 
-  if (isLoading) return <p className="p-4">Loading...</p>;
+  if (isLoading) return <LoadingSpinner />;
 
   return (
-    <div className="flex-1 p-4 lg:p-8 space-y-8">
-      <Card className="w-full max-w-4xl mx-auto p-8">
-        <CardHeader className="pb-4">
-          <CardTitle className="text-xl font-semibold">Edit Property</CardTitle>
+    <div className="flex-1 p-4 lg:p-8">
+      <Card className="w-full max-w-7xl mx-auto p-8">
+        <CardHeader className="pb-4 lg:pb-6">
+          <CardTitle className="text-xl lg:text-2xl font-semibold">
+            Edit Property
+          </CardTitle>
         </CardHeader>
 
         <CardContent>

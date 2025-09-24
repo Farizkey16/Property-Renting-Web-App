@@ -12,29 +12,13 @@ import {
 
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useRoomSearch } from "@/hooks/useRoom";
-import { formatCurrency } from "@/lib/utils";
+import { useRoomPricing, useRoomSearch } from "@/hooks/useRoom";
 import { DateRange } from "react-day-picker";
 import { addDays, format, startOfDay } from "date-fns";
 import { CardBookingSkeleton } from "@/components/fragment/loading-error/PropertyDetailSkeleton";
 import { DatePickerWithRange } from "@/components/fragment/date-picker/DatePickerPopover";
 import { GuestPicker } from "@/components/ui/GuestPicker";
-
-interface Review {
-  id: string;
-  userName: string;
-  userAvatar: string;
-  yearsOnPlatform: number;
-  rating: number;
-  date: string;
-  content: string;
-  isExpanded?: boolean;
-}
-
-interface ReviewsCardProps {
-  reviews: Review[];
-  reviewsPerPage?: number;
-}
+import { PeakRate, PriceSection } from "./PriceSection";
 
 export default function BookingSectionPage() {
   const router = useRouter();
@@ -68,6 +52,7 @@ export default function BookingSectionPage() {
     rooms: 1,
   });
 
+  const [hasSelectedDate, setHasSelectedDate] = useState(false);
   useEffect(() => {
     const guestsParam = params.get("guests");
     const roomsParam = params.get("rooms");
@@ -90,6 +75,7 @@ export default function BookingSectionPage() {
       setOpen(true);
     }
   }, [params]);
+
   const checkInParam =
     params.get("checkIn") ?? format(todayDefault, "yyyy-MM-dd");
   const checkOutParam =
@@ -101,6 +87,39 @@ export default function BookingSectionPage() {
     checkInParam,
     checkOutParam
   );
+
+  const { data: priceData, isLoading: priceLoading } = useRoomPricing(
+    propertyname,
+    roomname,
+    hasSelectedDate ? format(dateRange!.from as Date, "yyyy-MM-dd") : undefined,
+    hasSelectedDate ? format(dateRange!.to as Date, "yyyy-MM-dd") : undefined
+  );
+
+  useEffect(() => {
+    if (hasSelectedDate && dateRange?.from && dateRange?.to) {
+      const timeoutId = setTimeout(() => {
+        const checkIn = format(dateRange.from as Date, "yyyy-MM-dd");
+        const checkOut = format(dateRange.to as Date, "yyyy-MM-dd");
+
+        const paramsObj = new URLSearchParams(window.location.search);
+        paramsObj.set("checkIn", checkIn);
+        paramsObj.set("checkOut", checkOut);
+
+        router.replace(`?${paramsObj.toString()}`, { scroll: false });
+      }, 2000);
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [dateRange, hasSelectedDate, router]);
+
+  if (isLoading) return <CardBookingSkeleton />;
+  if (isError) return <div className="p-8">Something went wrong</div>;
+
+  const propertyId = data?.property?.id;
+  const roomId = data?.id;
+
+  const totalGuests = guests.guests.toString();
+  const rooms = guests.rooms.toString();
 
   const handleSearchDate = () => {
     if (!dateRange?.from || !dateRange?.to) {
@@ -117,15 +136,6 @@ export default function BookingSectionPage() {
 
     router.replace(`?${paramsObj.toString()}`, { scroll: false });
   };
-
-  const propertyId = data?.property?.id;
-  const roomId = data?.id;
-
-  const totalGuests = guests.guests.toString();
-  const rooms = guests.rooms.toString();
-
-  if (isLoading) return <CardBookingSkeleton />;
-  if (isError) return <div className="p-8">Something went wrong</div>;
 
   const handleReserveNow = () => {
     if (!dateRange?.from || !dateRange?.to) {
@@ -149,35 +159,12 @@ export default function BookingSectionPage() {
           onClick={() => setOpen(true)}
           className="fixed bottom-0 left-0 w-full p-4 bg-white border-t shadow-lg z-40 lg:hidden cursor-pointer">
           <div className="flex justify-between items-center mt-4">
-            <div>
-              <span className="text-sm text-gray-600">From</span>
-              {data.pricing?.total ? (
-                <div className="flex flex-col">
-                  <span className="text-sm text-gray-500 line-through">
-                    {formatCurrency(data.base_price)}
-                  </span>
-                  <span className="text-2xl font-bold text-gray-900">
-                    {formatCurrency(data.pricing.total)}
-                  </span>
-                </div>
-              ) : (
-                <div className="text-2xl font-bold text-gray-900">
-                  {formatCurrency(data.base_price)}
-                </div>
-              )}
-            </div>
-
-            <div className="text-right">
-              {data.pricing?.total ? (
-                <span className="text-lg font-semibold text-green-600">
-                  Total Price
-                </span>
-              ) : data.peak_season_rates?.length > 0 ? (
-                <span className="text-lg font-semibold text-orange-500">
-                  Peak Rate
-                </span>
-              ) : null}
-            </div>
+            <PriceSection
+              basePrice={priceData?.base_price ?? data.base_price}
+              total={priceData?.total}
+              peakRates={priceData?.peak_season_rates}
+              loading={priceLoading}
+            />
           </div>
         </div>
       )}
@@ -199,8 +186,16 @@ export default function BookingSectionPage() {
             </div>
             <DatePickerWithRange
               date={dateRange}
-              onDateChange={setDateRange}
-              className="mt-4"
+              onDateChange={(range) => {
+                if (!range?.from || !range?.to) {
+                  setDateRange(undefined);
+                  setHasSelectedDate(false);
+                  return;
+                }
+
+                setDateRange(range);
+                setHasSelectedDate(true);
+              }}
             />
 
             <div className="flex items-center gap-2">
@@ -209,35 +204,12 @@ export default function BookingSectionPage() {
             <GuestPicker value={guests} onChange={setGuests} />
 
             <div className="flex justify-between items-center mt-4">
-              <div>
-                <span className="text-sm text-gray-600">From</span>
-                {data.pricing?.total ? (
-                  <div className="flex flex-col">
-                    <span className="text-sm text-gray-500 line-through">
-                      {formatCurrency(data.base_price)}
-                    </span>
-                    <span className="text-2xl font-bold text-gray-900">
-                      {formatCurrency(data.pricing.total)}
-                    </span>
-                  </div>
-                ) : (
-                  <div className="text-2xl font-bold text-gray-900">
-                    {formatCurrency(data.base_price)}
-                  </div>
-                )}
-              </div>
-
-              <div className="text-right">
-                {data.pricing?.total ? (
-                  <span className="text-lg font-semibold text-green-600">
-                    Total Price
-                  </span>
-                ) : data.peak_season_rates?.length > 0 ? (
-                  <span className="text-lg font-semibold text-orange-500">
-                    Peak Rate
-                  </span>
-                ) : null}
-              </div>
+              <PriceSection
+                basePrice={priceData?.base_price ?? data.base_price}
+                total={priceData?.total}
+                peakRates={priceData?.peak_season_rates}
+                loading={priceLoading}
+              />
             </div>
 
             <Button
@@ -269,44 +241,30 @@ export default function BookingSectionPage() {
               </div>
               <DatePickerWithRange
                 date={dateRange}
-                onDateChange={setDateRange}
+                onDateChange={(range) => {
+                  if (!range?.from || !range?.to) {
+                    setDateRange(undefined);
+                    setHasSelectedDate(false);
+                    return;
+                  }
+
+                  setDateRange(range);
+                  setHasSelectedDate(true);
+                }}
               />
 
               <div className="flex items-center gap-2 mt-4">
                 <span className="text-sm text-gray-600">Guests & Rooms</span>
               </div>
               <GuestPicker value={guests} onChange={setGuests} />
+
               <div className="flex justify-between items-center mt-4">
-                <div>
-                  <span className="text-sm text-gray-600">From</span>
-
-                  {data.pricing?.total ? (
-                    <div className="flex flex-col">
-                      <span className="text-sm text-gray-500 line-through">
-                        {formatCurrency(data.base_price)}
-                      </span>
-                      <span className="text-2xl font-bold text-gray-900">
-                        {formatCurrency(data.pricing.total)}
-                      </span>
-                    </div>
-                  ) : (
-                    <div className="text-2xl font-bold text-gray-900">
-                      {formatCurrency(data.base_price)}
-                    </div>
-                  )}
-                </div>
-
-                <div className="text-right">
-                  {data.pricing?.total ? (
-                    <span className="text-lg font-semibold text-green-600">
-                      Total Price
-                    </span>
-                  ) : data.peak_season_rates?.length > 0 ? (
-                    <span className="text-lg font-semibold text-orange-500">
-                      Peak Rate
-                    </span>
-                  ) : null}
-                </div>
+                <PriceSection
+                  basePrice={priceData?.base_price ?? data.base_price}
+                  total={priceData?.total}
+                  peakRates={priceData?.peak_season_rates}
+                  loading={priceLoading}
+                />
               </div>
 
               <Button

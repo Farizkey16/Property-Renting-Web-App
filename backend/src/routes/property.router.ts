@@ -44,7 +44,7 @@ class PropertyRouter {
     this.route.patch(
       "/delete/:id",
       verifyToken,
-      // onlyTenant,
+      onlyTenant,
       this.propertyController.deleteProperty
     );
   }

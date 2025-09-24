@@ -37,10 +37,14 @@ export function DeleteDialog({
           <p className="text-sm text-gray-600">{description}</p>
 
           <DialogFooter className="flex justify-end gap-2">
-            <Button variant="outline" onClick={() => setOpen(false)}>
+            <Button
+              variant="outline"
+              onClick={() => setOpen(false)}
+              className="cursor-pointer">
               No
             </Button>
             <Button
+              className="cursor-pointer"
               variant="destructive"
               onClick={() => {
                 onConfirm();

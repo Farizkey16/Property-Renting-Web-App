@@ -22,7 +22,7 @@ export const ButtonLogout = () => {
     <Button
       onClick={handleLogout}
       variant="destructive"
-      className="w-full "
+      className="w-full cursor-pointer "
       disabled={logoutMutation.isPending}>
       {logoutMutation.isPending ? "Logging out..." : "Logout"}
     </Button>

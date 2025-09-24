@@ -57,6 +57,7 @@ export const getPropertyByIdRepository = async (propertyId: string) => {
     where: { id: propertyId, deleted_at: null },
     include: {
       rooms: {
+        where: { deleted_at: null },
         select: {
           id: true,
           name: true,

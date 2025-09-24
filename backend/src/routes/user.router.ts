@@ -15,7 +15,7 @@ class UserRouter {
 
   private initializeRoutes() {
     this.route.get("/me", verifyToken, this.userController.getUserId);
-    this.route.post(
+    this.route.patch(
       "/otp-password",
       verifyToken,
       this.userController.otpChangePassword

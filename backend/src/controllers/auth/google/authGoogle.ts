@@ -20,7 +20,7 @@ class GoogleAuthController {
 
       const result = await handleGoogleCallback(code, res);
 
-      return res.redirect("http://localhost:3000");
+      return res.redirect(process.env.FRONTEND_URL!);
     } catch (error) {
       next(error);
     }

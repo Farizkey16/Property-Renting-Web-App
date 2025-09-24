@@ -3,6 +3,7 @@ import { transport } from "../../config/nodemailer";
 import AppError from "../../errors/AppError";
 import {
   createNewOtp,
+  createNewOtpChangePaaword,
   newOtpChangeEmailRepository,
 } from "../../repositories/auth/auth.repository";
 import {
@@ -40,7 +41,6 @@ export const resetPasswordUser = async (
 };
 
 export const otpPasswordServices = async (userId: string) => {
-  // generate otp
   const email = await getEmailById(userId);
 
   if (!email) {
@@ -48,11 +48,7 @@ export const otpPasswordServices = async (userId: string) => {
   }
 
   const verificationOtp = generatedOtp();
-  const otpPassword = await createNewOtp({
-    email,
-    reset_password_otp: verificationOtp,
-  });
-
+  const otpPassword = await createNewOtpChangePaaword(userId, verificationOtp);
   await transport.sendMail({
     from: process.env.EMAIL_USER,
     to: email,

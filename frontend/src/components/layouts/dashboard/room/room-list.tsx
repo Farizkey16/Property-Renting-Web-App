@@ -43,7 +43,6 @@ export function RoomList({ rooms }: RoomListProps) {
                 <th className="text-left py-3 px-3 font-medium text-muted-foreground">
                   Room
                 </th>
-
                 <th className="text-left py-3 px-3 font-medium text-muted-foreground">
                   Price
                 </th>
@@ -56,78 +55,91 @@ export function RoomList({ rooms }: RoomListProps) {
                 <th className="text-left py-3 px-3 font-medium text-muted-foreground">
                   Created At
                 </th>
-                <th />
-                <th className="text-left py-3 px-3 font-medium text-muted-foreground ">
+                <th className="text-center py-3 px-3 font-medium text-muted-foreground">
                   Actions
                 </th>
               </tr>
             </thead>
+
             <tbody>
-              {rooms.map((room, index) => (
-                <tr
-                  key={room.id}
-                  className="border-t hover:bg-muted/30 transition-colors">
-                  <td className="py-3 px-3">{index + 1}</td>
-                  <td className="py-3 px-3">
-                    <div className="flex items-center space-x-3">
-                      <Avatar className="w-9 h-9">
-                        <AvatarImage
-                          src={room.image || room.room_images?.[0]?.image_url}
-                          alt={room.name}
-                        />
-                        <AvatarFallback>
-                          {room.name?.slice(0, 2).toUpperCase()}
-                        </AvatarFallback>
-                      </Avatar>
-                      <span className="font-medium">{room.name}</span>
-                    </div>
-                  </td>
-                  <td className="py-3 px-3 text-muted-foreground">
-                    {formatCurrency(room.base_price)}
-                  </td>
-                  <td className="py-3 px-3">{room.capacity}</td>
-                  <td className="py-3 px-3">
-                    <Badge
-                      variant="secondary"
-                      className={
-                        statusColors[
-                          room.status as keyof typeof statusColors
-                        ] || "bg-gray-100 text-gray-800"
-                      }>
-                      {room.status || "Available"}
-                    </Badge>
-                  </td>
-                  <td className="py-3 px-3">
-                    {formatDate(room.created_at ?? "")}
-                  </td>
-                  <td className="flex justify-evenly items-center py-3 px-3  ">
-                    <Link href={`/dashboard/property/room/edit/${room.id}`}>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="cursor-pointer">
-                        <Pencil className="w-4 h-4" />
-                      </Button>
-                    </Link>
-                    <DeleteDialog
-                      title="Delete Room"
-                      description="Are you sure you want to delete this room?"
-                      onConfirm={async () => {
-                        await deleteRoom(room.id);
-                        alert("Room deleted successfully");
-                      }}
-                      trigger={
-                        <Button
-                          variant="destructive"
-                          size="icon"
-                          disabled={isPending}>
-                          <Trash2 className="w-4 h-4" />
-                        </Button>
-                      }
-                    />
+              {rooms.length === 0 ? (
+                <tr>
+                  <td
+                    colSpan={7}
+                    className="py-3 px-3 text-center text-muted-foreground">
+                    No rooms
                   </td>
                 </tr>
-              ))}
+              ) : (
+                rooms.map((room, index) => (
+                  <tr
+                    key={room.id}
+                    className="border-t hover:bg-muted/30 transition-colors">
+                    <td className="py-3 px-3">{index + 1}</td>
+                    <td className="py-3 px-3">
+                      <div className="flex items-center space-x-3">
+                        <Avatar className="w-9 h-9">
+                          <AvatarImage
+                            src={room.image || room.room_images?.[0]?.image_url}
+                            alt={room.name}
+                          />
+                          <AvatarFallback>
+                            {room.name?.slice(0, 2).toUpperCase()}
+                          </AvatarFallback>
+                        </Avatar>
+                        <span className="font-medium">{room.name}</span>
+                      </div>
+                    </td>
+                    <td className="py-3 px-3 text-muted-foreground">
+                      {formatCurrency(room.base_price)}
+                    </td>
+                    <td className="py-3 px-3">{room.capacity}</td>
+                    <td className="py-3 px-3">
+                      <Badge
+                        variant="secondary"
+                        className={
+                          statusColors[
+                            room.status as keyof typeof statusColors
+                          ] || "bg-gray-100 text-gray-800"
+                        }>
+                        {room.status || "Available"}
+                      </Badge>
+                    </td>
+                    <td className="py-3 px-3">
+                      {formatDate(room.created_at ?? "")}
+                    </td>
+                    <td className="py-3 px-3 text-center">
+                      <div className="flex items-center justify-center gap-8">
+                        <Link href={`/dashboard/property/room/edit/${room.id}`}>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="cursor-pointer">
+                            <Pencil className="w-4 h-4" />
+                          </Button>
+                        </Link>
+
+                        <DeleteDialog
+                          title="Delete Room"
+                          description="Are you sure you want to delete this room?"
+                          onConfirm={async () => {
+                            await deleteRoom(room.id);
+                            alert("Room deleted successfully");
+                          }}
+                          trigger={
+                            <Button
+                              variant="destructive"
+                              size="icon"
+                              disabled={isPending}>
+                              <Trash2 className="w-4 h-4" />
+                            </Button>
+                          }
+                        />
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
         </div>

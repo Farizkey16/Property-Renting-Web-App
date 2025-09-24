@@ -108,7 +108,14 @@ export const useUpdateProperty = () => {
 };
 
 export const useSoftDeleteProperty = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (id: string) => softDeletePropertyService(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["property-by-tenant"] });
+    },
+    onError: (error) => {
+      console.error("Delete failed:", error);
+    },
   });
 };

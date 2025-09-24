@@ -1,4 +1,4 @@
-import EditRoomForm from "@/components/layouts/dashboard/room/edit-room";
+import EditRoomForm from "@/components/layouts/dashboard/room/edit/edit-room";
 import React from "react";
 
 const EditRoomPage = () => {
