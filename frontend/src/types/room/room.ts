@@ -25,6 +25,12 @@ export interface ApiProperty {
   rooms: Room[];
 }
 
+export interface RoomAvailabilityParams {
+  roomId: string;
+  checkIn: string; 
+  checkOut: string; 
+}
+
 export interface CreateRoomType {
   property_id: string;
   name: string;

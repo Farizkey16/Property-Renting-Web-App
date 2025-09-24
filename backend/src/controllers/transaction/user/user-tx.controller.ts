@@ -12,6 +12,7 @@ import { eachDayOfInterval } from "date-fns";
 import { BookingStatus } from "../../../../prisma/generated/client";
 import { isValidBookingStatus } from "../../../types/transaction/transactions.types";
 import {
+  checkRoomInventory,
   FindProofImage,
   UpdateBookings,
 } from "../../../repositories/transaction/transaction.repository";
@@ -21,7 +22,7 @@ import { getFilteredBookings } from "../../../repositories/transaction/user-tx.r
 type Booking = Prisma.bookingsGetPayload<{}>;
 
 class UserTransactions {
-  public reservation = async (
+  public createBooking = async (
     req: Request,
     res: Response,
     next: NextFunction
@@ -30,8 +31,6 @@ class UserTransactions {
       const role = res.locals.decrypt;
 
       const userId = role.userId;
-      console.log("userId from token:", userId);
-
       const {
         propertyId,
         checkInDate,
@@ -42,31 +41,25 @@ class UserTransactions {
         totalPrice,
         subtotal,
         quantity,
+        fullName,
+        email,
       } = req.body;
 
       if (!propertyId || !checkInDate || !checkOutDate || !guests) {
         throw new AppError("Please enter the required fields", 400);
       }
 
-      // Checking Room Availability
-      const conflict_dates = await prisma.room_availability.findMany({
-        where: {
-          room_id: roomId,
-          date: {
-            gte: new Date(checkInDate),
-            lt: new Date(checkOutDate),
-          },
-          is_available: false,
-        },
-      });
+      const newBooking: Booking = await prisma.$transaction(async (tx) => {
+        const availableRooms = await checkRoomInventory(
+          tx,
+          roomId,
+          checkInDate,
+          checkOutDate,
+          quantity
+        );
 
-      if (conflict_dates.length > 0) {
-        throw new AppError("Room is not available", 409);
-      }
-
-      const createBooking: Booking = await prisma.$transaction(async (tx) => {
         // Create Booking Property
-        const newBookings = await tx.bookings.create({
+        const createBooking = await tx.bookings.create({
           data: {
             status: "waiting_confirmation",
             check_in_date: new Date(checkInDate),
@@ -121,14 +114,18 @@ class UserTransactions {
           )
         );
 
-        return newBookings;
+        return createBooking;
       });
 
       // Send Response
       res.status(201).json({
         success: true,
         message: "Booking successfully created.",
-        data: createBooking,
+        identity: {
+          fullName: fullName,
+          email: email,
+        },
+        data: newBooking,
       });
     } catch (error) {
       console.log(error);

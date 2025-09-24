@@ -18,7 +18,6 @@ export const getCurrentUser = async (): Promise<JwtPayload | null> => {
 
     try {
         const decoded = verify(token, process.env.TOKEN_KEY!) as JwtPayload
-        console.log("decoded is:", decoded, "token is:", token)
         return decoded
         
     } catch (error) {

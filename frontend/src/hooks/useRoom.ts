@@ -7,7 +7,8 @@ import {
   fetchRoomsDetailsByQuery,
   softDeleteRoom,
 } from "@/services/room.service";
-import { CreateRoomType, EditRoomType } from "@/types/room/room";
+import { getRoomAmountAvailable } from "@/services/transactions.services";
+import { CreateRoomType, EditRoomType, RoomAvailabilityParams } from "@/types/room/room";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const useRoom = () => {
@@ -76,3 +77,14 @@ export const useDeleteRoom = () => {
   },
 });
 };
+
+export const useRoomAvailability = (params: RoomAvailabilityParams) => {
+  const {roomId, checkIn, checkOut} = params
+  const queryClient = useQueryClient();
+
+  return useQuery({
+    queryKey: ['room', 'availability', roomId, checkIn, checkOut],
+    queryFn: () => getRoomAmountAvailable(params),
+    enabled: !!roomId && !!checkIn && !!checkOut
+  })
+}

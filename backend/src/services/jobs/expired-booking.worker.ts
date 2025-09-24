@@ -44,15 +44,3 @@ export const expireOverdueBookings = async () => {
     console.error(`Error running the [${EXPIRE_BOOKINGS_JOB}] job:`, error);
   }
 };
-
-// async function startExpiredBooking() {
-//   const boss = await getBoss();
-//   await boss.work(EXPIRE_BOOKINGS_JOB, expireOverdueBookings);
-//   await boss.schedule(EXPIRE_BOOKINGS_JOB, "*/1 * * * *");
-//   console.log(`Booking expiration scheduler started. Will run every minute.`);
-// }
-
-// startExpiredBooking().catch((error) => {
-//   console.error(`${EXPIRE_BOOKINGS_JOB} failed to start:`, error);
-//   process.exit(1);
-// });

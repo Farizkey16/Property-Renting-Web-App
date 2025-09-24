@@ -54,7 +54,7 @@ export default function RoomDetail({ data }: RoomDetailProps) {
             </h1>
             <div className="flex items-center gap-2 mt-2">
               <Star className="w-4 h-4 fill-current text-yellow-400" />
-              <span className="text-sm font-medium">{ratingDisplay.toFixed(1)}</span>
+              <span className="text-sm font-medium">{ratingDisplay > 0 ? ratingDisplay.toFixed(1) : "No ratings yet"}</span>
               <span className="text-sm text-gray-500">{`${reviewsCount} Ratings`}</span>
             </div>
           </div>

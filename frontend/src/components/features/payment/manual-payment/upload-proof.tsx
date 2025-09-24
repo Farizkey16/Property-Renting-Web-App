@@ -87,7 +87,7 @@ export const UploadProofFunction = ({
           <div className="border-2 border-dashed border-slate-300 rounded-lg p-8 text-center hover:border-slate-400 transition-colors">
             <input
               type="file"
-              accept="image/png, image/jpeg, image/jpg"
+              accept="image/png, image/jpg"
               onChange={onFileSelect}
               className="hidden"
               id="receipt-upload"
@@ -102,7 +102,7 @@ export const UploadProofFunction = ({
                     Click to upload receipt
                   </p>
                   <p className="text-sm text-slate-500">
-                    PNG, JPEG, or JPG up to 1MB
+                    PNG or JPG up to 1MB
                   </p>
                 </div>
               </div>

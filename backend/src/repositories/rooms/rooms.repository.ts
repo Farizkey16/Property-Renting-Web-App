@@ -275,6 +275,19 @@ export const getRoomByPropertyAndNameRepositoryDetail = async (
               reviews: true
             }
           },
+          bookings: {
+            include: {
+              booking_rooms: {
+                include: {
+                  room: {
+                    select: {
+                      id: true,
+                    }
+                  }
+                }
+              }
+            }
+          }
         },
       },
       room_images: true,

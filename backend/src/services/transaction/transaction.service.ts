@@ -1,9 +1,9 @@
 import { Prisma } from "@prisma/client";
+import { prisma } from "../../config/prisma";
 import AppError from "../../errors/AppError";
 import { findBookingRoomsByBookingId, updateProofImageRepository } from "../../repositories/transaction/tenant-tx.repository";
 import { sendEmail } from "../email.service";
 import {
-  findUserById,
   getEmailAndFullnameById,
 } from "../../repositories/user/user.respository";
 import {
@@ -13,43 +13,17 @@ import {
 } from "../../utils/emailTemplates";
 import { scheduler } from "../scheduler.service";
 import {
-  FindRooms,
-  Overlapping,
   FormattedRoom,
   BookingTemplateData,
   BookingRoomCompleteType,
   BookingWithDetails,
 } from "../../types/transaction/transactions.types";
-import { NextFunction } from "express";
 import { handleUpload } from "../../config/cloudinary";
 import { checkBookingAndUserId } from "../../repositories/transaction/user-tx.repository";
 
 type BookingRoomType = Awaited<
   ReturnType<typeof findBookingRoomsByBookingId>
 >[0];
-
-export const availableRooms = (
-  findRooms: FindRooms[],
-  overlappingBooking: Overlapping[],
-  tx: Prisma.TransactionClient
-) => {
-  const availability = findRooms.map((br) => {
-    const bookingQty = overlappingBooking
-      .filter((ovr) => ovr.room_id === br.room_id)
-      .reduce((acc, num) => acc + num.quantity, 0);
-
-    if (bookingQty + br.quantity > br.room.total_rooms) {
-      throw new AppError("Not enough rooms available to book.", 409);
-    }
-
-    return {
-      room_id: br.room_id,
-      available: br.room.total_rooms - bookingQty,
-    };
-  });
-
-  return availability;
-};
 
 export const sendUserBookingConfirmation = async (
   booking: BookingWithDetails
@@ -80,6 +54,7 @@ export const sendUserBookingConfirmation = async (
     booking_id: booking.id,
     propertyName: propertyName,
     rooms: formattedRooms,
+    email: user.email
   };
 
   await sendEmail(
@@ -92,19 +67,16 @@ export const sendUserBookingConfirmation = async (
 };
 
 export const scheduleReminder = async (bookingId: string) => {
-  const findCheckInDate = findBookingRoomsByBookingId(bookingId);
+  const bookings = await findBookingRoomsByBookingId(bookingId);
+  const firstBooking = bookings[0].created_at
 
-  interface BookingRoomCheckIn {
-    check_in_date: Date[];
-  }
+  if (bookings.length === 0) {
+  return; 
+}
+  
+  const reminderDate = new Date(firstBooking);
 
-  const checkInDate: Date[] = (
-    (await findCheckInDate) as BookingRoomCheckIn[]
-  ).map((ci) => ci.check_in_date[0]);
-  const reminderDate = new Date(checkInDate[0]);
-
-  reminderDate.setDate(reminderDate.getDate() - 1);
-  reminderDate.setHours(9, 0, 0, 0);
+  reminderDate.setMinutes(reminderDate.getDate() + 3);
 
   const boss = await scheduler();
   await boss.send(
@@ -146,6 +118,7 @@ export const sendRejectionNotification = async (
     booking_id: bookingId,
     propertyName: propertyName,
     rooms: formattedRooms,
+    email: user.email
   };
 
   await sendEmail(
@@ -154,6 +127,52 @@ export const sendRejectionNotification = async (
     BOOKING_REJECTION_TEMPLATE_SINGLE(templateData)
   );
 };
+
+export const getRoomAmount = async (roomId: string, checkIn: Date, checkOut: Date) => {
+
+const [room, overlapBookings] = await Promise.all([
+  prisma.rooms.findUnique({
+    where: {
+      id: roomId
+    }, select: {
+      total_rooms: true
+    }
+  }),
+
+  prisma.booking_rooms.findMany({
+    where: {
+      room_id: roomId,
+      booking: {
+        status: {
+          in: ["waiting_confirmation", "confirmed", "waiting_payment"]
+        }
+      },
+      check_in_date: {
+        lt: checkOut
+      },
+      check_out_date: {
+        gt: checkIn
+      }
+    },
+    select: {
+      quantity: true
+    }
+  })
+])
+
+if(!room){
+    return 0;
+  }
+
+  const totalInventory = room.total_rooms
+  const bookedQuantity = overlapBookings.reduce((sum, booking) => sum + booking.quantity, 0)
+
+  const availableInventory = totalInventory - bookedQuantity
+
+  return Math.max(0, availableInventory)
+
+
+}
 
 export const proofUploadService = async (
   userId: string,

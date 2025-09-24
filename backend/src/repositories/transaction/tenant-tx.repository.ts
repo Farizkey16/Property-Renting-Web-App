@@ -9,6 +9,7 @@ import {
   isValidSort,
   ProofImage,
 } from "../../types/transaction/transactions.types";
+import { scheduleBookingReminder } from "../../services/jobs/booking-reminder.worker";
 
 export const ValidateBooking = async (
   booking_id: string,
@@ -73,6 +74,7 @@ export const findBookingRoomsByBookingId = async (
       guests_count: true,
       nights: true,
       subtotal: true,
+      created_at: true,
       room: {
         select: {
           total_rooms: true,
@@ -332,6 +334,8 @@ export const acceptBookingPayment = async (
         booking_rooms: { include: { room: { select: { name: true } } } },
       },
     });
+
+    await scheduleBookingReminder(updatedBooking)
 
     return updatedBooking;
   });

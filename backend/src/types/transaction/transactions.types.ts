@@ -37,6 +37,7 @@ export type BookingTemplateData = {
   booking_id: string;
   propertyName: string;
   rooms: FormattedRoom[];
+  email: string;
 };
 
 export interface BookingRoomCompleteType {

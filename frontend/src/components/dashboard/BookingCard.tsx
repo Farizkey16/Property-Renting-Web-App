@@ -111,7 +111,7 @@ export const BookingCard = ({ booking, role }: BookingCardProps) => {
         );
         toast.success("Payment proof uploaded successfully!");
         setIsSuccessModalOpen(true);
-        router.push("/dashboard/bookings");
+        router.push("/dashboard/bookings?page=1&status=confirmed&sort=desc");
       } catch (error: any) {
         toast.error(
           error.response?.data?.message || "Upload failed. Please try again."
@@ -219,9 +219,9 @@ export const BookingCard = ({ booking, role }: BookingCardProps) => {
                     accept="image/png, image/jpg, image/jpeg"
                     style={{ display: "none" }}
                   />
-                  {role === "user" && booking.status === "waiting_payment" && (
+                  {role === "user" && (booking.status === "waiting_payment" || booking.status === "waiting_confirmation") && (
                     <Button size="sm" className="cursor-pointer" onClick={handleButtonClick}>
-                      Resubmit Payment Proof
+                      {!booking.proof_image ? "Submit Payment Proof" : "Resubmit Payment Proof"}
                     </Button>
                   )}
 

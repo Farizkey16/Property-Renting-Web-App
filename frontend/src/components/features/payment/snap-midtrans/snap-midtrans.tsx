@@ -24,7 +24,7 @@ export const SnapMidtrans = ({ bookingId }: SnapProps) => {
 
   const handleCloseModal = () => {
         setIsSuccessModalOpen(false);
-        router.push("/dashboard/bookings")
+        router.push("/dashboard/bookings?page=1&status=confirmed&sort=desc")
       }
 
   const handlePayment = async () => {

@@ -1,4 +1,3 @@
-import type { FetchBookingsParams } from "@/services/transactions.services";
 import {
   BookingStatus,
   isValidBookingStatus,

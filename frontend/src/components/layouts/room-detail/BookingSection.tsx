@@ -249,9 +249,6 @@ export default function BookingSectionPage() {
               You won&apos;t be charged until after your reservation begins.
               Cancellations are free up to 2 hours before.
             </div>
-            <Button variant="outline" className="w-full">
-              Request free tour
-            </Button>
           </div>
         </DialogContent>
       </Dialog>
@@ -321,9 +318,6 @@ export default function BookingSectionPage() {
                 You won&apos;t be charged until after your reservation begins.
                 Cancellations are free up to 2 hours before.
               </div>
-              <Button variant="outline" className="w-full mt-2">
-                Request free tour
-              </Button>
             </CardContent>
           </Card>
         </div>

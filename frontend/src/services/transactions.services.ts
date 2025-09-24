@@ -8,6 +8,7 @@ import {
 } from "@/types/transactions/transactions";
 import qs from "qs";
 import { cookies } from "next/headers";
+import { RoomAvailabilityParams } from "@/types/room/room";
 
 export interface FetchBookingsParams {
   status?: BookingStatus;
@@ -16,7 +17,7 @@ export interface FetchBookingsParams {
   endDate?: string;
   bookingId?: string;
   page?: number | string;
-  role?: "user" | "tenant"
+  role?: "user" | "tenant";
 }
 
 export type FlexibleBookingParams = Omit<FetchBookingsParams, "status"> & {
@@ -104,32 +105,6 @@ export const fetchUserBookingById = async (bookingId: string) => {
   }
 };
 
-// export const fetchUserBookings = async (searchParams: URLSearchParams) => {
-//   const endpoint = `${BASE_URL}/reservations/get`;
-//   const cookieStore = await cookies()
-//   const token = cookieStore.get("accessToken")?.value
-//   const response = await axios.get(endpoint, {
-//     params: searchParams,
-//     headers: {
-//       'Cookie': token ? `accessToken=${token}` : ''
-//     }
-//   });
-//   return response.data.data;
-// };
-
-// export const fetchTenantBookings = async (searchParams: URLSearchParams) => {
-//   const endpoint = `${BASE_URL}/payment/orders/tenant`;
-//   const cookieStore = await cookies()
-//   const token = cookieStore.get("accessToken")?.value
-//   const response = await axios.get(endpoint, {
-//     params: searchParams,
-//     headers: {
-//       'Cookie': token ? `accessToken=${token}` : ''
-//     }
-//   });
-//   return response.data;
-// };
-
 export const userCancelBookingById = async (bookingId: string) => {
   const response = await axios.patch(
     `${BASE_URL}/reservations/cancel/${bookingId}`,
@@ -142,11 +117,15 @@ export const userCancelBookingById = async (bookingId: string) => {
 };
 
 export const tenantCancelBookingById = async (id: string) => {
-  const response = await axios.patch(`${BASE_URL}/payment/cancel/${id}`, {}, {
-    withCredentials: true
-  })
-  return response.data
-}
+  const response = await axios.patch(
+    `${BASE_URL}/payment/cancel/${id}`,
+    {},
+    {
+      withCredentials: true,
+    }
+  );
+  return response.data;
+};
 
 export const paymentProofUpload = async (payload: {
   bookingId: string;
@@ -165,8 +144,7 @@ export const paymentProofUpload = async (payload: {
   try {
     const endpoint = `${BASE_URL}/reservations/proof/${bookingId}`;
     const response = await axios.patch(endpoint, formData, {
-      headers: {
-      },
+      headers: {},
       withCredentials: true,
     });
     return response.data;
@@ -177,15 +155,30 @@ export const paymentProofUpload = async (payload: {
 };
 
 export const tenantAcceptBookingById = async (id: string) => {
-  const response = await axios.patch(`${BASE_URL}/payment/accept/${id}`, {}, {
-    withCredentials: true
-  })
-  return response.data
-}
+  const response = await axios.patch(
+    `${BASE_URL}/payment/accept/${id}`,
+    {},
+    {
+      withCredentials: true,
+    }
+  );
+  return response.data;
+};
 
 export const tenantRejectBookingById = async (id: string) => {
-  const response = await axios.patch(`${BASE_URL}/payment/reject/${id}`, {}, {
-    withCredentials: true
-  })
-  return response.data
-}
+  const response = await axios.patch(
+    `${BASE_URL}/payment/reject/${id}`,
+    {},
+    {
+      withCredentials: true,
+    }
+  );
+  return response.data;
+};
+
+export const getRoomAmountAvailable = async (params: RoomAvailabilityParams) => {
+  const response = await axios.get(`${BASE_URL}/payment/room-availability`, {
+    params: params,
+  });
+  return response.data.data.availableCount
+};

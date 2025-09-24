@@ -31,7 +31,7 @@ const FileUpload = ({ onChange, initialPreview }: Props) => {
 
   return (
     <div>
-      <Input type="file" accept="image/*" onChange={handleFileChange} />
+      <Input type="file" accept="image/jpg, image/png" onChange={handleFileChange} />
       {preview && (
         <div className="mt-4">
           <Image

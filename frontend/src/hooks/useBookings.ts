@@ -45,26 +45,6 @@ export const useUserBookingByQuery = (bookingId: string | null | undefined) => {
   });
 };
 
-// export const useUserBookings = (filters: FetchBookingsParams, options: {enabled: boolean}) => {
-//    const { status, sort, startDate, endDate, bookingId, page } = filters;
-//   return useQuery({
-//     queryKey: ['bookings', 'user', status, sort, startDate, endDate, bookingId, page ],
-//     queryFn: () => fetchUserBookings(filters),
-//     placeholderData: keepPreviousData,
-//     enabled: options.enabled
-//   });
-// };
-
-// export const useTenantBookings = (filters: FetchBookingsParams, options: {enabled: boolean}) => {
-//   const { status, sort, startDate, endDate, bookingId, page } = filters;
-//   return useQuery({
-//     queryKey: ['bookings', 'tenant', status, sort, startDate, endDate, bookingId, page],
-//     queryFn: () => fetchTenantBookings(filters),
-//     placeholderData: keepPreviousData,
-//     enabled: options.enabled
-//   });
-// };
-
 export const useUserCancelBooking = () => {
   const queryClient = useQueryClient();
 
@@ -74,9 +54,9 @@ export const useUserCancelBooking = () => {
     onSuccess: () => {
       toast.success("Booking successfully canceled.");
 
-      queryClient.invalidateQueries({ queryKey: ["bookings"] });
+      queryClient.invalidateQueries({ queryKey: ["bookings"], exact:true });
       queryClient.refetchQueries({ queryKey: ["bookings"] });
-      queryClient.invalidateQueries({ queryKey: ["booking"] });
+      queryClient.invalidateQueries({ queryKey: ["booking"], exact:true });
       queryClient.refetchQueries({ queryKey: ["booking"] });
     },
 
@@ -95,8 +75,10 @@ export const useTenantCancelBooking = () => {
     onSuccess: () => {
       toast.success("Booking successfully canceled.");
 
-      queryClient.invalidateQueries({ queryKey: ["bookings"] });
-      queryClient.invalidateQueries({ queryKey: ["booking"] });
+      queryClient.invalidateQueries({ queryKey: ["bookings"], exact:true });
+      queryClient.refetchQueries({ queryKey: ["bookings"] });
+      queryClient.invalidateQueries({ queryKey: ["booking"], exact:true });
+      queryClient.refetchQueries({ queryKey: ["booking"] });
     },
 
     onError: (error) => {
@@ -114,8 +96,10 @@ export const useTenantAcceptBooking = () => {
     onSuccess: () => {
       toast.success("Booking successfully accepted.");
 
-      queryClient.invalidateQueries({ queryKey: ["bookings"] });
-      queryClient.invalidateQueries({ queryKey: ["booking"] });
+      queryClient.invalidateQueries({ queryKey: ["bookings"], exact:true });
+      queryClient.refetchQueries({ queryKey: ["bookings"] });
+      queryClient.invalidateQueries({ queryKey: ["booking"], exact:true });
+      queryClient.refetchQueries({ queryKey: ["booking"] });
     },
 
     onError: (error) => {

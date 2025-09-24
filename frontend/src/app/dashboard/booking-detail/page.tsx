@@ -4,7 +4,6 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
   Select,
   SelectContent,
@@ -13,20 +12,17 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Separator } from "@radix-ui/react-select";
 import { Users, Bed, Wifi, Coffee, Shield, Clock, X } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { usePropertyById } from "@/hooks/useProperty";
 import { format, parseISO } from "date-fns";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "sonner";
 
 import { usePriceQuote } from "@/hooks/usePriceQuote";
 import { formatCurrency } from "@/lib/utils";
 import { useMutation } from "@tanstack/react-query";
-import {
-  createBooking,
-  CreateBookingPayload,
-} from "@/services/transactions.services";
+import { createBooking } from "@/services/transactions.services";
+import { useRoomAvailability } from "@/hooks/useRoom";
 
 export default function BookingDetailsForm() {
   const [formData, setFormData] = useState({
@@ -41,15 +37,13 @@ export default function BookingDetailsForm() {
     mutationFn: createBooking,
 
     onSuccess: (data) => {
-      const bookingId = data.data.id
-    
-      console.log("Booking created successfully!", data);
-      console.log("ID is:", bookingId)
-      
-      router.push(`/dashboard/payment-page/${bookingId}`);
-      toast.success("Your booking has been made! Please proceed to payment.");
+      const bookingId = data.data.id;
 
+      console.log("Booking created successfully!", data);
+      console.log("ID is:", bookingId);
       
+      toast.success("Your booking has been made! Please proceed to payment.");
+      router.push(`/dashboard/payment-page/${bookingId}`);
     },
 
     onError: (error) => {
@@ -66,10 +60,17 @@ export default function BookingDetailsForm() {
   const property_id = searchParams.get("propertyId") ?? undefined;
   const room_id = searchParams.get("roomId");
   const guests = searchParams.get("guests");
-  const rooms = searchParams.get("rooms")
+  const rooms = searchParams.get("rooms");
 
-  if (!startDateString || !endDateString || !property_id || !room_id || !guests || !rooms) {
-    throw new Error("Query does not exist.")
+  if (
+    !startDateString ||
+    !endDateString ||
+    !property_id ||
+    !room_id ||
+    !guests ||
+    !rooms
+  ) {
+    throw new Error("Query does not exist.");
   }
 
   // Parse for Display
@@ -81,12 +82,27 @@ export default function BookingDetailsForm() {
   const { data: property, isLoading: isLoadingProperty } =
     usePropertyById(property_id);
 
-
   const { data: priceDetails, isLoading: isLoadingPrice } = usePriceQuote(
     room_id!,
     startDateString!,
     endDateString!
   );
+
+  const checkIn = startDateString;
+  const checkOut = endDateString;
+
+  const {
+    data: availableCount,
+    status,
+    isLoading,
+    isError,
+    error,
+  } = useRoomAvailability({
+    roomId: room_id,
+    checkIn,
+    checkOut: checkOut,
+  });
+  console.log("DEBUG: Query Status:", { status, isLoading, isError, error, availableCount });
 
   const selectedRoom = property?.rooms?.find((r) => r.id === room_id);
 
@@ -94,16 +110,22 @@ export default function BookingDetailsForm() {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-
   const handleContinue = () => {
     const checkInDate = searchParams.get("checkIn");
     const checkOutDate = searchParams.get("checkOut");
     const propertyId = searchParams.get("propertyId") ?? undefined;
     const roomId = searchParams.get("roomId");
     const guests = searchParams.get("guests");
-    const quantity = searchParams.get("rooms")
+    const quantity = searchParams.get("rooms");
 
-    if (!propertyId || !roomId || !checkInDate || !checkOutDate || !guests || !quantity) {
+    if (
+      !propertyId ||
+      !roomId ||
+      !checkInDate ||
+      !checkOutDate ||
+      !guests ||
+      !quantity
+    ) {
       alert(
         "Error: Booking information is incomplete in the URL. Cannot proceed."
       );
@@ -134,9 +156,7 @@ export default function BookingDetailsForm() {
       {/* Header */}
       <div className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 py-4">
-          <div className="flex items-center gap-4">
-
-          </div>
+          <div className="flex items-center gap-4"></div>
         </div>
       </div>
 
@@ -270,7 +290,6 @@ export default function BookingDetailsForm() {
               </CardContent>
             </Card>
 
-                
             <Button
               onClick={handleContinue}
               className="w-full bg-green-600 hover:bg-green-700 text-white py-3 text-base font-medium"
@@ -281,9 +300,9 @@ export default function BookingDetailsForm() {
           </div>
 
           {/* Right Column - Booking Summary */}
-          <div className="space-y-6">
+          <div className="space-y-4">
             {/* Hotel Images */}
-            <Card className="overflow-hidden">
+            <Card className="overflow-hidden h-full">
               <div className="relative">
                 <img
                   src={property?.main_image}
@@ -291,22 +310,11 @@ export default function BookingDetailsForm() {
                   className="w-full h-48 object-cover"
                 />
               </div>
-              <CardContent className="p-4">
-                <div className="flex items-center gap-2 mb-2">
-                  <h3 className="font-semibold text-lg">{property?.name}</h3>
-                  <div className="flex text-yellow-400">{"★".repeat(4)}</div>
+              <CardContent className="p-4 space-y-3">
+                <div className="flex flex-col mb-2">
+                  <h3 className="font-semibold text-lg">{property?.name} - </h3>
+                  <h4 className="font-semibold mb-2">{selectedRoom?.name}</h4>
                 </div>
-                <div className="flex items-center text-sm text-gray-600 mb-2">
-                  <span className="text-yellow-500 mr-1">★</span>
-                  <span className="font-medium">8.5</span>
-                  <span className="ml-1">(3183)</span>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Booking Details */}
-            <Card>
-              <CardContent className="p-4 space-y-4">
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div>
                     <p className="text-gray-600">Check-in</p>
@@ -322,15 +330,9 @@ export default function BookingDetailsForm() {
                 <div className="text-sm">
                   <p className="text-gray-600">{`${priceDetails?.nights} night(s)`}</p>
                 </div>
-
-                <Separator />
-
                 <div>
-                  <h4 className="font-semibold mb-2">
-                    (1x) {selectedRoom?.name}
-                  </h4>
                   <p className="text-red-600 text-sm font-medium mb-3">
-                    1 room(s) left!
+                    {`${availableCount} room(s) left!`}
                   </p>
 
                   <div className="space-y-2 text-sm text-gray-600">
@@ -348,9 +350,6 @@ export default function BookingDetailsForm() {
                     </div>
                   </div>
                 </div>
-
-                <Separator />
-
                 <div className="space-y-2">
                   <div className="flex justify-between items-center">
                     <span className="font-semibold">Total Room Price</span>
@@ -364,7 +363,8 @@ export default function BookingDetailsForm() {
                     </div>
                   </div>
                   <p className="text-sm text-gray-600">
-                    {`${rooms}`} room(s), {`${priceDetails?.nights} night(s)`}
+                    {`${availableCount}`} room(s),{" "}
+                    {`${priceDetails?.nights} night(s)`}
                   </p>
                 </div>
               </CardContent>

@@ -2,16 +2,17 @@ import { Router } from "express";
 import TenantTransactions from "../controllers/transaction/tenant/tenant-tx.controller";
 import { onlyTenant } from "../middleware/by-role/tenantMiddleware";
 import { verifyToken } from "../middleware/VerifyToken";
-import BookingReviews from "../controllers/reviews/review.controller";
-import SalesReport from "../controllers/tenant-report/tenant-report.controller";
+import UserSalesReport from "../controllers/tenant-report/user-sales-report.controller";
 
 class TenantTransactionsRouter {
   private route: Router;
   private tenantTrx: TenantTransactions;
+  private userSalesReport: UserSalesReport
 
   constructor() {
     this.route = Router();
     this.tenantTrx = new TenantTransactions();
+    this.userSalesReport = new UserSalesReport();
 
     this.initializeRoutes();
   }
@@ -27,6 +28,9 @@ class TenantTransactionsRouter {
       verifyToken,
       this.tenantTrx.getReservations
     );
+
+    this.route.get("/room-availability", this.tenantTrx.getRoomAmountAvailable);
+    this.route.get("/user/report", verifyToken, this.userSalesReport.getUserSales)
 
     this.route.patch(
       "/accept/:id",

@@ -5,17 +5,14 @@ import {
   acceptBookingPayment,
   findBookingByIdRepository,
   findBookingIncludeBookingRooms,
-  findBookingRoomsByBookingId,
-  FindProofImage,
   getOrderRepository,
-  OverlappingBooking,
   UpdateBookings,
   UpdateRoomAvailability,
   ValidateBooking,
 } from "../../../repositories/transaction/tenant-tx.repository";
 import { getEmailAndFullnameById } from "../../../repositories/user/user.respository";
 import {
-  availableRooms,
+  getRoomAmount,
   scheduleReminder,
   sendRejectionNotification,
   sendUserBookingConfirmation,
@@ -24,6 +21,7 @@ import { Prisma } from "../../../../prisma/generated/client";
 import { isValidBookingStatus } from "../../../types/transaction/transactions.types";
 import { getFilteredBookings } from "../../../repositories/transaction/user-tx.repository";
 import { getDatesBetween } from "../../../utils/getDatesBetween";
+import { scheduleBookingReminder } from "../../../services/jobs/booking-reminder.worker";
 
 class TenantTransactions {
   public acceptPayment = async (
@@ -44,9 +42,6 @@ class TenantTransactions {
       // Send Booking Confirmation
       await sendUserBookingConfirmation(updatedBooking);
 
-      // Scheduling Reminder
-      await scheduleReminder(bookingId);
-
       res.json({
         message: "Payment successful, booking created",
         data: updatedBooking,
@@ -66,7 +61,7 @@ class TenantTransactions {
 
       const bookingId = req.params.id;
 
-      console.log("Fetching from bookingId:", bookingId)
+      console.log("Fetching from bookingId:", bookingId);
 
       if (!bookingId) {
         throw new AppError("Invalid transaction ID", 400);
@@ -80,23 +75,20 @@ class TenantTransactions {
 
         const userId = await UpdateBookings(bookingId, "waiting_payment", tx);
 
-        const booking = await findBookingIncludeBookingRooms(bookingId, tx)
+        const booking = await findBookingIncludeBookingRooms(bookingId, tx);
 
-        const datesToUpdate = getDatesBetween(booking.check_in_date, booking.check_out_date)
-        
-        const roomId = booking.booking_rooms.room_id
+        const datesToUpdate = getDatesBetween(
+          booking.check_in_date,
+          booking.check_out_date
+        );
 
+        const roomId = booking.booking_rooms.room_id;
 
         // Validate user
         const user = await getEmailAndFullnameById(userId);
 
         // Update Availability
-        await UpdateRoomAvailability(
-          roomId,
-          datesToUpdate,
-          true,
-          tx
-        );
+        await UpdateRoomAvailability(roomId, datesToUpdate, true, tx);
 
         return { userId, user };
       });
@@ -124,27 +116,6 @@ class TenantTransactions {
       if (!bookingId) {
         throw new AppError("Invalid booking ID", 400);
       }
-
-      // // Find Payment Proof
-      // const result = await FindProofImage(bookingId);
-
-      // if (!result) {
-      //   throw new AppError("The booking does not exist.", 404);
-      // } else {
-      //   if (result.proof_image) {
-      //     console.log(
-      //       "Proof image exists, booking cannot be cancelled.",
-      //       result.proof_image
-      //     );
-      //     return;
-      //   } else {
-      //     console.log(
-      //       "Booking exists, but a proof image has not been uploaded yet. Cancelling booking..."
-      //     );
-      //   }
-      // }
-
-      // console.log("proof:", result);
 
       // Update Status to Canceled
       const cancelledBooking = await UpdateBookings(
@@ -323,13 +294,11 @@ class TenantTransactions {
           data: [],
         });
       }
-      res
-        .status(200)
-        .json({
-          success: true,
-          message: "Reservations successfully fetched.",
-          data: bookings,
-        });
+      res.status(200).json({
+        success: true,
+        message: "Reservations successfully fetched.",
+        data: bookings,
+      });
     } catch (error) {
       next(error);
     }
@@ -396,19 +365,29 @@ class TenantTransactions {
               },
             },
           },
+          user: {
+            select: {
+              full_name: true,
+              email: true,
+            },
+          },
         },
       });
 
       const events = bookings.flatMap((booking) => {
         return booking.booking_rooms.map((br) => {
           return {
-            id: booking.id,
             title: `${br.room.name} - Booked`,
             start: booking.check_in_date,
             end: booking.check_out_date,
             backgroundColor:
               booking.status === "confirmed" ? "#CA3433" : "#16A34A",
             borderColor: booking.status === "confirmed" ? "#CA3433" : "#16A34A",
+            extendedProps: {
+              name: booking.user.full_name,
+              email: booking.user.email,
+              id: booking.id,
+            },
           };
         });
       });
@@ -417,6 +396,41 @@ class TenantTransactions {
         success: true,
         message: "Availability successfully fetched.",
         data: events,
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public getRoomAmountAvailable = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const { roomId, checkIn, checkOut } = req.query;
+
+      console.log("checking query:", roomId, checkIn, checkOut);
+
+      if (!roomId || !checkIn || !checkOut) {
+        throw new AppError(
+          "roomId, checkIn, and checkOut are required query parameters.",
+          400
+        );
+      }
+
+      const availableRooms = await getRoomAmount(
+        String(roomId),
+        new Date(String(checkIn)),
+        new Date(String(checkOut))
+      );
+
+      res.status(200).json({
+        success: true,
+        data: {
+          roomId: roomId,
+          availableCount: availableRooms,
+        },
       });
     } catch (error) {
       next(error);

@@ -18,11 +18,11 @@ class UserTransactionsRouter {
         this.initializeRoutes()}
 
         private initializeRoutes() {
-            this.route.post("/create", verifyToken, onlyUser, this.userTrx.reservation),
+            this.route.post("/create", verifyToken, onlyUser, this.userTrx.createBooking),
             this.route.patch("/proof/:bookingId", verifyToken, onlyUser, uploaderMemory().single("proof_image"), this.userTrx.paymentProofUpload)
-            this.route.post("/:bookingId/reviews", verifyToken, onlyUser, this.reviewController.createReview)
+            this.route.post("/:bookingId/reviews", verifyToken, onlyUser, this.reviewController.createReview),
             this.route.get("/get", verifyToken, onlyUser, this.userTrx.getReservations),
-            this.route.get("/:bookingId", verifyToken, onlyUser, this.userTrx.getReservationById)
+            this.route.get("/:bookingId", verifyToken, onlyUser, this.userTrx.getReservationById),
             this.route.get("/get/history", verifyToken, onlyUser, this.userTrx.getReservationsHistory),
             this.route.patch("/cancel/:id", verifyToken, onlyUser, this.userTrx.cancelPayment)
         }

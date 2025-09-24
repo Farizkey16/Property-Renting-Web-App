@@ -3,15 +3,6 @@ import AppError from "../../errors/AppError";
 import { prisma } from "../../config/prisma";
 import { Prisma } from "../../../prisma/generated/client";
 
-/**
- * 1. Validate tenant role
- * 2. Fetch & validate booking based on id --> this is to accommodate aggregate sales data, basing it on amount/total_price on booking status === 'confirmed'
- * 3. Fetch & validate property based on id --> this is to accommodate aggregate sales data based on amount on property list
- * 4. Fetch & validate user based on booking (?) --> this is to accommodate aggregate sales data per user
- * 5. sorting by date and sales total
- * 6. filter by date range
- */
-
 interface ChartData {
   labels: string[];
   data: number[];
@@ -32,8 +23,7 @@ class SalesReport {
   ) => {
     try {
       const user = res.locals.decrypt;
-      console.log("Printing user:", user.role, user.id);
-
+      
       if (user.role !== "tenant") {
         throw new AppError("Only tenants are authorized for access.", 403);
       }
@@ -153,71 +143,70 @@ class SalesReport {
     }
   };
 
-  public getAggregate = async (req: Request, res: Response, next: NextFunction) => {
-
+  public getAggregate = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
     try {
-        
-        const user = res.locals.decrypt
-        const tenantRecord = await prisma.tenants.findUnique({ where: { user_id: user.userId}})
-        if(!tenantRecord) throw new AppError("No tenant record.", 404)
-        const tenantId = tenantRecord.id;
+      const user = res.locals.decrypt;
+      const tenantRecord = await prisma.tenants.findUnique({
+        where: { user_id: user.userId },
+      });
+      if (!tenantRecord) throw new AppError("No tenant record.", 404);
+      const tenantId = tenantRecord.id;
 
-        const {startDate, endDate} = req.query
+      const { startDate, endDate } = req.query;
 
-        const whereClause: Prisma.bookingsWhereInput = {
-            property: {
-                tenant_id: tenantId
-            }, 
-            status: "confirmed"
-        }
+      const whereClause: Prisma.bookingsWhereInput = {
+        property: {
+          tenant_id: tenantId,
+        },
+        status: "confirmed",
+      };
 
-        const [revenueTotal, bookingsTotal, visitorsTotal ] = await Promise.all([
-            prisma.bookings.aggregate({
-                where: whereClause,
-                _sum: {
-                    total_price: true
-                }
-            }),
-            prisma.bookings.aggregate({
-                where: whereClause,
-                _count: { _all: true}
-            }),
-            prisma.bookings.aggregate({
-                _count: {
-                    user_id: true
-                },
-                where: whereClause
-            })
-        ])
+      const [revenueTotal, bookingsTotal, visitorsTotal] = await Promise.all([
+        prisma.bookings.aggregate({
+          where: whereClause,
+          _sum: {
+            total_price: true,
+          },
+        }),
+        prisma.bookings.aggregate({
+          where: whereClause,
+          _count: { _all: true },
+        }),
+        prisma.bookings.aggregate({
+          _count: {
+            user_id: true,
+          },
+          where: whereClause,
+        }),
+      ]);
 
-        const totalRevenue = revenueTotal._sum.total_price?.toNumber() || 0
-        const totalBookings = bookingsTotal._count._all
-        const totalVisitors = visitorsTotal._count.user_id
+      const totalRevenue = revenueTotal._sum.total_price?.toNumber() || 0;
+      const totalBookings = bookingsTotal._count._all;
+      const totalVisitors = visitorsTotal._count.user_id;
 
-        const avgRevenuePerBooking = totalBookings > 0 ? totalRevenue / totalVisitors : 0
+      const avgRevenuePerBooking =
+        totalBookings > 0 ? totalRevenue / totalVisitors : 0;
 
-        const stats: OverviewStats = {
-            totalRevenue,
-            totalBookings,
-            totalVisitors,
-            avgRevenuePerBooking: parseFloat(avgRevenuePerBooking.toFixed(2))
-        }
+      const stats: OverviewStats = {
+        totalRevenue,
+        totalBookings,
+        totalVisitors,
+        avgRevenuePerBooking: parseFloat(avgRevenuePerBooking.toFixed(2)),
+      };
 
-        res.status(200).json({
-            success: true,
-            message: "Data fetched.",
-            data: stats
-        })
-        
-
+      res.status(200).json({
+        success: true,
+        message: "Data fetched.",
+        data: stats,
+      });
     } catch (error) {
-        next(error)
+      next(error);
     }
-
-
-
-  }
+  };
 }
 
 export default SalesReport;
-

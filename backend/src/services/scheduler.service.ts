@@ -10,7 +10,8 @@ export const getBoss = async () => {
       throw new AppError("DATABASE_URL environment variable is not set.", 400);
     }
 
-    const newBoss = new PgBoss(process.env.DATABASE_URL);
+    const newBoss = new PgBoss({
+      connectionString: process.env.DATABASE_URL, }); // timezone?
     await newBoss.start();
     console.log("pg-boss connection started successfully.");
     boss = newBoss;
@@ -28,18 +29,14 @@ export const startAllWorkersAndSchedules = async () => {
 
     console.log("Ensuring queues exist...");
     await boss.createQueue(EXPIRE_BOOKINGS_JOB);
-    await boss.createQueue(SEND_REMINDER_JOB);
+    await boss.createQueue("send-booking-reminder");
 
     await boss.work(EXPIRE_BOOKINGS_JOB, expireOverdueBookings);
-    await boss.work(SEND_REMINDER_JOB, bookingReminderHandler);
+    await boss.work("send-booking-reminder", bookingReminderHandler)
 
     await boss.unschedule(EXPIRE_BOOKINGS_JOB);
-    await boss.schedule(EXPIRE_BOOKINGS_JOB, "0 9 * * 3"); 
-    console.log(`Scheduled job '${EXPIRE_BOOKINGS_JOB}' to run every minute.`);
-
-    await boss.unschedule(SEND_REMINDER_JOB);
-    await boss.schedule(SEND_REMINDER_JOB, "0 9 * * *");
-    console.log(`Scheduled job '${SEND_REMINDER_JOB}' to run daily at 9 AM.`);
+    await boss.schedule(EXPIRE_BOOKINGS_JOB, "0 9 * * *"); 
+    console.log(`Scheduled job '${EXPIRE_BOOKINGS_JOB}' to run every 9 AM.`);
 
     console.log("All workers and schedules are set up.");
   } catch (error) {
