@@ -1,7 +1,6 @@
 "use client";
 
 import { Calendar } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Dialog,
@@ -19,10 +18,14 @@ import { CardBookingSkeleton } from "@/components/fragment/loading-error/Propert
 import { DatePickerWithRange } from "@/components/fragment/date-picker/DatePickerPopover";
 import { GuestPicker } from "@/components/ui/GuestPicker";
 import { PriceSection } from "./PriceSection";
+import { RoomAvailabilityStatus } from "./RoomAvailabilityStatus";
+import { ReserveButton } from "./ReserveButton";
 
 export default function BookingSectionPage() {
   const router = useRouter();
   const params = useSearchParams();
+  const [isRoomFullyBooked, setIsRoomFullyBooked] = useState(false);
+  const [availabilityLoading, setAvailabilityLoading] = useState(true);
 
   const propertyname = params.get("propertyname") || undefined;
   const roomname = params.get("roomname") || undefined;
@@ -121,22 +124,6 @@ export default function BookingSectionPage() {
   const totalGuests = guests.guests.toString();
   const rooms = guests.rooms.toString();
 
-  const handleSearchDate = () => {
-    if (!dateRange?.from || !dateRange?.to) {
-      alert("Please select a date range.");
-      return;
-    }
-
-    const checkIn = format(dateRange.from, "yyyy-MM-dd");
-    const checkOut = format(dateRange.to, "yyyy-MM-dd");
-
-    const paramsObj = new URLSearchParams(Array.from(params.entries()));
-    paramsObj.set("checkIn", checkIn);
-    paramsObj.set("checkOut", checkOut);
-
-    router.replace(`?${paramsObj.toString()}`, { scroll: false });
-  };
-
   const handleReserveNow = () => {
     if (!dateRange?.from || !dateRange?.to) {
       alert("Please select a date range.");
@@ -153,7 +140,6 @@ export default function BookingSectionPage() {
 
   return (
     <>
-      {/* Mobile Fixed Booking Bar */}
       {!open && (
         <div
           onClick={() => setOpen(true)}
@@ -178,11 +164,6 @@ export default function BookingSectionPage() {
             <div className="flex items-center gap-2">
               <Calendar className="w-4 h-4" />
               <span className="text-sm text-gray-600">Choose a date</span>
-              <Button
-                onClick={handleSearchDate}
-                className="ml-auto rounded-4xl">
-                Search Date
-              </Button>
             </div>
             <DatePickerWithRange
               date={dateRange}
@@ -198,6 +179,18 @@ export default function BookingSectionPage() {
               }}
             />
 
+            {dateRange?.from && dateRange?.to && roomId && (
+              <RoomAvailabilityStatus
+                roomId={roomId}
+                startDate={checkInParam}
+                endDate={checkOutParam}
+                onAvailabilityChange={(fullyBooked, loading) => {
+                  setIsRoomFullyBooked(fullyBooked);
+                  setAvailabilityLoading(loading);
+                }}
+              />
+            )}
+
             <div className="flex items-center gap-2">
               <span className="text-sm text-gray-600">Guests & Rooms</span>
             </div>
@@ -212,15 +205,10 @@ export default function BookingSectionPage() {
               />
             </div>
 
-            <Button
+            <ReserveButton
               onClick={handleReserveNow}
-              className="w-full bg-green-500 hover:bg-green-600 text-white">
-              Reserve now
-            </Button>
-            <div className="text-xs text-gray-500 text-center">
-              You won&apos;t be charged until after your reservation begins.
-              Cancellations are free up to 2 hours before.
-            </div>
+              isDisabled={isRoomFullyBooked || availabilityLoading}
+            />
           </div>
         </DialogContent>
       </Dialog>
@@ -232,12 +220,6 @@ export default function BookingSectionPage() {
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4" />
                 <span className="text-sm text-gray-600">Choose a date</span>
-
-                <Button
-                  onClick={handleSearchDate}
-                  className="ml-auto rounded-4xl">
-                  search date
-                </Button>
               </div>
               <DatePickerWithRange
                 date={dateRange}
@@ -253,7 +235,19 @@ export default function BookingSectionPage() {
                 }}
               />
 
-              <div className="flex items-center gap-2 mt-4">
+              {dateRange?.from && dateRange?.to && roomId && (
+                <RoomAvailabilityStatus
+                  roomId={roomId}
+                  startDate={checkInParam}
+                  endDate={checkOutParam}
+                  onAvailabilityChange={(fullyBooked, loading) => {
+                    setIsRoomFullyBooked(fullyBooked);
+                    setAvailabilityLoading(loading);
+                  }}
+                />
+              )}
+
+              <div className="flex items-center gap-2 mt-2">
                 <span className="text-sm text-gray-600">Guests & Rooms</span>
               </div>
               <GuestPicker value={guests} onChange={setGuests} />
@@ -267,14 +261,17 @@ export default function BookingSectionPage() {
                 />
               </div>
 
-              <Button
+              <ReserveButton
                 onClick={handleReserveNow}
-                className="w-full bg-green-500 hover:bg-green-600 text-white mt-4">
-                Reserve now
-              </Button>
-              <div className="text-xs text-gray-500 text-center">
-                You won&apos;t be charged until after your reservation begins.
-                Cancellations are free up to 2 hours before.
+                isDisabled={isRoomFullyBooked || availabilityLoading}
+              />
+
+              <div className="flex items-center gap-2 bg-gray-50 rounded-md p-2 border border-gray-200">
+                <span className="text-sm text-gray-600">
+                  Please note that higher rates may apply during weekends,
+                  holidays, or peak periods as per the property owner&apos;s
+                  policy.
+                </span>
               </div>
             </CardContent>
           </Card>

@@ -43,6 +43,43 @@ export const fetchRoomsDetailsByQuery = async (
   return result;
 };
 
+export const blockRoomByTenant = async (
+  id: string,
+  start_date?: string,
+  end_date?: string
+) => {
+  const response = await axios.post(
+    `${BASE_URL}/room/block/${id}?startDate=${start_date}&endDate=${end_date}`,
+    {},
+    { withCredentials: true }
+  );
+  return response.data;
+};
+
+export const getRoomAvailability = async (
+  id: string,
+  start_date?: string,
+  end_date?: string
+) => {
+  const response = await axios.get(
+    `${BASE_URL}/room/get-date/${id}?startDate=${start_date}&endDate=${end_date}`
+  );
+  return response.data;
+};
+
+export const unBlockRoomByTenant = async (
+  id: string,
+  start_date?: string,
+  end_date?: string
+) => {
+  const response = await axios.post(
+    `${BASE_URL}/room/unblock/${id}?startDate=${start_date}&endDate=${end_date}`,
+    {},
+    { withCredentials: true }
+  );
+  return response.data;
+};
+
 export const createRoom = async (room: CreateRoomType) => {
   const formData = new FormData();
   formData.append("property_id", room.property_id);

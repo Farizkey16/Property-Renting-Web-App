@@ -15,12 +15,7 @@ interface PriceSectionProps {
   loading?: boolean;
 }
 
-export function PriceSection({
-  basePrice,
-  total,
-  peakRates,
-  loading,
-}: PriceSectionProps) {
+export function PriceSection({ basePrice, total, loading }: PriceSectionProps) {
   if (loading) {
     return (
       <div>
@@ -38,6 +33,9 @@ export function PriceSection({
           <span className="text-sm text-gray-500 line-through">
             {formatCurrency(basePrice)}
           </span>
+          <span className="text-lg font-semibold text-green-600 mt-2">
+            Total Price
+          </span>
           <span className="text-2xl font-bold text-gray-900">
             {formatCurrency(total)}
           </span>
@@ -47,18 +45,6 @@ export function PriceSection({
           {formatCurrency(basePrice)}
         </div>
       )}
-
-      <div className="text-right">
-        {total ? (
-          <span className="text-lg font-semibold text-green-600">
-            Total Price
-          </span>
-        ) : peakRates && peakRates.length > 0 ? (
-          <span className="text-lg font-semibold text-orange-500">
-            Peak Rate
-          </span>
-        ) : null}
-      </div>
     </div>
   );
 }

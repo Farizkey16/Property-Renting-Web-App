@@ -9,7 +9,7 @@ export enum PropertyCategory {
 
 export interface RoomData {
   id: string;
-  name: string
+  name: string;
 }
 
 export interface createProperty {
@@ -23,7 +23,7 @@ export interface createProperty {
   longitude: string;
   main_image: File;
   property_category: PropertyCategory;
-  rooms?: RoomData[]
+  rooms?: RoomData[];
 }
 
 export interface updateProperty {
@@ -72,7 +72,7 @@ export interface Room {
   deleted_at: string | null;
   total_rooms: number;
   room_images: RoomImage[];
-  room_availability: string;
+  room_availability?: { id: string; date: string; is_available: boolean }[];
 }
 
 export interface Property {

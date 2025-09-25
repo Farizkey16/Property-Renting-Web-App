@@ -3,7 +3,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Pencil, Trash2 } from "lucide-react";
+import { Pencil, Trash2, User2 } from "lucide-react";
 import { formatCurrency, formatDate } from "@/lib/utils";
 import Link from "next/link";
 import { DeleteDialog } from "@/components/fragment/button-action/DeleteDialog";
@@ -15,18 +15,18 @@ interface RoomListProps {
     name: string;
     base_price: number;
     capacity: number;
+    total_rooms: number;
     image?: string;
     status?: string;
     created_at?: string;
     room_images?: { image_url: string }[];
+    room_availability?: Array<{
+      id: string;
+      date: string;
+      is_available: boolean;
+    }>;
   }>;
 }
-
-const statusColors: Record<string, string> = {
-  Available: "bg-green-100 text-green-800",
-  Occupied: "bg-yellow-100 text-yellow-800",
-  Maintenance: "bg-red-100 text-red-800",
-};
 
 export function RoomList({ rooms }: RoomListProps) {
   const { mutateAsync: deleteRoom, isPending } = useDeleteRoom();
@@ -50,10 +50,13 @@ export function RoomList({ rooms }: RoomListProps) {
                   Capacity
                 </th>
                 <th className="text-left py-3 px-3 font-medium text-muted-foreground">
-                  Status
+                  Total Room
                 </th>
                 <th className="text-left py-3 px-3 font-medium text-muted-foreground">
-                  Created At
+                  Status / Availability
+                </th>
+                <th className="text-left py-3 px-3 font-medium text-muted-foreground">
+                  Set Availability
                 </th>
                 <th className="text-center py-3 px-3 font-medium text-muted-foreground">
                   Actions
@@ -93,21 +96,44 @@ export function RoomList({ rooms }: RoomListProps) {
                     <td className="py-3 px-3 text-muted-foreground">
                       {formatCurrency(room.base_price)}
                     </td>
-                    <td className="py-3 px-3">{room.capacity}</td>
-                    <td className="py-3 px-3">
-                      <Badge
-                        variant="secondary"
-                        className={
-                          statusColors[
-                            room.status as keyof typeof statusColors
-                          ] || "bg-gray-100 text-gray-800"
-                        }>
-                        {room.status || "Available"}
-                      </Badge>
+                    <td className="py-3 px-6">
+                      <div className="flex items-center">
+                        {room.capacity}
+                        <User2 className="w-4 h-4 ml-2" />
+                      </div>
                     </td>
-                    <td className="py-3 px-3">
-                      {formatDate(room.created_at ?? "")}
+                    <td className="py-3 px-8">{room.total_rooms}</td>
+                    <td className="py-3 px-3 font-medium">
+                      {room.room_availability &&
+                      room.room_availability.length > 0 ? (
+                        room.room_availability.map((avail) => (
+                          <div key={avail.id} className="mb-2">
+                            {formatDate(avail.date)}
+                            {" -> "}
+                            <Badge
+                              variant={
+                                avail.is_available ? "default" : "destructive"
+                              }>
+                              {avail.is_available ? "Available" : "Full/Booked"}
+                            </Badge>
+                          </div>
+                        ))
+                      ) : (
+                        <Badge variant="secondary">Available</Badge>
+                      )}
                     </td>
+
+                    <td className="py-3 px-3 text-muted-foreground">
+                      <Link
+                        href={`/dashboard/property/room/availability/${room.id}`}>
+                        <Button
+                          size="sm"
+                          className="bg-amber-500 cursor-pointer rounded-2xl p-4 hover:bg-amber-300">
+                          Set Date
+                        </Button>
+                      </Link>
+                    </td>
+
                     <td className="py-3 px-3 text-center">
                       <div className="flex items-center justify-center gap-8">
                         <Link href={`/dashboard/property/room/edit/${room.id}`}>

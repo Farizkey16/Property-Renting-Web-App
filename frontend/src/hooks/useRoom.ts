@@ -1,14 +1,21 @@
 import {
+  blockRoomByTenant,
   createRoom,
   editRoom,
   fetchAllRooms,
   fetchRoomById,
   fetchRoomsByQuery,
   fetchRoomsDetailsByQuery,
+  getRoomAvailability,
   softDeleteRoom,
+  unBlockRoomByTenant,
 } from "@/services/room.service";
 import { getRoomAmountAvailable } from "@/services/transactions.services";
-import { CreateRoomType, EditRoomType, RoomAvailabilityParams } from "@/types/room/room";
+import {
+  CreateRoomType,
+  EditRoomType,
+  RoomAvailabilityParams,
+} from "@/types/room/room";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const useRoom = () => {
@@ -22,6 +29,17 @@ export const useRoomById = (id: string) => {
   return useQuery({
     queryKey: ["room", id],
     queryFn: () => fetchRoomById(id),
+  });
+};
+
+export const useGetRoomAvailibility = (
+  id: string,
+  start_date: string,
+  end_date: string
+) => {
+  return useQuery({
+    queryKey: ["room-availability", id, start_date, end_date],
+    queryFn: () => getRoomAvailability(id, start_date, end_date),
   });
 };
 
@@ -56,6 +74,30 @@ export const useRoomPricing = (
         peak_season_rates: data.peak_season_rates,
       };
     },
+  });
+};
+
+export const useBlockRoomByTenant = (
+  id: string,
+  start_date?: string,
+  end_date?: string
+) => {
+  return useMutation({
+    mutationFn: () => blockRoomByTenant(id, start_date, end_date),
+    onSuccess: (data) => console.log("Blocked:", data),
+    onError: (error) => console.error(error),
+  });
+};
+
+export const useUnBlockRoomByTenant = (
+  id: string,
+  start_date?: string,
+  end_date?: string
+) => {
+  return useMutation({
+    mutationFn: () => unBlockRoomByTenant(id, start_date, end_date),
+    onSuccess: (data) => console.log("UnBlocked:", data),
+    onError: (error) => console.error(error),
   });
 };
 
@@ -100,12 +142,12 @@ export const useDeleteRoom = () => {
 };
 
 export const useRoomAvailability = (params: RoomAvailabilityParams) => {
-  const {roomId, checkIn, checkOut} = params
-  const queryClient = useQueryClient();
+  const { roomId, checkIn, checkOut } = params;
+  // const queryClient = useQueryClient();
 
   return useQuery({
-    queryKey: ['room', 'availability', roomId, checkIn, checkOut],
+    queryKey: ["room", "availability", roomId, checkIn, checkOut],
     queryFn: () => getRoomAmountAvailable(params),
-    enabled: !!roomId && !!checkIn && !!checkOut
-  })
-}
+    enabled: !!roomId && !!checkIn && !!checkOut,
+  });
+};

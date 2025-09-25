@@ -267,13 +267,13 @@ export const getRoomByPropertyAndNameRepositoryDetail = async (
             select: {
               id: true,
               rating: true,
-              comment: true
-            }
+              comment: true,
+            },
           },
           _count: {
             select: {
-              reviews: true
-            }
+              reviews: true,
+            },
           },
           bookings: {
             include: {
@@ -282,12 +282,12 @@ export const getRoomByPropertyAndNameRepositoryDetail = async (
                   room: {
                     select: {
                       id: true,
-                    }
-                  }
-                }
-              }
-            }
-          }
+                    },
+                  },
+                },
+              },
+            },
+          },
         },
       },
       room_images: true,
@@ -299,6 +299,160 @@ export const findRoomByIdRepository = async (id: string) => {
   return await prisma.rooms.findUnique({
     where: { id, deleted_at: null },
   });
+};
+
+export const findByRoomIdRepository = async (roomId: string) => {
+  return prisma.room_availability.findMany({
+    where: { room_id: roomId },
+    orderBy: { date: "asc" },
+  });
+};
+
+export const findByRoomIdAndDateRangeRepository = async (
+  roomId: string,
+  startDate: Date,
+  endDate: Date
+) => {
+  const room = await prisma.rooms.findUnique({
+    where: { id: roomId },
+    select: {
+      id: true,
+      name: true,
+      total_rooms: true,
+      capacity: true,
+    },
+  });
+
+  if (!room) {
+    throw new AppError("Room not found", 404);
+  }
+
+  const availability = await prisma.room_availability.findMany({
+    where: {
+      room_id: roomId,
+      date: { gte: startDate, lte: endDate },
+    },
+    orderBy: { date: "asc" },
+  });
+
+  const bookings = await prisma.booking_rooms.findMany({
+    where: {
+      room_id: roomId,
+      booking: {
+        check_in_date: { lte: endDate },
+        check_out_date: { gte: startDate },
+      },
+    },
+    select: {
+      quantity: true,
+      booking: {
+        select: {
+          check_in_date: true,
+          check_out_date: true,
+        },
+      },
+    },
+  });
+
+  const results = availability.map((a) => {
+    const bookedCount = bookings
+      .filter(
+        (b) =>
+          b.booking.check_in_date <= a.date && b.booking.check_out_date > a.date
+      )
+      .reduce((sum, b) => sum + b.quantity, 0);
+
+    const remaining = a.is_available ? room.total_rooms - bookedCount : 0;
+
+    return {
+      id: a.id,
+      date: a.date,
+      is_available: a.is_available,
+      total_rooms: room.total_rooms,
+      booked_count: bookedCount,
+      remaining: remaining < 0 ? 0 : remaining,
+    };
+  });
+
+  return results;
+};
+
+export const blockAllRoomsByTenantRepository = async (
+  roomId: string,
+  startDate: Date,
+  endDate: Date
+) => {
+  const room = await prisma.rooms.findUnique({
+    where: { id: roomId },
+    select: { id: true },
+  });
+
+  if (!room) {
+    throw new AppError("Room not found", 404);
+  }
+
+  // ambil semua availability yang kena block
+  const availability = await prisma.room_availability.findMany({
+    where: {
+      room_id: roomId,
+      date: { gte: startDate, lte: endDate },
+    },
+    orderBy: { date: "asc" },
+    select: { id: true, date: true },
+  });
+
+  if (availability.length === 0) {
+    throw new AppError("No availability found in the given date range", 404);
+  }
+
+  // update semuanya jadi false
+  await prisma.room_availability.updateMany({
+    where: { id: { in: availability.map((a) => a.id) } },
+    data: { is_available: false },
+  });
+
+  return {
+    message: "All rooms blocked successfully",
+    blocked_dates: availability.map((a) => a.date.toISOString().split("T")[0]),
+  };
+};
+
+export const unBlockAllRoomsByTenantRepository = async (
+  roomId: string,
+  startDate: Date,
+  endDate: Date
+) => {
+  const room = await prisma.rooms.findUnique({
+    where: { id: roomId },
+    select: { id: true },
+  });
+
+  if (!room) {
+    throw new AppError("Room not found", 404);
+  }
+
+  const availability = await prisma.room_availability.findMany({
+    where: {
+      room_id: roomId,
+      date: { gte: startDate, lte: endDate },
+    },
+    orderBy: { date: "asc" },
+    select: { id: true, date: true },
+  });
+
+  if (availability.length === 0) {
+    throw new AppError("No availability found in the given date range", 404);
+  }
+
+  await prisma.room_availability.updateMany({
+    where: { id: { in: availability.map((a) => a.id) } },
+    data: { is_available: true },
+  });
+
+  return {
+    message: "All rooms blocked successfully",
+    blocked_dates: availability.map((a) => a.date.toISOString().split("T")[0]),
+  };
 };
 
 export const deleteRoomByIdRepository = async (id: string) => {

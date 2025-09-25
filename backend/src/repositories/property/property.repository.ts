@@ -83,7 +83,14 @@ export const getTenantWithPropertiesByUserId = async (userId: string) => {
           rooms: {
             include: {
               room_images: true,
-              room_availability: true,
+              room_availability: {
+                where: { is_available: false },
+                select: {
+                  id: true,
+                  date: true,
+                  is_available: true,
+                },
+              },
             },
           },
         },

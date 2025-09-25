@@ -7,6 +7,8 @@ import {
   createRoomRepository,
   deleteRoomByIdRepository,
   findAllRoomsRepository,
+  findByRoomIdAndDateRangeRepository,
+  findByRoomIdRepository,
   findRoomByIdRepository,
   findRoomRepository,
   getRoomAvailabilityWithPriceRepository,
@@ -253,6 +255,22 @@ export const updateRoomService = async (
 export const getRoomsService = async () => {
   const response = await findAllRoomsRepository();
   return response;
+};
+
+export const getRoomAvailableService = async (
+  roomId: string,
+  startDate?: string,
+  endDate?: string
+) => {
+  if (startDate && endDate) {
+    return await findByRoomIdAndDateRangeRepository(
+      roomId,
+      new Date(startDate),
+      new Date(endDate)
+    );
+  }
+
+  return await findByRoomIdRepository(roomId);
 };
 
 export const getRoomByPropertyAndNameService = async (

@@ -4,6 +4,10 @@ import { verifyToken } from "../middleware/VerifyToken";
 import { onlyTenant } from "../middleware/by-role/tenantMiddleware";
 import { uploaderMemory } from "../middleware/uploader";
 import BookingReviews from "../controllers/reviews/review.controller";
+import {
+  createPropertyValidation,
+  editPropertyValidation,
+} from "../middleware/validation/property";
 
 class PropertyRouter {
   private route: Router;
@@ -23,6 +27,7 @@ class PropertyRouter {
       verifyToken,
       onlyTenant,
       uploaderMemory().single("main_image"),
+      createPropertyValidation,
       this.propertyController.createProperty
     );
     this.route.get("/all", this.propertyController.getAllProperties);
@@ -39,6 +44,7 @@ class PropertyRouter {
       verifyToken,
       onlyTenant,
       uploaderMemory().single("main_image"),
+      editPropertyValidation,
       this.propertyController.updateProperty
     );
     this.route.patch(

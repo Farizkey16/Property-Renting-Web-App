@@ -18,7 +18,20 @@ class RoomRouter {
     this.route.get("/all", this.roomRouter.getRoomsController);
     this.route.get("/search", this.roomRouter.getRoomByPropertyAndName);
     this.route.get("/details", this.roomRouter.getRoomByPropertyAndNameDetail);
+    this.route.get("/get-date/:id", this.roomRouter.getRoomAvailability);
     this.route.get("/get/:id", this.roomRouter.getRoomById);
+    this.route.post(
+      "/block/:id",
+      verifyToken,
+      onlyTenant,
+      this.roomRouter.blockRoomByTenant
+    );
+    this.route.post(
+      "/unblock/:id",
+      verifyToken,
+      onlyTenant,
+      this.roomRouter.unBlockRoomByTenant
+    );
     this.route.post(
       "/create",
       verifyToken,
