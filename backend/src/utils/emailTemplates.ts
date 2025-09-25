@@ -412,65 +412,139 @@ export const BOOKING_CONFIRMATION_TEMPLATE_MULTIPLE = (
 };
 
 export const BOOKING_REMINDER_TEMPLATE = (
-  guestName: string,
-  booking_id: string,
-  check_in_date: string,
-  check_out_date: string,
-  property_name: string
+  data: BookingTemplateData
 ) => {
   const reminderHtml = `
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Booking Reminder</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Stay is Almost Here!</title>
   </head>
-  <body style="margin:0; padding:0; background:#f4f4f4; font-family: Arial, sans-serif;">
-    <table align="center" cellpadding="0" cellspacing="0" width="600" style="background:#ffffff; margin:20px auto; border-radius:8px; overflow:hidden;">
-      <!-- Header -->
+  <body style="margin:0; padding:0; background:#f8f6f4; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;">
+    <table align="center" cellpadding="0" cellspacing="0" width="600" style="background:#ffffff; margin:20px auto; border-radius:12px; overflow:hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.08);">
+      
+
       <tr>
-        <td style="background:#4CAF50; padding:20px; text-align:center; color:#fff;">
-          <h2 style="margin:0;">Booking Reminder</h2>
+        <td style="background: linear-gradient(135deg, #e85a74 0%, #d4405a 100%); padding:40px 30px; text-align:center; color:#fff;">
+          <h1 style="margin:0; font-size:28px; font-weight:600; letter-spacing:-0.5px;">Your Stay is Almost Here!</h1>
+          <p style="margin:12px 0 0; font-size:16px; opacity:0.9; font-weight:300;">We can't wait to welcome you</p>
         </td>
       </tr>
 
-      <!-- Body -->
+    
       <tr>
-        <td style="padding:20px; color:#333; font-size:14px; line-height:1.6;">
-          <p>Dear ${guestName},</p>
-          <p>
-            This is a friendly reminder of your upcoming stay at <strong>${property_name}</strong>.
+        <td style="padding:40px 30px; color:#2d3748; font-size:16px; line-height:1.6;">
+          <p style="font-size:18px; margin:0 0 24px; color:#1a202c;">Dear <strong>${data.guestName}</strong>,</p>
+          
+          <p style="margin:0 0 32px; color:#4a5568;">
+            Your upcoming stay at <strong style="color:#e85a74;">${data.propertyName}</strong> is just around the corner! 
+            We're excited to host you and want to ensure everything is ready for your arrival.
           </p>
-          <table width="100%" cellpadding="8" cellspacing="0" style="border-collapse:collapse; margin:15px 0;">
-            <tr>
-              <td style="border-bottom:1px solid #ddd;"><strong>Booking ID:</strong></td>
-              <td style="border-bottom:1px solid #ddd;">${booking_id}</td>
-            </tr>
-            <tr>
-              <td style="border-bottom:1px solid #ddd;"><strong>Check-in:</strong></td>
-              <td style="border-bottom:1px solid #ddd;">${check_in_date}</td>
-            </tr>
-            <tr>
-              <td style="border-bottom:1px solid #ddd;"><strong>Check-out:</strong></td>
-              <td style="border-bottom:1px solid #ddd;">${check_out_date}</td>
-            </tr>
-          </table>
-          <p>
-            We’re excited to host you soon! If you need to make any changes or have questions, please contact our support team.
+
+           Booking details card 
+          <div style="background:#f7fafc; border-radius:12px; padding:24px; margin:32px 0; border-left:4px solid #e85a74;">
+            <h3 style="margin:0 0 20px; color:#2d3748; font-size:18px; font-weight:600;">Booking Details</h3>
+            <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+              <tr>
+                <td style="padding:8px 0; border-bottom:1px solid #e2e8f0; width:35%; color:#4a5568; font-weight:500;">Booking ID:</td>
+                <td style="padding:8px 0; border-bottom:1px solid #e2e8f0; color:#1a202c; font-weight:600;">${data.booking_id.slice(0,6).toUpperCase()}</td>
+              </tr>
+              <tr>
+                <td style="padding:8px 0; border-bottom:1px solid #e2e8f0; color:#4a5568; font-weight:500;">Check-in:</td>
+                <td style="padding:8px 0; border-bottom:1px solid #e2e8f0; color:#1a202c; font-weight:600;">${data.rooms[0].check_in_date}</td>
+              </tr>
+              <tr>
+                <td style="padding:8px 0; border-bottom:1px solid #e2e8f0; color:#4a5568; font-weight:500;">Check-out:</td>
+                <td style="padding:8px 0; border-bottom:1px solid #e2e8f0; color:#1a202c; font-weight:600;">${data.rooms[0].check_out_date}</td>
+              </tr>
+              <tr>
+                <td style="padding:8px 0; color:#4a5568; font-weight:500;">Duration:</td>
+                <td style="padding:8px 0; color:#1a202c; font-weight:600;">${data.rooms[0].nights} nights</td>
+              </tr>
+            </table>
+          </div>
+
+           Pre-arrival checklist 
+          <div style="margin:32px 0;">
+            <h3 style="margin:0 0 20px; color:#2d3748; font-size:18px; font-weight:600;">Pre-Arrival Checklist</h3>
+            <div style="background:#fff5f5; border-radius:8px; padding:20px; border:1px solid #fed7d7;">
+              <ul style="margin:0; padding:0 0 0 20px; color:#4a5568;">
+                <li style="margin:0 0 12px;">📱 Save our contact number: <strong style="color:#e85a74;">+62 8782 144123 (WhatsApp)</strong></li>
+                <li style="margin:0 0 12px;">🆔 Bring valid photo ID for check-in verification</li>
+                <li style="margin:0 0 12px;">🎫 Keep your booking confirmation handy</li>
+                <li style="margin:0 0 12px;">⏰ Standard check-in time: 3:00 PM - 9:00 PM</li>
+                <li style="margin:0;">🚗 Parking instructions will be sent 24 hours before arrival</li>
+              </ul>
+            </div>
+          </div>
+
+           What to expect 
+          <div style="margin:32px 0;">
+            <h3 style="margin:0 0 20px; color:#2d3748; font-size:18px; font-weight:600;">What to Expect</h3>
+            <div style="display:flex; flex-wrap:wrap; gap:16px;">
+              <div style="background:#f0fff4; border-radius:8px; padding:16px; flex:1; min-width:200px; border:1px solid #c6f6d5;">
+                <div style="color:#38a169; font-size:20px; margin-bottom:8px;">🏠</div>
+                <div style="color:#2d3748; font-weight:600; margin-bottom:4px;">Clean & Ready</div>
+                <div style="color:#4a5568; font-size:14px;">Property professionally cleaned and sanitized</div>
+              </div>
+              <div style="background:#f7fafc; border-radius:8px; padding:16px; flex:1; min-width:200px; border:1px solid #e2e8f0;">
+                <div style="color:#4299e1; font-size:20px; margin-bottom:8px;">📋</div>
+                <div style="color:#2d3748; font-weight:600; margin-bottom:4px;">House Guide</div>
+                <div style="color:#4a5568; font-size:14px;">Digital welcome guide with all property info</div>
+              </div>
+            </div>
+          </div>
+
+           Contact section 
+          <div style="margin:32px 0;">
+            <h3 style="margin:0 0 16px; color:#2d3748; font-size:18px; font-weight:600;">Need Assistance?</h3>
+            <p style="margin:0 0 16px; color:#4a5568;">
+              Our support team is available 24/7 to help with any questions or special requests.
+            </p>
+            <div style="text-align:center; margin:24px 0;">
+              <a href="tel:+62 8782 144123 (WhatsApp)" style="display:inline-block; background:#e85a74; color:#ffffff; padding:14px 28px; text-decoration:none; border-radius:8px; font-weight:600; font-size:16px; margin:0 8px 8px 0;">Call Support</a>
+              <a href="mailto:support@homz.co.id" style="display:inline-block; background:#f7fafc; color:#4a5568; padding:14px 28px; text-decoration:none; border-radius:8px; font-weight:600; font-size:16px; border:2px solid #e2e8f0;">Email Us</a>
+            </div>
+          </div>
+
+          <div style="background:#fff8f0; border-radius:8px; padding:20px; margin:32px 0; border-left:4px solid #ed8936;">
+            <p style="margin:0; color:#9c4221; font-weight:500;">
+              <strong>Important:</strong> If your plans change, please contact us as soon as possible. 
+              Late cancellations may be subject to our cancellation policy.
+            </p>
+          </div>
+
+          <p style="margin:32px 0 0; color:#4a5568; font-size:16px;">
+            We're looking forward to providing you with an exceptional stay experience!
+          </p>
+          
+          <p style="margin:16px 0 0; color:#2d3748; font-weight:600;">
+            Warm regards,<br>
+            The ${data.propertyName} Team
           </p>
         </td>
       </tr>
 
-      <!-- Footer -->
+    
       <tr>
-        <td style="padding:15px; text-align:center; background:#f9f9f9; color:#888; font-size:12px;">
-          <p style="margin:0;">© ${new Date().getFullYear()} ${property_name}. All rights reserved.</p>
+        <td style="padding:30px; text-align:center; background:#f8f9fa; border-top:1px solid #e9ecef;">
+          <div style="margin-bottom:16px;">
+            <a href="" style="color:#e85a74; text-decoration:none; font-weight:600; margin:0 16px;">Visit Website</a>
+            <a href="" style="color:#e85a74; text-decoration:none; font-weight:600; margin:0 16px;">Follow Us</a>
+            <a href="" style="color:#e85a74; text-decoration:none; font-weight:600; margin:0 16px;">Contact</a>
+          </div>
+          <p style="margin:16px 0 0; color:#adb5bd; font-size:12px;">
+            © ${new Date().getFullYear()} ${data.propertyName}. All rights reserved.<br>
+            This email was sent regarding booking ${data.booking_id}
+          </p>
         </td>
       </tr>
     </table>
   </body>
 </html>
-`;
+;`
 
   return reminderHtml;
 };
@@ -606,15 +680,15 @@ export const BOOKING_REJECTION_TEMPLATE_SINGLE = (
                                 <tr>
                                     <td>
                                         <strong style="color: #333333;">Booking Reference:</strong> ${
-                                          data.booking_id
+                                          data.booking_id.slice(0,6).toUpperCase()
                                         }<br>
                                         <strong style="color: #333333;">Property:</strong> ${
                                           data.propertyName
                                         }<br>
-                                        <strong style="color: #333333;">Amount:</strong> ${data.rooms.reduce(
+                                        <strong style="color: #333333;">Amount:</strong> ${formatCurrency(data.rooms.reduce(
                                           (acc, num) => acc + num.subtotal,
                                           0
-                                        )}<br>
+                                        ))}<br>
                                         <strong style="color: #333333;">Decline Reason:</strong> Expired Payment Link
                                     </td>
                                 </tr>
@@ -645,8 +719,8 @@ export const BOOKING_REJECTION_TEMPLATE_SINGLE = (
                     <!-- Footer -->
                     <tr>
                         <td align="center" style="padding: 20px; font-size: 12px; color: #999999; border-top: 1px solid #dddddd;">
-                            <p style="margin: 0;">[Property Name] | [Property Address]</p>
-                            <p style="margin: 10px 0 0;">Need help? Contact us at [Support Email]</p>
+                            <p style="margin: 0;"> ${data.propertyName}</p>
+                            <p style="margin: 10px 0 0;">Need help? Contact us at support@homz.com</p>
                         </td>
                     </tr>
                 </table>

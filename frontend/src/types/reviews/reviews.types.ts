@@ -11,7 +11,7 @@ export interface Review {
     id: string;
     rating: number;
     comment: string | null;
-    tenantReply: string | null;
+    tenant_reply: string | null;
     created_at: string;
     user: ReviewUser
 }

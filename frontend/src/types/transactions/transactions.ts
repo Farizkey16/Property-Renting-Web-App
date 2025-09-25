@@ -1,3 +1,11 @@
+export interface ReviewProps {
+    id: string;
+    rating: number;
+    comment: string | null;
+    tenant_reply: string | null;
+    created_at: string;
+}
+
 export interface Booking {
   id: string;
   user_id: string;
@@ -28,6 +36,7 @@ export interface Booking {
   _count: {
     reviews: number
   }
+  
 }
 
 export interface Room {

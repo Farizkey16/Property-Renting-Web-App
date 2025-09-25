@@ -34,7 +34,7 @@ export default function BookingDetailsForm() {
   });
   const router = useRouter();
 
-  const createBookingMutation = useMutation({
+  const { mutate: createNewBooking, isPending } = useMutation({
     mutationFn: createBooking,
 
     onSuccess: (data) => {
@@ -157,7 +157,7 @@ export default function BookingDetailsForm() {
       taxesAndFees: priceDetails?.taxesAndFees,
     };
 
-    createBookingMutation.mutate(finalBookingPayload);
+    createNewBooking(finalBookingPayload);
   };
 
   return (
@@ -300,9 +300,23 @@ export default function BookingDetailsForm() {
 
             <Button
               onClick={handleContinue}
+              disabled={isPending}
               className="w-full bg-green-600 hover:bg-green-700 text-white py-3 text-base font-medium"
+<<<<<<< HEAD
               size="lg">
               Continue to Payment
+=======
+              size="lg"
+            >
+              {isPending ? (
+                <div className="flex items-center justify-center gap-2">
+                  <Spinner className="h-5 w-5" />
+                  <span>Processing...</span>
+                </div>
+              ) : (
+                "Continue to Payment"
+              )}
+>>>>>>> develop
             </Button>
           </div>
 

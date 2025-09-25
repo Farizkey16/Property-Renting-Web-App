@@ -49,7 +49,7 @@ export const createReview = async (payload: CreateReviewPayload) => {
 
 export const replyReview = async (payload: ReplyReviewPayload) => {
   const { reviewId, reply } = payload;
-  const endpoint = `${BASE_URL}/reviews/${reviewId}/reviews`;
+  const endpoint = `${BASE_URL}/reviews/${reviewId}/reply`;
   const response = await axios.post(
     endpoint,
     { reply },
