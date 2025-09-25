@@ -15,7 +15,8 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { createReview } from "@/services/reviews.service";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
+import { Spinner } from "../ui/shadcn-io/spinner";
 
 interface LeaveReviewFormProps {
   bookingId: string;
@@ -24,7 +25,7 @@ interface LeaveReviewFormProps {
 export const LeaveReviewForm = ({ bookingId }: LeaveReviewFormProps) => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
-  const [commentFill, setCommentFill] = useState(false)
+  const [open, setOpen] = useState(false);
   const queryClient = useQueryClient();
 
   const createReviewMutation = useMutation({
@@ -33,6 +34,7 @@ export const LeaveReviewForm = ({ bookingId }: LeaveReviewFormProps) => {
       toast.success("Thank you for your review!");
       queryClient.invalidateQueries({ queryKey: ["reviews"] });
       queryClient.invalidateQueries({ queryKey: ["bookings"] });
+      setOpen(false)
     },
     onError: (error) => {
       toast.error(error.message);
@@ -41,19 +43,20 @@ export const LeaveReviewForm = ({ bookingId }: LeaveReviewFormProps) => {
 
   const handleSubmit = () => {
     if (rating === 0) {
-      toast.warn("Please provide a star rating");
+      toast.warning("Please provide a star rating");
       return;
     }
     createReviewMutation.mutate({ bookingId, rating, comment });
   };
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="outline" size="sm">
           Leave Review
         </Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent onEscapeKeyDown={(e) => e.preventDefault()}
+          onInteractOutside={(e) => e.preventDefault()}>
         <DialogHeader>
           <DialogTitle>How was your stay?</DialogTitle>
         </DialogHeader>
@@ -65,7 +68,7 @@ export const LeaveReviewForm = ({ bookingId }: LeaveReviewFormProps) => {
               initialValue={rating}
               size={40}
               transition
-              SVGstyle={{'display': 'inline'}}
+              SVGstyle={{ display: "inline" }}
             />
           </div>
           <div>
@@ -85,7 +88,14 @@ export const LeaveReviewForm = ({ bookingId }: LeaveReviewFormProps) => {
             disabled={createReviewMutation.isPending}
             className="w-full"
           >
-            {createReviewMutation.isPending ? "Submitting..." : "Submit Review"}
+            {createReviewMutation.isPending ? (
+              <div className="flex items-center justify-center gap-2">
+                <Spinner className="h-5 w-5" />
+                <span>Submitting...</span>
+              </div>
+            ) : (
+              "Submit Review"
+            )}
           </Button>
         </DialogFooter>
       </DialogContent>

@@ -1,12 +1,9 @@
+import { Helpers, Task } from "graphile-worker";
 import { prisma } from "../../config/prisma";
-import { getBoss } from "../scheduler.service";
 
-const EXPIRE_BOOKINGS_JOB = "expire-overdue-bookings";
-
-export const expireOverdueBookings = async () => {
+export const expiredBookings: Task = async function (_payload: unknown, helpers: Helpers) {
   try {
-    console.log("Running scheduled job: Checking for expired bookings...");
-
+    
     const now = new Date();
 
     const overdueBookings = await prisma.bookings.findMany({
@@ -19,7 +16,7 @@ export const expireOverdueBookings = async () => {
     });
 
     if (overdueBookings.length === 0) {
-      console.log("No expired bookings found.");
+      helpers.logger.info("No expired bookings found.");
       return;
     }
 
@@ -37,10 +34,12 @@ export const expireOverdueBookings = async () => {
       },
     });
 
-    console.log(
-      `[${EXPIRE_BOOKINGS_JOB}] successfully expired ${idstoExpire.length} bookings.`
-    );
+    helpers.logger.info(`Successfully expired ${idstoExpire.length} overdue bookings.`)
+
   } catch (error) {
-    console.error(`Error running the [${EXPIRE_BOOKINGS_JOB}] job:`, error);
+    console.log(error)
+    throw error
   }
-};
+}
+
+export default expiredBookings

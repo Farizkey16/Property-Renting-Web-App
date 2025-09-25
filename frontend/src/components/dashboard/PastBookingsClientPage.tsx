@@ -1,12 +1,11 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { BookingsToolbar } from "./BookingToolbar";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { PaginationControl } from "../fragment/pagination-control/PaginationControl";
 import { BookingList } from "./BookingList";
 import { Booking, Filters, Meta } from "@/types/transactions/transactions";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { PastBookingsToolbar } from "./PastBookingToolbar";
 
 interface PastBookingsClientProps {
@@ -26,6 +25,7 @@ export function PastBookingsClient({
   const searchParams = useSearchParams();
   const [uploadFile, setUploadFile] = useState<File | null>(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isPending, startTransition] = useTransition();
 
   const handleFilterChange = (key: string, value: string | null) => {
     const current = new URLSearchParams(Array.from(searchParams.entries()));
@@ -40,7 +40,9 @@ export function PastBookingsClient({
     const search = current.toString();
     const query = search ? `?${search}` : "";
 
-    router.push(`/dashboard/pastbookings${query}`);
+    startTransition(() => {
+      router.push(`/dashboard/pastbookings${query}`);
+    });
   };
 
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,15 +53,15 @@ export function PastBookingsClient({
   };
 
   const clearFilters = () => {
-    setIsTransitioning(true);
-    router.push(`/dashboard/pastbookings`);
-  };
+    startTransition(() => {
+    router.push(`/dashboard/pastbookings`);}
+  )};
 
   const handlePageChange = (newPage: number) => {
-    setIsTransitioning(true);
+    
     const current = new URLSearchParams(Array.from(searchParams.entries()));
     current.set("page", String(newPage));
-    router.push(`/dashboard/pastbookings?${current.toString()}`);
+    startTransition(() => {router.push(`/dashboard/pastbookings?${current.toString()}`)})
   };
 
   return (
@@ -89,8 +91,8 @@ export function PastBookingsClient({
               bookings={bookings}
               role={role}
               isError={false}
-              isFetching={isTransitioning}
-              isLoading={isTransitioning}
+              isFetching={isPending}
+              isLoading={isPending}
             />
           )}
         </CardContent>

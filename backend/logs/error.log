@@ -2156,3 +2156,268 @@ Transaction API error: Transaction already closed: A batch query cannot be execu
 2025-09-24 12:45:00 [ERROR]: POST /auth/login | MESSAGE: Invalid password | STACK: undefined
 2025-09-24 21:44:07 [ERROR]: GET /user/me | MESSAGE: Unauthorized | STACK: undefined
 2025-09-24 21:47:19 [ERROR]: GET /user/me | MESSAGE: Unauthorized | STACK: undefined
+2025-09-25 01:50:54 [ERROR]: POST /reservations/create | MESSAGE: 
+Invalid `tx.room_availability.upsert()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:98:34
+
+  95 
+  96 await Promise.all(
+  97   datesToUpdate.map((date) =>
+→ 98     tx.room_availability.upsert(
+Transaction API error: Transaction not found. Transaction ID is invalid, refers to an old closed transaction Prisma doesn't have information about anymore, or was obtained before disconnecting. | STACK: PrismaClientKnownRequestError: 
+Invalid `tx.room_availability.upsert()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:98:34
+
+  95 
+  96 await Promise.all(
+  97   datesToUpdate.map((date) =>
+→ 98     tx.room_availability.upsert(
+Transaction API error: Transaction not found. Transaction ID is invalid, refers to an old closed transaction Prisma doesn't have information about anymore, or was obtained before disconnecting.
+    at ri.handleRequestError (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:124:7459)
+    at ri.handleAndLogRequestError (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:124:6784)
+    at ri.request (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:124:6491)
+    at async l (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:133:9812)
+    at async Promise.all (index 0)
+2025-09-25 02:05:40 [ERROR]: POST /reservations/create | MESSAGE: 
+Invalid `tx.bookings.create()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:62:49
+
+  59 );
+  60 
+  61 // Create Booking Property
+→ 62 const createBooking = await tx.bookings.create(
+Transaction API error: Transaction already closed: A query cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 5200 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction. | STACK: PrismaClientKnownRequestError: 
+Invalid `tx.bookings.create()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:62:49
+
+  59 );
+  60 
+  61 // Create Booking Property
+→ 62 const createBooking = await tx.bookings.create(
+Transaction API error: Transaction already closed: A query cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 5200 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction.
+    at ri.handleRequestError (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:124:7459)
+    at ri.handleAndLogRequestError (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:124:6784)
+    at ri.request (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:124:6491)
+    at async l (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:133:9812)
+2025-09-25 02:10:35 [ERROR]: POST /reservations/create | MESSAGE: Transaction API error: Transaction not found. Transaction ID is invalid, refers to an old closed transaction Prisma doesn't have information about anymore, or was obtained before disconnecting. | STACK: PrismaClientKnownRequestError: Transaction API error: Transaction not found. Transaction ID is invalid, refers to an old closed transaction Prisma doesn't have information about anymore, or was obtained before disconnecting.
+    at Qr.transaction (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:114:11489)
+    at async Proxy._transactionWithCallback (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:133:8207)
+2025-09-25 03:58:10 [ERROR]: POST /reservations/create | MESSAGE: 
+Invalid `tx.bookings.create()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:62:49
+
+  59 );
+  60 
+  61 // Create Booking Property
+→ 62 const createBooking = await tx.bookings.create(
+Transaction API error: Transaction already closed: A query cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 5337 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction. | STACK: PrismaClientKnownRequestError: 
+Invalid `tx.bookings.create()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/transaction/user/user-tx.controller.ts:62:49
+
+  59 );
+  60 
+  61 // Create Booking Property
+→ 62 const createBooking = await tx.bookings.create(
+Transaction API error: Transaction already closed: A query cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 5337 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction.
+    at ri.handleRequestError (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:124:7459)
+    at ri.handleAndLogRequestError (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:124:6784)
+    at ri.request (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:124:6491)
+    at async l (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:133:9812)
+2025-09-25 03:59:51 [ERROR]: GET /user/me | MESSAGE: Unauthorized | STACK: undefined
+2025-09-25 04:06:35 [ERROR]: GET /tenant/aggregate-report | MESSAGE: 
+Invalid `prisma.bookings.aggregate()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/tenant-report/tenant-report.controller.ts:175:25
+
+  172     total_price: true,
+  173   },
+  174 }),
+→ 175 prisma.bookings.aggregate(
+Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | STACK: PrismaClientKnownRequestError: 
+Invalid `prisma.bookings.aggregate()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/tenant-report/tenant-report.controller.ts:175:25
+
+  172     total_price: true,
+  173   },
+  174 }),
+→ 175 prisma.bookings.aggregate(
+Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`.
+    at ri.handleRequestError (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:124:7459)
+    at ri.handleAndLogRequestError (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:124:6784)
+    at ri.request (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:124:6491)
+    at async l (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:133:9812)
+    at async Promise.all (index 1)
+2025-09-25 08:33:13 [ERROR]: GET /tenant/sales-report | MESSAGE: 
+Invalid `prisma.tenants.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/tenant-report/tenant-report.controller.ts:31:49
+
+  28   throw new AppError("Only tenants are authorized for access.", 403);
+  29 }
+  30 
+→ 31 const tenantRecord = await prisma.tenants.findUnique(
+Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`. | STACK: PrismaClientKnownRequestError: 
+Invalid `prisma.tenants.findUnique()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/controllers/tenant-report/tenant-report.controller.ts:31:49
+
+  28   throw new AppError("Only tenants are authorized for access.", 403);
+  29 }
+  30 
+→ 31 const tenantRecord = await prisma.tenants.findUnique(
+Can't reach database server at `aws-0-us-west-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-0-us-west-1.pooler.supabase.com:6543`.
+    at ri.handleRequestError (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:124:7459)
+    at ri.handleAndLogRequestError (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:124:6784)
+    at ri.request (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:124:6491)
+    at async l (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:133:9812)
+2025-09-25 10:11:08 [ERROR]: POST /reservations/create | MESSAGE: Unauthorized access, only user can access this route | STACK: undefined
+2025-09-25 10:11:55 [ERROR]: POST /reservations/create | MESSAGE: Unauthorized access, only user can access this route | STACK: undefined
+2025-09-25 10:11:56 [ERROR]: POST /reservations/create | MESSAGE: Unauthorized access, only user can access this route | STACK: undefined
+2025-09-25 10:11:57 [ERROR]: POST /reservations/create | MESSAGE: Unauthorized access, only user can access this route | STACK: undefined
+2025-09-25 10:12:21 [ERROR]: POST /reservations/create | MESSAGE: Unauthorized access, only user can access this route | STACK: undefined
+2025-09-25 10:12:24 [ERROR]: POST /auth/logout | MESSAGE: Unauthorized | STACK: undefined
+2025-09-25 10:12:26 [ERROR]: GET /user/me | MESSAGE: Unauthorized | STACK: undefined
+2025-09-25 10:22:03 [ERROR]: GET /user/me | MESSAGE: Unauthorized | STACK: undefined
+2025-09-25 10:31:21 [ERROR]: PATCH /payment/accept/24b69601-d1f5-43c3-81d5-c168d213a4e2 | MESSAGE: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 6882 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction. | STACK: PrismaClientKnownRequestError: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 6882 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction.
+    at Qr.transaction (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:114:11489)
+    at async Proxy._transactionWithCallback (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:133:8207)
+2025-09-25 10:35:32 [ERROR]: PATCH /payment/accept/b1939399-9ab1-433f-ad9d-6f22f5c2dd1f | MESSAGE: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 7417 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction. | STACK: PrismaClientKnownRequestError: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 7417 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction.
+    at Qr.transaction (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:114:11489)
+    at async Proxy._transactionWithCallback (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:133:8207)
+2025-09-25 10:36:15 [ERROR]: PATCH /payment/accept/b1939399-9ab1-433f-ad9d-6f22f5c2dd1f | MESSAGE: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 8659 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction. | STACK: PrismaClientKnownRequestError: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 8659 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction.
+    at Qr.transaction (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:114:11489)
+    at async Proxy._transactionWithCallback (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:133:8207)
+2025-09-25 10:37:27 [ERROR]: PATCH /payment/accept/b1939399-9ab1-433f-ad9d-6f22f5c2dd1f | MESSAGE: 
+Invalid `tx.bookings.update()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/repositories/transaction/tenant-tx.repository.ts:324:46
+
+  321   );
+  322 }
+  323 
+→ 324 const updatedBooking = await tx.bookings.update(
+Transaction API error: Transaction already closed: A query cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 5190 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction. | STACK: PrismaClientKnownRequestError: 
+Invalid `tx.bookings.update()` invocation in
+/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/src/repositories/transaction/tenant-tx.repository.ts:324:46
+
+  321   );
+  322 }
+  323 
+→ 324 const updatedBooking = await tx.bookings.update(
+Transaction API error: Transaction already closed: A query cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 5190 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction.
+    at ri.handleRequestError (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:124:7459)
+    at ri.handleAndLogRequestError (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:124:6784)
+    at ri.request (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:124:6491)
+    at async l (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:133:9812)
+2025-09-25 12:14:19 [ERROR]: PATCH /payment/accept/b1939399-9ab1-433f-ad9d-6f22f5c2dd1f | MESSAGE: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 9592 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction. | STACK: PrismaClientKnownRequestError: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 9592 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction.
+    at Qr.transaction (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:114:11489)
+    at async Proxy._transactionWithCallback (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:133:8207)
+2025-09-25 12:15:05 [ERROR]: PATCH /payment/accept/24b69601-d1f5-43c3-81d5-c168d213a4e2 | MESSAGE: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 7272 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction. | STACK: PrismaClientKnownRequestError: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 7272 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction.
+    at Qr.transaction (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:114:11489)
+    at async Proxy._transactionWithCallback (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:133:8207)
+2025-09-25 12:28:25 [ERROR]: PATCH /payment/accept/24b69601-d1f5-43c3-81d5-c168d213a4e2 | MESSAGE: Transaction API error: Unable to start a transaction in the given time. | STACK: PrismaClientKnownRequestError: Transaction API error: Unable to start a transaction in the given time.
+    at Qr.transaction (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:114:11489)
+    at async Proxy._transactionWithCallback (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:133:8097)
+2025-09-25 12:37:32 [ERROR]: PATCH /payment/accept/b1939399-9ab1-433f-ad9d-6f22f5c2dd1f | MESSAGE: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 9380 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction. | STACK: PrismaClientKnownRequestError: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 9380 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction.
+    at Qr.transaction (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:114:11489)
+    at async Proxy._transactionWithCallback (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:133:8207)
+2025-09-25 12:39:12 [ERROR]: PATCH /payment/accept/24b69601-d1f5-43c3-81d5-c168d213a4e2 | MESSAGE: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 6530 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction. | STACK: PrismaClientKnownRequestError: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 6530 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction.
+    at Qr.transaction (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:114:11489)
+    at async Proxy._transactionWithCallback (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:133:8207)
+2025-09-25 12:41:24 [ERROR]: PATCH /payment/accept/b1939399-9ab1-433f-ad9d-6f22f5c2dd1f | MESSAGE: 
+Invalid `prisma.bookings.update()` invocation:
+
+
+Transaction API error: Transaction already closed: A query cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 6096 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction. | STACK: PrismaClientKnownRequestError: 
+Invalid `prisma.bookings.update()` invocation:
+
+
+Transaction API error: Transaction already closed: A query cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 6096 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction.
+    at ri.handleRequestError (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:124:7459)
+    at ri.handleAndLogRequestError (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:124:6784)
+    at ri.request (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:124:6491)
+    at async l (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:133:9812)
+2025-09-25 12:43:43 [ERROR]: PATCH /payment/accept/b1939399-9ab1-433f-ad9d-6f22f5c2dd1f | MESSAGE: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 8615 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction. | STACK: PrismaClientKnownRequestError: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 8615 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction.
+    at Qr.transaction (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:114:11489)
+    at async Proxy._transactionWithCallback (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:133:8207)
+2025-09-25 12:49:24 [ERROR]: PATCH /payment/accept/24b69601-d1f5-43c3-81d5-c168d213a4e2 | MESSAGE: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 8423 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction. | STACK: PrismaClientKnownRequestError: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 8423 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction.
+    at Qr.transaction (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:114:11489)
+    at async Proxy._transactionWithCallback (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:133:8207)
+2025-09-25 12:51:05 [ERROR]: PATCH /payment/accept/b1939399-9ab1-433f-ad9d-6f22f5c2dd1f | MESSAGE: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 9092 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction. | STACK: PrismaClientKnownRequestError: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 9092 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction.
+    at Qr.transaction (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:114:11489)
+    at async Proxy._transactionWithCallback (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:133:8207)
+2025-09-25 12:52:52 [ERROR]: PATCH /payment/accept/b1939399-9ab1-433f-ad9d-6f22f5c2dd1f | MESSAGE: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 7493 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction. | STACK: PrismaClientKnownRequestError: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 7493 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction.
+    at Qr.transaction (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:114:11489)
+    at async Proxy._transactionWithCallback (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:133:8207)
+2025-09-25 12:57:55 [ERROR]: PATCH /payment/accept/b1939399-9ab1-433f-ad9d-6f22f5c2dd1f | MESSAGE: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 9888 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction. | STACK: PrismaClientKnownRequestError: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 9888 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction.
+    at Qr.transaction (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:114:11489)
+    at async Proxy._transactionWithCallback (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:133:8207)
+2025-09-25 12:58:25 [ERROR]: PATCH /payment/accept/b1939399-9ab1-433f-ad9d-6f22f5c2dd1f | MESSAGE: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 7764 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction. | STACK: PrismaClientKnownRequestError: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 7764 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction.
+    at Qr.transaction (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:114:11489)
+    at async Proxy._transactionWithCallback (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:133:8207)
+2025-09-25 13:02:31 [ERROR]: PATCH /payment/accept/b1939399-9ab1-433f-ad9d-6f22f5c2dd1f | MESSAGE: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 6829 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction. | STACK: PrismaClientKnownRequestError: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 6829 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction.
+    at Qr.transaction (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:114:11489)
+    at async Proxy._transactionWithCallback (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:133:8207)
+2025-09-25 13:15:37 [ERROR]: PATCH /payment/accept/b1939399-9ab1-433f-ad9d-6f22f5c2dd1f | MESSAGE: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 8653 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction. | STACK: PrismaClientKnownRequestError: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 8653 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction.
+    at Qr.transaction (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:114:11489)
+    at async Proxy._transactionWithCallback (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:133:8207)
+2025-09-25 13:16:32 [ERROR]: PATCH /payment/accept/b1939399-9ab1-433f-ad9d-6f22f5c2dd1f | MESSAGE: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 6606 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction. | STACK: PrismaClientKnownRequestError: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 6606 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction.
+    at Qr.transaction (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:114:11489)
+    at async Proxy._transactionWithCallback (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:133:8207)
+2025-09-25 13:38:51 [ERROR]: PATCH /payment/accept/b1939399-9ab1-433f-ad9d-6f22f5c2dd1f | MESSAGE: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 8442 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction. | STACK: PrismaClientKnownRequestError: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 8442 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction.
+    at Qr.transaction (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:114:11489)
+    at async Proxy._transactionWithCallback (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:133:8207)
+2025-09-25 13:39:49 [ERROR]: PATCH /payment/accept/24b69601-d1f5-43c3-81d5-c168d213a4e2 | MESSAGE: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 6592 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction. | STACK: PrismaClientKnownRequestError: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 6592 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction.
+    at Qr.transaction (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:114:11489)
+    at async Proxy._transactionWithCallback (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:133:8207)
+2025-09-25 13:40:31 [ERROR]: PATCH /payment/accept/24b69601-d1f5-43c3-81d5-c168d213a4e2 | MESSAGE: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 6890 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction. | STACK: PrismaClientKnownRequestError: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 6890 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction.
+    at Qr.transaction (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:114:11489)
+    at async Proxy._transactionWithCallback (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:133:8207)
+2025-09-25 13:40:51 [ERROR]: GET /user/me | MESSAGE: Unauthorized | STACK: undefined
+2025-09-25 13:43:04 [ERROR]: GET /user/me | MESSAGE: Unauthorized | STACK: undefined
+2025-09-25 13:45:00 [ERROR]: PATCH /payment/accept/1d89a3cd-8829-45fd-b785-6b2f9f98c7fe | MESSAGE: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 8879 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction. | STACK: PrismaClientKnownRequestError: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 8879 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction.
+    at Qr.transaction (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:114:11489)
+    at async Proxy._transactionWithCallback (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:133:8207)
+2025-09-25 13:45:31 [ERROR]: PATCH /payment/accept/1d89a3cd-8829-45fd-b785-6b2f9f98c7fe | MESSAGE: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 7189 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction. | STACK: PrismaClientKnownRequestError: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 7189 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction.
+    at Qr.transaction (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:114:11489)
+    at async Proxy._transactionWithCallback (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:133:8207)
+2025-09-25 13:46:45 [ERROR]: PATCH /payment/accept/1d89a3cd-8829-45fd-b785-6b2f9f98c7fe | MESSAGE: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 8573 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction. | STACK: PrismaClientKnownRequestError: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 8573 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction.
+    at Qr.transaction (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:114:11489)
+    at async Proxy._transactionWithCallback (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:133:8207)
+2025-09-25 14:02:26 [ERROR]: PATCH /payment/accept/1d89a3cd-8829-45fd-b785-6b2f9f98c7fe | MESSAGE: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 7909 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction. | STACK: PrismaClientKnownRequestError: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 7909 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction.
+    at Qr.transaction (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:114:11489)
+    at async Proxy._transactionWithCallback (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:133:8207)
+2025-09-25 14:51:24 [ERROR]: PATCH /payment/accept/b1939399-9ab1-433f-ad9d-6f22f5c2dd1f | MESSAGE: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 8402 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction. | STACK: PrismaClientKnownRequestError: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 8402 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction.
+    at Qr.transaction (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:114:11489)
+    at async Proxy._transactionWithCallback (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:133:8207)
+2025-09-25 14:51:46 [ERROR]: PATCH /payment/accept/24b69601-d1f5-43c3-81d5-c168d213a4e2 | MESSAGE: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 7924 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction. | STACK: PrismaClientKnownRequestError: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 7924 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction.
+    at Qr.transaction (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:114:11489)
+    at async Proxy._transactionWithCallback (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:133:8207)
+2025-09-25 14:52:40 [ERROR]: GET /user/me | MESSAGE: Unauthorized | STACK: undefined
+2025-09-25 20:41:12 [ERROR]: POST /reservations/706defe8-24dc-403d-966f-6d005bb3f7da/reviews | MESSAGE: Review already submitted. | STACK: undefined
+2025-09-25 21:43:31 [ERROR]: GET /user/me | MESSAGE: Unauthorized | STACK: undefined
+2025-09-25 21:46:25 [ERROR]: PATCH /payment/accept/b1939399-9ab1-433f-ad9d-6f22f5c2dd1f | MESSAGE: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 7754 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction. | STACK: PrismaClientKnownRequestError: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 7754 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction.
+    at Qr.transaction (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:114:11489)
+    at async Proxy._transactionWithCallback (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:133:8207)
+2025-09-25 21:47:01 [ERROR]: PATCH /payment/accept/b1939399-9ab1-433f-ad9d-6f22f5c2dd1f | MESSAGE: 
+Invalid `prisma.bookings.update()` invocation:
+
+
+Transaction API error: Transaction already closed: A query cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 5675 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction. | STACK: PrismaClientKnownRequestError: 
+Invalid `prisma.bookings.update()` invocation:
+
+
+Transaction API error: Transaction already closed: A query cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 5675 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction.
+    at ri.handleRequestError (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:124:7459)
+    at ri.handleAndLogRequestError (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:124:6784)
+    at ri.request (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:124:6491)
+    at async l (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:133:9812)
+2025-09-25 21:49:19 [ERROR]: PATCH /payment/accept/b1939399-9ab1-433f-ad9d-6f22f5c2dd1f | MESSAGE: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 7525 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction. | STACK: PrismaClientKnownRequestError: Transaction API error: Transaction already closed: A commit cannot be executed on an expired transaction. The timeout for this transaction was 5000 ms, however 7525 ms passed since the start of the transaction. Consider increasing the interactive transaction timeout or doing less work in the transaction.
+    at Qr.transaction (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:114:11489)
+    at async Proxy._transactionWithCallback (/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client/runtime/library.js:133:8207)
+2025-09-25 23:03:25 [ERROR]: GET /user/me | MESSAGE: Unauthorized | STACK: undefined
+2025-09-25 23:52:34 [ERROR]: GET /user/me | MESSAGE: Unauthorized | STACK: undefined

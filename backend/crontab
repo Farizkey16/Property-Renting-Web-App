@@ -1,0 +1,3 @@
+# At 9:00 AM every day, run the 'expire-overdue-bookings' task.
+# Payloads are optional.
+0 2 * * * expire-overdue-bookings

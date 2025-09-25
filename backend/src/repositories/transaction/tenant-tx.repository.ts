@@ -9,7 +9,8 @@ import {
   isValidSort,
   ProofImage,
 } from "../../types/transaction/transactions.types";
-import { scheduleBookingReminder } from "../../services/jobs/booking-reminder.worker";
+import { quickAddJob } from "graphile-worker";
+import { BookingWithDetails } from "../../services/jobs/send-confirmation";
 
 export const ValidateBooking = async (
   booking_id: string,
@@ -47,9 +48,9 @@ export const UpdateBookings = async (
     data: {
       status: status,
     },
-    select: {
-      user_id: true,
-    },
+    include: {
+      booking_rooms: true
+    }
   });
 
   return updateBooking.user_id;
@@ -90,67 +91,6 @@ export const findBookingRoomsByBookingId = async (
   });
 
   return bookingRooms;
-};
-
-export const OverlappingBooking = async (
-  bookingId: string,
-  tx: Prisma.TransactionClient
-) => {
-  const findBookings = await findBookingRoomsByBookingId(bookingId, tx);
-
-  const roomIds: string[] = (findBookings as BookingRoomCompleteType[]).map(
-    (rid) => rid.room_id
-  );
-  const bookingRoomIds: string[] = (
-    findBookings as BookingRoomCompleteType[]
-  ).map((brid) => brid.id);
-  const checkOut: Date[] = (findBookings as BookingRoomCompleteType[]).map(
-    (co) => co.check_out_date
-  );
-  const checkIn: Date[] = (findBookings as BookingRoomCompleteType[]).map(
-    (ci) => ci.check_in_date
-  );
-
-  const earliestCheckIn = new Date(
-    Math.min(...checkIn.map((date) => date.getTime()))
-  );
-  const latestCheckOut = new Date(
-    Math.max(...checkOut.map((date) => date.getTime()))
-  );
-
-  if (roomIds.length === 0) {
-    return [];
-  }
-
-  const ovrBooking = await tx.booking_rooms.findMany({
-    where: {
-      room_id: {
-        in: roomIds,
-      },
-      id: {
-        not: {
-          in: bookingRoomIds,
-        },
-      },
-      OR: [
-        { booking: { status: "confirmed" } },
-        { booking: { status: "waiting_payment" } },
-      ],
-      check_in_date: { lt: latestCheckOut },
-      check_out_date: { gt: earliestCheckIn },
-    },
-    select: {
-      room_id: true,
-      quantity: true,
-      room: {
-        select: {
-          total_rooms: true,
-        },
-      },
-    },
-  });
-
-  return ovrBooking;
 };
 
 export const UpdateRoomAvailability = async (
@@ -302,41 +242,30 @@ export const findBookingIncludeBookingRooms = async (
 export const acceptBookingPayment = async (
   bookingId: string,
   tenantId: string
-) => {
-  return prisma.$transaction(async (tx) => {
-    const booking = await tx.bookings.findFirst({
+): Promise<BookingWithDetails> => {
+  try {
+    const updatedBooking = await prisma.bookings.update({
       where: {
         id: bookingId,
         status: "waiting_confirmation",
-        property: {
-          tenant_id: tenantId,
-        },
+        property: { tenant_id: tenantId },
       },
-    });
-
-    if (!booking) {
-      throw new AppError(
-        "Booking not found, not awaiting confirmation, or you are not authorized.",
-        404
-      );
-    }
-
-    const updatedBooking = await tx.bookings.update({
-      where: { id: bookingId },
       data: {
         status: "confirmed",
         paid_at: new Date(),
       },
-
       include: {
         user: { select: { full_name: true, email: true } },
-        property: { select: { name: true, city: true, main_image: true } },
+        property: { select: { name: true, city: true} },
         booking_rooms: { include: { room: { select: { name: true } } } },
       },
     });
 
-    await scheduleBookingReminder(updatedBooking)
-
     return updatedBooking;
-  });
+  } catch (error) {
+    throw new AppError(
+      "Booking not found, not awaiting confirmation, or you are not authorized.",
+      404
+    );
+  }
 };

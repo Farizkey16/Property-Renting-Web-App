@@ -11,7 +11,6 @@ import {
   BOOKING_CONFIRMATION_TEMPLATE_MULTIPLE,
   BOOKING_REJECTION_TEMPLATE_SINGLE,
 } from "../../utils/emailTemplates";
-import { scheduler } from "../scheduler.service";
 import {
   FormattedRoom,
   BookingTemplateData,
@@ -20,6 +19,7 @@ import {
 } from "../../types/transaction/transactions.types";
 import { handleUpload } from "../../config/cloudinary";
 import { checkBookingAndUserId } from "../../repositories/transaction/user-tx.repository";
+import { quickAddJob } from "graphile-worker";
 
 type BookingRoomType = Awaited<
   ReturnType<typeof findBookingRoomsByBookingId>
@@ -74,21 +74,12 @@ export const scheduleReminder = async (bookingId: string) => {
   return; 
 }
   
-  const reminderDate = new Date(firstBooking);
-
-  reminderDate.setMinutes(reminderDate.getDate() + 3);
-
-  const boss = await scheduler();
-  await boss.send(
+  await quickAddJob(
+    {connectionString: process.env.DIRECT_URL},
     "send-booking-reminder",
-    {
-      bookingId: bookingId,
-    },
-    {
-      startAfter: reminderDate,
-      singletonKey: `reminder-${bookingId}`,
-    }
-  );
+    {bookingId: bookingId}
+  )
+  
 };
 
 export const sendRejectionNotification = async (

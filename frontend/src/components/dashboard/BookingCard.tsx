@@ -11,19 +11,19 @@ import {
 import { formatCurrency } from "@/lib/utils";
 import { ViewProofModal } from "../ui/view-proof";
 import { LeaveReviewForm } from "./leave-review";
-import { toast } from "react-toastify";
 import { useRef, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { Spinner } from "../ui/shadcn-io/spinner";
+import { Toaster, toast } from "sonner";
 
 const getStatusColor = (status: string) => {
   switch (status) {
     case "waiting_confirmation":
       return "bg-gray-100 text-green-700 hover:bg-green-100";
-    case "pending":
+    case "waiting_payment":
       return "bg-yellow-100 text-yellow-700 hover:bg-yellow-100";
-    case "cancelled":
+    case "canceled":
       return "bg-red-100 text-red-700 hover:bg-red-100";
     default:
       return "bg-gray-100 text-gray-700 hover:bg-gray-100";
@@ -52,6 +52,7 @@ export const BookingCard = ({ booking, role }: BookingCardProps) => {
   const price = booking.amount;
 
   const bookingId = booking.id;
+  const hasReviewed = booking._count.reviews
 
   const isTenantActionRequired =
     role === "tenant" && booking.status === "waiting_confirmation";
@@ -62,25 +63,16 @@ export const BookingCard = ({ booking, role }: BookingCardProps) => {
       booking.status === "waiting_confirmation");
 
   const handleCancel = (bookingId: string) => {
-    if (window.confirm("Are you sure you want to cancel this booking?")) {
-      cancelBookingMutation.mutate(bookingId);
-    }
+    cancelBookingMutation.mutate(bookingId);
   };
 
   const handleAccept = (bookingId: string) => {
-    if (window.confirm("Are you sure you want to accept this booking?")) {
-      acceptBookingMutation.mutate(bookingId);
-    }
+    acceptBookingMutation.mutate(bookingId);
   };
-
   const handleReject = (bookingId: string) => {
-    if (window.confirm("Are you sure you want to reject this booking?")) {
-      rejectBookingMutation.mutate(bookingId);
-    }
+    rejectBookingMutation.mutate(bookingId);
   };
 
-  const hasReviewed = booking._count?.reviews
-  
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-64 py-3">
@@ -125,11 +117,11 @@ export const BookingCard = ({ booking, role }: BookingCardProps) => {
   return (
     <CardContent className="px-1 py-1">
       <div className="space-y-1">
-        {/* Render a single booking card for the passed booking prop */}
+        
         <Card key={booking.id} className="border border-gray-200">
           <CardContent className="p-4">
             <div className="flex flex-col lg:flex-row gap-4">
-              {/* Property Image */}
+        
               <div className="w-full lg:w-32 h-20 rounded-lg overflow-hidden bg-gray-100">
                 <img
                   src={booking.property?.main_image ?? "/placeholder.svg"}
@@ -165,7 +157,7 @@ export const BookingCard = ({ booking, role }: BookingCardProps) => {
                   <div className="flex items-center text-gray-600">
                     <Calendar className="w-4 h-4 mr-2" />
                     <span>
-                      {new Date(booking.check_in_date).toLocaleDateString()} - {" "}
+                      {new Date(booking.check_in_date).toLocaleDateString()} -{" "}
                       {new Date(booking.check_out_date).toLocaleDateString()}
                     </span>
                   </div>
@@ -185,7 +177,18 @@ export const BookingCard = ({ booking, role }: BookingCardProps) => {
                     <Button
                       size="sm"
                       className="bg-orange-500 hover:bg-orange-600 cursor-pointer"
-                      onClick={() => handleAccept(booking.id)}
+                      onClick={() =>
+                        toast.warning(
+                          "Are you sure you want to accept this booking?",
+                          {
+                            description: "You cannot undo this action.",
+                            action: {
+                              label: "Accept",
+                              onClick: () => handleAccept(booking.id),
+                            },
+                          }
+                        )
+                      }
                     >
                       {" "}
                       Accept
@@ -198,7 +201,18 @@ export const BookingCard = ({ booking, role }: BookingCardProps) => {
                     <Button
                       size="sm"
                       className="bg-red-500 hover:bg-red-600 cursor-pointer"
-                      onClick={() => handleReject(booking.id)}
+                      onClick={() =>
+                        toast.warning(
+                          "Are you sure you want to reject this booking?",
+                          {
+                            description: "You cannot undo this action.",
+                            action: {
+                              label: "Reject",
+                              onClick: () => handleReject(booking.id),
+                            },
+                          }
+                        )
+                      }
                     >
                       {" "}
                       Reject
@@ -219,11 +233,19 @@ export const BookingCard = ({ booking, role }: BookingCardProps) => {
                     accept="image/png, image/jpg, image/jpeg"
                     style={{ display: "none" }}
                   />
-                  {role === "user" && (booking.status === "waiting_payment" || booking.status === "waiting_confirmation") && (
-                    <Button size="sm" className="cursor-pointer" onClick={handleButtonClick}>
-                      {!booking.proof_image ? "Submit Payment Proof" : "Resubmit Payment Proof"}
-                    </Button>
-                  )}
+                  {role === "user" &&
+                    (booking.status === "waiting_payment" ||
+                      booking.status === "waiting_confirmation") && (
+                      <Button
+                        size="sm"
+                        className="cursor-pointer"
+                        onClick={handleButtonClick}
+                      >
+                        {!booking.proof_image
+                          ? "Submit Payment Proof"
+                          : "Resubmit Payment Proof"}
+                      </Button>
+                    )}
 
                   {canUserCancel && (
                     <Button
@@ -231,14 +253,26 @@ export const BookingCard = ({ booking, role }: BookingCardProps) => {
                       size="sm"
                       className="text-red-600 hover:text-red-700 bg-transparent cursor-pointer"
                       disabled={cancelBookingMutation.isPending}
-                      onClick={() => handleCancel(booking.id)}
+                      onClick={() =>
+                        toast.warning(
+                          "Are you sure you want to cancel this booking?",
+                          {
+                            description: "You cannot undo this action.",
+                            action: {
+                              label: "Cancel",
+                              onClick: () => handleCancel(booking.id),
+                            },
+                          }
+                        )
+                      }
                     >
                       Cancel
                     </Button>
                   )}
 
                   {booking.status === "confirmed" &&
-                    role === "user" && !hasReviewed &&
+                    role === "user" &&
+                    !hasReviewed &&
                     new Date(booking.check_out_date) < new Date() && (
                       <>
                         <LeaveReviewForm bookingId={booking.id} />

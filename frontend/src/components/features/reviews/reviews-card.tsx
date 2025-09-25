@@ -1,15 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Rating } from "react-simple-star-rating";
-import { Review } from "@/types/reviews/reviews.types";
 import { usePropertyReviews } from "@/hooks/useReviews";
-import { fetchReviews } from "@/services/reviews.service";
 import { PaginationControl } from "@/components/fragment/pagination-control/PaginationControl";
 import { Spinner } from "@/components/ui/shadcn-io/spinner";
+import { Review } from "@/types/reviews/reviews.types";
 
 interface ReviewsCardProps {
   reviews: Review[];
@@ -35,7 +34,6 @@ const ReviewCard = ({ review }: { review: Review }) => {
             <h4 className="font-semibold text-base">{review.user.full_name}</h4>
           </div>
         </div>
-        
 
         <div className="flex items-center gap-2 mb-2">
           <div className="flex items-center gap-1">
@@ -54,7 +52,6 @@ const ReviewCard = ({ review }: { review: Review }) => {
             })}
           </span>
         </div>
-        
 
         <div className="text-sm leading-relaxed">
           {review.comment &&
@@ -71,12 +68,12 @@ const ReviewCard = ({ review }: { review: Review }) => {
           )}
         </div>
 
-        {review.tenantReply && (
+        {review.tenant_reply && (
           <div className="mt-4 p-4 bg-slate-50 rounded-lg border">
             <p className="font-semibold text-sm text-slate-800">
               Reply from the owner
             </p>
-            <p className="text-sm text-slate-600 mt-2">{review.tenantReply}</p>
+            <p className="text-sm text-slate-600 mt-2">{review.tenant_reply}</p>
           </div>
         )}
       </CardContent>
@@ -85,21 +82,33 @@ const ReviewCard = ({ review }: { review: Review }) => {
 };
 
 export const ReviewList = ({ propertyId }: { propertyId: string }) => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const { data: reviews, error, isError, isLoading } = usePropertyReviews(
-    propertyId,
-    currentPage
-  );
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const currentPage = Number(searchParams.get("page")) || 1;
+  const {
+    data: reviews,
+    error,
+    isError,
+    isLoading,
+  } = usePropertyReviews(propertyId, currentPage);
 
   const handlePageChange = (newPage: number) => {
-    setCurrentPage(newPage)
+    const params = new URLSearchParams(searchParams);
+    params.set("page", String(newPage));
+    router.push(`${pathname}?${params.toString()}`);
   };
 
-  if (isLoading) return <div><Spinner/></div>;
+  if (isLoading)
+    return (
+      <div className="flex justify-center items-center h-64">
+        <Spinner />
+      </div>
+    );
   if (isError) return <div>An error occurred: {error.message}</div>;
 
-  const allReviews = reviews.data
-  const meta = reviews.meta
+  const allReviews = reviews.data;
+  const meta = reviews.meta;
 
   if (allReviews.length === 0) {
     return <div className="text-center py-8">No reviews yet.</div>;
@@ -113,7 +122,12 @@ export const ReviewList = ({ propertyId }: { propertyId: string }) => {
         ))}
       </div>
 
-      <PaginationControl totalItems={meta.totalItems} pageSize={meta.limit} currentPage={currentPage} onPageChange={handlePageChange}/>
+      <PaginationControl
+        totalItems={meta.totalItems}
+        pageSize={meta.limit}
+        currentPage={meta.page}
+        onPageChange={handlePageChange}
+      />
     </div>
   );
 };

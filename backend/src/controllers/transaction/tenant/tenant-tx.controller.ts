@@ -13,7 +13,6 @@ import {
 import { getEmailAndFullnameById } from "../../../repositories/user/user.respository";
 import {
   getRoomAmount,
-  scheduleReminder,
   sendRejectionNotification,
   sendUserBookingConfirmation,
 } from "../../../services/transaction/transaction.service";
@@ -21,7 +20,7 @@ import { Prisma } from "../../../../prisma/generated/client";
 import { isValidBookingStatus } from "../../../types/transaction/transactions.types";
 import { getFilteredBookings } from "../../../repositories/transaction/user-tx.repository";
 import { getDatesBetween } from "../../../utils/getDatesBetween";
-import { scheduleBookingReminder } from "../../../services/jobs/booking-reminder.worker";
+import { quickAddJob } from "graphile-worker";
 
 class TenantTransactions {
   public acceptPayment = async (
@@ -39,8 +38,19 @@ class TenantTransactions {
         role.tenant_id
       );
 
-      // Send Booking Confirmation
-      await sendUserBookingConfirmation(updatedBooking);
+      quickAddJob(
+        { connectionString: process.env.DIRECT_URL },
+        "send-confirmation-job",
+        updatedBooking
+      );
+
+      const reminderRunAt = new Date(Date.now() + 10 * 1000);
+      await quickAddJob(
+        { connectionString: process.env.DIRECT_URL },
+        "send-booking-reminder",
+        { bookingId: updatedBooking.id },
+        { runAt: reminderRunAt }
+      );
 
       res.json({
         message: "Payment successful, booking created",
@@ -61,36 +71,26 @@ class TenantTransactions {
 
       const bookingId = req.params.id;
 
-      console.log("Fetching from bookingId:", bookingId);
-
       if (!bookingId) {
         throw new AppError("Invalid transaction ID", 400);
       }
 
       const rejectProcess = await prisma.$transaction(async (tx) => {
-        // Validate Property --> repository selects property key
-        await ValidateBooking(bookingId, role.userId, tx);
-
         // Update booking and Return UserID
 
-        const userId = await UpdateBookings(bookingId, "waiting_payment", tx);
-
-        const booking = await findBookingIncludeBookingRooms(bookingId, tx);
+        const updatedBooking = await UpdateBookings(bookingId, "waiting_payment", tx);
 
         const datesToUpdate = getDatesBetween(
-          booking.check_in_date,
-          booking.check_out_date
+          updatedBooking.check_in_date,
+          updatedBooking.check_out_date
         );
 
-        const roomId = booking.booking_rooms.room_id;
-
-        // Validate user
-        const user = await getEmailAndFullnameById(userId);
+        const roomId = updatedBooking.booking_rooms.room_id;
 
         // Update Availability
         await UpdateRoomAvailability(roomId, datesToUpdate, true, tx);
 
-        return { userId, user };
+        return updatedBooking
       });
 
       // Send Rejection Notification

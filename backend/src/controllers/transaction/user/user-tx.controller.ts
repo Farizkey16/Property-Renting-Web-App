@@ -103,7 +103,7 @@ class UserTransactions {
                 },
               },
               update: {
-                is_available: false,
+                is_available: true,
               },
               create: {
                 room_id: roomId,

@@ -30,6 +30,7 @@ export type FormattedRoom = {
   quantity: number;
   subtotal: number;
   room_id: string;
+  nights?: number
 };
 
 export type BookingTemplateData = {
@@ -38,6 +39,9 @@ export type BookingTemplateData = {
   propertyName: string;
   rooms: FormattedRoom[];
   email: string;
+  check_in_date?: Date;
+  check_out_date?: Date;
+  nights?: number
 };
 
 export interface BookingRoomCompleteType {

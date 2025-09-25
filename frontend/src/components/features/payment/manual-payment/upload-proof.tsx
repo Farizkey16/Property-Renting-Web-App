@@ -37,14 +37,6 @@ export const UploadProofFunction = ({
     router.push("/dashboard/bookings");
   };
 
-  if (isLoading) {
-  return (
-    <div className="flex justify-center items-center h-64"> 
-      <Spinner />
-    </div>
-  );
-}
-
   const handleUploadProof = async () => {
     if (!uploadedFile) {
       toast.error("Please select a file to upload");
@@ -64,8 +56,8 @@ export const UploadProofFunction = ({
         { withCredentials: true }
       );
       toast.success("Payment proof uploaded successfully!");
-      setIsSuccessModalOpen(true)
-      router.push("/dashboard/bookings")
+      setIsSuccessModalOpen(true);
+      router.push("/dashboard/bookings?page=1&sort=desc&status=waiting_confirmation");
     } catch (error: any) {
       toast.error(
         error.response?.data?.message || "Upload failed. Please try again."
@@ -101,9 +93,7 @@ export const UploadProofFunction = ({
                   <p className="font-medium text-slate-900">
                     Click to upload receipt
                   </p>
-                  <p className="text-sm text-slate-500">
-                    PNG or JPG up to 1MB
-                  </p>
+                  <p className="text-sm text-slate-500">PNG or JPG up to 1MB</p>
                 </div>
               </div>
             </label>
@@ -129,7 +119,14 @@ export const UploadProofFunction = ({
             className="w-full bg-emerald-600 hover:bg-emerald-700"
             size="lg"
           >
-            {isPending ? "Uploading..." : "Submit Payment Receipt"}
+            {isLoading ? (
+              <div className="flex items-center justify-center gap-2">
+                <Spinner className="h-5 w-5" />
+                <span>Processing...</span>
+              </div>
+            ) : (
+              "Submit Payment Receipt"
+            )}
           </Button>
         </CardContent>
       </Card>

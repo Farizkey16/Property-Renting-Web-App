@@ -144,6 +144,8 @@ model bookings {
   property         properties      @relation(fields: [property_id], references: [id])
   user             users           @relation(fields: [user_id], references: [id])
   reviews          reviews[]
+
+  @@index([property_id, status])
 }
 
 model booking_rooms {

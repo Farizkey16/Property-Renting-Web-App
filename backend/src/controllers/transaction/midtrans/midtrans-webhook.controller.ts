@@ -3,7 +3,7 @@ import { snap } from "../../../config/midtrans";
 import { prisma } from "../../../config/prisma";
 import AppError from "../../../errors/AppError";
 import crypto from "crypto";
-import { sendUserBookingConfirmation } from "../../../services/transaction/transaction.service";
+import { scheduleReminder, sendUserBookingConfirmation } from "../../../services/transaction/transaction.service";
 
 export class MidtransWebhookController {
   public handleNotification = async (
@@ -47,6 +47,8 @@ export class MidtransWebhookController {
           .send("Booking not found, but notification acknowledged.");
       }
 
+      const bookingId = booking.id
+
       const tenantRecord = await prisma.tenants.findUnique({
         where: {
           user_id: booking.user_id
@@ -75,6 +77,7 @@ export class MidtransWebhookController {
           });
 
           await sendUserBookingConfirmation(updatedBooking)
+          await scheduleReminder(bookingId)
         }
       } else if (
         transactionStatus === "expire" ||

@@ -23,6 +23,7 @@ import { formatCurrency } from "@/lib/utils";
 import { useMutation } from "@tanstack/react-query";
 import { createBooking } from "@/services/transactions.services";
 import { useRoomAvailability } from "@/hooks/useRoom";
+import { Spinner } from "@/components/ui/shadcn-io/spinner";
 
 export default function BookingDetailsForm() {
   const [formData, setFormData] = useState({
@@ -33,7 +34,7 @@ export default function BookingDetailsForm() {
   });
   const router = useRouter();
 
-  const createBookingMutation = useMutation({
+  const { mutate: createNewBooking, isPending } = useMutation({
     mutationFn: createBooking,
 
     onSuccess: (data) => {
@@ -41,7 +42,7 @@ export default function BookingDetailsForm() {
 
       console.log("Booking created successfully!", data);
       console.log("ID is:", bookingId);
-      
+
       toast.success("Your booking has been made! Please proceed to payment.");
       router.push(`/dashboard/payment-page/${bookingId}`);
     },
@@ -102,7 +103,13 @@ export default function BookingDetailsForm() {
     checkIn,
     checkOut: checkOut,
   });
-  console.log("DEBUG: Query Status:", { status, isLoading, isError, error, availableCount });
+  console.log("DEBUG: Query Status:", {
+    status,
+    isLoading,
+    isError,
+    error,
+    availableCount,
+  });
 
   const selectedRoom = property?.rooms?.find((r) => r.id === room_id);
 
@@ -148,7 +155,7 @@ export default function BookingDetailsForm() {
       taxesAndFees: priceDetails?.taxesAndFees,
     };
 
-    createBookingMutation.mutate(finalBookingPayload);
+    createNewBooking(finalBookingPayload);
   };
 
   return (
@@ -292,10 +299,18 @@ export default function BookingDetailsForm() {
 
             <Button
               onClick={handleContinue}
+              disabled={isPending}
               className="w-full bg-green-600 hover:bg-green-700 text-white py-3 text-base font-medium"
               size="lg"
             >
-              Continue to Payment
+              {isPending ? (
+                <div className="flex items-center justify-center gap-2">
+                  <Spinner className="h-5 w-5" />
+                  <span>Processing...</span>
+                </div>
+              ) : (
+                "Continue to Payment"
+              )}
             </Button>
           </div>
 
