@@ -48,3 +48,4 @@ export function PriceSection({ basePrice, total, loading }: PriceSectionProps) {
     </div>
   );
 }
+

@@ -25,7 +25,6 @@ export default async function UserSalesTable() {
     { key: "totalBookings", label: "Total Bookings" },
     { key: "totalSpent", label: "Total Spent" },
     { key: "lastBookingDate", label: "Last Booking Date" },
-    { key: "segment", label: "Segment" },
   ];
 
   return (

@@ -96,4 +96,6 @@ export const editRoomValidation = [
     .isInt({ min: 0 })
     .withMessage("Total rooms must be >= 0"),
   validationHandling,
+
 ];
+

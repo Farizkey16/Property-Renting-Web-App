@@ -1,9 +1,8 @@
-import PgBoss from "pg-boss";
-import AppError from "../errors/AppError";
+
 import { expiredBookings } from "./jobs/expired-booking.worker";
 import { bookingReminder } from "./jobs/booking-reminder.worker";
-import { run, quickAddJob } from "graphile-worker";
-import type { Task, TaskList } from "graphile-worker";
+import { run } from "graphile-worker";
+import type { TaskList } from "graphile-worker";
 
 const taskList = {
   "send-booking-reminder": bookingReminder,
@@ -16,8 +15,6 @@ const SEND_CONFIRMATION_JOB = "send-confirmation-job"
 
 export const startAllWorkersAndSchedules = async () => {
   try {
-    // const boss = await getBoss();
-    console.log("Setting up pgBoss workers and schedules...");
 
     const taskList: TaskList = {
       [EXPIRE_BOOKINGS_JOB]: expiredBookings,

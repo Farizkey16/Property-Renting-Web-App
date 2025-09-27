@@ -24,7 +24,6 @@ export function PastBookingsClient({
   const router = useRouter();
   const searchParams = useSearchParams();
   const [uploadFile, setUploadFile] = useState<File | null>(null);
-  const [isTransitioning, setIsTransitioning] = useState(false);
   const [isPending, startTransition] = useTransition();
 
   const handleFilterChange = (key: string, value: string | null) => {
@@ -54,14 +53,17 @@ export function PastBookingsClient({
 
   const clearFilters = () => {
     startTransition(() => {
-    router.push(`/dashboard/pastbookings`);}
-  )};
+      router.push(`/dashboard/pastbookings`);
+    });
+  };
 
   const handlePageChange = (newPage: number) => {
-    
     const current = new URLSearchParams(Array.from(searchParams.entries()));
     current.set("page", String(newPage));
-    startTransition(() => {router.push(`/dashboard/pastbookings?${current.toString()}`)})
+    startTransition(() => {
+      router.push(`/dashboard/pastbookings?${current.toString()}`);
+    });
+
   };
 
   return (

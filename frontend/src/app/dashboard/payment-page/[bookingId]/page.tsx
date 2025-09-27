@@ -24,7 +24,7 @@ export type PaymentPageParams = {
 export default function PaymentPage() {
   const [timeLeft, setTimeLeft] = useState<string>("");
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading] = useState(false);
   const params = useParams<PaymentPageParams>();
   const uploadMutation = useUploadProofMutation();
 

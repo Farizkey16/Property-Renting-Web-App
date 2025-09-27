@@ -27,7 +27,6 @@ export const UploadProofFunction = ({
   onFileSelect,
   bookingId,
   uploadedFile,
-  isPending,
 }: UploadProofParams) => {
   const router = useRouter();
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
@@ -58,10 +57,12 @@ export const UploadProofFunction = ({
       toast.success("Payment proof uploaded successfully!");
       setIsSuccessModalOpen(true);
       router.push("/dashboard/bookings?page=1&sort=desc&status=waiting_confirmation");
-    } catch (error: any) {
+    } catch (error) {
+
       toast.error(
-        error.response?.data?.message || "Upload failed. Please try again."
+       "Upload failed. Please try again."
       );
+      console.error("Error uploading payment proof:", error);
     } finally {
       setIsLoading(false);
     }

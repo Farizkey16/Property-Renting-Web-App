@@ -6,7 +6,8 @@ import { BookingsToolbar } from "./BookingToolbar";
 import { PaginationControl } from "../fragment/pagination-control/PaginationControl";
 import { BookingList } from "./BookingList";
 import { Booking, Filters, Meta } from "@/types/transactions/transactions";
-import { useState } from "react";
+import { useState, useTransition } from "react";
+import { is } from "date-fns/locale";
 
 interface BookingsClientProps {
   bookings: Booking[];
@@ -24,7 +25,7 @@ export function BookingsClient({
   const router = useRouter();
   const searchParams = useSearchParams();
   const [uploadFile, setUploadFile] = useState<File | null>(null);
-  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isPending, startTransition] = useTransition();
 
   const handleFilterChange = (key: string, value: string | null) => {
     const current = new URLSearchParams(Array.from(searchParams.entries()));
@@ -50,15 +51,17 @@ export function BookingsClient({
   };
 
   const clearFilters = () => {
-    setIsTransitioning(true);
-    router.push(`/dashboard/bookings`);
+    startTransition(() => {
+      router.push(`/dashboard/bookings`);
+    });
   };
 
   const handlePageChange = (newPage: number) => {
-    setIsTransitioning(true);
     const current = new URLSearchParams(Array.from(searchParams.entries()));
-    current.set("page", String(newPage));
-    router.push(`/dashboard/bookings?${current.toString()}`);
+      current.set("page", String(newPage));
+    startTransition(() => {
+      router.push(`/dashboard/bookings?${current.toString()}`);
+    });
   };
 
   return (
@@ -88,8 +91,8 @@ export function BookingsClient({
               bookings={bookings}
               role={role}
               isError={false}
-              isFetching={isTransitioning}
-              isLoading={isTransitioning}
+              isFetching={isPending}
+              isLoading={isPending}
             />
           )}
         </CardContent>
