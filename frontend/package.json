@@ -68,9 +68,9 @@
     "@types/jsonwebtoken": "^9.0.10",
     "@types/luxon": "^3.7.1",
     "@types/mapbox__mapbox-gl-geocoder": "^5.0.0",
-    "@types/node": "^20",
+    "@types/node": "20.19.17",
     "@types/qs": "^6.14.0",
-    "@types/react": "^19",
+    "@types/react": "19.1.14",
     "@types/react-datepicker": "^6.2.0",
     "@types/react-dom": "^19",
     "eslint": "^9",
@@ -78,6 +78,6 @@
     "prisma": "^6.16.2",
     "tailwindcss": "^4",
     "tw-animate-css": "^1.3.6",
-    "typescript": "^5"
+    "typescript": "5.9.2"
   }
 }

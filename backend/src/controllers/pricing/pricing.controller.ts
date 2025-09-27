@@ -17,6 +17,8 @@ class PricingQuoteController {
         total: string;
       };
 
+      console.log("Received query params:", { roomId, checkIn, checkOut, total });
+
       const room = await prisma.rooms.findUnique({ where: { id: roomId } });
 
       if (!room) {
