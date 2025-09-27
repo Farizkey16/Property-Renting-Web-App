@@ -2,7 +2,6 @@
 
 import { useSearchParams, useRouter } from "next/navigation";
 import { PropertyTypeNav } from "./property-type-nav";
-import { PropertyGrid } from "./property-grid";
 
 export function PropertyPage() {
   const searchParams = useSearchParams();
@@ -24,7 +23,6 @@ export function PropertyPage() {
           router.push(`?${params.toString()}`);
         }}
       />
-      <PropertyGrid />
     </div>
   );
 }

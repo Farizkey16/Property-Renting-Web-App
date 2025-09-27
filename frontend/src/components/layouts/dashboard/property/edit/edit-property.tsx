@@ -203,7 +203,6 @@ const EditPropertyForm = () => {
               </div>
             </div>
 
-            {/* Map pakai PropertyMap */}
             <div>
               <Label>Pick Location on Map</Label>
               <PropertyMap
@@ -216,7 +215,7 @@ const EditPropertyForm = () => {
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="hidden">
               <div>
                 <Label>Latitude</Label>
                 <Input {...register("latitude")} readOnly />

@@ -3,6 +3,10 @@ import RoomsController from "../controllers/rooms/rooms.controller";
 import { uploaderMemory } from "../middleware/uploader";
 import { verifyToken } from "../middleware/VerifyToken";
 import { onlyTenant } from "../middleware/by-role/tenantMiddleware";
+import {
+  createRoomValidation,
+  editRoomValidation,
+} from "../middleware/validation/room";
 
 class RoomRouter {
   private route: Router;
@@ -37,6 +41,7 @@ class RoomRouter {
       verifyToken,
       onlyTenant,
       uploaderMemory().array("images", 3),
+      createRoomValidation,
       this.roomRouter.createRoomController
     );
     this.route.patch(
@@ -44,6 +49,7 @@ class RoomRouter {
       verifyToken,
       onlyTenant,
       uploaderMemory().array("images", 3),
+      editRoomValidation,
       this.roomRouter.updateRoom
     );
     this.route.patch(

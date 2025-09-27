@@ -52,7 +52,7 @@ export function Header() {
             <span className="text-white text-sm font-bold">h</span>
           </div>
           <span
-            className={`text-xl lg:text-2xl font-semibold ${
+            className={`text-xl lg:text-2xl font-bold ${
               isWhiteText ? "text-white" : "text-black"
             }`}>
             homz

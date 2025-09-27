@@ -177,7 +177,7 @@ export default function CreatePropertyForm() {
               }}
             />
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="hidden">
               <div>
                 <Label className="mb-2">Latitude</Label>
                 <Input {...register("latitude")} readOnly />

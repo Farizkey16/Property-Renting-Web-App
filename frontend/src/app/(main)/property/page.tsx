@@ -21,6 +21,7 @@ export default async function SearchPage(props: {
             <InputDate />
           </div>
         </div>
+
         <PropertyTypeNav activeCategory={categories} />
         <Suspense fallback={MapLoading()}>
           <PropertyDiscovery

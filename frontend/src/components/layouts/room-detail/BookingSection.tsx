@@ -109,7 +109,7 @@ export default function BookingSectionPage() {
         paramsObj.set("checkOut", checkOut);
 
         router.replace(`?${paramsObj.toString()}`, { scroll: false });
-      }, 2000);
+      }, 1000);
 
       return () => clearTimeout(timeoutId);
     }
@@ -207,7 +207,9 @@ export default function BookingSectionPage() {
 
             <ReserveButton
               onClick={handleReserveNow}
-              isDisabled={isRoomFullyBooked || availabilityLoading}
+              isDisabled={
+                isRoomFullyBooked || availabilityLoading || !hasSelectedDate
+              }
             />
           </div>
         </DialogContent>

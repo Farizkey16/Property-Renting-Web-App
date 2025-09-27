@@ -8,6 +8,7 @@ import { formatCurrency, formatDate } from "@/lib/utils";
 import Link from "next/link";
 import { DeleteDialog } from "@/components/fragment/button-action/DeleteDialog";
 import { useDeleteRoom } from "@/hooks/useRoom";
+import { toast } from "sonner";
 
 interface RoomListProps {
   rooms: Array<{
@@ -150,7 +151,7 @@ export function RoomList({ rooms }: RoomListProps) {
                           description="Are you sure you want to delete this room?"
                           onConfirm={async () => {
                             await deleteRoom(room.id);
-                            alert("Room deleted successfully");
+                            toast.success("Room deleted successfully!");
                           }}
                           trigger={
                             <Button

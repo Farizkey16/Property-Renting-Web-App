@@ -88,13 +88,13 @@ export function GuestPicker({ value, onChange }: GuestPickerProps) {
           onValueChange={(val) => handleValueChange("guests", val)}
         />
         <Separator />
-        <Counter
+        {/* <Counter
           title="Rooms"
           description="Number of rooms"
           value={value.rooms}
           min={1}
           onValueChange={(val) => handleValueChange("rooms", val)}
-        />
+        /> */}
       </PopoverContent>
     </Popover>
   );

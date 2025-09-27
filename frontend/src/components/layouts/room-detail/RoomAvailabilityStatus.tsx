@@ -3,6 +3,7 @@
 import React, { useEffect } from "react";
 import { format } from "date-fns";
 import { useGetRoomAvailibility } from "@/hooks/useRoom";
+import { Loader2 } from "lucide-react";
 
 export interface AvailabilityItem {
   id: string;
@@ -15,17 +16,17 @@ export interface AvailabilityItem {
 
 interface RoomAvailabilityStatusProps {
   roomId: string;
-  startDate: string; // format yyyy-MM-dd
-  endDate: string; // format yyyy-MM-dd
+  startDate: string;
+  endDate: string;
   onAvailabilityChange?: (isFullyBooked: boolean, isLoading: boolean) => void;
 }
 
-export const RoomAvailabilityStatus: React.FC<RoomAvailabilityStatusProps> = ({
+export const RoomAvailabilityStatus = ({
   roomId,
   startDate,
   endDate,
   onAvailabilityChange,
-}) => {
+}: RoomAvailabilityStatusProps) => {
   const { data, isLoading, isError } = useGetRoomAvailibility(
     roomId,
     startDate,
@@ -45,7 +46,12 @@ export const RoomAvailabilityStatus: React.FC<RoomAvailabilityStatusProps> = ({
   }, [data, isLoading, onAvailabilityChange]);
 
   if (isLoading)
-    return <div className="p-4 text-gray-500">Checking availability...</div>;
+    return (
+      <div className="flex items-center gap-2 p-4 text-gray-500">
+        <Loader2 className="w-4 h-4 animate-spin" />
+        <span>Checking availability...</span>
+      </div>
+    );
   if (isError)
     return <div className="p-4 text-red-500">Failed to load availability.</div>;
   if (!data?.availability || data.availability.length === 0)

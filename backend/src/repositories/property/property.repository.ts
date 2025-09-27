@@ -81,6 +81,7 @@ export const getTenantWithPropertiesByUserId = async (userId: string) => {
         orderBy: { created_at: "desc" },
         include: {
           rooms: {
+            where: { deleted_at: null },
             include: {
               room_images: true,
               room_availability: {

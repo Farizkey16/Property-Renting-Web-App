@@ -18,7 +18,8 @@ export function FilterSection() {
     } else {
       params.delete("name");
     }
-    params.set("page", "1"); // reset ke page 1 tiap search
+    params.set("page", "1");
+    params.delete("category");
     router.push(`?${params.toString()}`, { scroll: false });
   };
 
