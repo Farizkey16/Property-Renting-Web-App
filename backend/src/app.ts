@@ -30,11 +30,15 @@ class App {
   }
 
   private configure(): void {
+    const allowedOrigin = [
+      "http://localhost:3000", // local development
+      "https://property-renting-web-app.vercel.app", // production
+    ];
     this.app.use(express.json());
     this.app.use(cookieParser());
     this.app.use(
       cors({
-        origin: "http://localhost:3000",
+        origin: allowedOrigin,
         credentials: true,
       })
     );
@@ -73,20 +77,10 @@ class App {
   private errorHandler(): void {
     this.app.use(
       (error: any, req: Request, res: Response, next: NextFunction) => {
-        const statusCode = error.statusCode || 500;
-        const message =
-          error.message || "An unexpected internal server error occurred.";
-        // logger.error(
-        //   `${req.method} ${req.path} | STATUS: ${
-        //     error.message
-        //   } | MESSAGE: ${JSON.stringify(error)}`
-        // );
         logger.error(
-          `${req.method} ${req.path} | MESSAGE: ${error.message} | STACK: ${error.stack}`
+          `${req.method} ${req.path} ${error.message} ${JSON.stringify(error)}`
         );
-        res
-          .status(statusCode)
-          .json({ message: message, statusCode: statusCode });
+        res.status(error.rc || 500).send(error);
       }
     );
   }
