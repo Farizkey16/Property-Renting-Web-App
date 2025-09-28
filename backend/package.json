@@ -7,7 +7,7 @@
     "start": "src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "ts-node src/index.ts",
-    "build": "npm run clean && tsc && npm run copy-assets",
+    "build": "tsc",
     "clean": "rm -rf dist",
     "copy-assets": "cpx 'src/*/.{hbs,json,crontab}' dist"
   },
