@@ -93,6 +93,7 @@ const loginService = async (data, res) => {
         full_name: userWithoutPassword.full_name,
         is_verified: userWithoutPassword.is_verified,
         profile_picture: userWithoutPassword.profile_picture,
+        generateTokenAndSetCookie: jwt_1.generateTokenAndSetCookie,
     };
 };
 exports.loginService = loginService;
