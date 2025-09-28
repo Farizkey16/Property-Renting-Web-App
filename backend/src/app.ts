@@ -30,7 +30,7 @@ class App {
   }
 
   private configure(): void {
-    const allowedOrigin = [
+    const allowedOrigins = [
       "http://localhost:3000", // local development
       "https://property-renting-web-app.vercel.app", // production
     ];
@@ -38,7 +38,13 @@ class App {
     this.app.use(cookieParser());
     this.app.use(
       cors({
-        origin: allowedOrigin,
+        origin: (origin, callback) => {
+          if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+          } else {
+            callback(new Error("Not allowed by CORS"));
+          }
+        },
         credentials: true,
       })
     );
