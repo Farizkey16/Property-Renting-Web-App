@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Heart, Star } from "lucide-react";
+import { Star } from "lucide-react";
 import Image from "next/image";
 import { ReviewList } from "@/components/features/reviews/reviews-card";
 import { RoomDetailProps } from "@/types/room/room";
@@ -10,9 +10,12 @@ export default function RoomDetail({ data }: RoomDetailProps) {
   }
 
   const propertyId = data?.property?.id;
-  const reviewsCount = data.property._count.reviews
-  const ratingSum = data.property.reviews.reduce((acc, review)=> acc + review.rating, 0)
-  const ratingDisplay = ratingSum/reviewsCount
+  const reviewsCount = data.property._count.reviews;
+  const ratingSum = data.property.reviews.reduce(
+    (acc, review) => acc + review.rating,
+    0
+  );
+  const ratingDisplay = ratingSum / reviewsCount;
 
   return (
     <div className="lg:col-span-2 space-y-6">
@@ -54,13 +57,14 @@ export default function RoomDetail({ data }: RoomDetailProps) {
             </h1>
             <div className="flex items-center gap-2 mt-2">
               <Star className="w-4 h-4 fill-current text-yellow-400" />
-              <span className="text-sm font-medium">{ratingDisplay > 0 ? ratingDisplay.toFixed(1) : "No ratings yet"}</span>
+              <span className="text-sm font-medium">
+                {ratingDisplay > 0
+                  ? ratingDisplay.toFixed(1)
+                  : "No ratings yet"}
+              </span>
               <span className="text-sm text-gray-500">{`${reviewsCount} Ratings`}</span>
             </div>
           </div>
-          <button aria-label="Add to wishlist">
-            <Heart className="w-5 h-5" />
-          </button>
         </div>
 
         {/* Description */}
@@ -97,7 +101,7 @@ export default function RoomDetail({ data }: RoomDetailProps) {
             </div>
             <CardContent className="space-y-2">
               <h3 className="text-lg font-medium mb-2">Property Information</h3>
-              <div className="text-sm text-gray-700 space-y-1">
+              <div className="text-sm text-gray-700 space-y-1 p-2">
                 <div>
                   <strong>Name:</strong> {data.property.name}
                 </div>

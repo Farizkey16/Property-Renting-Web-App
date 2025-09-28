@@ -25,20 +25,27 @@ export default function FilterSidebar() {
   ]);
   const [checkIn, setCheckIn] = useState<string>(queryCheckIn);
   const [checkOut, setCheckOut] = useState<string>(queryCheckOut);
+  const [loading, setLoading] = useState(false);
 
   const applyFilters = () => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.set("radius", tempRadius[0].toString());
-    params.set("minPrice", tempRange[0].toString());
-    params.set("maxPrice", tempRange[1].toString());
+    try {
+      setLoading(true);
+      const params = new URLSearchParams(searchParams.toString());
+      params.set("radius", tempRadius[0].toString());
+      params.set("minPrice", tempRange[0].toString());
+      params.set("maxPrice", tempRange[1].toString());
 
-    if (checkIn) params.set("checkIn", checkIn);
-    else params.delete("checkIn");
+      if (checkIn) params.set("checkIn", checkIn);
+      else params.delete("checkIn");
 
-    if (checkOut) params.set("checkOut", checkOut);
-    else params.delete("checkOut");
+      if (checkOut) params.set("checkOut", checkOut);
+      else params.delete("checkOut");
 
-    router.replace(`?${params.toString()}`);
+      router.replace(`?${params.toString()}`);
+      setTimeout(() => setLoading(false), 1500);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -92,8 +99,8 @@ export default function FilterSidebar() {
       </div>
 
       {/* Search Button */}
-      <Button onClick={applyFilters} className="w-full">
-        Search
+      <Button onClick={applyFilters} className="w-full cursor-pointer">
+        {loading ? "Loading..." : "Search"}
       </Button>
     </div>
   );

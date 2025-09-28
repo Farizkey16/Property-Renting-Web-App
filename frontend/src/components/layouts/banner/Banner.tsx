@@ -21,19 +21,19 @@ export function Banner() {
   ];
 
   return (
-    <section className="w-full py-12 px-4 ">
+    <section className="w-full py-12 px-4  ">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-2xl md:text-3xl font-bold text-center mb-12 text-gray-900">
           Kenapa pilih Homz?
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 ">
           {features.map((feature, index) => {
             const IconComponent = feature.icon;
             return (
               <div
                 key={index}
-                className="flex flex-col items-center text-center md:items-start md:text-left  border-2 border-gray-200 rounded-2xl p-2 shadow-md">
+                className="flex flex-col items-center text-center md:items-start md:text-left  border-2 border-gray-200 rounded-2xl p-4 shadow-md">
                 <div className="flex items-center justify-center w-12 h-12 mb-4 bg-gray-100 rounded-lg">
                   <IconComponent className="w-6 h-6 text-gray-700" />
                 </div>
