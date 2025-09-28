@@ -13,14 +13,14 @@ const generateTokenAndSetCookie = (res, existingUser) => {
     const token = (0, jsonwebtoken_1.sign)({
         userId: existingUser.id,
         role: existingUser.role,
-        tenantId: existingUser.tenantId
+        tenantId: existingUser.tenantId,
     }, process.env.TOKEN_KEY, {
         expiresIn: "24h",
     });
     res.cookie("token", token, {
         httpOnly: true,
-        secure: false,
-        sameSite: "lax",
+        secure: process.env.NODE_ENV === "production",
+        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
         maxAge: 24 * 60 * 60 * 1000,
     });
     return token;
