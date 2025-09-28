@@ -31,8 +31,6 @@ class App {
 
   private configure(): void {
     const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(",") || [];
-    this.app.use(express.json());
-    this.app.use(cookieParser());
     this.app.use(
       cors({
         origin: (origin, callback) => {
@@ -49,6 +47,8 @@ class App {
     this.app.set("query parser", (str: string) => {
       return qs.parse(str, { arrayLimit: 20 });
     });
+    this.app.use(express.json());
+    this.app.use(cookieParser());
   }
 
   private route(): void {

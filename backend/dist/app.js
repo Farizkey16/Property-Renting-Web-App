@@ -31,15 +31,25 @@ class App {
         this.errorHandler();
     }
     configure() {
-        this.app.use(express_1.default.json());
-        this.app.use((0, cookie_parser_1.default)());
+        const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(",") || [];
         this.app.use((0, cors_1.default)({
-            origin: "http://localhost:3000",
+            origin: (origin, callback) => {
+                if (!origin)
+                    return callback(null, true);
+                if (allowedOrigins.includes(origin)) {
+                    callback(null, true);
+                }
+                else {
+                    callback(new Error("Not allowed by CORS"));
+                }
+            },
             credentials: true,
         }));
         this.app.set("query parser", (str) => {
             return qs_1.default.parse(str, { arrayLimit: 20 });
         });
+        this.app.use(express_1.default.json());
+        this.app.use((0, cookie_parser_1.default)());
     }
     route() {
         const authRouter = new auth_router_1.default();
@@ -69,17 +79,8 @@ class App {
     // error handling
     errorHandler() {
         this.app.use((error, req, res, next) => {
-            const statusCode = error.statusCode || 500;
-            const message = error.message || "An unexpected internal server error occurred.";
-            // logger.error(
-            //   `${req.method} ${req.path} | STATUS: ${
-            //     error.message
-            //   } | MESSAGE: ${JSON.stringify(error)}`
-            // );
-            logger_1.default.error(`${req.method} ${req.path} | MESSAGE: ${error.message} | STACK: ${error.stack}`);
-            res
-                .status(statusCode)
-                .json({ message: message, statusCode: statusCode });
+            logger_1.default.error(`${req.method} ${req.path} ${error.message} ${JSON.stringify(error)}`);
+            res.status(error.rc || 500).send(error);
         });
     }
     start() {
