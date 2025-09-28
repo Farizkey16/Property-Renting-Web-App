@@ -30,16 +30,14 @@ class App {
   }
 
   private configure(): void {
-    const allowedOrigins = [
-      "http://localhost:3000", // local development
-      "https://property-renting-web-app.vercel.app", // production
-    ];
+    const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(",") || [];
     this.app.use(express.json());
     this.app.use(cookieParser());
     this.app.use(
       cors({
         origin: (origin, callback) => {
-          if (!origin || allowedOrigins.includes(origin)) {
+          if (!origin) return callback(null, true);
+          if (allowedOrigins.includes(origin)) {
             callback(null, true);
           } else {
             callback(new Error("Not allowed by CORS"));
