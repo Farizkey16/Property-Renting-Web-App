@@ -20,7 +20,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema, LoginSchema } from "@/lib/validation/auth";
 import { Eye, EyeOff } from "lucide-react";
 
-export default function LoginForm() {
+export default function LoginPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   console.log("searchParams login:", searchParams.toString());
@@ -86,7 +86,6 @@ export default function LoginForm() {
                 )}
               </div>
 
-              {/* Password with eye toggle */}
               <div>
                 <Label htmlFor="password" className="mb-2">
                   Password
@@ -119,7 +118,7 @@ export default function LoginForm() {
               {/* Submit */}
               <Button
                 type="submit"
-                className="w-full curson-pointer"
+                className="w-full cursor-pointer"
                 disabled={isPending}>
                 {isPending ? "Loading..." : "Login"}
               </Button>

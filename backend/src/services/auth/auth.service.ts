@@ -115,6 +115,7 @@ export const loginService = async (data: any, res: Response) => {
     full_name: userWithoutPassword.full_name,
     is_verified: userWithoutPassword.is_verified,
     profile_picture: userWithoutPassword.profile_picture,
+    generateTokenAndSetCookie,
   };
 };
 
