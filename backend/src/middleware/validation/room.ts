@@ -9,7 +9,7 @@ const validationHandling = (
 ) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    throw new AppError(errors.array()[0].msg, 400);
+    throw new AppError(errors?.array()[0]?.msg, 400);
   }
   next();
 };
@@ -96,4 +96,6 @@ export const editRoomValidation = [
     .isInt({ min: 0 })
     .withMessage("Total rooms must be >= 0"),
   validationHandling,
+
 ];
+

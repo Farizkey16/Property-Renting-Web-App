@@ -15,7 +15,6 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import type {
-  FetchBookingsParams,
   FlexibleBookingParams,
 } from "@/services/transactions.services";
 import { toast } from "react-toastify";

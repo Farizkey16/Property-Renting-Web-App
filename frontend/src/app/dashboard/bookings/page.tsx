@@ -9,13 +9,15 @@ import { BookingsClient } from "@/components/dashboard/BookingsClientPage";
 import { cookies } from "next/headers";
 import axios from "axios";
 
+type SearchParams = { [key: string]: string | string[] | undefined };
+
 type BookingsPageProps = {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: Promise<SearchParams>;
 };
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
-export const fetchUserBookings = async (searchParams: URLSearchParams) => {
+const fetchUserBookings = async (searchParams: URLSearchParams) => {
   const endpoint = `${BASE_URL}/reservations/get`;
   const cookieStore = await cookies();
   const token = cookieStore.get("token")?.value;
@@ -28,7 +30,7 @@ export const fetchUserBookings = async (searchParams: URLSearchParams) => {
   return response.data.data;
 };
 
-export const fetchTenantBookings = async (searchParams: URLSearchParams) => {
+const fetchTenantBookings = async (searchParams: URLSearchParams) => {
   const endpoint = `${BASE_URL}/payment/orders/tenant`;
   const cookieStore = await cookies();
   const token = cookieStore.get("token")?.value;

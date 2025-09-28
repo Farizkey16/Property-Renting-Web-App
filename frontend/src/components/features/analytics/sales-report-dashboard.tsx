@@ -67,8 +67,6 @@ export function SalesReportDashboard() {
 
   const {
     data: aggregate,
-    isLoading: aggLoading,
-    isError: aggError,
   } = useSalesAggregate();
 
   const chartOptions = {
@@ -115,7 +113,7 @@ export function SalesReportDashboard() {
               <div className="pt-4">          
                 <Select
                   value={groupBy}
-                  onValueChange={(value) => setGroupBy(value as any)}
+                  onValueChange={(value) => setGroupBy(value as typeof groupBy)}
                 >
                   <SelectTrigger className="w-[180px]">
                     <SelectValue placeholder="Group By" />

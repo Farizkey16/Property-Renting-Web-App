@@ -4,19 +4,18 @@
   "description": "echo \"# Project\" > README.md",
   "main": "src/index.ts",
   "scripts": {
-    "start:api": "src/index.ts",
-    "start:worker:expirations": "nodemon src/services/jobs/expired-booking.worker.ts",
-    "start:worker:bookingreminder": "nodemon src/services/jobs/booking-reminder.worker.ts",
+    "start": "src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon src/index.ts"
+    "dev": "ts-node src/index.ts",
+    "build": "npm run clean && tsc && npm run copy-assets",
+    "clean": "rm -rf dist",
+    "copy-assets": "cpx 'src/*/.{hbs,json,crontab}' dist"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^6.13.0",
-    "@types/luxon": "^3.7.1",
-    "@types/multer": "^2.0.0",
     "bcrypt": "^6.0.0",
     "cloudinary": "^2.7.0",
     "cookie-parser": "^1.4.7",
@@ -35,10 +34,8 @@
     "multer": "^2.0.2",
     "node-cron": "^4.2.1",
     "nodemailer": "^7.0.5",
-    "pg-boss": "^10.3.2",
     "prisma": "^6.13.0",
     "qs": "^6.14.0",
-    "react-toastify": "^11.0.5",
     "streamifier": "^0.1.1",
     "winston": "^3.17.0"
   },
@@ -48,11 +45,16 @@
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
     "@types/jsonwebtoken": "^9.0.10",
+    "@types/luxon": "^3.7.1",
     "@types/midtrans-client": "^1.4.0",
+    "@types/multer": "^2.0.0",
     "@types/node": "^24.2.0",
     "@types/nodemailer": "^6.4.17",
     "@types/qs": "^6.14.0",
     "@types/streamifier": "^0.1.2",
+    "cpx": "^1.5.0",
+    "nodemon": "^3.1.10",
+    "rimraf": "^6.0.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.2"
   }

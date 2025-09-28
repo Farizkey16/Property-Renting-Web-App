@@ -13,7 +13,6 @@ import RoomRouter from "./routes/room.router";
 import TenantTxRouter from "./routes/tenant-tx.router";
 import UserTxRouter from "./routes/user-tx.router";
 import { startAllWorkersAndSchedules } from "./services/scheduler.service";
-import PricingQuoteController from "./controllers/pricing/pricing.controller";
 import PricingRouter from "./routes/pricing.router";
 import ReviewRouter from "./routes/review.router";
 import MidtransRouter from "./routes/midtrans.router";

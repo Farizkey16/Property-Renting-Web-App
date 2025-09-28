@@ -86,6 +86,10 @@ class RoomsController {
     try {
       const { id } = req.params;
 
+      if (!id) {
+        throw new AppError("[getRoomById]: Id is required.", 400)
+      }
+
       const response = await getRoomByIdRepository(id);
 
       res.status(200).send({ message: "Room found", success: true, response });
@@ -163,6 +167,10 @@ class RoomsController {
   ): Promise<void> {
     try {
       const { id } = req.params;
+
+      if (!id) {
+        throw new AppError("[updateRoom]: Id is required.", 400)
+      }
 
       const weekend_peak = req.body.weekend_peak
         ? {
@@ -287,6 +295,10 @@ class RoomsController {
         throw new AppError("Tenant not found", 404);
       }
       const id = req.params.id;
+
+      if (!id) {
+        throw new AppError("[deleteRoom]: Id is required.", 400)
+      }
 
       const response = await deleteRoomByIdService(id);
       res

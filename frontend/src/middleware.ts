@@ -49,9 +49,9 @@ export function middleware(req: NextRequest) {
         (path) => pathname === path || pathname.startsWith(`${path}/`)
       );
 
-      // if (!isAllowed) {
-      //   return NextResponse.redirect(new URL("/dashboard", req.url));
-      // }
+      if (!isAllowed) {
+        return NextResponse.redirect(new URL("/dashboard", req.url));
+      }
     }
   }
 

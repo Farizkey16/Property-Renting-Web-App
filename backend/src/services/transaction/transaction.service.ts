@@ -41,8 +41,8 @@ export const sendUserBookingConfirmation = async (
     return {
       name: dbRoom.room.name,
       room_id: dbRoom.room_id,
-      check_in_date: dbRoom.check_in_date.toISOString().split("T")[0],
-      check_out_date: dbRoom.check_out_date.toISOString().split("T")[0],
+      check_in_date: dbRoom.check_in_date.toISOString().split("T")[0] ?? '',
+      check_out_date: dbRoom.check_out_date.toISOString().split("T")[0]?? '',
       guests_count: dbRoom.guests_count,
       quantity: dbRoom.quantity,
       subtotal: Number(dbRoom.subtotal),
@@ -86,6 +86,8 @@ export const sendRejectionNotification = async (
   bookingId: string,
   userId: string
 ) => {
+
+  
   const bookingRoomsFromDb = await findBookingRoomsByBookingId(bookingId);
   const user = await getEmailAndFullnameById(userId);
   const propertyName = bookingRoomsFromDb[0].room.property.name;
@@ -96,8 +98,8 @@ export const sendRejectionNotification = async (
     return {
       name: dbRoom.room.name,
       room_id: dbRoom.room_id,
-      check_in_date: dbRoom.check_in_date.toISOString().split("T")[0],
-      check_out_date: dbRoom.check_out_date.toISOString().split("T")[0],
+      check_in_date: dbRoom.check_in_date.toISOString().split("T")[0] ?? '',
+      check_out_date: dbRoom.check_out_date.toISOString().split("T")[0] ?? '',
       guests_count: dbRoom.guests_count,
       quantity: dbRoom.quantity,
       subtotal: dbRoom.subtotal,

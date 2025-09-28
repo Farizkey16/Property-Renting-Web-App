@@ -33,6 +33,10 @@ class TenantTransactions {
 
       const bookingId = req.params.id;
 
+      if (!bookingId) {
+        throw new AppError("[acceptPayment]: Id is required.", 400);
+      }
+
       const updatedBooking = await acceptBookingPayment(
         bookingId,
         role.tenant_id
@@ -51,7 +55,6 @@ class TenantTransactions {
         { bookingId: updatedBooking.id },
         { runAt: reminderRunAt }
       );
-
       res.json({
         message: "Payment successful, booking created",
         data: updatedBooking,
@@ -71,6 +74,9 @@ class TenantTransactions {
 
       const bookingId = req.params.id;
 
+      console.log("Fetching from bookingId:", bookingId);
+
+
       if (!bookingId) {
         throw new AppError("Invalid transaction ID", 400);
       }
@@ -78,12 +84,14 @@ class TenantTransactions {
       const rejectProcess = await prisma.$transaction(async (tx) => {
         // Update booking and Return UserID
 
+
         const updatedBooking = await UpdateBookings(bookingId, "waiting_payment", tx);
 
         const datesToUpdate = getDatesBetween(
           updatedBooking.check_in_date,
           updatedBooking.check_out_date
         );
+
 
         const roomId = updatedBooking.booking_rooms.room_id;
 
@@ -204,9 +212,14 @@ class TenantTransactions {
   ) => {
     try {
       const { bookingId } = req.params;
+      if (!bookingId) {
+        throw new AppError("[getReservationById]: Id is required.", 400);
+      }
       const user = res.locals.decrypt;
 
       const booking = await findBookingByIdRepository(bookingId, user);
+
+      
 
       if (!booking) {
         throw new AppError("Booking not found.", 404);

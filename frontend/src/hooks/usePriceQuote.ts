@@ -13,3 +13,4 @@ export const usePriceQuote = (
     enabled: !!roomId && !!checkIn && !!checkOut && !!total,
   });
 };
+

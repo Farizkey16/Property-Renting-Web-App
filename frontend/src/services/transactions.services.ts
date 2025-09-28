@@ -1,13 +1,11 @@
 import axios from "axios";
 import {
-  Booking,
   BookingApiResponse,
   BookingsApiResponse,
   BookingStatus,
   PaginatedBookings,
 } from "@/types/transactions/transactions";
 import qs from "qs";
-import { cookies } from "next/headers";
 import { RoomAvailabilityParams } from "@/types/room/room";
 
 export interface FetchBookingsParams {
@@ -176,9 +174,11 @@ export const tenantRejectBookingById = async (id: string) => {
   return response.data;
 };
 
-export const getRoomAmountAvailable = async (params: RoomAvailabilityParams) => {
+export const getRoomAmountAvailable = async (
+  params: RoomAvailabilityParams
+) => {
   const response = await axios.get(`${BASE_URL}/payment/room-availability`, {
     params: params,
   });
-  return response.data.data.availableCount
+  return response.data.data.availableCount;
 };

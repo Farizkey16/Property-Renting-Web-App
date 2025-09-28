@@ -2,7 +2,7 @@ import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import { Card, CardContent } from "../ui/card";
 import { Booking } from "@/types/transactions/transactions";
-import { MapPin, Calendar, Users, ShieldCheck } from "lucide-react";
+import { MapPin, Calendar, Users, CheckCircle } from "lucide-react";
 import {
   useCancelBookingByRole,
   useTenantAcceptBooking,
@@ -15,8 +15,16 @@ import { useRef, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { Spinner } from "../ui/shadcn-io/spinner";
-import { Toaster, toast } from "sonner";
-
+import { toast } from "sonner";
+import Image from "next/image";
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+} from "../ui/dialog";
+import { DialogDescription, DialogTitle } from "@radix-ui/react-dialog";
+        
 const getStatusColor = (status: string) => {
   switch (status) {
     case "waiting_confirmation":
@@ -38,7 +46,6 @@ export type BookingCardProps = {
 export const BookingCard = ({ booking, role }: BookingCardProps) => {
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [uploadFile, setUploadFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const router = useRouter();
   const cancelBookingMutation = useCancelBookingByRole(role);
@@ -52,7 +59,7 @@ export const BookingCard = ({ booking, role }: BookingCardProps) => {
   const price = booking.amount;
 
   const bookingId = booking.id;
-  const hasReviewed = booking._count.reviews
+  const hasReviewed = booking._count.reviews;
 
   const isTenantActionRequired =
     role === "tenant" && booking.status === "waiting_confirmation";
@@ -72,14 +79,6 @@ export const BookingCard = ({ booking, role }: BookingCardProps) => {
   const handleReject = (bookingId: string) => {
     rejectBookingMutation.mutate(bookingId);
   };
-
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-64 py-3">
-        <Spinner />
-      </div>
-    );
-  }
 
   const handleButtonClick = async () => {
     fileInputRef.current?.click();
@@ -103,30 +102,57 @@ export const BookingCard = ({ booking, role }: BookingCardProps) => {
         );
         toast.success("Payment proof uploaded successfully!");
         setIsSuccessModalOpen(true);
-        router.push("/dashboard/bookings?page=1&status=confirmed&sort=desc");
-      } catch (error: any) {
-        toast.error(
-          error.response?.data?.message || "Upload failed. Please try again."
-        );
+      } catch (error) {
+        toast.error("Failed to upload payment proof. Please try again later.");
+        console.log(error);
       } finally {
         setIsLoading(false);
       }
     }
   };
 
+  const handleCloseModal = () => {
+    setIsSuccessModalOpen(false);
+    router.push(
+      "/dashboard/bookings?page=1&status=waiting_confirmation&sort=desc"
+    );
+  };
+
   return (
     <CardContent className="px-1 py-1">
+      <Dialog open={isSuccessModalOpen} onOpenChange={setIsSuccessModalOpen}>
+        <DialogContent
+          onEscapeKeyDown={(e) => e.preventDefault()}
+          onInteractOutside={(e) => e.preventDefault()}
+          className="sm:max-w-md"
+        >
+          <DialogHeader className="flex flex-col items-center text-center">
+            <CheckCircle className="h-16 w-16 text-green-500 mb-4" />
+            <DialogTitle className="text-2xl">Upload Successful!</DialogTitle>
+            <DialogDescription className="pt-2">
+              Your payment proof has been submitted. The tenant will verify it
+              shortly.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter className="pt-4">
+            <Button onClick={handleCloseModal} className="w-full">
+              View My Bookings
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
       <div className="space-y-1">
-        
         <Card key={booking.id} className="border border-gray-200">
           <CardContent className="p-4">
             <div className="flex flex-col lg:flex-row gap-4">
-        
+
               <div className="w-full lg:w-32 h-20 rounded-lg overflow-hidden bg-gray-100">
-                <img
+                <Image
+                  height={80}
+                  width={128}
                   src={booking.property?.main_image ?? "/placeholder.svg"}
-                  alt={booking.property?.name}
-                  className="w-full h-full object-cover"
+                  alt={booking.property?.name || "Property Image"}
+                  className="object-cover w-full h-full"
                 />
               </div>
 
@@ -240,10 +266,19 @@ export const BookingCard = ({ booking, role }: BookingCardProps) => {
                         size="sm"
                         className="cursor-pointer"
                         onClick={handleButtonClick}
+                        disabled={isLoading}
                       >
-                        {!booking.proof_image
-                          ? "Submit Payment Proof"
-                          : "Resubmit Payment Proof"}
+                        {isLoading ? (
+                          <div className="flex items-center gap-2">
+                            <Spinner className="h-4 w-4" />
+                            <span>Uploading...</span>
+                          </div>
+                        ) : !booking.proof_image ? (
+                          "Submit Payment Proof"
+                        ) : (
+                          "Resubmit Payment Proof"
+                        )}
+
                       </Button>
                     )}
 

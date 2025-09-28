@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import { format } from "date-fns";
-import { useGetRoomAvailibility } from "@/hooks/useRoom";
+import { useGetRoomAvailability } from "@/hooks/useRoom";
 import { Loader2 } from "lucide-react";
 
 export interface AvailabilityItem {
@@ -27,12 +27,18 @@ export const RoomAvailabilityStatus = ({
   endDate,
   onAvailabilityChange,
 }: RoomAvailabilityStatusProps) => {
-  const { data, isLoading, isError } = useGetRoomAvailibility(
+  const { data, isLoading, isError } = useGetRoomAvailability(
     roomId,
     startDate,
     endDate
   );
 
+
+  console.log("DEBUG: Availability Data:", data);
+  console.log("DEBUG: Start Date:", startDate);
+  console.log("DEBUG: End Date:", endDate);
+  console.log("DEBUG: Room ID:", roomId);
+        
   useEffect(() => {
     if (data?.availability && onAvailabilityChange) {
       const filteredAvailability = data.availability.slice(0, -1);

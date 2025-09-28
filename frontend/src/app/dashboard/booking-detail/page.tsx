@@ -12,7 +12,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Users, Bed, Wifi, Coffee, Shield, Clock, X } from "lucide-react";
+import { Users, Wifi, Coffee } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { usePropertyById } from "@/hooks/useProperty";
 import { format, parseISO } from "date-fns";
@@ -24,6 +24,8 @@ import { useMutation } from "@tanstack/react-query";
 import { createBooking } from "@/services/transactions.services";
 import { useRoomAvailability } from "@/hooks/useRoom";
 import Image from "next/image";
+import { Spinner } from "@/components/ui/shadcn-io/spinner";
+
 
 export default function BookingDetailsForm() {
   const [formData, setFormData] = useState({
@@ -81,15 +83,17 @@ export default function BookingDetailsForm() {
   const startDateDisplay = format(startDate, "eee, d MMM yyyy");
   const endDateDisplay = format(endDate, "eee, d MMM yyyy");
 
-  const { data: property, isLoading: isLoadingProperty } =
+  const { data: property} =
     usePropertyById(property_id);
 
-  const { data: priceDetails, isLoading: isLoadingPrice } = usePriceQuote(
+  const { data: priceDetails} = usePriceQuote(
     room_id!,
     startDateString!,
     endDateString!,
     total!
   );
+
+  console.log("DEBUG: Price Details:", priceDetails);
 
   const checkIn = startDateString;
   const checkOut = endDateString;
@@ -302,10 +306,6 @@ export default function BookingDetailsForm() {
               onClick={handleContinue}
               disabled={isPending}
               className="w-full bg-green-600 hover:bg-green-700 text-white py-3 text-base font-medium"
-<<<<<<< HEAD
-              size="lg">
-              Continue to Payment
-=======
               size="lg"
             >
               {isPending ? (
@@ -316,7 +316,7 @@ export default function BookingDetailsForm() {
               ) : (
                 "Continue to Payment"
               )}
->>>>>>> develop
+
             </Button>
           </div>
 

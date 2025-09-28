@@ -10,10 +10,6 @@ import { PaginationControl } from "@/components/fragment/pagination-control/Pagi
 import { Spinner } from "@/components/ui/shadcn-io/spinner";
 import { Review } from "@/types/reviews/reviews.types";
 
-interface ReviewsCardProps {
-  reviews: Review[];
-  reviewsPerPage?: number;
-}
 
 const ReviewCard = ({ review }: { review: Review }) => {
   const [isExpanded, setIsExpanded] = useState(false);

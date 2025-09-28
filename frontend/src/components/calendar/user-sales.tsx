@@ -3,6 +3,20 @@ import { cookies } from "next/headers";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
+type UserReport = {
+  userId: string | number;
+  name: string;
+  email: string;
+  totalBookings: number;
+  totalSpent: number;
+  lastBookingDate: string; 
+};
+
+type Column = {
+  key: keyof UserReport;
+  label: string;
+};
+
 const fetchUserSalesReport = async () => {
   const cookieStore = await cookies();
   const token = await cookieStore.get("token")?.value;
@@ -18,14 +32,13 @@ const fetchUserSalesReport = async () => {
 
 export default async function UserSalesTable() {
   const userData = await fetchUserSalesReport();
-  const columns = [
+  const columns: Column[] = [
     { key: "userId", label: "User ID" },
     { key: "name", label: "Full Name" },
     { key: "email", label: "Email" },
     { key: "totalBookings", label: "Total Bookings" },
     { key: "totalSpent", label: "Total Spent" },
     { key: "lastBookingDate", label: "Last Booking Date" },
-    { key: "segment", label: "Segment" },
   ];
 
   return (
@@ -53,12 +66,12 @@ export default async function UserSalesTable() {
           </tr>
         </thead>
         <tbody className="text-sm leading-relaxed text-[var(--color-foreground)]">
-          {userData.map((user: any) => (
+          {userData.map((user: UserReport ) => (
             <tr
               key={user.userId}
               className="border-b border-[var(--color-border)] last:border-b-0 last:[&>td:first-child]:rounded-bl-[var(--radius-xl)] last:[&>td:last-child]:rounded-br-[var(--radius-xl)]"
             >
-              {columns.map((column: any) => (
+              {columns.map((column: Column) => (
                 <td
                   key={column.key}
                   className="px-4 py-4 font-medium text-[var(--color-foreground)]"

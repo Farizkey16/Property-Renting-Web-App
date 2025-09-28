@@ -2,11 +2,6 @@ import { useMemo } from "react";
 
 export const ellipses = "...";
 
-const range = (start: number, end: number) => {
-  let length = end - start + 1;
-  return Array.from({ length }, (_, index) => index + start);
-};
-
 interface UsePaginationProps {
   totalCount: number;
   pageSize: number;

@@ -1,6 +1,6 @@
 import { Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { BookingCard, BookingCardProps } from "./BookingCard";
+import { BookingCard } from "./BookingCard";
 import { Booking } from "@/types/transactions/transactions";
 import React from "react";
 
@@ -24,7 +24,6 @@ export const BookingList = ({
   isLoading,
   isError,
   isFetching,
-  onFileSelect,
   role,
 }: BookingListProps) => {
 

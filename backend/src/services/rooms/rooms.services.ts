@@ -290,6 +290,10 @@ export const getRoomByPropertyAndNameService = async (
 
   const room = rooms[0];
 
+  if (!room) {
+    throw new AppError("[getRoomAvailableService]: room is missing.", 400);
+  }
+
   if (checkIn && checkOut) {
     const pricing = await getRoomAvailabilityWithPriceRepository(
       room.id,

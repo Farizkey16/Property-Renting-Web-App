@@ -7,6 +7,7 @@ import {
 } from "../../utils/emailTemplates";
 import { BookingTemplateData } from "../../types/transaction/transactions.types";
 import { Task, Helpers } from "graphile-worker";
+import AppError from "../../errors/AppError";
 
 interface ReminderJobType {
   bookingId: string;
@@ -18,6 +19,11 @@ export const bookingReminder: Task = async (
 ) => {
   try {
     const { bookingId } = payload as ReminderJobType;
+
+    if (!bookingId) {
+        throw new AppError("[bookingReminder]: Id is required.", 400);
+      }
+
     helpers.logger.info(`Sending reminder for booking ${bookingId}...`);
 
     const booking = await prisma.bookings.findUnique({
@@ -69,8 +75,8 @@ export const bookingReminder: Task = async (
       propertyName: booking.property.name,
       rooms: booking.booking_rooms.map((room) => ({
         name: room.room.name,
-        check_in_date: room.check_in_date.toISOString().split("T")[0],
-        check_out_date: room.check_out_date.toISOString().split("T")[0],
+        check_in_date: room.check_in_date.toISOString().split("T")[0] ?? '',
+        check_out_date: room.check_out_date.toISOString().split("T")[0] ?? '',
         guests_count: room.guests_count,
         nights: room.nights,
         quantity: room.quantity,
@@ -106,3 +112,4 @@ export const bookingReminder: Task = async (
     throw error;
   }
 };
+

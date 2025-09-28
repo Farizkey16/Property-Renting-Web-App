@@ -10,7 +10,7 @@ const validationHandling = (
 ) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    throw new AppError(errors.array()[0].msg, 400);
+    throw new AppError(errors?.array()[0]?.msg, 400);
   }
   next();
 };

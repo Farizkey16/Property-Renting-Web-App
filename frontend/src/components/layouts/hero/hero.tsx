@@ -24,7 +24,7 @@ export function HeroSection() {
 
         {/* Input Date */}
         <div className="w-full max-w-6xl">
-          <InputDate height="h-18" />
+          <InputDate className="h-18" />
         </div>
       </div>
     </section>

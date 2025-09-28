@@ -3,7 +3,6 @@ import AuthController from "../controllers/auth/auth.controller";
 import { verifyToken } from "../middleware/VerifyToken";
 import GoogleAuthController from "../controllers/auth/google/authGoogle";
 import {
-  loginValidation,
   regisValidation,
 } from "../middleware/validation/auth";
 
