@@ -41,8 +41,13 @@ export function PriceSection({ basePrice, total, loading }: PriceSectionProps) {
           </span>
         </div>
       ) : (
-        <div className="text-2xl font-bold text-gray-900">
-          {formatCurrency(basePrice)}
+        <div className="flex flex-col">
+          <span className="text-lg font-semibold text-green-600 mt-2">
+            Total Price
+          </span>
+          <div className="text-2xl font-bold text-gray-900">
+            {formatCurrency(basePrice)}
+          </div>
         </div>
       )}
     </div>

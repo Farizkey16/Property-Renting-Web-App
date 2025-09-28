@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { PropertyCategory } from "@/types/property/property";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
 
 interface PropertyTypeNavProps {
   onSelectCategory?: (value: string) => void;
@@ -30,16 +31,18 @@ const propertyTypes = [
 export function PropertyTypeNav({ activeCategory }: PropertyTypeNavProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [loading, setLoading] = useState(false);
 
   const handleSelect = (value: string) => {
     const params = new URLSearchParams(searchParams.toString());
+    setLoading(true);
 
     if (value) {
       params.set("category", value);
     } else {
       params.delete("category");
     }
-
+    setTimeout(() => setLoading(false), 1500);
     router.push(`?${params.toString()}#properties`, { scroll: false });
   };
 
@@ -55,16 +58,23 @@ export function PropertyTypeNav({ activeCategory }: PropertyTypeNavProps) {
                 onClick={() => handleSelect(type.value)}
                 className={`flex flex-col items-center space-y-1 sm:space-y-2 min-w-0 flex-shrink-0 px-2 sm:px-4 cursor-pointer rounded-lg py-2 transition-colors 
                    hover:bg-blue-50`}>
-                <type.icon
-                  className={`w-5 h-5 sm:w-6 sm:h-6 ${
-                    isActive ? "text-blue-600" : "text-gray-600"
-                  }`}
-                />
+                {loading && !isActive ? (
+                  <div className="flex items-center justify-center w-6 h-6">
+                    <div className="w-4 h-4 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+                  </div>
+                ) : (
+                  <type.icon
+                    className={`w-5 h-5 sm:w-6 sm:h-6 ${
+                      isActive ? "text-blue-600" : "text-gray-600"
+                    }`}
+                  />
+                )}
+
                 <span
                   className={`text-xs font-bold whitespace-nowrap text-center ${
                     isActive ? "text-blue-600 font-medium" : "text-gray-600"
                   }`}>
-                  {type.label}
+                  {loading && !isActive ? "Loading..." : type.label}
                 </span>
               </div>
             );

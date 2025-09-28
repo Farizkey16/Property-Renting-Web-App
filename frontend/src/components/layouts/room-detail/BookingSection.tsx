@@ -207,9 +207,7 @@ export default function BookingSectionPage() {
 
             <ReserveButton
               onClick={handleReserveNow}
-              isDisabled={
-                isRoomFullyBooked || availabilityLoading || !hasSelectedDate
-              }
+              isDisabled={isRoomFullyBooked || availabilityLoading}
             />
           </div>
         </DialogContent>
