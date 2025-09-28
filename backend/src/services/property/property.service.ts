@@ -22,6 +22,7 @@ export const getAllPropertiesService = async (params: {
 };
 
 export const getPropertyByIdService = async (id: string) => {
+  
   const existingProperty = await findPropertyByIdRepository(id);
   if (!existingProperty) {
     throw new AppError("Property not found", 404);

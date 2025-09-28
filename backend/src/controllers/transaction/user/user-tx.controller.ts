@@ -286,6 +286,11 @@ class UserTransactions {
   ) => {
     try {
       const { bookingId } = req.params;
+
+      if (!bookingId) {
+        throw new AppError("[getReservationById]: Id is required.", 400);
+      }
+
       const user = res.locals.decrypt;
 
       const booking = await findBookingByIdRepository(bookingId, user);
@@ -328,6 +333,10 @@ class UserTransactions {
       }
 
       const { bookingId } = req.params;
+
+      if (!bookingId) {
+        throw new AppError("[paymentProofUpload]: Id is required.", 400);
+      }
 
       const response = await proofUploadService(userId, bookingId, req.file);
 

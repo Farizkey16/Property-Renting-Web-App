@@ -1,32 +1,29 @@
 import {
-  FetchBookingsParams,
   FlexibleBookingParams,
 } from "@/services/transactions.services";
 import {
-  Booking,
   BookingsApiResponse,
   BookingStatus,
-  isValidBookingHistoryStatus,
   isValidBookingStatus,
   isValidSort,
   PaginatedBookings,
   SortStatus,
-  VALID_BOOKING_HISTORY_STATUS,
 } from "@/types/transactions/transactions";
 import axios from "axios";
 import qs from "qs";
 import { getCurrentUser } from "@/lib/cookie-auth";
 import { PastBookingsClient } from "@/components/dashboard/PastBookingsClientPage";
 import { cookies } from "next/headers";
-import { isBefore } from "date-fns";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
+type SearchParams = { [key: string]: string | string[] | undefined };
+
 type BookingsPageProps = {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: Promise<SearchParams>;
 };
 
-export const fetchBookings = async <T extends FlexibleBookingParams>(
+const fetchBookings = async <T extends FlexibleBookingParams>(
   query: T
 ): Promise<PaginatedBookings> => {
   try {

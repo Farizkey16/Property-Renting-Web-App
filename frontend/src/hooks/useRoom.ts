@@ -33,7 +33,7 @@ export const useRoomById = (id: string) => {
   });
 };
 
-export const useGetRoomAvailibility = (
+export const useGetRoomAvailability = (
   id: string,
   start_date: string,
   end_date: string

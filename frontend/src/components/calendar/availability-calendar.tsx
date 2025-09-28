@@ -4,6 +4,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import axios from "axios";
 import { useState } from "react";
+import { EventHoveringArg } from "@fullcalendar/core/index.js";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -15,7 +16,7 @@ type TooltipInfo = {
   bookingEnd?: Date;
 } | null;
 
-const fetchAvailabilityEvents = async (fetchInfo: any) => {
+const fetchAvailabilityEvents = async (fetchInfo: { start: Date; end: Date }) => {
   const { start, end } = fetchInfo;
 
   const params = {
@@ -35,7 +36,7 @@ export default function AvailabilityCalendar() {
   const [tooltipInfo, setTooltipInfo] = useState<TooltipInfo>(null);
   const [tooltipPosition, setTooltipPosition] = useState({ top: 0, left: 0 });
 
-  const handleMouseEnter = (info: any) => {
+  const handleMouseEnter = (info: EventHoveringArg) => {
     const bookingName = info.event.extendedProps.name || "N/A";
     const bookingEmail = info.event.extendedProps.email;
     const bookingId = info.event.extendedProps.id;

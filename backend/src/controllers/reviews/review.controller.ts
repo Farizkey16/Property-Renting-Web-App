@@ -10,6 +10,10 @@ class BookingReviews {
   ) => {
     const userId = res.locals.decrypt.userId;
     const { bookingId } = req.params;
+
+    if (!bookingId) {
+      throw new AppError("[getPropertyById]: Id is required.", 400);
+    }
     const { rating, comment } = req.body;
 
     await prisma.$transaction(async (tx) => {

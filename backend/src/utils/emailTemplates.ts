@@ -1,3 +1,4 @@
+import AppError from "../errors/AppError";
 import {
   BookingRoomCompleteType,
   BookingTemplateData,
@@ -453,15 +454,15 @@ export const BOOKING_REMINDER_TEMPLATE = (
               </tr>
               <tr>
                 <td style="padding:8px 0; border-bottom:1px solid #e2e8f0; color:#4a5568; font-weight:500;">Check-in:</td>
-                <td style="padding:8px 0; border-bottom:1px solid #e2e8f0; color:#1a202c; font-weight:600;">${data.rooms[0].check_in_date}</td>
+                <td style="padding:8px 0; border-bottom:1px solid #e2e8f0; color:#1a202c; font-weight:600;">${data.rooms[0]?.check_in_date ?? ''}</td>
               </tr>
               <tr>
                 <td style="padding:8px 0; border-bottom:1px solid #e2e8f0; color:#4a5568; font-weight:500;">Check-out:</td>
-                <td style="padding:8px 0; border-bottom:1px solid #e2e8f0; color:#1a202c; font-weight:600;">${data.rooms[0].check_out_date}</td>
+                <td style="padding:8px 0; border-bottom:1px solid #e2e8f0; color:#1a202c; font-weight:600;">${data.rooms[0]?.check_out_date ?? ''}</td>
               </tr>
               <tr>
                 <td style="padding:8px 0; color:#4a5568; font-weight:500;">Duration:</td>
-                <td style="padding:8px 0; color:#1a202c; font-weight:600;">${data.rooms[0].nights} nights</td>
+                <td style="padding:8px 0; color:#1a202c; font-weight:600;">${data.rooms[0]?.nights ?? 0} nights</td>
               </tr>
             </table>
           </div>
@@ -553,12 +554,15 @@ export const BOOKING_REMINDER_TEMPLATE_MULTIPLE = (
   data: BookingTemplateData
 ) => {
   const earliestCheckInDate = data.rooms.reduce((earliest, room) => {
+    if (!earliest) throw new AppError("No check-in dates available", 404);
     return room.check_in_date < earliest ? room.check_in_date : earliest;
-  }, data.rooms[0].check_in_date);
+  }, data.rooms[0]?.check_in_date);
 
   const latestCheckOutDate = data.rooms.reduce((latest, room) => {
+    
+    if (!latest) throw new AppError("No check-out dates available", 404);
     return room.check_out_date < latest ? room.check_out_date : latest;
-  }, data.rooms[0].check_out_date);
+  }, data.rooms[0]?.check_out_date);
 
   const roomRowsHtml = data.rooms
     .map(

@@ -56,7 +56,14 @@ class PropertyController {
     next: NextFunction
   ): Promise<void> {
     try {
-      const property = await getPropertyByIdService(req.params.id);
+      const { id } = req.params;
+
+      if (!id) {
+        throw new AppError("[getPropertyById]: Id is required.", 400);
+      }
+
+      const property = await getPropertyByIdService(id);
+
       res
         .status(200)
         .send({ message: "Property found", success: true, property });
@@ -204,6 +211,10 @@ class PropertyController {
       }
 
       const propertyId = req.params.id;
+
+      if (!propertyId) {
+        throw new AppError("[getPropertyById]: Id is required.", 400);
+      }
       const property = await updatePropertyServices(
         propertyId,
         req.body,
@@ -232,6 +243,9 @@ class PropertyController {
       }
 
       const propertyId = req.params.id;
+      if (!propertyId) {
+        throw new AppError("[deleteProperty]: Id is required.", 400);
+      }
 
       await deletePropertyService(propertyId, tenant.id);
 

@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import { format } from "date-fns";
-import { useGetRoomAvailibility } from "@/hooks/useRoom";
+import { useGetRoomAvailability } from "@/hooks/useRoom";
 import { Loader2 } from "lucide-react";
 
 export interface AvailabilityItem {
@@ -27,7 +27,7 @@ export const RoomAvailabilityStatus = ({
   endDate,
   onAvailabilityChange,
 }: RoomAvailabilityStatusProps) => {
-  const { data, isLoading, isError } = useGetRoomAvailibility(
+  const { data, isLoading, isError } = useGetRoomAvailability(
     roomId,
     startDate,
     endDate

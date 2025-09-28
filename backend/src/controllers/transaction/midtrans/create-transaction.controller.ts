@@ -14,6 +14,10 @@ class MidtransTransaction {
       const userId = user.userId;
       const { bookingId } = req.params;
 
+      if (!bookingId) {
+        throw new AppError("[createTransaction]: Id is required.", 400);
+      }
+
       const booking = await prisma.bookings.findUnique({
         where: {
           id: bookingId,

@@ -17,6 +17,34 @@ import {
 import { CheckCircle } from "lucide-react";
 import { Spinner } from "@/components/ui/shadcn-io/spinner";
 
+interface SnapSuccessResult {
+  status_code: string;
+  status_message: string;
+  transaction_id: string;
+  order_id: string;
+  gross_amount: string;
+  payment_type: string;
+  transaction_time: string;
+  transaction_status: string;
+  fraud_status: string;
+  pdf_url?: string;
+  finish_redirect_url?: string;
+}
+
+interface SnapPayOptions {
+  onSuccess: (result: SnapSuccessResult) => void;
+  onError: (result: Error) => void; // Midtrans docs specify an Error object
+  onClose: () => void;
+}
+
+declare global {
+  interface Window {
+    snap: {
+      pay: (token: string, options: SnapPayOptions) => void;
+    };
+  }
+}
+
 interface SnapProps {
   bookingId: string;
 }
@@ -24,15 +52,17 @@ interface SnapProps {
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export const SnapMidtrans = ({ bookingId }: SnapProps) => {
-  const [paymentResult, setPaymentResult] = useState(null);
+  const [paymentResult, setPaymentResult] = useState<
+    SnapSuccessResult | Error | null
+  >(null);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const handleCloseModal = () => {
-        setIsSuccessModalOpen(false);
-        router.push("/dashboard/bookings?page=1&status=confirmed&sort=desc")
-      }
+    setIsSuccessModalOpen(false);
+    router.push("/dashboard/bookings?page=1&status=confirmed&sort=desc");
+  };
 
   const handlePayment = async () => {
     setIsLoading(true);
@@ -51,13 +81,13 @@ export const SnapMidtrans = ({ bookingId }: SnapProps) => {
       }
 
       window.snap.pay(token, {
-        onSuccess: (result: any) => {
+        onSuccess: (result: SnapSuccessResult) => {
           setPaymentResult(result);
           console.log("Payment Successful.");
           toast.success("Payment successful!");
           setIsSuccessModalOpen(true);
         },
-        onError: (result: any) => {
+        onError: (result: Error) => {
           setPaymentResult(result);
           console.log("Payment Unsuccessful.");
           toast.error("Payment failed.");
@@ -101,6 +131,18 @@ export const SnapMidtrans = ({ bookingId }: SnapProps) => {
               once the tenant accepts your payment.
             </DialogDescription>
           </DialogHeader>
+
+          {paymentResult && "order_id" in paymentResult && (
+            <div className="text-sm text-muted-foreground bg-slate-50 p-4 rounded-lg border text-left space-y-1">
+              <p>
+                <strong>Order ID:</strong> {paymentResult.order_id}
+              </p>
+              <p className="capitalize">
+                <strong>Payment Type:</strong>{" "}
+                {paymentResult.payment_type.replace(/_/g, " ")}
+              </p>
+            </div>
+          )}
           <DialogFooter>
             <Button onClick={handleCloseModal}>View My Bookings</Button>
           </DialogFooter>

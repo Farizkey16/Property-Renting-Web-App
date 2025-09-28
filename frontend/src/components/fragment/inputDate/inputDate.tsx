@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import { GuestPicker } from "@/components/ui/GuestPicker";
 import { addDays, format } from "date-fns";
 import { useState } from "react";
+import { cn } from "@/lib/utils";
 
 interface MapboxFeature {
   id: string;
@@ -19,7 +20,7 @@ interface MapboxFeature {
   center: [number, number];
 }
 
-export default function InputDate() {
+export default function InputDate({ className }: { className?: string }) {
   const [checkIn, setCheckIn] = useState<Date | undefined>();
   const [checkOut, setCheckOut] = useState<Date | undefined>();
   const [openCheckIn, setOpenCheckIn] = useState(false);
@@ -129,7 +130,7 @@ export default function InputDate() {
   const canSearch = !!coords && !!checkIn && !!checkOut && !geoLoading;
 
   return (
-    <div className="w-full flex flex-col lg:flex-row items-stretch border-2 rounded-4xl bg-white p-4 lg:p-0 gap-2 lg:gap-0 shadow-md  border-gray-200 ">
+    <div className={cn("w-full flex flex-col lg:flex-row items-stretch border-2 rounded-4xl bg-white p-4 lg:p-0 gap-2 lg:gap-0 shadow-md  border-gray-200 ", className)}>
       {/* Location Input */}
       <div className="relative flex-1 px-2 lg:px-4">
         <input

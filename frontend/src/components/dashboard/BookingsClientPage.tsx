@@ -1,13 +1,12 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { BookingsToolbar } from "./BookingToolbar";
 import { PaginationControl } from "../fragment/pagination-control/PaginationControl";
 import { BookingList } from "./BookingList";
 import { Booking, Filters, Meta } from "@/types/transactions/transactions";
 import { useState, useTransition } from "react";
-import { is } from "date-fns/locale";
 
 interface BookingsClientProps {
   bookings: Booking[];

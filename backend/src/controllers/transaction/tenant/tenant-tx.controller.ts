@@ -33,6 +33,10 @@ class TenantTransactions {
 
       const bookingId = req.params.id;
 
+      if (!bookingId) {
+        throw new AppError("[acceptPayment]: Id is required.", 400);
+      }
+
       const updatedBooking = await acceptBookingPayment(
         bookingId,
         role.tenant_id
@@ -208,9 +212,14 @@ class TenantTransactions {
   ) => {
     try {
       const { bookingId } = req.params;
+      if (!bookingId) {
+        throw new AppError("[getReservationById]: Id is required.", 400);
+      }
       const user = res.locals.decrypt;
 
       const booking = await findBookingByIdRepository(bookingId, user);
+
+      
 
       if (!booking) {
         throw new AppError("Booking not found.", 404);
