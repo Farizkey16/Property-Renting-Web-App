@@ -9,7 +9,8 @@
     "dev": "ts-node src/index.ts",
     "build": "tsc",
     "clean": "rm -rf dist",
-    "copy-assets": "cpx 'src/*/.{hbs,json,crontab}' dist"
+    "copy-assets": "cpx 'src/*/.{hbs,json,crontab}' dist",
+    "postinstall": "prisma generate"
   },
   "keywords": [],
   "author": "",

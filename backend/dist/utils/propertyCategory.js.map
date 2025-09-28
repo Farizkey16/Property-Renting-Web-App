@@ -1,0 +1,1 @@
+{"version":3,"file":"propertyCategory.js","sourceRoot":"","sources":["../../src/utils/propertyCategory.ts"],"names":[],"mappings":";;AAEA,sDAUC;AAZD,0DAAiE;AAEjE,SAAgB,qBAAqB,CACnC,KAAc;IAEd,IAAI,CAAC,KAAK;QAAE,OAAO,SAAS,CAAC;IAE7B,IAAI,MAAM,CAAC,MAAM,CAAC,yBAAgB,CAAC,CAAC,QAAQ,CAAC,KAAyB,CAAC,EAAE,CAAC;QACxE,OAAO,KAAyB,CAAC;IACnC,CAAC;IAED,OAAO,SAAS,CAAC;AACnB,CAAC"}
