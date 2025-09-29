@@ -19,7 +19,7 @@ class UserController {
       const decrypt = res.locals.decrypt;
 
       if (!decrypt || !decrypt.userId) {
-        throw new AppError("Unauthorized access", 401);
+        throw new AppError("[getUserId]: Unauthorized access", 401);
       }
 
       const userId = decrypt.userId;

@@ -18,6 +18,7 @@ import { useRouter } from "next/navigation";
 
 const AuthHeader = () => {
   const { data: user, isLoading } = useFetchMe();
+  console.log("user", user);
   const isLoggedIn = !!user;
   const router = useRouter();
   return (

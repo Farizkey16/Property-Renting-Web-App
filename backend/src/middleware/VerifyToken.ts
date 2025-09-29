@@ -41,7 +41,7 @@ export const verifyToken = (
     } else if (error instanceof JsonWebTokenError) {
       next(new AppError("Invalid token", 401));
     } else {
-      next(new AppError("Unauthorized", 401));
+      next(new AppError("[VerifyToken]: Unauthorized", 401));
     }
   }
 };
