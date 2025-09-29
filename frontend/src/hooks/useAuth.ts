@@ -6,11 +6,27 @@ import {
   verifyEmail,
 } from "@/services/auth.services";
 import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
 
 export const useLoginUser = () => {
   return useMutation({
-    mutationFn: ({ email, password }: { email: string; password: string }) =>
-      loginUser(email, password),
+    mutationFn: async ({
+      email,
+      password,
+    }: {
+      email: string;
+      password: string;
+    }) => {
+      const res = await loginUser(email, password);
+
+      if (res.token) {
+        localStorage.setItem("token", res.token);
+
+        axios.defaults.headers.common["Authorization"] = `Bearer ${res.token}`;
+      }
+
+      return res;
+    },
   });
 };
 

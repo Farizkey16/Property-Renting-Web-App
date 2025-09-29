@@ -20,7 +20,7 @@ class AuthRouter {
     }
     initializeRoutes() {
         this.route.post("/register", auth_1.regisValidation, this.authController.register);
-        this.route.post("/login", this.authController.login);
+        this.route.post("/login", auth_1.loginValidation, this.authController.login);
         this.route.patch("/new-otp", this.authController.newOtp);
         this.route.patch("/verify-email", this.authController.verifyEmail);
         this.route.post("/logout", VerifyToken_1.verifyToken, this.authController.logout);
