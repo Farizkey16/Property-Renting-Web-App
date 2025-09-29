@@ -21,7 +21,15 @@ class AuthController {
             res.status(200).send({
                 message: "User logged in",
                 success: true,
-                user,
+                user: {
+                    id: user.id,
+                    email: user.email,
+                    role: user.role,
+                    full_name: user.full_name,
+                    is_verified: user.is_verified,
+                    profile_picture: user.profile_picture,
+                },
+                token: user.token,
             });
         }
         catch (error) {

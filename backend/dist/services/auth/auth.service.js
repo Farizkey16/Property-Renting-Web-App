@@ -84,7 +84,7 @@ const loginService = async (data, res) => {
     if (!comparePassword) {
         throw new AppError_1.default("Invalid password", 401);
     }
-    (0, jwt_1.generateTokenAndSetCookie)(res, existingUser);
+    const token = (0, jwt_1.generateTokenAndSetCookie)(res, existingUser);
     const { password_hash: _, ...userWithoutPassword } = existingUser;
     return {
         id: userWithoutPassword.id,
@@ -93,7 +93,7 @@ const loginService = async (data, res) => {
         full_name: userWithoutPassword.full_name,
         is_verified: userWithoutPassword.is_verified,
         profile_picture: userWithoutPassword.profile_picture,
-        generateTokenAndSetCookie: jwt_1.generateTokenAndSetCookie,
+        token,
     };
 };
 exports.loginService = loginService;

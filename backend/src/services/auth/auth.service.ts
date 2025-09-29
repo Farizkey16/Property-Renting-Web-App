@@ -104,7 +104,7 @@ export const loginService = async (data: any, res: Response) => {
   if (!comparePassword) {
     throw new AppError("Invalid password", 401);
   }
-  generateTokenAndSetCookie(res, existingUser);
+  const token = generateTokenAndSetCookie(res, existingUser);
 
   const { password_hash: _, ...userWithoutPassword } = existingUser;
 
@@ -115,7 +115,7 @@ export const loginService = async (data: any, res: Response) => {
     full_name: userWithoutPassword.full_name,
     is_verified: userWithoutPassword.is_verified,
     profile_picture: userWithoutPassword.profile_picture,
-    generateTokenAndSetCookie,
+    token,
   };
 };
 
