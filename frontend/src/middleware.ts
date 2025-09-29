@@ -11,13 +11,8 @@ function decodeJwt(token: string) {
 }
 
 export function middleware(req: NextRequest) {
+  const token = req.cookies.get("token")?.value;
   const { pathname, search } = req.nextUrl;
-
-  // Ambil token dari header Authorization
-  const authHeader = req.headers.get("authorization");
-  const token = authHeader?.startsWith("Bearer ")
-    ? authHeader.split(" ")[1]
-    : null;
 
   if (pathname.startsWith("/dashboard")) {
     if (!token || token.trim() === "") {
