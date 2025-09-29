@@ -295,7 +295,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/generated/client",
+      "value": "/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /29 sep fork/Property-Renting-Web-App/backend/prisma/generated/client",
       "fromEnvVar": null
     },
     "config": {
@@ -309,7 +309,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /Property-Renting-Web-App/backend/prisma/schema.prisma",
+    "sourceFilePath": "/Users/Farizkey/Documents/Purwadhika - JCWDOL 020 /29 sep fork/Property-Renting-Web-App/backend/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
