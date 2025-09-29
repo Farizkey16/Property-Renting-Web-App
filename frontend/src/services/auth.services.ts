@@ -23,20 +23,20 @@ export const loginUser = async (
   email: string,
   password: string
 ): Promise<AuthResponse> => {
-  const response = await axios.post<AuthResponse>(
-    `${BASE_URL}/auth/login`,
-    {
-      email,
-      password_hash: password,
-    },
-    {
-      withCredentials: true,
-    }
-  );
-  console.log(response.data);
+  const response = await axios.post<AuthResponse>(`${BASE_URL}/auth/login`, {
+    email,
+    password_hash: password,
+  });
+
+  if (response.data.token) {
+    localStorage.setItem("token", response.data.token);
+    axios.defaults.headers.common[
+      "Authorization"
+    ] = `Bearer ${response.data.token}`;
+  }
+
   return response.data;
 };
-
 export const newOtP = async (email: string): Promise<AuthResponse> => {
   const response = await axios.patch<AuthResponse>(`${BASE_URL}/auth/new-otp`, {
     email,
@@ -61,16 +61,7 @@ export const verifyEmail = async (
 };
 
 export const logoutUser = async () => {
-  try {
-    const response = await axios.post(
-      `${BASE_URL}/auth/logout`,
-      {},
-      { withCredentials: true }
-    );
-    console.log("Logout success:", response.data);
-    return response.data;
-  } catch (err) {
-    console.error("Logout error:");
-    throw err;
-  }
+  localStorage.removeItem("token");
+  delete axios.defaults.headers.common["Authorization"];
+  return { message: "Logged out", success: true };
 };

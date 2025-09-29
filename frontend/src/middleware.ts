@@ -1,26 +1,26 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { verify, JwtPayload } from "jsonwebtoken";
 
-function decodeJwt(token: string) {
+function decodeJwt(token: string): JwtPayload | null {
   try {
-    const base64 = token.split(".")[1];
-    return JSON.parse(Buffer.from(base64, "base64").toString("utf-8"));
-  } catch {
+    const secret = process.env.TOKEN_KEY;
+    if (!secret) return null;
+    return verify(token, secret) as JwtPayload;
+  } catch (errror) {
+    console.log(errror);
     return null;
   }
 }
 
 export function middleware(req: NextRequest) {
+  const authHeader = req.headers.get("authorization");
+  const token = authHeader?.split(" ")[1]; // Bearer <token>
   const { pathname, search } = req.nextUrl;
 
-  // Ambil token dari header Authorization
-  const authHeader = req.headers.get("authorization");
-  const token = authHeader?.startsWith("Bearer ")
-    ? authHeader.split(" ")[1]
-    : null;
-
+  // Proteksi semua route dashboard
   if (pathname.startsWith("/dashboard")) {
-    if (!token || token.trim() === "") {
+    if (!token) {
       const loginUrl = new URL("/auth/login", req.url);
       loginUrl.searchParams.set("from", `${pathname}${search}`);
       return NextResponse.redirect(loginUrl);
@@ -33,12 +33,12 @@ export function middleware(req: NextRequest) {
 
     const role = payload.role as string | undefined;
 
-    if (role === "tenant") {
-      if (pathname.startsWith("/dashboard/history")) {
-        return NextResponse.redirect(new URL("/dashboard", req.url));
-      }
+    // Tenant tidak boleh akses /dashboard/history
+    if (role === "tenant" && pathname.startsWith("/dashboard/history")) {
+      return NextResponse.redirect(new URL("/dashboard", req.url));
     }
 
+    // User hanya boleh akses halaman tertentu
     if (role === "user") {
       const allowed = [
         "/dashboard",
@@ -47,7 +47,7 @@ export function middleware(req: NextRequest) {
         "/dashboard/notifications",
         "/dashboard/booking-detail",
         "/dashboard/payment-page",
-        "/dashboard/booking-confirmation/:bookingId",
+        "/dashboard/booking-confirmation",
       ];
 
       const isAllowed = allowed.some(
